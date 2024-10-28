@@ -5,6 +5,8 @@ Command line tool and library for generating random xml documents for eFTI consi
 
 ## Command line tool
 
+Requires Java 17 or later.
+
 Build with:
 ```
 ./gradlew build
