@@ -11,8 +11,12 @@ object EftiTextContentWriter {
     private val xpathFactory = XPathFactory.newInstance()
 
     fun setTextContent(doc: Document, xpath: String, value: String) {
-        val expression = compileXpath(xpath)
-        val nodes = expression.evaluate(doc, XPathConstants.NODESET) as NodeList
+        val compiled = compileXpath(xpath)
+        setTextContent(doc, compiled, value)
+    }
+
+    fun setTextContent(doc: Document, xpath: XPathExpression, value: String) {
+        val nodes = xpath.evaluate(doc, XPathConstants.NODESET) as NodeList
         nodes.asIterable().forEach { node -> node.textContent = value }
     }
 

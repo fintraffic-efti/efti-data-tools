@@ -4,6 +4,7 @@ import eu.efti.datatools.schema.EftiSchemas
 import eu.efti.datatools.schema.XmlSchemaElement
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.nullValue
+import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
@@ -14,8 +15,8 @@ import org.w3c.dom.Document
 import org.w3c.dom.bootstrap.DOMImplementationRegistry
 import org.w3c.dom.ls.DOMImplementationLS
 import org.xml.sax.SAXException
+import org.xmlunit.matchers.CompareMatcher.isSimilarTo
 import java.io.*
-import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.transform.Source
 import javax.xml.transform.dom.DOMSource
 import javax.xml.validation.Schema
@@ -28,13 +29,8 @@ class EftiDomPopulatorTest {
     @ParameterizedTest
     @MethodSource("populateTestCases")
     fun `should create valid documents with different generator seeds`(testCase: PopulateTestCase) {
-        val factory = DocumentBuilderFactory.newInstance()
-        val builder = factory.newDocumentBuilder()
-
-        val doc: Document = builder.newDocument()
-
         val populator = EftiDomPopulator(testCase.seed, testCase.repeatablePopulateMode)
-        populator.populate(doc, testCase.eftiSchema)
+        val doc = populator.populate(testCase.eftiSchema)
 
         val error = validate(doc, testCase.javaSchema)
 
@@ -49,19 +45,11 @@ class EftiDomPopulatorTest {
     @Test
     @Tag("expectation-update")
     fun `should populate common document that matches the expected document`() {
+        val expectationFilename = "common-expected.xml"
         val eftiSchema = EftiSchemas.readConsignmentCommonSchema()
 
-        val factory = DocumentBuilderFactory.newInstance()
-        val builder = factory.newDocumentBuilder()
-
-        val doc: Document = builder.newDocument()
-
         val populator = EftiDomPopulator(42, RepeatablePopulateMode.EXACTLY_ONE)
-        populator.populate(doc, eftiSchema)
-
-        val expectationFilename = "common-expected.xml"
-        val expected =
-            InputStreamReader(classpathInputStream(expectationFilename)).use { it.readText() }
+        val doc = populator.populate(eftiSchema)
 
         if (updateTestExpectations) {
             val updated = formatXml(doc)
@@ -71,10 +59,63 @@ class EftiDomPopulatorTest {
             }
             fail("Test expectations updated, run test again to verify")
         } else {
-            // Use junit assertEquals because it formats the expected value better than hamcrest
-            assertEquals(
-                expected, formatXml(doc),
-                "Populated document did not match the expected document, please update test expectations with: ./gradlew updateTestExpectations"
+            val expected =
+                InputStreamReader(classpathInputStream(expectationFilename)).use { it.readText() }
+
+            assertAll(
+                { assertThat(validate(doc, EftiSchemas.javaCommonSchema), nullValue()) },
+                {
+                    // Use junit assertEquals because it formats the expected value better than hamcrest.
+                    // Also, CompareMatcher.isSimilarTo does not work with consignment-common document, maybe it's too big?
+                    assertEquals(
+                        expected, formatXml(doc),
+                        "Populated document did not match the expected document, please update test expectations with: ./gradlew updateTestExpectations"
+                    )
+                },
+            )
+        }
+    }
+
+    @Test
+    @Tag("expectation-update")
+    fun `should apply overrides in order`() {
+        val expectationFilename = "override-expected.xml"
+        val seed = 23L
+        val repeatableMode = RepeatablePopulateMode.MINIMUM_ONE
+
+        val overrides = listOf(
+            "consignment/deliveryEvent/actualOccurrenceDateTime" to "000000000000+0000",
+            "/consignment/mainCarriageTransportMovement/modeCode" to "8",
+        )
+            .map { (expression, value) ->
+                expression to EftiDomPopulator.TextContentOverride.tryToParse(expression, value)
+            }
+            .onEach { (expression, parsed) -> if (parsed == null) throw IllegalArgumentException("""Could not parse "$expression"""") }
+            .mapNotNull(Pair<String, EftiDomPopulator.TextContentOverride?>::second)
+
+        val populator = EftiDomPopulator(seed, repeatableMode)
+        val doc = populator.populate(EftiSchemas.readConsignmentIdentifiersSchema(), overrides, namespaceAware = false)
+
+        if (updateTestExpectations) {
+            val updated = formatXml(doc)
+            FileWriter(testResourceFile(expectationFilename)).use {
+                it.write(updated)
+                it.flush()
+            }
+            fail("Test expectations updated, run test again to verify")
+        } else {
+            val expected =
+                InputStreamReader(classpathInputStream(expectationFilename)).use { it.readText() }
+
+            assertAll(
+                { assertThat(validate(doc, EftiSchemas.javaIdentifiersSchema), nullValue()) },
+                {
+                    assertThat(
+                        "Populated document did not match the expected document, please update test expectations with: ./gradlew updateTestExpectations",
+                        doc,
+                        isSimilarTo(expected)
+                    )
+                },
             )
         }
     }
