@@ -23,6 +23,12 @@ class Args {
     )
     var seed: Long? = null
 
+    @Parameter(
+        names = ["--repeatable-mode", "-r"],
+        description = "How many instances of a repeatable element should be generated"
+    )
+    var repeatableMode: RepeatablePopulateMode = RepeatablePopulateMode.MINIMUM_ONE
+
     @Parameter(names = ["--output", "-o"], required = false, description = "Output file (will not be overwritten).")
     var outputCommon: String = "consignment-common.xml"
 
@@ -45,6 +51,7 @@ fun main(argv: Array<String>) {
         println(
             """|Generating with:
                |  * seed: $seed
+               |  * repeatable mode: ${args.repeatableMode.name}
                |  * output: ${args.outputCommon}
                |  * pretty: ${args.pretty}
            """.trimMargin()
@@ -56,7 +63,7 @@ fun main(argv: Array<String>) {
             exitProcess(1)
         } else {
             val doc = newDocument().also {
-                EftiDomPopulator(seed, RepeatablePopulateMode.MINIMUM_ONE)
+                EftiDomPopulator(seed, args.repeatableMode)
                     .populate(it, EftiSchemas.readConsignmentCommonSchema())
             }
 
