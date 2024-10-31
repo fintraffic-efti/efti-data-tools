@@ -48,7 +48,7 @@ class EftiDomPopulatorTest {
         val expectationFilename = "common-expected.xml"
         val eftiSchema = EftiSchemas.readConsignmentCommonSchema()
 
-        val populator = EftiDomPopulator(42, RepeatablePopulateMode.EXACTLY_ONE)
+        val populator = EftiDomPopulator(42, RepeatablePopulateMode.MINIMUM_ONE)
         val doc = populator.populate(eftiSchema)
 
         if (updateTestExpectations) {
