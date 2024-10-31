@@ -201,7 +201,7 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
 
             if (schema.type.isTextContentType) {
                 val generator = findMostSpecificGenerator(schema.name, schema.type)
-                element.textContent = generator(currentPath, repeatIndex, schema.type)
+                element.textContent = generator(currentPath.append(repeatIndex), repeatIndex, schema.type)
             }
         }
     }

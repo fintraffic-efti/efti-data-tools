@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><consignment xmlns="http://efti.eu/v1/consignment/identifier">
-    <carrierAcceptanceDateTime formatId="205">203111060349+0000</carrierAcceptanceDateTime>
+    <carrierAcceptanceDateTime formatId="205">202902012244+0000</carrierAcceptanceDateTime>
     <deliveryEvent>
         <actualOccurrenceDateTime formatId="205">000000000000+0000</actualOccurrenceDateTime>
     </deliveryEvent>
@@ -7,21 +7,21 @@
         <dangerousGoodsIndicator>true</dangerousGoodsIndicator>
         <modeCode>8</modeCode>
         <usedTransportMeans>
-            <id schemeAgencyId="tctkvk">xmjpnd</id>
+            <id schemeAgencyId="tctkvk">rjanve</id>
             <registrationCountry>
-                <code>SO</code>
+                <code>LK</code>
             </registrationCountry>
         </usedTransportMeans>
     </mainCarriageTransportMovement>
     <usedTransportEquipment>
         <carriedTransportEquipment>
-            <id schemeAgencyId="tzuowq">mogxzq</id>
+            <id schemeAgencyId="tzuowq">jwfofm</id>
             <sequenceNumber>0</sequenceNumber>
         </carriedTransportEquipment>
-        <categoryCode>RF</categoryCode>
-        <id schemeAgencyId="qtwpts">ytykoq</id>
+        <categoryCode>NT</categoryCode>
+        <id schemeAgencyId="qtwpts">wupfuu</id>
         <registrationCountry>
-            <code>BJ</code>
+            <code>CD</code>
         </registrationCountry>
         <sequenceNumber>0</sequenceNumber>
     </usedTransportEquipment>
