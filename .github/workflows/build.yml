@@ -23,3 +23,22 @@ jobs:
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build
+
+    - name: Prepare lib artifacts
+      run: |
+        mkdir -p build/lib
+        cp ./populate/build/libs/populate.jar build/lib
+        cp ./schema/build/libs/schema.jar build/lib
+
+    - name: Upload library artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: eu.efti.datatools.lib.${{ github.sha }}
+        path: ./build/lib/*
+
+    - name: Upload app artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: eu.efti.datatools.app.${{ github.sha }}
+        path: |
+          ./app/build/distributions/app.zip
