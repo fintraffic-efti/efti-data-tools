@@ -3,16 +3,15 @@
 Command line tool and library for generating random xml documents for eFTI consignment schemas at
 [reference-implementation](https://github.com/EFTI4EU/reference-implementation/tree/main/schema/xsd).
 
-## Command line tool
-
 Requires Java 17 or later.
 
-Build with:
-```
-./gradlew build
-```
+## Binaries
 
-Unzip [app.zip](./app/build/distributions/app.zip) and run:
+Get binaries from [workflow run artifacts](https://github.com/EFTI4EU/efti-data-tools/actions).
+
+### Command line application
+
+Unzip app zip and run command line tool with:
 ```
 # On *nix:
 app/bin/app --help
@@ -20,6 +19,11 @@ app/bin/app --help
 # On Windows:
 app/bin/app.bat --help
 ```
+
+### Libraries
+
+Note that the libraries require org.apache.xmlbeans:xmlbeans as a runtime dependency. See [build.gradle.kts](schema/build.gradle.kts)
+for the specific version.
 
 ## Examples
 
@@ -47,4 +51,11 @@ These examples use gradle to simplify testing. Note how the xpath expressions us
 
 ```shell
 ./gradlew app:run --args="-x identifier -w -s 42 -t 'consignment/usedTransportEquipment[1]/id:=ABC-123' -t 'consignment/usedTransportEquipment[2]/id:=XYZ-789'"
+```
+
+## Development
+
+Build and run tests with:
+```
+./gradlew build
 ```
