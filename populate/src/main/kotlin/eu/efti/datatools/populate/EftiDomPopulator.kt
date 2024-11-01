@@ -5,10 +5,21 @@ import eu.efti.datatools.schema.XmlSchemaElement.XmlName
 import eu.efti.datatools.schema.XmlSchemaElement.XmlType
 import org.w3c.dom.Document
 import org.w3c.dom.Node
+import org.w3c.dom.NodeList
+import org.w3c.dom.bootstrap.DOMImplementationRegistry
+import org.w3c.dom.ls.DOMImplementationLS
+import org.xml.sax.InputSource
+import org.xml.sax.SAXException
+import java.io.ByteArrayOutputStream
+import java.io.StringReader
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.*
+import javax.xml.parsers.DocumentBuilderFactory
+import javax.xml.xpath.XPathExpression
+import javax.xml.xpath.XPathExpressionException
+import javax.xml.xpath.XPathFactory
 import kotlin.math.max
 import kotlin.math.min
 
@@ -22,6 +33,28 @@ enum class RepeatablePopulateMode {
 
 @Suppress("detekt:MagicNumber")
 class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulateMode = RepeatablePopulateMode.RANDOM) {
+    data class TextContentOverride(val xpath: XPathRawAndCompiled, val value: String) {
+        data class XPathRawAndCompiled(val raw: String, val compiled: XPathExpression) {
+            companion object {
+                private val xpathFactory = XPathFactory.newInstance()
+
+                fun tryToParse(expression: String): XPathRawAndCompiled? {
+                    val xpath = xpathFactory.newXPath()
+                    return try {
+                        XPathRawAndCompiled(expression, xpath.compile(expression))
+                    } catch (e: XPathExpressionException) {
+                        null
+                    }
+                }
+            }
+        }
+
+        companion object {
+            fun tryToParse(expression: String, value: String): TextContentOverride? =
+                XPathRawAndCompiled.tryToParse(expression)?.let { TextContentOverride(it, value) }
+        }
+    }
+
     interface SchemaValueMatcher {
         fun match(name: XmlName, type: XmlType): Boolean
     }
@@ -72,10 +105,49 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
         EnumTypeMatcher to enumerationGenerator,
     )
 
-    fun populate(doc: Document, schema: XmlSchemaElement) {
+    fun populate(
+        schema: XmlSchemaElement,
+        overrides: List<TextContentOverride> = emptyList(),
+        namespaceAware: Boolean = true
+    ): Document {
+        val doc: Document = newDocument()
+
         val element = doc.appendChild(doc.createElementNS(schema.name.namespaceURI, schema.name.localPart))
         schema.children.forEach { child ->
             populateElement(doc, element, ValuePath(emptyList()).append(schema), child)
+        }
+
+        return applyOverrides(schema, doc, overrides, namespaceAware)
+    }
+
+    private fun applyOverrides(
+        schema: XmlSchemaElement,
+        originalDoc: Document,
+        overrides: List<TextContentOverride>,
+        namespaceAware: Boolean
+    ): Document {
+        return if (overrides.isNotEmpty()) {
+            val overridesDoc = if (!namespaceAware) {
+                // Java xpath implementation is strict about namespaces. If we want to ignore default namespace in
+                // xpath expressions, we need to remove namespaces altogether from the document...
+                removeNamespaces(originalDoc)
+            } else {
+                originalDoc
+            }
+
+            overrides.forEach { override ->
+                EftiTextContentWriter.setTextContent(overridesDoc, override.xpath.compiled, override.value)
+            }
+
+            if (!namespaceAware) {
+                // ...however, we want to produce documents that pass validation. Therefore, we need to restore
+                // the namespace declaration.
+                restoreEftiNamespace(schema, overridesDoc)
+            } else {
+                overridesDoc
+            }
+        } else {
+            originalDoc
         }
     }
 
@@ -129,7 +201,7 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
 
             if (schema.type.isTextContentType) {
                 val generator = findMostSpecificGenerator(schema.name, schema.type)
-                element.textContent = generator(currentPath, repeatIndex, schema.type)
+                element.textContent = generator(currentPath.append(repeatIndex), repeatIndex, schema.type)
             }
         }
     }
@@ -143,4 +215,66 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
         ) {
             "No generator found for: $name $type"
         }
+
+    companion object {
+        private val factory = DocumentBuilderFactory.newInstance()
+
+        private fun newDocument(): Document {
+            val builder = factory.newDocumentBuilder()
+            val doc: Document = builder.newDocument()
+            return doc
+        }
+
+        private fun restoreEftiNamespace(
+            schema: XmlSchemaElement,
+            originalDoc: Document
+        ): Document {
+            val doc: Document = newDocument()
+
+            // Create new root in the desired namespace
+            val root = doc.appendChild(doc.createElementNS(schema.name.namespaceURI, schema.name.localPart))
+
+            // Import children from the original document
+            originalDoc.firstChild.childNodes.asIterable().forEach { child ->
+                val importedChild = doc.importNode(child, /* deep */ true)
+                root.appendChild(importedChild)
+            }
+
+            // Another serialization round is required to convert all elements to the desired namespace
+            return tryDeserializeToDocument(serialize(doc), namespaceAware = true)
+        }
+
+        private fun removeNamespaces(doc: Document): Document {
+            // Note: a clumsy way of making unaware of namespaces
+            return tryDeserializeToDocument(serialize(doc), namespaceAware = false)
+        }
+
+        private fun NodeList.asIterable(): Iterable<Node> =
+            (0 until this.length).asSequence().map { this.item(it) }.asIterable()
+
+        private fun tryDeserializeToDocument(xml: String, namespaceAware: Boolean = true): Document = try {
+            val factory = DocumentBuilderFactory.newInstance().also { it.isNamespaceAware = namespaceAware }
+            val builder = factory.newDocumentBuilder()
+            builder.parse(InputSource(StringReader(xml)))
+        } catch (e: SAXException) {
+            throw IllegalArgumentException("Could not parse document:\n$xml", e)
+        }
+
+        private fun serialize(doc: Document): String {
+            val registry = DOMImplementationRegistry.newInstance()
+            val domImplLS = registry.getDOMImplementation("LS") as DOMImplementationLS
+
+            val lsSerializer = domImplLS.createLSSerializer()
+            val domConfig = lsSerializer.domConfig
+            domConfig.setParameter("format-pretty-print", true)
+
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            val lsOutput = domImplLS.createLSOutput()
+            lsOutput.encoding = "UTF-8"
+            lsOutput.byteStream = byteArrayOutputStream
+
+            lsSerializer.write(doc, lsOutput)
+            return byteArrayOutputStream.toString(Charsets.UTF_8)
+        }
+    }
 }

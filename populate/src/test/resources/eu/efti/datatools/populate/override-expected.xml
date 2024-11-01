@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><consignment xmlns="http://efti.eu/v1/consignment/identifier">
+    <carrierAcceptanceDateTime formatId="205">202902012244+0000</carrierAcceptanceDateTime>
+    <deliveryEvent>
+        <actualOccurrenceDateTime formatId="205">000000000000+0000</actualOccurrenceDateTime>
+    </deliveryEvent>
+    <mainCarriageTransportMovement>
+        <dangerousGoodsIndicator>true</dangerousGoodsIndicator>
+        <modeCode>8</modeCode>
+        <usedTransportMeans>
+            <id schemeAgencyId="tctkvk">rjanve</id>
+            <registrationCountry>
+                <code>LK</code>
+            </registrationCountry>
+        </usedTransportMeans>
+    </mainCarriageTransportMovement>
+    <usedTransportEquipment>
+        <carriedTransportEquipment>
+            <id schemeAgencyId="tzuowq">jwfofm</id>
+            <sequenceNumber>0</sequenceNumber>
+        </carriedTransportEquipment>
+        <categoryCode>NT</categoryCode>
+        <id schemeAgencyId="qtwpts">wupfuu</id>
+        <registrationCountry>
+            <code>CD</code>
+        </registrationCountry>
+        <sequenceNumber>0</sequenceNumber>
+    </usedTransportEquipment>
+</consignment>
