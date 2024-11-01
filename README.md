@@ -23,12 +23,12 @@ app/bin/app.bat --help
 
 ## Examples
 
-These examples use gradle to simplify testing.
+These examples use gradle to simplify testing. Note how the xpath expressions use local xml names and ignore namespaces.
 
 ### Set single value
 
 ```shell
-./gradlew app:run --args="-x identifier -w -s 42 -t 'consignment/deliveryEvent/actualOccurrenceDateTime:=123456789012+0000'"
+./gradlew app:run --args="-x identifier -w -s 42 -t 'consignment/deliveryEvent/actualOccurrenceDateTime:=202412312359+0000'"
 ```
 
 ### Unset value by overwriting with empty value

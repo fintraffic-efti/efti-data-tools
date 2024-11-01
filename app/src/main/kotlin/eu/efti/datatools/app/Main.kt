@@ -16,7 +16,7 @@ class TextContentOverrideConverter : IStringConverter<TextContentOverride> {
     override fun convert(raw: String): TextContentOverride {
         val parts = raw.split(XPATH_VALUE_SEPARATOR)
         if (parts.size != 2) {
-            throw ParameterException(""""$raw" should be of the form: <some xpath>$XPATH_VALUE_SEPARATOR<some value>""")
+            throw ParameterException(""""$raw" should be of the form: <xpath-expression>$XPATH_VALUE_SEPARATOR<value>""")
         }
         val (xpathString, valueString) = parts.map(String::trim)
 
@@ -71,7 +71,7 @@ class Args {
         names = ["--text-overrides", "-t"],
         converter = TextContentOverrideConverter::class,
         validateWith = [TextContentOverrideValidator::class],
-        description = """Override to apply to the populated document. The format is "<some-xpath>":="<some-value>". If multiple instances of this parameter are defined, then each override will be applied in the given order."""
+        description = """Override to apply to the populated document. The format is "<xpath-expression>:=<value>". Expression can use local xml names, namespaces can be ignored. If multiple instances of this parameter are defined, then each override will be applied in the given order."""
     )
     var textOverrides: List<TextContentOverride> = emptyList()
 
