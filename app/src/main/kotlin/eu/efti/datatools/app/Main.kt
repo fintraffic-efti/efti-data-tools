@@ -7,8 +7,10 @@ import eu.efti.datatools.populate.EftiDomPopulator
 import eu.efti.datatools.populate.EftiDomPopulator.TextContentOverride
 import eu.efti.datatools.populate.RepeatablePopulateMode
 import eu.efti.datatools.schema.EftiSchemas
+import eu.efti.datatools.schema.XmlUtil
 import org.w3c.dom.Document
 import java.io.File
+import javax.xml.validation.Schema
 import kotlin.system.exitProcess
 
 class TextContentOverrideConverter : IStringConverter<TextContentOverride> {
@@ -152,31 +154,35 @@ fun main(argv: Array<String>) {
                 namespaceAware = false,
             )
 
-        val writeDocument = documentWriter(args.pretty)
+        val validateAndWrite = documentValidatorAndWriter(args.pretty)
 
         when (args.schema) {
             SchemaOption.both -> {
                 val identifiers = commonToIdentifier(doc)
-                writeDocument(doc, checkNotNull(fileCommon))
-                writeDocument(identifiers, checkNotNull(fileIdentifiers))
+                validateAndWrite(EftiSchemas.javaCommonSchema, doc, checkNotNull(fileCommon))
+                validateAndWrite(EftiSchemas.javaIdentifiersSchema, identifiers, checkNotNull(fileIdentifiers))
             }
 
             SchemaOption.common -> {
-                writeDocument(doc, checkNotNull(fileCommon))
+                validateAndWrite(EftiSchemas.javaCommonSchema, doc, checkNotNull(fileCommon))
             }
 
             SchemaOption.identifier -> {
-                writeDocument(doc, checkNotNull(fileIdentifiers))
+                validateAndWrite(EftiSchemas.javaIdentifiersSchema, doc, checkNotNull(fileIdentifiers))
             }
         }
     }
 }
 
-private fun documentWriter(prettyPrint: Boolean): (doc: Document, file: File) -> Unit = { doc, file ->
-    file.printWriter().use { out ->
-        out.print(serializeToString(doc, prettyPrint = prettyPrint))
+private fun documentValidatorAndWriter(prettyPrint: Boolean): (schema: Schema, doc: Document, file: File) -> Unit =
+    { schema, doc, file ->
+        XmlUtil.validate(doc, schema)?.also {
+            throw IllegalStateException("Application produced an invalid document. Please report the parameters and the this error message to the maintainers. Validation error: $it")
+        }
+        file.printWriter().use { out ->
+            out.print(serializeToString(doc, prettyPrint = prettyPrint))
+        }
     }
-}
 
 private fun randomShortSeed() =
     System.currentTimeMillis().let { number -> number - (number / 100000 * 100000) }
