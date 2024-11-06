@@ -1,10 +1,10 @@
 package eu.efti.datatools.app
 
 import com.beust.jcommander.*
-import eu.efti.datatools.app.SchemaConversion.commonToIdentifier
 import eu.efti.datatools.populate.EftiDomPopulator
 import eu.efti.datatools.populate.EftiDomPopulator.TextContentOverride
 import eu.efti.datatools.populate.RepeatablePopulateMode
+import eu.efti.datatools.populate.SchemaConversion.commonToIdentifiers
 import eu.efti.datatools.schema.EftiSchemas
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.serializeToString
@@ -158,7 +158,7 @@ fun main(argv: Array<String>) {
 
         when (args.schema) {
             SchemaOption.both -> {
-                val identifiers = commonToIdentifier(doc)
+                val identifiers = commonToIdentifiers(doc)
                 validateAndWrite(EftiSchemas.javaCommonSchema, doc, checkNotNull(fileCommon))
                 validateAndWrite(EftiSchemas.javaIdentifiersSchema, identifiers, checkNotNull(fileIdentifiers))
             }

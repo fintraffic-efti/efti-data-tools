@@ -1,4 +1,4 @@
-package eu.efti.datatools.app
+package eu.efti.datatools.populate
 
 import eu.efti.datatools.schema.EftiSchemas
 import eu.efti.datatools.schema.XmlSchemaElement
@@ -12,12 +12,13 @@ import javax.xml.transform.dom.DOMResult
 import javax.xml.transform.dom.DOMSource
 
 object SchemaConversion {
-    fun commonToIdentifier(common: Document): Document {
+    fun commonToIdentifiers(common: Document): Document {
         val identifier = clone(common)
 
         dropNodesNotInSchema(EftiSchemas.readConsignmentIdentifiersSchema(), identifier.firstChild)
 
         return deserializeToDocument(
+            // Note: this is a dirty way of fixing the namespace, but it is simple and works in our context.
             serializeToString(identifier).replace(
                 "http://efti.eu/v1/consignment/common",
                 "http://efti.eu/v1/consignment/identifier",
