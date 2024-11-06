@@ -7,7 +7,7 @@
         <dangerousGoodsIndicator>true</dangerousGoodsIndicator>
         <modeCode>8</modeCode>
         <usedTransportMeans>
-            <id schemeAgencyId="tctkvk">rjanve</id>
+            <id schemeAgencyId="wqngxt">rjanve</id>
             <registrationCountry>
                 <code>LK</code>
             </registrationCountry>
@@ -15,11 +15,11 @@
     </mainCarriageTransportMovement>
     <usedTransportEquipment>
         <carriedTransportEquipment>
-            <id schemeAgencyId="tzuowq">jwfofm</id>
+            <id schemeAgencyId="qufkri">jwfofm</id>
             <sequenceNumber>0</sequenceNumber>
         </carriedTransportEquipment>
         <categoryCode>NT</categoryCode>
-        <id schemeAgencyId="qtwpts">wupfuu</id>
+        <id schemeAgencyId="ssvrkl">wupfuu</id>
         <registrationCountry>
             <code>CD</code>
         </registrationCountry>
