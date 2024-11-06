@@ -107,16 +107,17 @@ fun main(argv: Array<String>) {
         parser.usage()
     } else {
 
+        println("Generating with:")
         println(
-            """|Generating with:
-               |  * schema: ${args.schema}
-               |  * seed: ${args.seed}
-               |  * repeatable mode: ${args.repeatableMode.name}
-               |  * overrides: ${args.textOverrides.map { """Set "${it.xpath.raw}" to "${it.value}"""" }}
-               |  * output: ${args.output}
-               |  * overwrite: ${args.overwrite}
-               |  * pretty: ${args.pretty}
-           """.trimMargin()
+            listOf(
+                "schema" to args.schema,
+                "seed" to args.seed,
+                "repeatable mode" to args.repeatableMode.name,
+                "overrides" to args.textOverrides.map { """Set "${it.xpath.raw}" to "${it.value}"""" },
+                "output" to args.output,
+                "overwrite" to args.overwrite,
+                "pretty" to args.pretty,
+            ).joinToString("\n") { (label, value) -> """  * $label: $value""" }
         )
 
         val file = File(checkNotNull(args.output))
