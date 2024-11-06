@@ -1,13 +1,13 @@
 package eu.efti.datatools.app
 
 import com.beust.jcommander.*
-import eu.efti.datatools.app.XmlUtil.commonToIdentifier
-import eu.efti.datatools.app.XmlUtil.serializeToString
+import eu.efti.datatools.app.SchemaConversion.commonToIdentifier
 import eu.efti.datatools.populate.EftiDomPopulator
 import eu.efti.datatools.populate.EftiDomPopulator.TextContentOverride
 import eu.efti.datatools.populate.RepeatablePopulateMode
 import eu.efti.datatools.schema.EftiSchemas
 import eu.efti.datatools.schema.XmlUtil
+import eu.efti.datatools.schema.XmlUtil.serializeToString
 import org.w3c.dom.Document
 import java.io.File
 import javax.xml.validation.Schema

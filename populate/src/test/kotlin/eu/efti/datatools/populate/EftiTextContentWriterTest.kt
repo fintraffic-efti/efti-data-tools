@@ -1,15 +1,11 @@
 package eu.efti.datatools.populate
 
 import eu.efti.datatools.populate.EftiTextContentWriter.setTextContent
+import eu.efti.datatools.schema.XmlUtil.deserializeToDocument
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import org.w3c.dom.Document
-import org.xml.sax.InputSource
-import org.xml.sax.SAXException
 import org.xmlunit.matchers.CompareMatcher.isSimilarTo
-import java.io.StringReader
-import javax.xml.parsers.DocumentBuilderFactory
 import kotlin.random.Random
 import kotlin.streams.asStream
 
@@ -17,7 +13,7 @@ class EftiTextContentWriterTest {
     @ParameterizedTest
     @MethodSource("testCasesSetTextContent")
     fun `should replace text content with various XPaths and documents`(case: TestCase) {
-        val doc = tryDeserializeToDocument(case.original, namespaceAware = false)
+        val doc = deserializeToDocument(case.original, namespaceAware = false)
         setTextContent(doc, case.xpath, case.value)
 
         assertThat(doc, isSimilarTo(case.expected))
@@ -165,14 +161,5 @@ class EftiTextContentWriterTest {
                     )
                 },
             ).asStream()
-
-
-        fun tryDeserializeToDocument(xml: String, namespaceAware: Boolean = true): Document = try {
-            val factory = DocumentBuilderFactory.newInstance().also { it.isNamespaceAware = namespaceAware }
-            val builder = factory.newDocumentBuilder()
-            builder.parse(InputSource(StringReader(xml)))
-        } catch (e: SAXException) {
-            throw IllegalArgumentException("Could not parse document:\n$xml", e)
-        }
     }
 }

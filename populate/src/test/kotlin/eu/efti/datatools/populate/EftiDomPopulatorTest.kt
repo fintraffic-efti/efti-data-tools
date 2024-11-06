@@ -3,6 +3,7 @@ package eu.efti.datatools.populate
 import eu.efti.datatools.schema.EftiSchemas
 import eu.efti.datatools.schema.XmlSchemaElement
 import eu.efti.datatools.schema.XmlUtil
+import eu.efti.datatools.schema.XmlUtil.serializeToString
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.nullValue
 import org.junit.jupiter.api.Assertions.assertAll
@@ -13,9 +14,6 @@ import org.junit.jupiter.api.fail
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.w3c.dom.Document
-import org.w3c.dom.bootstrap.DOMImplementationRegistry
-import org.w3c.dom.ls.DOMImplementationLS
-import org.xmlunit.matchers.CompareMatcher.isSimilarTo
 import java.io.*
 import javax.xml.validation.Schema
 import kotlin.streams.asStream
@@ -108,10 +106,10 @@ class EftiDomPopulatorTest {
             assertAll(
                 { assertThat(XmlUtil.validate(doc, EftiSchemas.javaIdentifiersSchema), nullValue()) },
                 {
-                    assertThat(
-                        "Populated document did not match the expected document, please update test expectations with: ./gradlew updateTestExpectations",
-                        doc,
-                        isSimilarTo(expected)
+                    // Use junit assertEquals because it formats the expected value better than hamcrest.
+                    assertEquals(
+                        expected, formatXml(doc),
+                        "Populated document did not match the expected document, please update test expectations with: ./gradlew updateTestExpectations"
                     )
                 },
             )
@@ -157,22 +155,7 @@ class EftiDomPopulatorTest {
             }
         }
 
-        private fun formatXml(doc: Document): String {
-            val registry = DOMImplementationRegistry.newInstance()
-            val domImplLS = registry.getDOMImplementation("LS") as DOMImplementationLS
-
-            val lsSerializer = domImplLS.createLSSerializer()
-            val domConfig = lsSerializer.domConfig
-            domConfig.setParameter("format-pretty-print", true)
-
-            val byteArrayOutputStream = ByteArrayOutputStream()
-            val lsOutput = domImplLS.createLSOutput()
-            lsOutput.encoding = "UTF-8"
-            lsOutput.byteStream = byteArrayOutputStream
-
-            lsSerializer.write(doc, lsOutput)
-            return byteArrayOutputStream.toString(Charsets.UTF_8)
-        }
+        private fun formatXml(doc: Document): String = serializeToString(doc, prettyPrint = true)
 
         private fun classpathInputStream(filename: String): InputStream =
             checkNotNull(EftiDomPopulatorTest::class.java.getResourceAsStream(filename)) {

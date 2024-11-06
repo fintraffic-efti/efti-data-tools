@@ -1,7 +1,7 @@
 package eu.efti.datatools.populate
 
+import eu.efti.datatools.schema.XmlUtil.asIterable
 import org.w3c.dom.Document
-import org.w3c.dom.Node
 import org.w3c.dom.NodeList
 import javax.xml.xpath.XPathConstants
 import javax.xml.xpath.XPathExpression
@@ -24,8 +24,4 @@ object EftiTextContentWriter {
         val xpath = xpathFactory.newXPath()
         return xpath.compile(expression)
     }
-
-    private fun NodeList.asIterable(): Iterable<Node> =
-        (0 until this.length).asSequence().map { this.item(it) }.asIterable()
-
 }
