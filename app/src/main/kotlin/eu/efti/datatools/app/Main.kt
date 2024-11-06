@@ -75,7 +75,7 @@ class Args {
     )
     var textOverrides: List<TextContentOverride> = emptyList()
 
-    @Parameter(names = ["--output", "-o"], required = false, description = "Output file (will not be overwritten).")
+    @Parameter(names = ["--output", "-o"], required = false, description = "Output file.")
     var output: String? = null
 
     @Parameter(names = ["--overwrite", "-w"], required = false, description = "Overwrite existing document.")
