@@ -1,14 +1,13 @@
 package eu.efti.datatools.app
 
 import com.beust.jcommander.*
+import eu.efti.datatools.app.XmlUtil.commonToIdentifier
+import eu.efti.datatools.app.XmlUtil.serializeToString
 import eu.efti.datatools.populate.EftiDomPopulator
 import eu.efti.datatools.populate.EftiDomPopulator.TextContentOverride
 import eu.efti.datatools.populate.RepeatablePopulateMode
 import eu.efti.datatools.schema.EftiSchemas
 import org.w3c.dom.Document
-import org.w3c.dom.bootstrap.DOMImplementationRegistry
-import org.w3c.dom.ls.DOMImplementationLS
-import java.io.ByteArrayOutputStream
 import java.io.File
 import kotlin.system.exitProcess
 
@@ -42,7 +41,7 @@ class TextContentOverrideValidator : IParameterValidator {
 }
 
 enum class SchemaOption {
-    common, identifier
+    both, common, identifier
 }
 
 class Args {
@@ -59,7 +58,7 @@ class Args {
         names = ["--schema", "-x"],
         description = "Schema to use"
     )
-    var schema: SchemaOption? = SchemaOption.common
+    var schema: SchemaOption = SchemaOption.common
 
     @Parameter(
         names = ["--repeatable-mode", "-r"],
@@ -75,8 +74,11 @@ class Args {
     )
     var textOverrides: List<TextContentOverride> = emptyList()
 
-    @Parameter(names = ["--output", "-o"], required = false, description = "Output file.")
-    var output: String? = null
+    @Parameter(names = ["--output", "-o", "-oc"], required = false, description = "Output file for common.")
+    var pathCommon: String? = null
+
+    @Parameter(names = ["--output-identifiers", "-oi"], required = false, description = "Output file for identifiers.")
+    var pathIdentifiers: String? = null
 
     @Parameter(names = ["--overwrite", "-w"], required = false, description = "Overwrite existing document.")
     var overwrite: Boolean = false
@@ -99,8 +101,11 @@ fun main(argv: Array<String>) {
     if (args.seed == null) {
         args.seed = randomShortSeed()
     }
-    if (args.output == null) {
-        args.output = "consignment-${args.schema}-${args.seed}.xml"
+    if (args.pathCommon == null && args.schema in setOf(SchemaOption.both, SchemaOption.common)) {
+        args.pathCommon = "consignment-${args.seed}-common.xml"
+    }
+    if (args.pathIdentifiers == null && args.schema in setOf(SchemaOption.both, SchemaOption.identifier)) {
+        args.pathIdentifiers = "consignment-${args.seed}-identifiers.xml"
     }
 
     if (args.help) {
@@ -114,50 +119,64 @@ fun main(argv: Array<String>) {
                 "seed" to args.seed,
                 "repeatable mode" to args.repeatableMode.name,
                 "overrides" to args.textOverrides.map { """Set "${it.xpath.raw}" to "${it.value}"""" },
-                "output" to args.output,
+                "output common" to args.pathCommon,
+                "output identifiers" to args.pathIdentifiers,
                 "overwrite" to args.overwrite,
                 "pretty" to args.pretty,
-            ).joinToString("\n") { (label, value) -> """  * $label: $value""" }
+            )
+                .filter { it.second != null }
+                .joinToString("\n") { (label, value) -> """  * $label: $value""" }
         )
 
-        val file = File(checkNotNull(args.output))
-        if (!args.overwrite && file.exists()) {
-            println("Output file ${args.output} already exists")
-            exitProcess(1)
-        } else {
-            val doc = EftiDomPopulator(checkNotNull(args.seed), args.repeatableMode)
-                .populate(
-                    schema = when (checkNotNull(args.schema)) {
-                        SchemaOption.common -> EftiSchemas.readConsignmentCommonSchema()
-                        SchemaOption.identifier -> EftiSchemas.readConsignmentIdentifiersSchema()
-                    },
-                    overrides = args.textOverrides,
-                    namespaceAware = false,
-                )
+        val fileCommon = args.pathCommon?.let(::File)
+        val fileIdentifiers = args.pathIdentifiers?.let(::File)
+        if (!args.overwrite) {
+            if (fileCommon?.exists() == true) {
+                println("Output file ${args.pathCommon} already exists")
+                exitProcess(1)
+            }
+            if (fileIdentifiers?.exists() == true) {
+                println("Output file ${args.pathIdentifiers} already exists")
+                exitProcess(1)
+            }
+        }
 
-            file.printWriter().use { out ->
-                out.print(serializeToString(doc, prettyPrint = args.pretty))
+        val doc = EftiDomPopulator(checkNotNull(args.seed), args.repeatableMode)
+            .populate(
+                schema = when (args.schema) {
+                    SchemaOption.both -> EftiSchemas.readConsignmentCommonSchema()
+                    SchemaOption.common -> EftiSchemas.readConsignmentCommonSchema()
+                    SchemaOption.identifier -> EftiSchemas.readConsignmentIdentifiersSchema()
+                },
+                overrides = args.textOverrides,
+                namespaceAware = false,
+            )
+
+        val writeDocument = documentWriter(args.pretty)
+
+        when (args.schema) {
+            SchemaOption.both -> {
+                val identifiers = commonToIdentifier(doc)
+                writeDocument(doc, checkNotNull(fileCommon))
+                writeDocument(identifiers, checkNotNull(fileIdentifiers))
+            }
+
+            SchemaOption.common -> {
+                writeDocument(doc, checkNotNull(fileCommon))
+            }
+
+            SchemaOption.identifier -> {
+                writeDocument(doc, checkNotNull(fileIdentifiers))
             }
         }
     }
 }
 
+private fun documentWriter(prettyPrint: Boolean): (doc: Document, file: File) -> Unit = { doc, file ->
+    file.printWriter().use { out ->
+        out.print(serializeToString(doc, prettyPrint = prettyPrint))
+    }
+}
+
 private fun randomShortSeed() =
     System.currentTimeMillis().let { number -> number - (number / 100000 * 100000) }
-
-private fun serializeToString(doc: Document, prettyPrint: Boolean = false): String {
-    val registry = DOMImplementationRegistry.newInstance()
-    val domImplLS = registry.getDOMImplementation("LS") as DOMImplementationLS
-
-    val lsSerializer = domImplLS.createLSSerializer()
-    val domConfig = lsSerializer.domConfig
-    domConfig.setParameter("format-pretty-print", prettyPrint)
-
-    val byteArrayOutputStream = ByteArrayOutputStream()
-    val lsOutput = domImplLS.createLSOutput()
-    lsOutput.encoding = "UTF-8"
-    lsOutput.byteStream = byteArrayOutputStream
-
-    lsSerializer.write(doc, lsOutput)
-    return byteArrayOutputStream.toString(Charsets.UTF_8)
-}

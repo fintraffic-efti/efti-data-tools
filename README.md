@@ -53,6 +53,18 @@ These examples use gradle to simplify testing. Note how the xpath expressions us
 ./gradlew app:run --args="-x identifier -w -s 42 -t 'consignment/usedTransportEquipment[1]/id:=ABC-123' -t 'consignment/usedTransportEquipment[2]/id:=XYZ-789'"
 ```
 
+### Output both common and identifier documents with default filenames
+
+```shell
+./gradlew app:run --args="-x both -w -s 42
+```
+
+### Output both common and identifier documents with custom filenames
+
+```shell
+./gradlew app:run --args="-x both -w -s 42 -oc my-common.xml -oi my-identifiers.xml
+```
+
 ## Development
 
 Build and run tests with:
