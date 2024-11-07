@@ -3,6 +3,9 @@
 Command line tool and library for generating random xml documents for eFTI consignment schemas at
 [reference-implementation](https://github.com/EFTI4EU/reference-implementation/tree/main/schema/xsd).
 
+These tools are not part of the eFTI4EU reference implementation but may be used to help in development and testing of
+eFTI implementations.
+
 Requires Java 17 or later.
 
 ## Binaries
