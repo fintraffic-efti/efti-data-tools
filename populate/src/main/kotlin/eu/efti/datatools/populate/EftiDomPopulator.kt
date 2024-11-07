@@ -3,15 +3,11 @@ package eu.efti.datatools.populate
 import eu.efti.datatools.schema.XmlSchemaElement
 import eu.efti.datatools.schema.XmlSchemaElement.XmlName
 import eu.efti.datatools.schema.XmlSchemaElement.XmlType
+import eu.efti.datatools.schema.XmlUtil.asIterable
+import eu.efti.datatools.schema.XmlUtil.serializeToString
+import eu.efti.datatools.schema.XmlUtil.deserializeToDocument
 import org.w3c.dom.Document
 import org.w3c.dom.Node
-import org.w3c.dom.NodeList
-import org.w3c.dom.bootstrap.DOMImplementationRegistry
-import org.w3c.dom.ls.DOMImplementationLS
-import org.xml.sax.InputSource
-import org.xml.sax.SAXException
-import java.io.ByteArrayOutputStream
-import java.io.StringReader
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -241,40 +237,13 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
             }
 
             // Another serialization round is required to convert all elements to the desired namespace
-            return tryDeserializeToDocument(serialize(doc), namespaceAware = true)
+            return deserializeToDocument(serializeToString(doc, prettyPrint = false), namespaceAware = true)
         }
 
         private fun removeNamespaces(doc: Document): Document {
             // Note: a clumsy way of making unaware of namespaces
-            return tryDeserializeToDocument(serialize(doc), namespaceAware = false)
+            return deserializeToDocument(serializeToString(doc, prettyPrint = false), namespaceAware = false)
         }
 
-        private fun NodeList.asIterable(): Iterable<Node> =
-            (0 until this.length).asSequence().map { this.item(it) }.asIterable()
-
-        private fun tryDeserializeToDocument(xml: String, namespaceAware: Boolean = true): Document = try {
-            val factory = DocumentBuilderFactory.newInstance().also { it.isNamespaceAware = namespaceAware }
-            val builder = factory.newDocumentBuilder()
-            builder.parse(InputSource(StringReader(xml)))
-        } catch (e: SAXException) {
-            throw IllegalArgumentException("Could not parse document:\n$xml", e)
-        }
-
-        private fun serialize(doc: Document): String {
-            val registry = DOMImplementationRegistry.newInstance()
-            val domImplLS = registry.getDOMImplementation("LS") as DOMImplementationLS
-
-            val lsSerializer = domImplLS.createLSSerializer()
-            val domConfig = lsSerializer.domConfig
-            domConfig.setParameter("format-pretty-print", true)
-
-            val byteArrayOutputStream = ByteArrayOutputStream()
-            val lsOutput = domImplLS.createLSOutput()
-            lsOutput.encoding = "UTF-8"
-            lsOutput.byteStream = byteArrayOutputStream
-
-            lsSerializer.write(doc, lsOutput)
-            return byteArrayOutputStream.toString(Charsets.UTF_8)
-        }
     }
 }
