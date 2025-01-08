@@ -5,6 +5,7 @@ data class XmlSchemaElement(
     val type: XmlType,
     val cardinality: XmlCardinality,
     val children: List<XmlSchemaElement>,
+    val subsets: Set<SubsetId>,
 ) {
     data class XmlAttribute(val name: XmlName, val type: XmlType)
 
@@ -19,4 +20,10 @@ data class XmlSchemaElement(
     )
 
     data class XmlCardinality(val min: Long = 0, val max: Long? = null)
+
+    data class SubsetId(val id: String) {
+        init {
+            require(id.isNotBlank()) { "id must not be blank" }
+        }
+    }
 }
