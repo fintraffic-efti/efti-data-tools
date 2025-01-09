@@ -71,11 +71,14 @@ object XmlUtil {
         namespaceAware: Boolean,
         dropCondition: (node: Node, maybeSchemaElement: XmlSchemaElement?) -> Boolean
     ) {
-        fun isTextNode(node: Node): Boolean = node.nodeType == Node.TEXT_NODE
+        fun isFilterableNode(node: Node): Boolean = when (node.nodeType) {
+            Node.COMMENT_NODE, Node.TEXT_NODE -> false
+            else -> true
+        }
 
         node.childNodes
             .asIterable()
-            .filterNot(::isTextNode)
+            .filter(::isFilterableNode)
             .filter { childNode ->
                 val schemaElement = schema.children.find { sc ->
                     sc.name.localPart == childNode.localName && (!namespaceAware || sc.name.namespaceURI == childNode.namespaceURI)
@@ -90,7 +93,7 @@ object XmlUtil {
 
         node.childNodes
             .asIterable()
-            .filterNot(::isTextNode)
+            .filter(::isFilterableNode)
             .forEach { childNode ->
                 val childSchema = schema.children.first { it.name.localPart == childNode.localName }
                 dropNodesRecursively(childSchema, childNode, false, dropCondition)

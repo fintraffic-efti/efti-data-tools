@@ -10,13 +10,20 @@ import eu.efti.datatools.populate.EftiDomPopulator
 import eu.efti.datatools.populate.EftiDomPopulator.TextContentOverride
 import eu.efti.datatools.populate.RepeatablePopulateMode
 import eu.efti.datatools.populate.SchemaConversion.commonToIdentifiers
-import eu.efti.datatools.schema.EftiSchemas
 import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
 import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
+import eu.efti.datatools.schema.EftiSchemas.javaCommonSchema
+import eu.efti.datatools.schema.EftiSchemas.javaIdentifiersSchema
+import eu.efti.datatools.schema.SubsetUtil.filterCommonSubsets
+import eu.efti.datatools.schema.SubsetUtil.filterIdentifierSubsets
+import eu.efti.datatools.schema.XmlSchemaElement.SubsetId
 import eu.efti.datatools.schema.XmlUtil
+import eu.efti.datatools.schema.XmlUtil.deserializeToDocument
 import eu.efti.datatools.schema.XmlUtil.serializeToString
 import org.w3c.dom.Document
 import java.io.File
+import java.io.FileInputStream
+import java.io.InputStreamReader
 import javax.xml.validation.Schema
 import kotlin.system.exitProcess
 
@@ -49,17 +56,51 @@ class TextContentOverrideValidator : IParameterValidator {
     }
 }
 
-enum class SchemaOption {
-    both, common, identifier
-}
-
 class CommandMain {
     @Parameter(names = ["--help", "-h"], help = true, description = "Print this help.")
     var help = false
 }
 
+abstract class CommonArgs {
+    @Parameter(names = ["--overwrite", "-w"], required = false, description = "Overwrite existing documents.")
+    var overwrite: Boolean = false
+
+    @Parameter(names = ["--pretty", "-p"], required = false, description = "Pretty print.")
+    var pretty: Boolean = true
+}
+
+@Parameters(commandDescription = "Filter subsets on consignment document")
+class CommandFilter : CommonArgs() {
+    enum class SchemaOption {
+        common, identifier
+    }
+
+    @Parameter(
+        names = ["--schema", "-x"],
+        description = "Schema to use"
+    )
+    var schema: SchemaOption = SchemaOption.common
+
+    @Parameter(names = ["--input", "-i"], required = true, description = "Input file.")
+    var inputPath: String? = null
+
+    @Parameter(names = ["--output", "-o"], required = false, description = "Output file.")
+    var outputPath: String? = null
+
+    @Parameter(
+        names = ["--subset-id", "-s"],
+        required = true,
+        description = "List of subset ids to use for filtering. A document element is dropped if it is not included in any of the given subsets."
+    )
+    var subsetIds: List<String> = emptyList()
+}
+
 @Parameters(commandDescription = "Populate random documents")
-class CommandPopulate {
+class CommandPopulate : CommonArgs() {
+    enum class SchemaOption {
+        both, common, identifier
+    }
+
     @Parameter(
         names = ["--seed", "-s"],
         description = "Seed to use, by default a random seed is used. Identical seeds should produce identical documents for a given version of the application."
@@ -91,19 +132,15 @@ class CommandPopulate {
 
     @Parameter(names = ["--output-identifiers", "-oi"], required = false, description = "Output file for identifiers.")
     var pathIdentifiers: String? = null
-
-    @Parameter(names = ["--overwrite", "-w"], required = false, description = "Overwrite existing document.")
-    var overwrite: Boolean = false
-
-    @Parameter(names = ["--pretty", "-p"], required = false, description = "Pretty print.")
-    var pretty: Boolean = true
 }
 
 fun main(argv: Array<String>) {
     val mainArgs = CommandMain()
+    val filterArgs = CommandFilter()
     val populateArgs = CommandPopulate()
     val parser = JCommander.newBuilder()
         .addObject(mainArgs)
+        .addCommand("filter", filterArgs)
         .addCommand("populate", populateArgs)
         .build()
 
@@ -116,81 +153,139 @@ fun main(argv: Array<String>) {
 
     if (mainArgs.help) {
         parser.usage()
+    } else if (parser.parsedCommand == "filter") {
+        doFilter(filterArgs)
     } else if (parser.parsedCommand == "populate") {
         doPopulate(populateArgs)
     }
 }
 
-private fun doPopulate(populateArgs: CommandPopulate) {
-    if (populateArgs.seed == null) {
-        populateArgs.seed = randomShortSeed()
-    }
-    if (populateArgs.pathCommon == null && populateArgs.schema in setOf(SchemaOption.both, SchemaOption.common)) {
-        populateArgs.pathCommon = "consignment-${populateArgs.seed}-common.xml"
-    }
-    if (populateArgs.pathIdentifiers == null && populateArgs.schema in setOf(
-            SchemaOption.both,
-            SchemaOption.identifier
-        )
-    ) {
-        populateArgs.pathIdentifiers = "consignment-${populateArgs.seed}-identifiers.xml"
+private fun doFilter(args: CommandFilter) {
+    if (args.outputPath == null) {
+        args.outputPath = "filtered.xml"
     }
 
-    println("Generating with:")
+    println("Filtering with:")
     println(
         listOf(
-            "schema" to populateArgs.schema,
-            "seed" to populateArgs.seed,
-            "repeatable mode" to populateArgs.repeatableMode.name,
-            "overrides" to populateArgs.textOverrides.map { """Set "${it.xpath.raw}" to "${it.value}"""" },
-            "output common" to populateArgs.pathCommon,
-            "output identifiers" to populateArgs.pathIdentifiers,
-            "overwrite" to populateArgs.overwrite,
-            "pretty" to populateArgs.pretty,
+            "subsets" to args.subsetIds.joinToString(", "),
+            "schema" to args.schema,
+            "input" to args.inputPath,
+            "output" to args.outputPath,
+            "overwrite" to args.overwrite,
+            "pretty" to args.pretty,
         )
             .filter { it.second != null }
             .joinToString("\n") { (label, value) -> """  * $label: $value""" }
     )
 
-    val fileCommon = populateArgs.pathCommon?.let(::File)
-    val fileIdentifiers = populateArgs.pathIdentifiers?.let(::File)
-    if (!populateArgs.overwrite) {
+    val outputFile = args.outputPath?.let(::File)
+    if (!args.overwrite) {
+        if (outputFile?.exists() == true) {
+            println("Output file ${args.outputPath} already exists")
+            exitProcess(1)
+        }
+    }
+    if (args.subsetIds.isEmpty()) {
+        println("At least one subset id is required")
+        exitProcess(1)
+    }
+
+
+    val subsets = args.subsetIds.map(::SubsetId).toSet()
+    val doc = deserializeToDocument(InputStreamReader(FileInputStream(checkNotNull(args.inputPath))).readText())
+
+    val validateAndWrite = documentValidatorAndWriter(args.pretty)
+
+    when (checkNotNull(args.schema)) {
+        CommandFilter.SchemaOption.common -> validateAndWrite(
+            javaCommonSchema,
+            filterCommonSubsets(doc, subsets),
+            checkNotNull(outputFile),
+        )
+
+        CommandFilter.SchemaOption.identifier -> validateAndWrite(
+            javaIdentifiersSchema,
+            filterIdentifierSubsets(doc, subsets),
+            checkNotNull(outputFile),
+        )
+    }
+}
+
+private fun doPopulate(args: CommandPopulate) {
+    if (args.seed == null) {
+        args.seed = randomShortSeed()
+    }
+    if (args.pathCommon == null && args.schema in setOf(
+            CommandPopulate.SchemaOption.both,
+            CommandPopulate.SchemaOption.common
+        )
+    ) {
+        args.pathCommon = "consignment-${args.seed}-common.xml"
+    }
+    if (args.pathIdentifiers == null && args.schema in setOf(
+            CommandPopulate.SchemaOption.both,
+            CommandPopulate.SchemaOption.identifier
+        )
+    ) {
+        args.pathIdentifiers = "consignment-${args.seed}-identifiers.xml"
+    }
+
+    println("Generating with:")
+    println(
+        listOf(
+            "schema" to args.schema,
+            "seed" to args.seed,
+            "repeatable mode" to args.repeatableMode.name,
+            "overrides" to args.textOverrides.map { """Set "${it.xpath.raw}" to "${it.value}"""" },
+            "output common" to args.pathCommon,
+            "output identifiers" to args.pathIdentifiers,
+            "overwrite" to args.overwrite,
+            "pretty" to args.pretty,
+        )
+            .filter { it.second != null }
+            .joinToString("\n") { (label, value) -> """  * $label: $value""" }
+    )
+
+    val fileCommon = args.pathCommon?.let(::File)
+    val fileIdentifiers = args.pathIdentifiers?.let(::File)
+    if (!args.overwrite) {
         if (fileCommon?.exists() == true) {
-            println("Output file ${populateArgs.pathCommon} already exists")
+            println("Output file ${args.pathCommon} already exists")
             exitProcess(1)
         }
         if (fileIdentifiers?.exists() == true) {
-            println("Output file ${populateArgs.pathIdentifiers} already exists")
+            println("Output file ${args.pathIdentifiers} already exists")
             exitProcess(1)
         }
     }
 
-    val doc = EftiDomPopulator(checkNotNull(populateArgs.seed), populateArgs.repeatableMode)
+    val doc = EftiDomPopulator(checkNotNull(args.seed), args.repeatableMode)
         .populate(
-            schema = when (populateArgs.schema) {
-                SchemaOption.both -> consignmentCommonSchema
-                SchemaOption.common -> consignmentCommonSchema
-                SchemaOption.identifier -> consignmentIdentifierSchema
+            schema = when (args.schema) {
+                CommandPopulate.SchemaOption.both -> consignmentCommonSchema
+                CommandPopulate.SchemaOption.common -> consignmentCommonSchema
+                CommandPopulate.SchemaOption.identifier -> consignmentIdentifierSchema
             },
-            overrides = populateArgs.textOverrides,
+            overrides = args.textOverrides,
             namespaceAware = false,
         )
 
-    val validateAndWrite = documentValidatorAndWriter(populateArgs.pretty)
+    val validateAndWrite = documentValidatorAndWriter(args.pretty)
 
-    when (populateArgs.schema) {
-        SchemaOption.both -> {
+    when (args.schema) {
+        CommandPopulate.SchemaOption.both -> {
             val identifiers = commonToIdentifiers(doc)
-            validateAndWrite(EftiSchemas.javaCommonSchema, doc, checkNotNull(fileCommon))
-            validateAndWrite(EftiSchemas.javaIdentifiersSchema, identifiers, checkNotNull(fileIdentifiers))
+            validateAndWrite(javaCommonSchema, doc, checkNotNull(fileCommon))
+            validateAndWrite(javaIdentifiersSchema, identifiers, checkNotNull(fileIdentifiers))
         }
 
-        SchemaOption.common -> {
-            validateAndWrite(EftiSchemas.javaCommonSchema, doc, checkNotNull(fileCommon))
+        CommandPopulate.SchemaOption.common -> {
+            validateAndWrite(javaCommonSchema, doc, checkNotNull(fileCommon))
         }
 
-        SchemaOption.identifier -> {
-            validateAndWrite(EftiSchemas.javaIdentifiersSchema, doc, checkNotNull(fileIdentifiers))
+        CommandPopulate.SchemaOption.identifier -> {
+            validateAndWrite(javaIdentifiersSchema, doc, checkNotNull(fileIdentifiers))
         }
     }
 }
