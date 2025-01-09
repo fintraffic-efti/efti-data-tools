@@ -1,4 +1,5 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 val xmlunitVersion = "2.10.0"
@@ -32,9 +33,18 @@ tasks.test {
     useJUnitPlatform()
 
     testLogging {
-        events("passed", "skipped", "failed")
+        events(
+            TestLogEvent.PASSED,
+            TestLogEvent.SKIPPED,
+            TestLogEvent.FAILED,
+            TestLogEvent.STANDARD_ERROR,
+            TestLogEvent.STANDARD_OUT,
+        )
         exceptionFormat = TestExceptionFormat.FULL
     }
+
+    // Always run task even if it has successfully completed earlier
+    outputs.upToDateWhen { false }
 }
 
 tasks.register<Test>("updateTestExpectations") {
