@@ -1,6 +1,11 @@
 package eu.efti.datatools.app
 
-import com.beust.jcommander.*
+import com.beust.jcommander.IParameterValidator
+import com.beust.jcommander.IStringConverter
+import com.beust.jcommander.JCommander
+import com.beust.jcommander.Parameter
+import com.beust.jcommander.ParameterException
+import com.beust.jcommander.Parameters
 import eu.efti.datatools.populate.EftiDomPopulator
 import eu.efti.datatools.populate.EftiDomPopulator.TextContentOverride
 import eu.efti.datatools.populate.RepeatablePopulateMode
@@ -48,10 +53,13 @@ enum class SchemaOption {
     both, common, identifier
 }
 
-class Args {
+class CommandMain {
     @Parameter(names = ["--help", "-h"], help = true, description = "Print this help.")
     var help = false
+}
 
+@Parameters(commandDescription = "Populate random documents")
+class CommandPopulate {
     @Parameter(
         names = ["--seed", "-s"],
         description = "Seed to use, by default a random seed is used. Identical seeds should produce identical documents for a given version of the application."
@@ -92,86 +100,97 @@ class Args {
 }
 
 fun main(argv: Array<String>) {
-    val args = Args()
+    val mainArgs = CommandMain()
+    val populateArgs = CommandPopulate()
     val parser = JCommander.newBuilder()
-        .addObject(args)
+        .addObject(mainArgs)
+        .addCommand("populate", populateArgs)
         .build()
+
     try {
         parser.parse(*argv)
     } catch (e: ParameterException) {
         System.err.println(e.message)
         exitProcess(1)
     }
-    if (args.seed == null) {
-        args.seed = randomShortSeed()
-    }
-    if (args.pathCommon == null && args.schema in setOf(SchemaOption.both, SchemaOption.common)) {
-        args.pathCommon = "consignment-${args.seed}-common.xml"
-    }
-    if (args.pathIdentifiers == null && args.schema in setOf(SchemaOption.both, SchemaOption.identifier)) {
-        args.pathIdentifiers = "consignment-${args.seed}-identifiers.xml"
-    }
 
-    if (args.help) {
+    if (mainArgs.help) {
         parser.usage()
-    } else {
+    } else if (parser.parsedCommand == "populate") {
+        doPopulate(populateArgs)
+    }
+}
 
-        println("Generating with:")
-        println(
-            listOf(
-                "schema" to args.schema,
-                "seed" to args.seed,
-                "repeatable mode" to args.repeatableMode.name,
-                "overrides" to args.textOverrides.map { """Set "${it.xpath.raw}" to "${it.value}"""" },
-                "output common" to args.pathCommon,
-                "output identifiers" to args.pathIdentifiers,
-                "overwrite" to args.overwrite,
-                "pretty" to args.pretty,
-            )
-                .filter { it.second != null }
-                .joinToString("\n") { (label, value) -> """  * $label: $value""" }
+private fun doPopulate(populateArgs: CommandPopulate) {
+    if (populateArgs.seed == null) {
+        populateArgs.seed = randomShortSeed()
+    }
+    if (populateArgs.pathCommon == null && populateArgs.schema in setOf(SchemaOption.both, SchemaOption.common)) {
+        populateArgs.pathCommon = "consignment-${populateArgs.seed}-common.xml"
+    }
+    if (populateArgs.pathIdentifiers == null && populateArgs.schema in setOf(
+            SchemaOption.both,
+            SchemaOption.identifier
+        )
+    ) {
+        populateArgs.pathIdentifiers = "consignment-${populateArgs.seed}-identifiers.xml"
+    }
+
+    println("Generating with:")
+    println(
+        listOf(
+            "schema" to populateArgs.schema,
+            "seed" to populateArgs.seed,
+            "repeatable mode" to populateArgs.repeatableMode.name,
+            "overrides" to populateArgs.textOverrides.map { """Set "${it.xpath.raw}" to "${it.value}"""" },
+            "output common" to populateArgs.pathCommon,
+            "output identifiers" to populateArgs.pathIdentifiers,
+            "overwrite" to populateArgs.overwrite,
+            "pretty" to populateArgs.pretty,
+        )
+            .filter { it.second != null }
+            .joinToString("\n") { (label, value) -> """  * $label: $value""" }
+    )
+
+    val fileCommon = populateArgs.pathCommon?.let(::File)
+    val fileIdentifiers = populateArgs.pathIdentifiers?.let(::File)
+    if (!populateArgs.overwrite) {
+        if (fileCommon?.exists() == true) {
+            println("Output file ${populateArgs.pathCommon} already exists")
+            exitProcess(1)
+        }
+        if (fileIdentifiers?.exists() == true) {
+            println("Output file ${populateArgs.pathIdentifiers} already exists")
+            exitProcess(1)
+        }
+    }
+
+    val doc = EftiDomPopulator(checkNotNull(populateArgs.seed), populateArgs.repeatableMode)
+        .populate(
+            schema = when (populateArgs.schema) {
+                SchemaOption.both -> consignmentCommonSchema
+                SchemaOption.common -> consignmentCommonSchema
+                SchemaOption.identifier -> consignmentIdentifierSchema
+            },
+            overrides = populateArgs.textOverrides,
+            namespaceAware = false,
         )
 
-        val fileCommon = args.pathCommon?.let(::File)
-        val fileIdentifiers = args.pathIdentifiers?.let(::File)
-        if (!args.overwrite) {
-            if (fileCommon?.exists() == true) {
-                println("Output file ${args.pathCommon} already exists")
-                exitProcess(1)
-            }
-            if (fileIdentifiers?.exists() == true) {
-                println("Output file ${args.pathIdentifiers} already exists")
-                exitProcess(1)
-            }
+    val validateAndWrite = documentValidatorAndWriter(populateArgs.pretty)
+
+    when (populateArgs.schema) {
+        SchemaOption.both -> {
+            val identifiers = commonToIdentifiers(doc)
+            validateAndWrite(EftiSchemas.javaCommonSchema, doc, checkNotNull(fileCommon))
+            validateAndWrite(EftiSchemas.javaIdentifiersSchema, identifiers, checkNotNull(fileIdentifiers))
         }
 
-        val doc = EftiDomPopulator(checkNotNull(args.seed), args.repeatableMode)
-            .populate(
-                schema = when (args.schema) {
-                    SchemaOption.both -> consignmentCommonSchema
-                    SchemaOption.common -> consignmentCommonSchema
-                    SchemaOption.identifier -> consignmentIdentifierSchema
-                },
-                overrides = args.textOverrides,
-                namespaceAware = false,
-            )
+        SchemaOption.common -> {
+            validateAndWrite(EftiSchemas.javaCommonSchema, doc, checkNotNull(fileCommon))
+        }
 
-        val validateAndWrite = documentValidatorAndWriter(args.pretty)
-
-        when (args.schema) {
-            SchemaOption.both -> {
-                val identifiers = commonToIdentifiers(doc)
-                validateAndWrite(EftiSchemas.javaCommonSchema, doc, checkNotNull(fileCommon))
-                validateAndWrite(EftiSchemas.javaIdentifiersSchema, identifiers, checkNotNull(fileIdentifiers))
-            }
-
-            SchemaOption.common -> {
-                validateAndWrite(EftiSchemas.javaCommonSchema, doc, checkNotNull(fileCommon))
-            }
-
-            SchemaOption.identifier -> {
-                validateAndWrite(EftiSchemas.javaIdentifiersSchema, doc, checkNotNull(fileIdentifiers))
-            }
+        SchemaOption.identifier -> {
+            validateAndWrite(EftiSchemas.javaIdentifiersSchema, doc, checkNotNull(fileIdentifiers))
         }
     }
 }

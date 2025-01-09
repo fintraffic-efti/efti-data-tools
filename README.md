@@ -32,40 +32,46 @@ for the specific version.
 
 These examples use gradle to simplify testing. Note how the xpath expressions use local xml names and ignore namespaces.
 
+### Get help
+
+```shell
+./gradlew app:run --args="-h"
+```
+
 ### Set single value
 
 ```shell
-./gradlew app:run --args="-x identifier -w -s 42 -t 'consignment/deliveryEvent/actualOccurrenceDateTime:=202412312359+0000'"
+./gradlew app:run --args="populate -x identifier -w -s 42 -t 'consignment/deliveryEvent/actualOccurrenceDateTime:=202412312359+0000'"
 ```
 
 ### Unset value by overwriting with empty value
 
 ```shell
-./gradlew app:run --args="-x identifier -w -s 42 -t 'consignment/deliveryEvent/actualOccurrenceDateTime:='"
+./gradlew app:run --args="populate -x identifier -w -s 42 -t 'consignment/deliveryEvent/actualOccurrenceDateTime:='"
 ```
 
 ### Set multiple identifiers to same value
 
 ```shell
-./gradlew app:run --args="-x identifier -w -s 42 -t 'consignment/usedTransportEquipment/id:=ABC-123'"
+./gradlew app:run --args="populate -x identifier -w -s 42 -t 'consignment/usedTransportEquipment/id:=ABC-123'"
 ```
 
 ### Set multiple identifiers to different values
 
 ```shell
-./gradlew app:run --args="-x identifier -w -s 42 -t 'consignment/usedTransportEquipment[1]/id:=ABC-123' -t 'consignment/usedTransportEquipment[2]/id:=XYZ-789'"
+./gradlew app:run --args="populate -x identifier -w -s 42 -t 'consignment/usedTransportEquipment[1]/id:=ABC-123' -t 'consignment/usedTransportEquipment[2]/id:=XYZ-789'"
 ```
 
 ### Output both common and identifier documents with default filenames
 
 ```shell
-./gradlew app:run --args="-x both -w -s 42
+./gradlew app:run --args="populate -x both -w -s 42
 ```
 
 ### Output both common and identifier documents with custom filenames
 
 ```shell
-./gradlew app:run --args="-x both -w -s 42 -oc my-common.xml -oi my-identifiers.xml
+./gradlew app:run --args="populate -x both -w -s 42 -oc my-common.xml -oi my-identifiers.xml
 ```
 
 ## Development
