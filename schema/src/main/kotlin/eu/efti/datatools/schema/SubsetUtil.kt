@@ -18,6 +18,10 @@ object SubsetUtil {
     }
 
     fun dropNodesNotInSubsets(subsets: Set<XmlSchemaElement.SubsetId>, schema: XmlSchemaElement, node: Node) {
+        require(subsets.isNotEmpty()) {
+            "subsets must be non-empty"
+        }
+
         XmlUtil.dropNodesRecursively(
             schema = schema,
             node = node,

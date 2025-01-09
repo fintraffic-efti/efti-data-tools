@@ -1,6 +1,8 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
+val xmlunitVersion = "2.10.0"
+
 plugins {
     kotlin("jvm")
 }
@@ -14,7 +16,8 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.11.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.hamcrest:hamcrest-core:2.2")
-    testImplementation("org.xmlunit:xmlunit-matchers:2.10.0")
+    testImplementation("org.xmlunit:xmlunit-matchers:$xmlunitVersion")
+    testImplementation("org.xmlunit:xmlunit-jakarta-jaxb-impl:$xmlunitVersion")
 }
 
 kotlin {
