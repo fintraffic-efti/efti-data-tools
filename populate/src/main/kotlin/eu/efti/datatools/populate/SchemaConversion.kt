@@ -1,6 +1,6 @@
 package eu.efti.datatools.populate
 
-import eu.efti.datatools.schema.EftiSchemas
+import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
 import eu.efti.datatools.schema.XmlSchemaElement
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.clone
@@ -13,7 +13,7 @@ object SchemaConversion {
     fun commonToIdentifiers(common: Document): Document {
         val identifier = clone(common)
 
-        dropNodesNotInSchema(EftiSchemas.readConsignmentIdentifiersSchema(), identifier.firstChild)
+        dropNodesNotInSchema(consignmentIdentifierSchema, identifier.firstChild)
 
         return deserializeToDocument(
             // Note: this is a dirty way of fixing the namespace, but it is simple and works in our context.

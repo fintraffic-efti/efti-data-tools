@@ -6,6 +6,8 @@ import eu.efti.datatools.populate.EftiDomPopulator.TextContentOverride
 import eu.efti.datatools.populate.RepeatablePopulateMode
 import eu.efti.datatools.populate.SchemaConversion.commonToIdentifiers
 import eu.efti.datatools.schema.EftiSchemas
+import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
+import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.serializeToString
 import org.w3c.dom.Document
@@ -146,9 +148,9 @@ fun main(argv: Array<String>) {
         val doc = EftiDomPopulator(checkNotNull(args.seed), args.repeatableMode)
             .populate(
                 schema = when (args.schema) {
-                    SchemaOption.both -> EftiSchemas.readConsignmentCommonSchema()
-                    SchemaOption.common -> EftiSchemas.readConsignmentCommonSchema()
-                    SchemaOption.identifier -> EftiSchemas.readConsignmentIdentifiersSchema()
+                    SchemaOption.both -> consignmentCommonSchema
+                    SchemaOption.common -> consignmentCommonSchema
+                    SchemaOption.identifier -> consignmentIdentifierSchema
                 },
                 overrides = args.textOverrides,
                 namespaceAware = false,

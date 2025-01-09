@@ -1,7 +1,7 @@
 package eu.efti.datatools.schema
 
-import eu.efti.datatools.schema.EftiSchemas.readConsignmentCommonSchema
-import eu.efti.datatools.schema.EftiSchemas.readConsignmentIdentifiersSchema
+import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
+import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.hasItem
 import org.hamcrest.MatcherAssert.assertThat
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.assertAll
 class EftiSchemaTest {
     @Test
     fun `should parse identifier schema to XmlSchemaElement`() {
-        val element = readConsignmentIdentifiersSchema()
+        val element = consignmentIdentifierSchema
 
         // Do some minimal assertions.
         assertAll(
@@ -23,7 +23,7 @@ class EftiSchemaTest {
 
     @Test
     fun `should parse common schema to XmlSchemaElement`() {
-        val element = readConsignmentCommonSchema()
+        val element = consignmentCommonSchema
 
         // Do some minimal assertions.
         val applicableServiceCharge =

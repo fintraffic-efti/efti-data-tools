@@ -1,9 +1,9 @@
 package eu.efti.datatools.schema
 
+import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
+import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
 import eu.efti.datatools.schema.EftiSchemas.javaCommonSchema
 import eu.efti.datatools.schema.EftiSchemas.javaIdentifiersSchema
-import eu.efti.datatools.schema.EftiSchemas.readConsignmentCommonSchema
-import eu.efti.datatools.schema.EftiSchemas.readConsignmentIdentifiersSchema
 import eu.efti.datatools.schema.XmlUtil.clone
 import eu.efti.datatools.schema.XmlUtil.dropNodesRecursively
 import eu.efti.datatools.schema.XmlUtil.validate
@@ -13,10 +13,10 @@ import javax.xml.validation.Schema
 
 object SubsetUtil {
     fun filterCommonSubsets(doc: Document, subsets: Set<XmlSchemaElement.SubsetId>): Document =
-        filterSubsets(doc, subsets, javaCommonSchema, readConsignmentCommonSchema())
+        filterSubsets(doc, subsets, javaCommonSchema, consignmentCommonSchema)
 
     fun filterIdentifierSubsets(doc: Document, subsets: Set<XmlSchemaElement.SubsetId>): Document =
-        filterSubsets(doc, subsets, javaIdentifiersSchema, readConsignmentIdentifiersSchema())
+        filterSubsets(doc, subsets, javaIdentifiersSchema, consignmentIdentifierSchema)
 
     fun dropNodesNotInSubsets(subsets: Set<XmlSchemaElement.SubsetId>, schema: XmlSchemaElement, node: Node) {
         require(subsets.isNotEmpty()) {

@@ -2,6 +2,7 @@ package eu.efti.datatools.populate
 
 import eu.efti.datatools.populate.SchemaConversion.commonToIdentifiers
 import eu.efti.datatools.schema.EftiSchemas
+import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.serializeToString
 import org.hamcrest.MatcherAssert.assertThat
@@ -27,7 +28,7 @@ class SchemaConversionTest {
 
         val identifiersDoc = commonToIdentifiers(
             EftiDomPopulator(1234, RepeatablePopulateMode.MINIMUM_ONE).populate(
-                EftiSchemas.readConsignmentCommonSchema()
+                consignmentCommonSchema
             )
         )
 
