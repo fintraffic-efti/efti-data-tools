@@ -18,9 +18,9 @@ private const val PATH_IDENTIFIER = "/consignment-identifier.xsd"
 object EftiSchemas {
     private val schemaFactory: SchemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
 
-    private val xmlBeansCommonSchema: SchemaTypeSystem = readXmlBeansSchema(PATH_COMMON)
+    val consignmentCommonSchema: XmlSchemaElement = readConsignmentCommonSchema()
 
-    private val xmlBeansIdentifierSchema: SchemaTypeSystem = readXmlBeansSchema(PATH_IDENTIFIER)
+    val consignmentIdentifierSchema: XmlSchemaElement = readConsignmentIdentifierSchema()
 
     val javaCommonSchema: Schema =
         schemaFactory.newSchema(getResourceUrl(PATH_COMMON))
@@ -28,13 +28,13 @@ object EftiSchemas {
     val javaIdentifiersSchema: Schema =
         schemaFactory.newSchema(getResourceUrl(PATH_IDENTIFIER))
 
-    fun readConsignmentCommonSchema(): XmlSchemaElement = XmlSchemaParser.parse(
-        xmlBeansCommonSchema,
+    private fun readConsignmentCommonSchema(): XmlSchemaElement = XmlSchemaParser.parse(
+        readXmlBeansSchema(PATH_COMMON),
         XmlSchemaElement.XmlName("http://efti.eu/v1/consignment/common", "consignment"),
     )
 
-    fun readConsignmentIdentifiersSchema(): XmlSchemaElement = XmlSchemaParser.parse(
-        xmlBeansIdentifierSchema,
+    private fun readConsignmentIdentifierSchema(): XmlSchemaElement = XmlSchemaParser.parse(
+        readXmlBeansSchema(PATH_IDENTIFIER),
         XmlSchemaElement.XmlName("http://efti.eu/v1/consignment/identifier", "consignment"),
     )
 
@@ -67,6 +67,7 @@ object EftiSchemas {
             xmlOptions,
         )
     }
+
     private fun getResourceUrl(path: String): URL = checkNotNull(EftiSchemas::class.java.getResource(path)) {
         "Could not find resource $path"
     }

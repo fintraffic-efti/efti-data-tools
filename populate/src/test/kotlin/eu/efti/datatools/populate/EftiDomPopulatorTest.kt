@@ -1,6 +1,8 @@
 package eu.efti.datatools.populate
 
 import eu.efti.datatools.schema.EftiSchemas
+import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
+import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
 import eu.efti.datatools.schema.XmlSchemaElement
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.serializeToString
@@ -42,7 +44,7 @@ class EftiDomPopulatorTest {
     @Tag("expectation-update")
     fun `should populate common document that matches the expected document`() {
         val expectationFilename = "common-expected.xml"
-        val eftiSchema = EftiSchemas.readConsignmentCommonSchema()
+        val eftiSchema = consignmentCommonSchema
 
         val populator = EftiDomPopulator(42, RepeatablePopulateMode.MINIMUM_ONE)
         val doc = populator.populate(eftiSchema)
@@ -90,7 +92,7 @@ class EftiDomPopulatorTest {
             .mapNotNull(Pair<String, EftiDomPopulator.TextContentOverride?>::second)
 
         val populator = EftiDomPopulator(seed, repeatableMode)
-        val doc = populator.populate(EftiSchemas.readConsignmentIdentifiersSchema(), overrides, namespaceAware = false)
+        val doc = populator.populate(consignmentIdentifierSchema, overrides, namespaceAware = false)
 
         if (updateTestExpectations) {
             val updated = formatXml(doc)
@@ -134,8 +136,8 @@ class EftiDomPopulatorTest {
 
         private fun populateTestCasesForVariant(schemaVariant: String): Sequence<PopulateTestCase> {
             val (javaSchema, eftiSchema) = when (schemaVariant) {
-                "common" -> EftiSchemas.javaCommonSchema to EftiSchemas.readConsignmentCommonSchema()
-                "identifier" -> EftiSchemas.javaIdentifiersSchema to EftiSchemas.readConsignmentIdentifiersSchema()
+                "common" -> EftiSchemas.javaCommonSchema to consignmentCommonSchema
+                "identifier" -> EftiSchemas.javaIdentifiersSchema to consignmentIdentifierSchema
                 else -> throw IllegalArgumentException(schemaVariant)
             }
 

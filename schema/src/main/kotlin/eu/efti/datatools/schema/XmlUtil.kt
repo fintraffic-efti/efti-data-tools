@@ -12,10 +12,18 @@ import java.io.IOException
 import java.io.StringReader
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.transform.Source
+import javax.xml.transform.TransformerFactory
+import javax.xml.transform.dom.DOMResult
 import javax.xml.transform.dom.DOMSource
 import javax.xml.validation.Schema
 
 object XmlUtil {
+    fun clone(doc: Document): Document {
+        val domResult = DOMResult()
+        TransformerFactory.newInstance().newTransformer().transform(DOMSource(doc), domResult)
+        return checkNotNull(domResult.node as Document)
+    }
+
     fun validate(doc: Document, javaSchema: Schema): String? {
         val xmlSource: Source = DOMSource(doc)
         val error = try {
@@ -56,4 +64,39 @@ object XmlUtil {
 
     fun NodeList.asIterable(): Iterable<Node> =
         (0 until this.length).asSequence().map { this.item(it) }.asIterable()
+
+    fun dropNodesRecursively(
+        schema: XmlSchemaElement,
+        node: Node,
+        namespaceAware: Boolean,
+        dropCondition: (node: Node, maybeSchemaElement: XmlSchemaElement?) -> Boolean
+    ) {
+        fun isFilterableNode(node: Node): Boolean = when (node.nodeType) {
+            Node.COMMENT_NODE, Node.TEXT_NODE -> false
+            else -> true
+        }
+
+        node.childNodes
+            .asIterable()
+            .filter(::isFilterableNode)
+            .filter { childNode ->
+                val schemaElement = schema.children.find { sc ->
+                    sc.name.localPart == childNode.localName && (!namespaceAware || sc.name.namespaceURI == childNode.namespaceURI)
+                }
+                dropCondition(childNode, schemaElement)
+            }
+            // Dump nodes to list to ensure node removals do not affect iteration
+            .toList()
+            .forEach {
+                node.removeChild(it)
+            }
+
+        node.childNodes
+            .asIterable()
+            .filter(::isFilterableNode)
+            .forEach { childNode ->
+                val childSchema = schema.children.first { it.name.localPart == childNode.localName }
+                dropNodesRecursively(childSchema, childNode, false, dropCondition)
+            }
+    }
 }
