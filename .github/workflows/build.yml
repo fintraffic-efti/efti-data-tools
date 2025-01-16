@@ -97,5 +97,5 @@ jobs:
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag#v}" \
-              lib/efti-data-tools-lib-${tag#v}.zip
-              cli/efti-data-tools-cli-${tag#v}.zip
+              ./lib/efti-data-tools-lib-${tag#v}.zip \
+              ./cli/efti-data-tools-cli-${tag#v}.zip
