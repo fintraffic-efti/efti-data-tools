@@ -26,7 +26,7 @@ jobs:
       uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
     - name: Build with Gradle Wrapper
-      run: ./gradlew build check
+      run: ./gradlew build check app:distZip
 
     - name: Upload license reports
       # Try to upload report even if previous step fails
@@ -50,15 +50,16 @@ jobs:
     - name: Upload library artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: eu.efti.datatools.lib
+        name: efti-data-tools-lib
         path: ./build/local-maven-repo/
+        if-no-files-found: error
 
     - name: Upload app artifact
       uses: actions/upload-artifact@v4
       with:
-        name: eu.efti.datatools.app
-        path: |
-          ./app/build/distributions/app.zip
+        name: efti-data-tools-cli
+        path: ./app/build/distributions/efti-data-tools-cli-*.zip
+        if-no-files-found: error
 
   release:
     if: startsWith(github.ref, 'refs/tags/v')
@@ -73,17 +74,25 @@ jobs:
       - name: Download library package
         uses: actions/download-artifact@v4
         with:
-          name: eu.efti.datatools.lib
-          path: ./
+          name: efti-data-tools-lib
+          path: ./lib
+
+      - name: Download app package
+        uses: actions/download-artifact@v4
+        with:
+          name: efti-data-tools-cli
+          path: ./cli
 
       - name: Zip library package
-        run: zip -r eu-efti-datatools-${tag}.zip eu
+        working-directory: ./lib
+        run: zip -r efti-data-tools-lib-${tag#v}.zip eu
 
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "$tag" \
+          gh release create "Version ${tag#v}" \
               --repo="$GITHUB_REPOSITORY" \
-              --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
-              eu-efti-datatools-${tag}.zip
+              --title="${tag#v}" \
+              lib/efti-data-tools-lib-${tag#v}.zip
+              cli/efti-data-tools-cli-${tag#v}.zip

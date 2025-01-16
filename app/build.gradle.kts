@@ -10,4 +10,5 @@ dependencies {
 
 application {
     mainClass.set("eu.efti.datatools.app.MainKt")
+    applicationName = "efti-data-tools-cli"
 }
