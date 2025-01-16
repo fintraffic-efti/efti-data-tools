@@ -83,6 +83,9 @@ jobs:
           name: efti-data-tools-cli
           path: ./cli
 
+      - name: Debug files
+        run: find ./
+
       - name: Zip library package
         working-directory: ./lib
         run: zip -r efti-data-tools-lib-${tag#v}.zip eu
