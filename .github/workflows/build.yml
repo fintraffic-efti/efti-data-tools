@@ -68,11 +68,14 @@ jobs:
       contents: write
 
     steps:
-      - name: Download application jar
+      - name: Download library package
         uses: actions/download-artifact@v4
         with:
           name: eu.efti.datatools.lib
-          path: ./lib
+          path: ./
+
+      - name: Zip library package
+        run: zip -r eu-efti-datatools-$tag.zip
 
       - name: Create release
         env:
@@ -82,4 +85,4 @@ jobs:
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
-              ./lib/*
+              eu-efti-datatools-$tag.zip
