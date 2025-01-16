@@ -75,7 +75,7 @@ jobs:
           path: ./
 
       - name: Zip library package
-        run: zip -r eu-efti-datatools-$tag.zip
+        run: zip -r eu-efti-datatools-${tag}.zip eu
 
       - name: Create release
         env:
@@ -85,4 +85,4 @@ jobs:
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
-              eu-efti-datatools-$tag.zip
+              eu-efti-datatools-${tag}.zip
