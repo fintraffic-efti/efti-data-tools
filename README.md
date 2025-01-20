@@ -98,3 +98,12 @@ Build and run tests with:
 ```
 ./gradlew build distZip
 ```
+
+### Creating releases
+
+For example, to release version 0.1.0:
+1. Set the version number in [gradle.properties](gradle.properties)
+2. Commit
+3. Add and push tag `v0.1.0`
+
+Let us follow [semantic versioning](https://semver.org/).
