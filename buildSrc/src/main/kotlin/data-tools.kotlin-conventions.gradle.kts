@@ -6,6 +6,7 @@ val xmlunitVersion = "2.10.0"
 
 plugins {
     kotlin("jvm")
+    `maven-publish`
 }
 
 repositories {
@@ -19,6 +20,8 @@ dependencies {
     testImplementation("org.hamcrest:hamcrest-core:2.2")
     testImplementation("org.xmlunit:xmlunit-matchers:$xmlunitVersion")
     testImplementation("org.xmlunit:xmlunit-jakarta-jaxb-impl:$xmlunitVersion")
+
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 kotlin {
@@ -57,4 +60,18 @@ tasks.register<Test>("updateTestExpectations") {
 
     // Always run task even if it has successfully completed earlier
     outputs.upToDateWhen { false }
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "LocalMavenRepo"
+            url = uri(rootProject.layout.buildDirectory.dir("local-maven-repo"))
+        }
+    }
 }

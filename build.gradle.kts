@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "eu.efti.datatools"
-version = "0.0.1-SNAPSHOT"
+version = project.property("version") as String
 
 licenseReport {
     allowedLicensesFile = rootProject.file("allowed-licenses.json")
@@ -13,6 +13,6 @@ tasks.checkLicense {
     inputs.file("$rootDir/allowed-licenses.json")
 }
 
-tasks.create("check") {
+tasks.register("check") {
     dependsOn(tasks.checkLicense)
 }
