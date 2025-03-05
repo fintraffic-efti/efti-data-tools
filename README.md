@@ -62,10 +62,10 @@ The following examples use gradle to simplify testing. Note how the xpath expres
 ./gradlew app:run --args="populate -x identifier -w -s 42 -t 'consignment/deliveryEvent/actualOccurrenceDateTime:=202412312359+0000'"
 ```
 
-##### Unset value by overwriting with empty value
+##### Delete node
 
 ```shell
-./gradlew app:run --args="populate -x identifier -w -s 42 -t 'consignment/deliveryEvent/actualOccurrenceDateTime:='"
+./gradlew app:run --args="populate -x identifier -w -s 42 -d 'consignment/deliveryEvent/actualOccurrenceDateTime'"
 ```
 
 ##### Set multiple identifiers to same value

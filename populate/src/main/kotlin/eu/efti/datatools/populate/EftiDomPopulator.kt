@@ -29,22 +29,31 @@ enum class RepeatablePopulateMode {
 
 @Suppress("detekt:MagicNumber")
 class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulateMode = RepeatablePopulateMode.RANDOM) {
-    data class TextContentOverride(val xpath: XPathRawAndCompiled, val value: String) {
-        data class XPathRawAndCompiled(val raw: String, val compiled: XPathExpression) {
-            companion object {
-                private val xpathFactory = XPathFactory.newInstance()
+    data class XPathRawAndCompiled(val raw: String, val compiled: XPathExpression) {
+        companion object {
+            private val xpathFactory = XPathFactory.newInstance()
 
-                fun tryToParse(expression: String): XPathRawAndCompiled? {
-                    val xpath = xpathFactory.newXPath()
-                    return try {
-                        XPathRawAndCompiled(expression, xpath.compile(expression))
-                    } catch (e: XPathExpressionException) {
-                        null
-                    }
+            fun tryToParse(expression: String): XPathRawAndCompiled? {
+                val xpath = xpathFactory.newXPath()
+                return try {
+                    XPathRawAndCompiled(expression, xpath.compile(expression))
+                } catch (e: XPathExpressionException) {
+                    null
                 }
             }
         }
+    }
 
+    sealed interface Override
+
+    data class DeleteNodeOverride(val xpath: XPathRawAndCompiled) : Override {
+        companion object {
+            fun tryToParse(expression: String): DeleteNodeOverride? =
+                XPathRawAndCompiled.tryToParse(expression)?.let { DeleteNodeOverride(it) }
+        }
+    }
+
+    data class TextContentOverride(val xpath: XPathRawAndCompiled, val value: String) : Override {
         companion object {
             fun tryToParse(expression: String, value: String): TextContentOverride? =
                 XPathRawAndCompiled.tryToParse(expression)?.let { TextContentOverride(it, value) }
@@ -103,7 +112,7 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
 
     fun populate(
         schema: XmlSchemaElement,
-        overrides: List<TextContentOverride> = emptyList(),
+        overrides: List<Override> = emptyList(),
         namespaceAware: Boolean = true
     ): Document {
         val doc: Document = newDocument()
@@ -119,7 +128,7 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
     private fun applyOverrides(
         schema: XmlSchemaElement,
         originalDoc: Document,
-        overrides: List<TextContentOverride>,
+        overrides: List<Override>,
         namespaceAware: Boolean
     ): Document {
         return if (overrides.isNotEmpty()) {
@@ -132,7 +141,14 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
             }
 
             overrides.forEach { override ->
-                EftiTextContentWriter.setTextContent(overridesDoc, override.xpath.compiled, override.value)
+                when (override) {
+                    is DeleteNodeOverride -> EftiXPathDocumentManipulator.deleteNode(overridesDoc, override.xpath.compiled)
+                    is TextContentOverride -> EftiXPathDocumentManipulator.setTextContent(
+                        overridesDoc,
+                        override.xpath.compiled,
+                        override.value
+                    )
+                }
             }
 
             if (!namespaceAware) {
@@ -186,7 +202,8 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
 
                 if (schemaAttribute.type.isTextContentType) {
                     val generator = findMostSpecificGenerator(schemaAttribute.name, schemaAttribute.type)
-                    attribute.value = generator(currentPath.append(repeatIndex).append(schemaAttribute), 0, schemaAttribute.type)
+                    attribute.value =
+                        generator(currentPath.append(repeatIndex).append(schemaAttribute), 0, schemaAttribute.type)
                 }
                 element.attributes.setNamedItem(attribute)
             }
@@ -244,6 +261,5 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
             // Note: a clumsy way of making unaware of namespaces
             return deserializeToDocument(serializeToString(doc, prettyPrint = false), namespaceAware = false)
         }
-
     }
 }
