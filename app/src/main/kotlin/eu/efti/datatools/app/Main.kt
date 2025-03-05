@@ -7,7 +7,9 @@ import com.beust.jcommander.Parameter
 import com.beust.jcommander.ParameterException
 import com.beust.jcommander.Parameters
 import eu.efti.datatools.populate.EftiDomPopulator
+import eu.efti.datatools.populate.EftiDomPopulator.DeleteNodeOverride
 import eu.efti.datatools.populate.EftiDomPopulator.TextContentOverride
+import eu.efti.datatools.populate.EftiDomPopulator.XPathRawAndCompiled
 import eu.efti.datatools.populate.RepeatablePopulateMode
 import eu.efti.datatools.populate.SchemaConversion.commonToIdentifiers
 import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
@@ -35,7 +37,7 @@ class TextContentOverrideConverter : IStringConverter<TextContentOverride> {
         }
         val (xpathString, valueString) = parts.map(String::trim)
 
-        val xpath = TextContentOverride.XPathRawAndCompiled.tryToParse(xpathString)
+        val xpath = XPathRawAndCompiled.tryToParse(xpathString)
             ?: throw ParameterException("Invalid xpath: $raw")
 
         return TextContentOverride(xpath, valueString)
@@ -46,10 +48,29 @@ class TextContentOverrideConverter : IStringConverter<TextContentOverride> {
     }
 }
 
+class DeleteNodeOverrideConverter : IStringConverter<DeleteNodeOverride> {
+    override fun convert(raw: String): DeleteNodeOverride {
+        val xpath = XPathRawAndCompiled.tryToParse(raw)
+            ?: throw ParameterException("Invalid xpath: $raw")
+
+        return DeleteNodeOverride(xpath)
+    }
+}
+
 class TextContentOverrideValidator : IParameterValidator {
     override fun validate(name: String, value: String) {
         try {
             TextContentOverrideConverter().convert(value)
+        } catch (e: ParameterException) {
+            throw ParameterException("Parameter $name: ${e.message}")
+        }
+    }
+}
+
+class DeleteNodeOverrideValidator : IParameterValidator {
+    override fun validate(name: String, value: String) {
+        try {
+            DeleteNodeOverrideConverter().convert(value)
         } catch (e: ParameterException) {
             throw ParameterException("Parameter $name: ${e.message}")
         }
@@ -118,6 +139,14 @@ class CommandPopulate : CommonArgs() {
         description = "How many instances of a repeatable element should be generated"
     )
     var repeatableMode: RepeatablePopulateMode = RepeatablePopulateMode.MINIMUM_ONE
+
+    @Parameter(
+        names = ["--delete-overrides", "-d"],
+        converter = DeleteNodeOverrideConverter::class,
+        validateWith = [DeleteNodeOverrideValidator::class],
+        description = """Override to apply to the populated document. The format is "<xpath-expression>". Expression can use local xml names, namespaces can be ignored. If multiple instances of this parameter are defined, then each override will be applied in the given order."""
+    )
+    var deleteOverrides: List<DeleteNodeOverride> = emptyList()
 
     @Parameter(
         names = ["--text-overrides", "-t"],
@@ -231,13 +260,20 @@ private fun doPopulate(args: CommandPopulate) {
         args.pathIdentifiers = "consignment-${args.seed}-identifiers.xml"
     }
 
+    val overrides = args.deleteOverrides + args.textOverrides
+
     println("Generating with:")
     println(
         listOf(
             "schema" to args.schema,
             "seed" to args.seed,
             "repeatable mode" to args.repeatableMode.name,
-            "overrides" to args.textOverrides.map { """Set "${it.xpath.raw}" to "${it.value}"""" },
+            "overrides" to overrides.map {
+                when (it) {
+                    is DeleteNodeOverride -> """Delete "${it.xpath.raw}""""
+                    is TextContentOverride -> """Set "${it.xpath.raw}" to "${it.value}""""
+                }
+            },
             "output common" to args.pathCommon,
             "output identifiers" to args.pathIdentifiers,
             "overwrite" to args.overwrite,
@@ -267,7 +303,7 @@ private fun doPopulate(args: CommandPopulate) {
                 CommandPopulate.SchemaOption.common -> consignmentCommonSchema
                 CommandPopulate.SchemaOption.identifier -> consignmentIdentifierSchema
             },
-            overrides = args.textOverrides,
+            overrides = overrides,
             namespaceAware = false,
         )
 
