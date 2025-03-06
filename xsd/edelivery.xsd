@@ -68,7 +68,8 @@
       <xsd:enumeration value="503">
         <xsd:annotation>
           <xsd:documentation>
-            Service Unavailable - The server cannot handle the request (because it is overloaded or down for maintenance).
+            Service Unavailable - The server cannot handle the request (because it is overloaded or down for
+            maintenance).
             Generally, this is a temporary state.
           </xsd:documentation>
         </xsd:annotation>
@@ -131,7 +132,7 @@
           <!-- uil of the consignment -->
           <xsd:element name="uil" type="efti-ed:UIL"/>
           <!-- subset id of the consignment e.g. identifier, EU1, FI or FI01 -->
-          <xsd:element name="subsetId" type="xsd:string"/>
+          <xsd:element name="subsetId" type="xsd:string" maxOccurs="unbounded"/>
         </xsd:sequence>
       </xsd:extension>
     </xsd:complexContent>
@@ -166,7 +167,13 @@
       <xsd:extension base="efti-ed:Request">
         <xsd:sequence>
           <xsd:element name="uil" type="efti-ed:UIL"/>
-          <xsd:element name="message" type="xsd:string"/>
+          <xsd:element name="message">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:minLength value="2"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
         </xsd:sequence>
       </xsd:extension>
     </xsd:complexContent>
