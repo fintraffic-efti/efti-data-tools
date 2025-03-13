@@ -10,7 +10,7 @@ Requires Java 17 or later.
 
 ## Usage
 
-Get binaries from [releases](https://github.com/EFTI4EU/efti-data-tools/releases).
+This project releases libraries and a command line application.
 
 ### Libraries
 
@@ -19,19 +19,45 @@ There are two libraries:
  1. schema - Tools for subset filtering and other xml utilities
  2. populate - Tools for populating pseudo-random consignment documents
 
-Libraries are released as maven artifacts that you need to add to a local maven repo, for example. The process in a
-nutshell:
+Libraries are published to the Maven repository under this GitHub project at
+[mvn-repo branch](https://raw.githubusercontent.com/EFTI4EU/efti-data-tools/mvn-repo/README.md). To use them in your 
+Maven/Gradle project:
 
- 1. Get efti-data-tools-lib-<version>.zip from release page
- 2. Unzip it
- 3. Copy the whole `eu` directory into your maven repo (this can be a local repo)
- 4. Add `eu.efti.datatools:schema:<version>` and/or `eu.efti.datatools:populate:<version>` as maven dependencies 
+ 1. In your project configuration, add a Maven repository at url `https://github.com/EFTI4EU/efti-data-tools/raw/mvn-repo`:
+    * Gradle example:
+      ```
+      repositories {
+        maven("https://github.com/EFTI4EU/efti-data-tools/raw/mvn-repo")
+        mavenCentral()
+      }
+      ```
+    * Maven example:
+      ```
+      <repository>
+        <id>efti-data-tools</id>
+        <name>efti-data-tools repository</name>
+        <url>https://github.com/EFTI4EU/efti-data-tools/raw/mvn-repo</url>
+       </repository>
+      ```
+ 2. Add dependency `eu.efti.datatools:schema:<version>`, and if you need it, `eu.efti.datatools:populate:<version>`:
+    * Gradle example:
+      ```
+      implementation("eu.efti.datatools:schema:0.3.0")
+      ```
+    * Maven example:
+      ```
+      <dependency>
+        <groupId>eu.efti.datatools</groupId>
+        <artifactId>schema</artifactId>
+        <version>0.3.0</version>
+      </dependency>
+      ```
 
-See [Java example](./example/java) for a complete example.
+See [Java example](./example/java) for a complete example on library usage.
 
 ### Command line application
 
-Get efti-data-tools-cli-<version>.zip from release page, unzip it and run with:
+Get efti-data-tools-cli-<version>.zip from [releases](https://github.com/EFTI4EU/efti-data-tools/releases), unzip it and run with:
 ```
 # On *nix:
 ./efti-datatools-cli-<version>/bin/app --help
@@ -101,9 +127,14 @@ Build and run tests with:
 
 ### Creating releases
 
-For example, to release version 0.1.0:
+For example, to release version 0.3.0:
 1. Set the version number in [gradle.properties](gradle.properties)
 2. Commit
-3. Add and push tag `v0.1.0`
+3. Add and push tag `v0.3.0`
+4. Publish library artifacts manually to the Maven repository:
+   1. Checkout branch `mvn-repo`
+   2. Download library zip from https://github.com/EFTI4EU/efti-data-tools/releases/tag/v0.3.0
+   3. Unzip the file (directory `eu` should be at root dir of the repo)
+   4. Commit and push
 
 Let us follow [semantic versioning](https://semver.org/).
