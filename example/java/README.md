@@ -1,6 +1,7 @@
 # Java Example
 
-Example that shows how to use subset filtering and populate functionalities of the library.
+Example that shows how to use subset filtering and populate functionalities of the library. Note that this
+example project uses a local Maven repository and not the official one (this makes testing in CI pipeline easier).
 
 ## Usage
 
@@ -10,7 +11,7 @@ cd ../..
 ./gradlew publishMavenPublicationToLocalMavenRepoRepository
 ```
 
-The you can run the example tests:
+Then you can run the example tests:
 ```shell
 ./gradlew test
 ```
