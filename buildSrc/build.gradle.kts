@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-val kotlinVersion = "2.0.10"
+val kotlinVersion = "2.1.21"
 
 repositories {
     mavenCentral()
