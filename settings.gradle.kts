@@ -1,4 +1,4 @@
-rootProject.name = "data-tools"
+rootProject.name = "efti-data-tools"
 
 include(
     "app",
