@@ -1,10 +1,9 @@
 # efti-data-tools
 
 Java libraries and command line tool for filtering subsets and generating random xml documents of eFTI consignment schemas
-as defined at [reference-implementation](https://github.com/EFTI4EU/reference-implementation/tree/main/schema/xsd).
+as defined at [reference-implementation](https://github.com/fintraffic-efti/reference-implementation/tree/main/schema/xsd).
 
-These tools are not part of the eFTI4EU reference implementation but may be used in implementing, development and testing
-of eFTI applications.
+These tools may be used in implementing, development and testing of eFTI applications.
 
 Requires Java 17 or later.
 
@@ -20,14 +19,14 @@ There are two libraries:
  2. populate - Tools for populating pseudo-random consignment documents
 
 Libraries are published to the Maven repository under this GitHub project at
-[mvn-repo branch](https://raw.githubusercontent.com/EFTI4EU/efti-data-tools/mvn-repo/README.md). To use them in your 
+[mvn-repo branch](https://raw.githubusercontent.com/fintraffic-efti/efti-data-tools/mvn-repo/README.md). To use them in your 
 Maven/Gradle project:
 
- 1. In your project configuration, add a Maven repository at url `https://github.com/EFTI4EU/efti-data-tools/raw/mvn-repo`:
+ 1. In your project configuration, add a Maven repository at url `https://github.com/fintraffic-efti/efti-data-tools/raw/mvn-repo`:
     * Gradle example:
       ```
       repositories {
-        maven("https://github.com/EFTI4EU/efti-data-tools/raw/mvn-repo")
+        maven("https://github.com/fintraffic-efti/efti-data-tools/raw/mvn-repo")
         mavenCentral()
       }
       ```
@@ -36,7 +35,7 @@ Maven/Gradle project:
       <repository>
         <id>efti-data-tools</id>
         <name>efti-data-tools repository</name>
-        <url>https://github.com/EFTI4EU/efti-data-tools/raw/mvn-repo</url>
+        <url>https://github.com/fintraffic-efti/efti-data-tools/raw/mvn-repo</url>
        </repository>
       ```
  2. Add dependency `eu.efti.datatools:schema:<version>`, and if you need it, `eu.efti.datatools:populate:<version>`:
@@ -57,7 +56,7 @@ See [Java example](./example/java) for a complete example on library usage.
 
 ### Command line application
 
-Get efti-data-tools-cli-<version>.zip from [releases](https://github.com/EFTI4EU/efti-data-tools/releases), unzip it and run with:
+Get efti-data-tools-cli-<version>.zip from [releases](https://github.com/fintraffic-efti/efti-data-tools/releases), unzip it and run with:
 ```
 # On *nix:
 ./efti-datatools-cli-<version>/bin/app --help
@@ -133,7 +132,7 @@ For example, to release version 0.3.0:
 3. Add and push tag `v0.3.0`
 4. Publish library artifacts manually to the Maven repository:
    1. Checkout branch `mvn-repo`
-   2. Download library zip from https://github.com/EFTI4EU/efti-data-tools/releases/tag/v0.3.0
+   2. Download library zip from https://github.com/fintraffic-efti/efti-data-tools/releases/tag/v0.3.0
    3. Unzip the file (directory `eu` should be at root dir of the repo)
    4. Commit and push
 
