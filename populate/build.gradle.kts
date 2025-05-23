@@ -23,7 +23,7 @@ publishing {
             pom {
                 name = "populate"
                 description = "efti-data-tools populate utilities"
-                url = "https://github.com/EFTI4EU/efti-data-tools"
+                url = "https://github.com/fintraffic-efti/efti-data-tools"
 
                 licenses {
                     license {
@@ -33,9 +33,9 @@ publishing {
                 }
 
                 scm {
-                    connection = "scm:git:git@github.com:EFTI4EU/efti-data-tools.git"
-                    developerConnection = "scm:git:git@github.com:EFTI4EU/efti-data-tools.git"
-                    url = "https://github.com/EFTI4EU/efti-data-tools"
+                    connection = "scm:git:git@github.com:fintraffic-efti/efti-data-tools.git"
+                    developerConnection = "scm:git:git@github.com:fintraffic-efti/efti-data-tools.git"
+                    url = "https://github.com/fintraffic-efti/efti-data-tools"
                 }
             }
         }
