@@ -126,16 +126,17 @@ Build and run tests with:
 
 ### Creating releases
 
-For example, to release version 0.3.0:
-1. Set the version number in [gradle.properties](gradle.properties)
+For example, to release version 0.4.1:
+1. Set the version number in [gradle.properties](gradle.properties) to `0.4.1`
 2. Commit
-3. Add and push tag `v0.3.0`
+3. Add and push tag `v0.4.1`
 4. Publish library artifacts manually to the Maven repository:
    1. Checkout branch `mvn-repo`
-   2. Download library zip from https://github.com/fintraffic-efti/efti-data-tools/releases/tag/v0.3.0
+   2. Download library zip from https://github.com/fintraffic-efti/efti-data-tools/releases/tag/v0.4.1
    3. Unzip the file (directory `eu` should be at root dir of the repo), existing `maven-metadata.xml*` files may
       be overwritten.
    4. Commit and push
+5. Write release notes for the release by editing the release at https://github.com/fintraffic-efti/efti-data-tools/releases/tag/v0.4.1
 
 Note: the `mvn-repo` branch must not be merged to `main`.
 
