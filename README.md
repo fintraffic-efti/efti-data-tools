@@ -133,7 +133,10 @@ For example, to release version 0.3.0:
 4. Publish library artifacts manually to the Maven repository:
    1. Checkout branch `mvn-repo`
    2. Download library zip from https://github.com/fintraffic-efti/efti-data-tools/releases/tag/v0.3.0
-   3. Unzip the file (directory `eu` should be at root dir of the repo)
+   3. Unzip the file (directory `eu` should be at root dir of the repo), existing `maven-metadata.xml*` files may
+      be overwritten.
    4. Commit and push
+
+Note: the `mvn-repo` branch must not be merged to `main`.
 
 Let us follow [semantic versioning](https://semver.org/).
