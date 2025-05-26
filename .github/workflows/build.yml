@@ -1,4 +1,4 @@
-name: PR Builder
+name: Build
 on:
   pull_request:
     branches: [ "main" ]
