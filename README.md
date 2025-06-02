@@ -126,6 +126,8 @@ Build and run tests with:
 
 ### Creating releases
 
+Let us follow [semantic versioning](https://semver.org/).
+
 For example, to release version 0.4.1:
 1. Set the version number in [gradle.properties](gradle.properties) to `0.4.1`
 2. Commit
@@ -136,8 +138,12 @@ For example, to release version 0.4.1:
    3. Unzip the file (directory `eu` should be at root dir of the repo), existing `maven-metadata.xml*` files may
       be overwritten.
    4. Commit and push
-5. Write release notes for the release by editing the release at https://github.com/fintraffic-efti/efti-data-tools/releases/tag/v0.4.1
+5. Write release notes for the release by editing the release at 
+   [releases/tag/v0.4.1](https://github.com/fintraffic-efti/efti-data-tools/releases/tag/v0.4.1). Go through the
+   commit history after the previous release and include at least:
+   * all breaking changes
+   * new features
+   * other interesting changes
 
-Note: the `mvn-repo` branch must not be merged to `main`.
-
-Let us follow [semantic versioning](https://semver.org/).
+> [!IMPORTANT]
+> Note: the `mvn-repo` branch must not be merged to `main`.
