@@ -17,7 +17,6 @@ import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
 import eu.efti.datatools.schema.EftiSchemas.javaCommonSchema
 import eu.efti.datatools.schema.EftiSchemas.javaIdentifiersSchema
 import eu.efti.datatools.schema.SubsetUtil.filterCommonSubsets
-import eu.efti.datatools.schema.SubsetUtil.filterIdentifierSubsets
 import eu.efti.datatools.schema.XmlSchemaElement.SubsetId
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.deserializeToDocument
@@ -92,16 +91,6 @@ abstract class CommonArgs {
 
 @Parameters(commandDescription = "Filter subsets on consignment document")
 class CommandFilter : CommonArgs() {
-    enum class SchemaOption {
-        common, identifier
-    }
-
-    @Parameter(
-        names = ["--schema", "-x"],
-        description = "Schema to use"
-    )
-    var schema: SchemaOption = SchemaOption.common
-
     @Parameter(names = ["--input", "-i"], required = true, description = "Input file.")
     var inputPath: String? = null
 
@@ -198,7 +187,6 @@ private fun doFilter(args: CommandFilter) {
     println(
         listOf(
             "subsets" to args.subsetIds.joinToString(", "),
-            "schema" to args.schema,
             "input" to args.inputPath,
             "output" to args.outputPath,
             "overwrite" to args.overwrite,
@@ -226,19 +214,7 @@ private fun doFilter(args: CommandFilter) {
 
     val validateAndWrite = documentValidatorAndWriter(args.pretty)
 
-    when (checkNotNull(args.schema)) {
-        CommandFilter.SchemaOption.common -> validateAndWrite(
-            javaCommonSchema,
-            filterCommonSubsets(doc, subsets),
-            checkNotNull(outputFile),
-        )
-
-        CommandFilter.SchemaOption.identifier -> validateAndWrite(
-            javaIdentifiersSchema,
-            filterIdentifierSubsets(doc, subsets),
-            checkNotNull(outputFile),
-        )
-    }
+    validateAndWrite(javaCommonSchema, filterCommonSubsets(doc, subsets), checkNotNull(outputFile))
 }
 
 private fun doPopulate(args: CommandPopulate) {
