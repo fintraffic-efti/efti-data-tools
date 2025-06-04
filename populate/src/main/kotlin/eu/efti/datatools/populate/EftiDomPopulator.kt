@@ -178,7 +178,7 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
                 schema.cardinality.min to repeatGenerator.nextLong(
                     0,
                     min(schema.cardinality.max ?: 3, 3)
-                ) + max(schema.cardinality.min, 1)
+                ) + max(schema.cardinality.min, 2)
 
             RepeatablePopulateMode.MINIMUM_ONE ->
                 max(schema.cardinality.min, 1) to repeatGenerator.nextLong(

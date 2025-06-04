@@ -8,8 +8,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class JavaExample {
-    public static Document filterIdentifierSubsets(Document doc, Set<String> subsets) {
-        return SubsetUtil.filterIdentifierSubsets(
+    public static Document filterCommonSubsets(Document doc, Set<String> subsets) {
+        return SubsetUtil.filterCommonSubsets(
                 doc,
                 subsets.stream().map(XmlSchemaElement.SubsetId::new).collect(Collectors.toSet()));
     }

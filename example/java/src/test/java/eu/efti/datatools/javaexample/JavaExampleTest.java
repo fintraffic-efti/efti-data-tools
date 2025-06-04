@@ -21,9 +21,9 @@ public class JavaExampleTest {
     @Test
     public void shouldFilterSubsetsOnPopulatedDocument() {
         var populator = new EftiDomPopulator(1234, RepeatablePopulateMode.MINIMUM_ONE);
-        var originalDoc = populator.populate(EftiSchemas.getConsignmentIdentifierSchema(), List.of(), true);
+        var originalDoc = populator.populate(EftiSchemas.getConsignmentCommonSchema(), List.of(), true);
 
-        var filteredDoc = JavaExample.filterIdentifierSubsets(originalDoc, Set.of("FI01", "FI02"));
+        var filteredDoc = JavaExample.filterCommonSubsets(originalDoc, Set.of("FI01", "FI02"));
 
         var originalXml = XmlUtil.serializeToString(originalDoc, true);
         var filteredXml = XmlUtil.serializeToString(filteredDoc, true);
@@ -38,10 +38,10 @@ public class JavaExampleTest {
 
     @Test
     public void shouldFilterSubsetsOnExampleDocument() {
-        var originalXml = readXml("../../xsd/examples/consignment.xml");
+        var originalXml = readXml("../../xsd/examples/consignment-common.xml");
         var originalDoc = deserializeToDocument(originalXml);
 
-        var filteredDoc = JavaExample.filterIdentifierSubsets(originalDoc, Set.of("FI01", "FI02"));
+        var filteredDoc = JavaExample.filterCommonSubsets(originalDoc, Set.of("FI01", "FI02"));
 
         var formattedOriginalXml = XmlUtil.serializeToString(originalDoc, true);
         var filteredXml = XmlUtil.serializeToString(filteredDoc, true);

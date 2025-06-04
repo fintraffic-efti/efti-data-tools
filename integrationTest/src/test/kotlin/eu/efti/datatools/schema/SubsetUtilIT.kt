@@ -3,9 +3,7 @@ package eu.efti.datatools.schema
 import eu.efti.datatools.populate.EftiDomPopulator
 import eu.efti.datatools.populate.RepeatablePopulateMode
 import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
-import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
 import eu.efti.datatools.schema.EftiSchemas.javaCommonSchema
-import eu.efti.datatools.schema.EftiSchemas.javaIdentifiersSchema
 import eu.efti.datatools.schema.XmlSchemaElement.SubsetId
 import eu.efti.datatools.schema.XmlUtil.serializeToString
 import eu.efti.datatools.schema.XmlUtil.validate
@@ -68,10 +66,7 @@ class SubsetUtilIT {
         @JvmStatic
         fun filteringTestCases(): java.util.stream.Stream<PopulateTestCase> {
             val subsets = collectSubsets(consignmentCommonSchema)
-            return populateTestCasesForVariant(subsets, "identifier")
-                .plus(
-                    populateTestCasesForVariant(subsets, "common")
-                )
+            return populateTestCasesForVariant(subsets, "common")
                 .asStream()
         }
 
@@ -84,12 +79,6 @@ class SubsetUtilIT {
                     javaCommonSchema,
                     consignmentCommonSchema,
                     SubsetUtil::filterCommonSubsets
-                )
-
-                "identifier" -> Triple(
-                    javaIdentifiersSchema,
-                    consignmentIdentifierSchema,
-                    SubsetUtil::filterIdentifierSubsets
                 )
 
                 else -> throw IllegalArgumentException(schemaVariant)

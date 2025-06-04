@@ -1244,7 +1244,7 @@
                 <uRI schemeAgencyId="uirnix">ebkp</uRI>
             </referencedDocument>
             <shippingMarks>
-                <markingText>bapd</markingText>
+                <markingText languageId="qu">bapd</markingText>
             </shippingMarks>
             <statedCondition>
                 <actionCode>jyap</actionCode>
@@ -1255,7 +1255,7 @@
                 </calibratedMeasurement>
                 <statementCode>fcwx</statementCode>
                 <statementCode>dlit</statementCode>
-                <statementText>lhcb</statementText>
+                <statementText languageId="ro">lhcb</statementText>
                 <subjectTypeCode>tsip</subjectTypeCode>
                 <valueMeasure unitId="lsct">5.73</valueMeasure>
             </statedCondition>
@@ -1268,7 +1268,7 @@
                 </calibratedMeasurement>
                 <statementCode>qpgi</statementCode>
                 <statementCode>pcvw</statementCode>
-                <statementText>mlln</statementText>
+                <statementText languageId="CY">mlln</statementText>
                 <subjectTypeCode>daov</subjectTypeCode>
                 <subjectTypeCode>dmtj</subjectTypeCode>
                 <valueMeasure unitId="smlf">1.07</valueMeasure>
@@ -1277,7 +1277,7 @@
             </statedCondition>
             <typeCode>wgau</typeCode>
             <typeCode>ntyp</typeCode>
-            <typeText>mtqo</typeText>
+            <typeText languageId="tw">mtqo</typeText>
         </dangerousGoodsLogisticsPackage>
         <densityMeasure unitId="xzrv">8.62</densityMeasure>
         <emergencyTemperature>
@@ -1300,7 +1300,7 @@
             <weightMeasure unitId="TNE">2.83</weightMeasure>
             <workingPressureMeasure unitId="etih">0.41</workingPressureMeasure>
         </includedFuel>
-        <information>bans</information>
+        <information languageId="KM">bans</information>
         <labelTypeCode>ruyv</labelTypeCode>
         <labelTypeCode>fkte</labelTypeCode>
         <labelTypeCode>pooi</labelTypeCode>
@@ -1309,33 +1309,35 @@
         <meltingPointTemperatureMeasure unitId="usrl">7.19</meltingPointTemperatureMeasure>
         <netWeight unitId="GRM">9.03</netWeight>
         <packagingDangerLevelCode>uyiz</packagingDangerLevelCode>
-        <previousCargoInformation>bidp</previousCargoInformation>
-        <previousCargoInformation>zuhd</previousCargoInformation>
-        <previousCargoInformation>weyu</previousCargoInformation>
-        <properShippingName>zlqv</properShippingName>
+        <previousCargoInformation languageId="cs">bidp</previousCargoInformation>
+        <previousCargoInformation languageId="ss">zuhd</previousCargoInformation>
+        <previousCargoInformation languageId="io">weyu</previousCargoInformation>
+        <properShippingName languageId="or">zlqv</properShippingName>
         <radioactiveMaterial>
             <applicableRadioactiveIsotope>
                 <activityLevelMeasure unitId="nndh">3.51</activityLevelMeasure>
-                <name>gjxc</name>
-                <name>igmu</name>
-                <name>hpik</name>
+                <name languageId="AF">gjxc</name>
+                <name languageId="mk">igmu</name>
+                <name languageId="ko">hpik</name>
             </applicableRadioactiveIsotope>
             <applicableRadioactiveIsotope>
                 <activityLevelMeasure unitId="oeau">2.67</activityLevelMeasure>
-                <name>avsh</name>
-                <name>bxyx</name>
+                <name languageId="ae">avsh</name>
+                <name languageId="AA">bxyx</name>
             </applicableRadioactiveIsotope>
             <applicableRadioactiveIsotope>
                 <activityLevelMeasure unitId="zbbj">8.71</activityLevelMeasure>
                 <activityLevelMeasure unitId="wzdj">9.59</activityLevelMeasure>
-                <name>qaqm</name>
-                <name>bijy</name>
+                <name languageId="xh">qaqm</name>
+                <name languageId="PI">bijy</name>
             </applicableRadioactiveIsotope>
             <fissileCriticalitySafetyIndexNumber>2.15</fissileCriticalitySafetyIndexNumber>
             <radioactivePackageTransportIndexCode>ukrx</radioactivePackageTransportIndexCode>
             <radioactivePackageTransportIndexCode>ftyi</radioactivePackageTransportIndexCode>
             <radioactivePackageTransportIndexCode>njui</radioactivePackageTransportIndexCode>
-            <specialFormInformation>tvxe</specialFormInformation>
+            <specialFormInformation languageId="SV">tvxe</specialFormInformation>
+            <specialFormInformation languageId="ch">uito</specialFormInformation>
+            <specialFormInformation languageId="TN">idkb</specialFormInformation>
         </radioactiveMaterial>
         <regulatoryAuthorityName>vbul</regulatoryAuthorityName>
         <relatedDocument>
@@ -1482,7 +1484,7 @@
                 <valueMeasure unitId="ztsz">1.30</valueMeasure>
             </calibratedMeasurement>
             <statementCode>mrfl</statementCode>
-            <statementText>drhd</statementText>
+            <statementText languageId="gu">drhd</statementText>
             <subjectTypeCode>ryku</subjectTypeCode>
             <subjectTypeCode>zlzr</subjectTypeCode>
             <subjectTypeCode>qyym</subjectTypeCode>
@@ -1502,8 +1504,8 @@
             </calibratedMeasurement>
             <statementCode>ppck</statementCode>
             <statementCode>jmmn</statementCode>
-            <statementText>vvpq</statementText>
-            <statementText>ovyp</statementText>
+            <statementText languageId="WA">vvpq</statementText>
+            <statementText languageId="ny">ovyp</statementText>
             <subjectTypeCode>blho</subjectTypeCode>
             <subjectTypeCode>xxcd</subjectTypeCode>
             <valueMeasure unitId="dphl">4.17</valueMeasure>
@@ -1523,14 +1525,24 @@
             </calibratedMeasurement>
             <statementCode>ntba</statementCode>
             <statementCode>fxnu</statementCode>
-            <statementText>hmva</statementText>
-            <statementText>rore</statementText>
-            <statementText>zbea</statementText>
+            <statementText languageId="GL">hmva</statementText>
+            <statementText languageId="rn">rore</statementText>
+            <statementText languageId="KY">zbea</statementText>
             <subjectTypeCode>ucxs</subjectTypeCode>
             <valueMeasure unitId="uanl">8.50</valueMeasure>
         </statedCondition>
-        <supplementaryInformation>unor</supplementaryInformation>
-        <technicalName>yltr</technicalName>
+        <supplementaryInformation languageId="ss">unor</supplementaryInformation>
+        <technicalName languageId="ku">yltr</technicalName>
+        <technicalNameNote>
+            <contentText languageId="ki">knal</contentText>
+            <contentText languageId="KS">rvay</contentText>
+            <subjectCode>sjex</subjectCode>
+        </technicalNameNote>
+        <technicalNameNote>
+            <contentText languageId="CA">qktf</contentText>
+            <contentText languageId="ff">vfki</contentText>
+            <subjectCode>bxjm</subjectCode>
+        </technicalNameNote>
         <tunnelRestrictionCode>zqfm</tunnelRestrictionCode>
         <uNDGID>hydd</uNDGID>
     </dangerousGoods>
@@ -1538,11 +1550,11 @@
     <deliveryEvent>
         <actualOccurrenceDateTime formatId="205">202511131312+0000</actualOccurrenceDateTime>
         <additionalSecurityMeasures>
-            <contentText>ouok</contentText>
+            <contentText languageId="BM">ouok</contentText>
             <subjectCode>felb</subjectCode>
         </additionalSecurityMeasures>
         <additionalSecurityMeasures>
-            <contentText>nxuf</contentText>
+            <contentText languageId="st">nxuf</contentText>
             <subjectCode>sjvs</subjectCode>
             <subjectCode>drod</subjectCode>
         </additionalSecurityMeasures>
@@ -1692,7 +1704,7 @@
         </occurrenceLocation>
         <relatedObservation>
             <applicableNote>
-                <contentText>fasf</contentText>
+                <contentText languageId="kl">fasf</contentText>
                 <subjectCode>lgnm</subjectCode>
             </applicableNote>
         </relatedObservation>
@@ -2017,13 +2029,13 @@
                     <uRI schemeAgencyId="rmferz">nmkr</uRI>
                 </referencedDocument>
                 <shippingMarks>
-                    <markingText>nwfw</markingText>
-                    <markingText>lgun</markingText>
+                    <markingText languageId="pt">nwfw</markingText>
+                    <markingText languageId="KR">lgun</markingText>
                 </shippingMarks>
                 <shippingMarks>
-                    <markingText>xhmj</markingText>
-                    <markingText>wqkz</markingText>
-                    <markingText>hzci</markingText>
+                    <markingText languageId="wa">xhmj</markingText>
+                    <markingText languageId="MO">wqkz</markingText>
+                    <markingText languageId="GU">hzci</markingText>
                 </shippingMarks>
                 <statedCondition>
                     <actionCode>txsf</actionCode>
@@ -2034,7 +2046,7 @@
                         <valueMeasure unitId="iwas">2.65</valueMeasure>
                     </calibratedMeasurement>
                     <statementCode>chci</statementCode>
-                    <statementText>luaz</statementText>
+                    <statementText languageId="MK">luaz</statementText>
                     <subjectTypeCode>aucb</subjectTypeCode>
                     <valueMeasure unitId="ejph">9.09</valueMeasure>
                 </statedCondition>
@@ -2048,14 +2060,14 @@
                     </calibratedMeasurement>
                     <statementCode>hxxr</statementCode>
                     <statementCode>apql</statementCode>
-                    <statementText>gkfb</statementText>
-                    <statementText>xlhx</statementText>
+                    <statementText languageId="xh">gkfb</statementText>
+                    <statementText languageId="CU">xlhx</statementText>
                     <subjectTypeCode>vphz</subjectTypeCode>
                     <valueMeasure unitId="msxr">9.28</valueMeasure>
                 </statedCondition>
                 <typeCode>iyti</typeCode>
-                <typeText>hpoy</typeText>
-                <typeText>nhaz</typeText>
+                <typeText languageId="af">hpoy</typeText>
+                <typeText languageId="mr">nhaz</typeText>
             </dangerousGoodsLogisticsPackage>
             <densityMeasure unitId="iqht">4.33</densityMeasure>
             <densityMeasure unitId="jzcl">3.29</densityMeasure>
@@ -2076,9 +2088,9 @@
                 <weightMeasure unitId="GRM">3.71</weightMeasure>
                 <workingPressureMeasure unitId="ulcq">5.00</workingPressureMeasure>
             </includedFuel>
-            <information>sfsd</information>
-            <information>bhgi</information>
-            <information>xzzg</information>
+            <information languageId="TE">sfsd</information>
+            <information languageId="rm">bhgi</information>
+            <information languageId="SG">xzzg</information>
             <labelTypeCode>fiyx</labelTypeCode>
             <labelTypeCode>qqqg</labelTypeCode>
             <labelTypeCode>lflz</labelTypeCode>
@@ -2088,16 +2100,17 @@
             <meltingPointTemperatureMeasure unitId="tmsb">8.28</meltingPointTemperatureMeasure>
             <netWeight unitId="KGM">6.17</netWeight>
             <packagingDangerLevelCode>cows</packagingDangerLevelCode>
-            <previousCargoInformation>nvwf</previousCargoInformation>
-            <properShippingName>mean</properShippingName>
+            <previousCargoInformation languageId="ii">nvwf</previousCargoInformation>
+            <properShippingName languageId="ab">mean</properShippingName>
+            <properShippingName languageId="bo">qbof</properShippingName>
             <radioactiveMaterial>
                 <applicableRadioactiveIsotope>
                     <activityLevelMeasure unitId="cksf">6.35</activityLevelMeasure>
-                    <name>nfut</name>
+                    <name languageId="tt">nfut</name>
                 </applicableRadioactiveIsotope>
                 <fissileCriticalitySafetyIndexNumber>5.77</fissileCriticalitySafetyIndexNumber>
                 <radioactivePackageTransportIndexCode>tuyz</radioactivePackageTransportIndexCode>
-                <specialFormInformation>bqau</specialFormInformation>
+                <specialFormInformation languageId="sq">bqau</specialFormInformation>
             </radioactiveMaterial>
             <regulatoryAuthorityName>etli</regulatoryAuthorityName>
             <relatedDocument>
@@ -2241,8 +2254,8 @@
                     <valueMeasure unitId="vbyd">7.02</valueMeasure>
                 </calibratedMeasurement>
                 <statementCode>vkzj</statementCode>
-                <statementText>bnwd</statementText>
-                <statementText>hwor</statementText>
+                <statementText languageId="NG">bnwd</statementText>
+                <statementText languageId="RN">hwor</statementText>
                 <subjectTypeCode>uusu</subjectTypeCode>
                 <valueMeasure unitId="ltdz">5.91</valueMeasure>
             </statedCondition>
@@ -2256,14 +2269,20 @@
                     <valueMeasure unitId="tonk">5.51</valueMeasure>
                 </calibratedMeasurement>
                 <statementCode>diun</statementCode>
-                <statementText>isnr</statementText>
+                <statementText languageId="YI">isnr</statementText>
                 <subjectTypeCode>rjdh</subjectTypeCode>
                 <subjectTypeCode>vgvt</subjectTypeCode>
                 <valueMeasure unitId="sonl">1.58</valueMeasure>
                 <valueMeasure unitId="fyeo">7.95</valueMeasure>
             </statedCondition>
-            <supplementaryInformation>musx</supplementaryInformation>
-            <technicalName>jxzo</technicalName>
+            <supplementaryInformation languageId="ce">musx</supplementaryInformation>
+            <technicalName languageId="KN">jxzo</technicalName>
+            <technicalNameNote>
+                <contentText languageId="sc">pvwz</contentText>
+                <contentText languageId="ae">xcon</contentText>
+                <subjectCode>educ</subjectCode>
+                <subjectCode>hgxi</subjectCode>
+            </technicalNameNote>
             <tunnelRestrictionCode>szda</tunnelRestrictionCode>
             <uNDGID>ztkl</uNDGID>
         </transportDangerousGoods>
@@ -2600,11 +2619,11 @@
                     <uRI schemeAgencyId="fkqipu">kflp</uRI>
                 </referencedDocument>
                 <shippingMarks>
-                    <markingText>jylg</markingText>
+                    <markingText languageId="ie">jylg</markingText>
                 </shippingMarks>
                 <shippingMarks>
-                    <markingText>blsb</markingText>
-                    <markingText>bwho</markingText>
+                    <markingText languageId="RO">blsb</markingText>
+                    <markingText languageId="ak">bwho</markingText>
                 </shippingMarks>
                 <statedCondition>
                     <actionCode>heez</actionCode>
@@ -2618,13 +2637,13 @@
                         <valueMeasure unitId="rsrz">2.00</valueMeasure>
                     </calibratedMeasurement>
                     <statementCode>hqvv</statementCode>
-                    <statementText>ocfr</statementText>
+                    <statementText languageId="SU">ocfr</statementText>
                     <subjectTypeCode>blpe</subjectTypeCode>
                     <valueMeasure unitId="altk">7.26</valueMeasure>
                     <valueMeasure unitId="irwt">3.46</valueMeasure>
                 </statedCondition>
                 <typeCode>iqiq</typeCode>
-                <typeText>esxt</typeText>
+                <typeText languageId="AA">esxt</typeText>
             </dangerousGoodsLogisticsPackage>
             <densityMeasure unitId="nedw">4.13</densityMeasure>
             <emergencyTemperature>
@@ -2645,23 +2664,23 @@
                 <weightMeasure unitId="TNE">0.86</weightMeasure>
                 <workingPressureMeasure unitId="iqva">9.19</workingPressureMeasure>
             </includedFuel>
-            <information>mvrh</information>
+            <information languageId="DV">mvrh</information>
             <labelTypeCode>gxut</labelTypeCode>
             <limitedQuantityCode>jqsk</limitedQuantityCode>
             <meltingPointTemperatureMeasure unitId="eejd">8.42</meltingPointTemperatureMeasure>
             <netWeight unitId="TNE">6.70</netWeight>
             <packagingDangerLevelCode>asbv</packagingDangerLevelCode>
-            <previousCargoInformation>vtbp</previousCargoInformation>
-            <properShippingName>zync</properShippingName>
+            <previousCargoInformation languageId="sq">vtbp</previousCargoInformation>
+            <properShippingName languageId="SO">zync</properShippingName>
             <radioactiveMaterial>
                 <applicableRadioactiveIsotope>
                     <activityLevelMeasure unitId="qcqx">9.92</activityLevelMeasure>
-                    <name>vrvt</name>
-                    <name>pfxq</name>
+                    <name languageId="aa">vrvt</name>
+                    <name languageId="NL">pfxq</name>
                 </applicableRadioactiveIsotope>
                 <fissileCriticalitySafetyIndexNumber>6.05</fissileCriticalitySafetyIndexNumber>
                 <radioactivePackageTransportIndexCode>zdtp</radioactivePackageTransportIndexCode>
-                <specialFormInformation>sbkn</specialFormInformation>
+                <specialFormInformation languageId="ve">sbkn</specialFormInformation>
             </radioactiveMaterial>
             <regulatoryAuthorityName>nejh</regulatoryAuthorityName>
             <relatedDocument>
@@ -2799,14 +2818,23 @@
                     <valueMeasure unitId="uuwk">3.20</valueMeasure>
                 </calibratedMeasurement>
                 <statementCode>aqmd</statementCode>
-                <statementText>cdmn</statementText>
+                <statementText languageId="ts">cdmn</statementText>
                 <subjectTypeCode>ayja</subjectTypeCode>
                 <subjectTypeCode>oqgj</subjectTypeCode>
                 <valueMeasure unitId="rpho">9.35</valueMeasure>
                 <valueMeasure unitId="sgti">8.99</valueMeasure>
             </statedCondition>
-            <supplementaryInformation>hkai</supplementaryInformation>
-            <technicalName>dwhr</technicalName>
+            <supplementaryInformation languageId="nd">hkai</supplementaryInformation>
+            <supplementaryInformation languageId="mr">xwrg</supplementaryInformation>
+            <supplementaryInformation languageId="gv">viox</supplementaryInformation>
+            <technicalName languageId="ie">dwhr</technicalName>
+            <technicalNameNote>
+                <contentText languageId="SC">cjul</contentText>
+                <contentText languageId="SI">vtsi</contentText>
+                <subjectCode>sxjf</subjectCode>
+                <subjectCode>kkad</subjectCode>
+                <subjectCode>rrbp</subjectCode>
+            </technicalNameNote>
             <tunnelRestrictionCode>azyq</tunnelRestrictionCode>
             <uNDGID>rmjo</uNDGID>
         </transportDangerousGoods>
@@ -2980,8 +3008,8 @@
                     <uRI schemeAgencyId="vqcnrg">dofz</uRI>
                 </referencedDocument>
                 <shippingMarks>
-                    <markingText>qgkh</markingText>
-                    <markingText>bodt</markingText>
+                    <markingText languageId="TT">qgkh</markingText>
+                    <markingText languageId="gd">bodt</markingText>
                 </shippingMarks>
                 <statedCondition>
                     <actionCode>pxxe</actionCode>
@@ -2991,7 +3019,7 @@
                     </calibratedMeasurement>
                     <statementCode>czsr</statementCode>
                     <statementCode>zrnn</statementCode>
-                    <statementText>ojsn</statementText>
+                    <statementText languageId="OR">ojsn</statementText>
                     <subjectTypeCode>fyqm</subjectTypeCode>
                     <valueMeasure unitId="jmyb">3.03</valueMeasure>
                     <valueMeasure unitId="pdsl">6.65</valueMeasure>
@@ -3005,7 +3033,7 @@
                     </calibratedMeasurement>
                     <statementCode>lwfe</statementCode>
                     <statementCode>zgqi</statementCode>
-                    <statementText>opec</statementText>
+                    <statementText languageId="to">opec</statementText>
                     <subjectTypeCode>ekza</subjectTypeCode>
                     <subjectTypeCode>pstl</subjectTypeCode>
                     <valueMeasure unitId="zkhy">9.36</valueMeasure>
@@ -3021,13 +3049,13 @@
                         <valueMeasure unitId="ojuf">4.44</valueMeasure>
                     </calibratedMeasurement>
                     <statementCode>guho</statementCode>
-                    <statementText>wqsn</statementText>
-                    <statementText>deph</statementText>
+                    <statementText languageId="ga">wqsn</statementText>
+                    <statementText languageId="TN">deph</statementText>
                     <subjectTypeCode>ffjn</subjectTypeCode>
                     <valueMeasure unitId="swly">1.12</valueMeasure>
                 </statedCondition>
                 <typeCode>pdjx</typeCode>
-                <typeText>kcyj</typeText>
+                <typeText languageId="SI">kcyj</typeText>
             </dangerousGoodsLogisticsPackage>
             <densityMeasure unitId="sdgt">6.34</densityMeasure>
             <emergencyTemperature>
@@ -3047,30 +3075,31 @@
                 <weightMeasure unitId="TNE">3.60</weightMeasure>
                 <workingPressureMeasure unitId="cuzq">7.19</workingPressureMeasure>
             </includedFuel>
-            <information>hmew</information>
-            <information>aeqb</information>
-            <information>isrd</information>
+            <information languageId="IG">hmew</information>
+            <information languageId="ms">aeqb</information>
+            <information languageId="kr">isrd</information>
             <labelTypeCode>sgni</labelTypeCode>
             <limitedQuantityCode>ahgn</limitedQuantityCode>
             <meltingPointTemperatureMeasure unitId="abxl">5.63</meltingPointTemperatureMeasure>
             <meltingPointTemperatureMeasure unitId="xswn">4.37</meltingPointTemperatureMeasure>
             <netWeight unitId="GRM">2.95</netWeight>
             <packagingDangerLevelCode>xhyk</packagingDangerLevelCode>
-            <previousCargoInformation>gbwo</previousCargoInformation>
-            <properShippingName>ossa</properShippingName>
+            <previousCargoInformation languageId="BI">gbwo</previousCargoInformation>
+            <properShippingName languageId="NR">ossa</properShippingName>
             <radioactiveMaterial>
                 <applicableRadioactiveIsotope>
                     <activityLevelMeasure unitId="rbng">0.21</activityLevelMeasure>
                     <activityLevelMeasure unitId="pnwu">1.95</activityLevelMeasure>
-                    <name>rvik</name>
+                    <name languageId="ln">rvik</name>
                 </applicableRadioactiveIsotope>
                 <applicableRadioactiveIsotope>
                     <activityLevelMeasure unitId="mbuv">1.46</activityLevelMeasure>
-                    <name>sbyd</name>
+                    <name languageId="ka">sbyd</name>
                 </applicableRadioactiveIsotope>
                 <fissileCriticalitySafetyIndexNumber>1.42</fissileCriticalitySafetyIndexNumber>
                 <radioactivePackageTransportIndexCode>umox</radioactivePackageTransportIndexCode>
-                <specialFormInformation>nqyw</specialFormInformation>
+                <specialFormInformation languageId="AR">nqyw</specialFormInformation>
+                <specialFormInformation languageId="ln">gdwt</specialFormInformation>
             </radioactiveMaterial>
             <regulatoryAuthorityName>jmki</regulatoryAuthorityName>
             <relatedDocument>
@@ -3361,16 +3390,20 @@
                     <valueMeasure unitId="htuw">9.25</valueMeasure>
                 </calibratedMeasurement>
                 <statementCode>ndyc</statementCode>
-                <statementText>ticx</statementText>
-                <statementText>pvud</statementText>
+                <statementText languageId="nv">ticx</statementText>
+                <statementText languageId="HZ">pvud</statementText>
                 <subjectTypeCode>kluy</subjectTypeCode>
                 <subjectTypeCode>beyd</subjectTypeCode>
                 <valueMeasure unitId="ejhx">7.22</valueMeasure>
                 <valueMeasure unitId="eues">5.29</valueMeasure>
             </statedCondition>
-            <supplementaryInformation>rjma</supplementaryInformation>
-            <technicalName>ihuq</technicalName>
-            <technicalName>vylz</technicalName>
+            <supplementaryInformation languageId="sv">rjma</supplementaryInformation>
+            <technicalName languageId="HI">ihuq</technicalName>
+            <technicalName languageId="eu">vylz</technicalName>
+            <technicalNameNote>
+                <contentText languageId="MT">bhfv</contentText>
+                <subjectCode>ugha</subjectCode>
+            </technicalNameNote>
             <tunnelRestrictionCode>yffu</tunnelRestrictionCode>
             <uNDGID>yeer</uNDGID>
         </transportDangerousGoods>
@@ -3382,10 +3415,11 @@
         <consignmentRiskRelatedCode>qybu</consignmentRiskRelatedCode>
         <consignmentRiskRelatedCode>cgcc</consignmentRiskRelatedCode>
         <consignmentRiskRelatedCode>perp</consignmentRiskRelatedCode>
-        <description>sbxd</description>
-        <informationText>hklq</informationText>
-        <informationText>axkn</informationText>
-        <informationText>gfbd</informationText>
+        <description languageId="sl">sbxd</description>
+        <description languageId="vo">yntk</description>
+        <informationText languageId="ky">hklq</informationText>
+        <informationText languageId="ID">axkn</informationText>
+        <informationText languageId="cy">gfbd</informationText>
         <levelCode>rmop</levelCode>
         <screeningMethodCode>ysyr</screeningMethodCode>
         <screeningMethodCode>jahd</screeningMethodCode>
@@ -3395,13 +3429,13 @@
         <arrivalEvent>
             <actualOccurrenceDateTime formatId="205">202611031447+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>weyr</contentText>
-                <contentText>kwjt</contentText>
+                <contentText languageId="gu">weyr</contentText>
+                <contentText languageId="MH">kwjt</contentText>
                 <subjectCode>vwcm</subjectCode>
                 <subjectCode>hedu</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>acfp</contentText>
+                <contentText languageId="tg">acfp</contentText>
                 <subjectCode>lcgr</subjectCode>
                 <subjectCode>spmh</subjectCode>
             </additionalSecurityMeasures>
@@ -3531,7 +3565,7 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>yqbk</contentText>
+                    <contentText languageId="GN">yqbk</contentText>
                     <subjectCode>rerc</subjectCode>
                     <subjectCode>yukh</subjectCode>
                 </applicableNote>
@@ -3549,14 +3583,14 @@
         <arrivalEvent>
             <actualOccurrenceDateTime formatId="205">203302170836+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>rttq</contentText>
-                <contentText>jlfx</contentText>
+                <contentText languageId="en">rttq</contentText>
+                <contentText languageId="NG">jlfx</contentText>
                 <subjectCode>yuip</subjectCode>
                 <subjectCode>ghfl</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>fjgm</contentText>
-                <contentText>fvva</contentText>
+                <contentText languageId="so">fjgm</contentText>
+                <contentText languageId="ia">fvva</contentText>
                 <subjectCode>kfty</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -3686,14 +3720,14 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>nfop</contentText>
-                    <contentText>fvbv</contentText>
-                    <contentText>bnbo</contentText>
+                    <contentText languageId="YI">nfop</contentText>
+                    <contentText languageId="hu">fvbv</contentText>
+                    <contentText languageId="ay">bnbo</contentText>
                     <subjectCode>yhes</subjectCode>
                     <subjectCode>deea</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>awal</contentText>
+                    <contentText languageId="KG">awal</contentText>
                     <subjectCode>ydnn</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -3710,8 +3744,8 @@
         <arrivalEvent>
             <actualOccurrenceDateTime formatId="205">202503011726+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>ayif</contentText>
-                <contentText>ilhz</contentText>
+                <contentText languageId="ak">ayif</contentText>
+                <contentText languageId="fo">ilhz</contentText>
                 <subjectCode>murw</subjectCode>
                 <subjectCode>bmof</subjectCode>
             </additionalSecurityMeasures>
@@ -3962,7 +3996,7 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>fdqw</contentText>
+                    <contentText languageId="YI">fdqw</contentText>
                     <subjectCode>uvwm</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -3980,8 +4014,8 @@
         <borderCrossingEvent>
             <actualOccurrenceDateTime formatId="205">203301020257+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>ngfz</contentText>
-                <contentText>mipd</contentText>
+                <contentText languageId="IT">ngfz</contentText>
+                <contentText languageId="BA">mipd</contentText>
                 <subjectCode>udtu</subjectCode>
                 <subjectCode>bkui</subjectCode>
                 <subjectCode>zxax</subjectCode>
@@ -4105,7 +4139,7 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>dfge</contentText>
+                    <contentText languageId="NV">dfge</contentText>
                     <subjectCode>nbap</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -4122,7 +4156,7 @@
         <callEvent>
             <actualOccurrenceDateTime formatId="205">202311241640+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>wgjs</contentText>
+                <contentText languageId="hi">wgjs</contentText>
                 <subjectCode>djtz</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -4314,8 +4348,8 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>vnol</contentText>
-                    <contentText>tatz</contentText>
+                    <contentText languageId="et">vnol</contentText>
+                    <contentText languageId="ce">tatz</contentText>
                     <subjectCode>sbev</subjectCode>
                     <subjectCode>sosj</subjectCode>
                 </applicableNote>
@@ -4334,7 +4368,7 @@
         <callEvent>
             <actualOccurrenceDateTime formatId="205">203501130751+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>mwgj</contentText>
+                <contentText languageId="hi">mwgj</contentText>
                 <subjectCode>nkup</subjectCode>
                 <subjectCode>igsk</subjectCode>
             </additionalSecurityMeasures>
@@ -4449,8 +4483,8 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>opce</contentText>
-                    <contentText>eigk</contentText>
+                    <contentText languageId="tr">opce</contentText>
+                    <contentText languageId="sv">eigk</contentText>
                     <subjectCode>hmlk</subjectCode>
                     <subjectCode>veit</subjectCode>
                 </applicableNote>
@@ -4469,16 +4503,16 @@
         <callEvent>
             <actualOccurrenceDateTime formatId="205">203703230625+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>vtwj</contentText>
+                <contentText languageId="nn">vtwj</contentText>
                 <subjectCode>kwtg</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>ikkv</contentText>
+                <contentText languageId="wa">ikkv</contentText>
                 <subjectCode>mkgq</subjectCode>
                 <subjectCode>sdgi</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>qkoi</contentText>
+                <contentText languageId="nv">qkoi</contentText>
                 <subjectCode>cyhl</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -4716,12 +4750,12 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>mmob</contentText>
+                    <contentText languageId="ZU">mmob</contentText>
                     <subjectCode>rjir</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>rxyd</contentText>
-                    <contentText>vunt</contentText>
+                    <contentText languageId="ml">rxyd</contentText>
+                    <contentText languageId="pi">vunt</contentText>
                     <subjectCode>qnft</subjectCode>
                     <subjectCode>towh</subjectCode>
                     <subjectCode>iufl</subjectCode>
@@ -4742,7 +4776,7 @@
         <departureEvent>
             <actualOccurrenceDateTime formatId="205">202301240045+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>osoz</contentText>
+                <contentText languageId="kv">osoz</contentText>
                 <subjectCode>hvis</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -4876,8 +4910,8 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>jhhb</contentText>
-                    <contentText>qeri</contentText>
+                    <contentText languageId="BE">jhhb</contentText>
+                    <contentText languageId="SM">qeri</contentText>
                     <subjectCode>oalg</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -4894,15 +4928,15 @@
         <departureEvent>
             <actualOccurrenceDateTime formatId="205">202910020051+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>ndag</contentText>
-                <contentText>deld</contentText>
-                <contentText>elay</contentText>
+                <contentText languageId="YI">ndag</contentText>
+                <contentText languageId="ky">deld</contentText>
+                <contentText languageId="EO">elay</contentText>
                 <subjectCode>ordq</subjectCode>
                 <subjectCode>hfxn</subjectCode>
                 <subjectCode>rnpz</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>dmzb</contentText>
+                <contentText languageId="GL">dmzb</contentText>
                 <subjectCode>xjyo</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -5057,15 +5091,15 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>uvjb</contentText>
+                    <contentText languageId="te">uvjb</contentText>
                     <subjectCode>eqsf</subjectCode>
                     <subjectCode>rsxh</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>sucq</contentText>
-                    <contentText>fcca</contentText>
+                    <contentText languageId="sa">sucq</contentText>
+                    <contentText languageId="nl">fcca</contentText>
                     <subjectCode>kboz</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -5082,13 +5116,13 @@
         <departureEvent>
             <actualOccurrenceDateTime formatId="205">202512130653+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>jkaf</contentText>
+                <contentText languageId="nd">jkaf</contentText>
                 <subjectCode>ehgb</subjectCode>
                 <subjectCode>mzdb</subjectCode>
                 <subjectCode>ugur</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>sgwc</contentText>
+                <contentText languageId="IO">sgwc</contentText>
                 <subjectCode>nnus</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -5215,7 +5249,7 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>ynof</contentText>
+                    <contentText languageId="GV">ynof</contentText>
                     <subjectCode>zlvu</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -5233,7 +5267,7 @@
         <event>
             <actualOccurrenceDateTime formatId="205">203607141045+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>szjm</contentText>
+                <contentText languageId="FJ">szjm</contentText>
                 <subjectCode>kplt</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -5542,9 +5576,9 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>sold</contentText>
-                    <contentText>saqr</contentText>
-                    <contentText>cjhc</contentText>
+                    <contentText languageId="MO">sold</contentText>
+                    <contentText languageId="ps">saqr</contentText>
+                    <contentText languageId="ug">cjhc</contentText>
                     <subjectCode>mxfg</subjectCode>
                     <subjectCode>ljcx</subjectCode>
                 </applicableNote>
@@ -5566,7 +5600,7 @@
         <loadingEvent>
             <actualOccurrenceDateTime formatId="205">202003210623+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>mzfm</contentText>
+                <contentText languageId="la">mzfm</contentText>
                 <subjectCode>vvcm</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -5720,14 +5754,14 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>dcjz</contentText>
-                    <contentText>jsgg</contentText>
+                    <contentText languageId="KW">dcjz</contentText>
+                    <contentText languageId="SO">jsgg</contentText>
                     <subjectCode>gqom</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>nnjf</contentText>
+                    <contentText languageId="bs">nnjf</contentText>
                     <subjectCode>okqb</subjectCode>
                     <subjectCode>wszo</subjectCode>
                 </applicableNote>
@@ -5745,8 +5779,8 @@
         <loadingEvent>
             <actualOccurrenceDateTime formatId="205">203006090028+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>ffsy</contentText>
-                <contentText>bxmu</contentText>
+                <contentText languageId="ur">ffsy</contentText>
+                <contentText languageId="am">bxmu</contentText>
                 <subjectCode>lnbc</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -5851,21 +5885,21 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>fpcv</contentText>
-                    <contentText>whga</contentText>
+                    <contentText languageId="WO">fpcv</contentText>
+                    <contentText languageId="SV">whga</contentText>
                     <subjectCode>zznb</subjectCode>
                     <subjectCode>gwwh</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>gmii</contentText>
+                    <contentText languageId="SQ">gmii</contentText>
                     <subjectCode>vjgu</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>vxmu</contentText>
+                    <contentText languageId="BN">vxmu</contentText>
                     <subjectCode>kamb</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -5882,7 +5916,7 @@
         <loadingEvent>
             <actualOccurrenceDateTime formatId="205">202805280118+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>vuaa</contentText>
+                <contentText languageId="to">vuaa</contentText>
                 <subjectCode>weaj</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -6107,12 +6141,12 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>fafp</contentText>
+                    <contentText languageId="ia">fafp</contentText>
                     <subjectCode>uebg</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>noiy</contentText>
-                    <contentText>evpd</contentText>
+                    <contentText languageId="TO">noiy</contentText>
+                    <contentText languageId="IA">evpd</contentText>
                     <subjectCode>gyip</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -6138,12 +6172,12 @@
         <unloadingEvent>
             <actualOccurrenceDateTime formatId="205">203809281016+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>igip</contentText>
-                <contentText>qufj</contentText>
+                <contentText languageId="sm">igip</contentText>
+                <contentText languageId="ki">qufj</contentText>
                 <subjectCode>lncc</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>fkzg</contentText>
+                <contentText languageId="EN">fkzg</contentText>
                 <subjectCode>bydz</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -6260,7 +6294,7 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>qqol</contentText>
+                    <contentText languageId="SD">qqol</contentText>
                     <subjectCode>lybn</subjectCode>
                     <subjectCode>xaeq</subjectCode>
                     <subjectCode>vkvh</subjectCode>
@@ -6268,13 +6302,13 @@
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>tpxf</contentText>
-                    <contentText>uuyi</contentText>
+                    <contentText languageId="tt">tpxf</contentText>
+                    <contentText languageId="it">uuyi</contentText>
                     <subjectCode>idfz</subjectCode>
                     <subjectCode>lyme</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>svhl</contentText>
+                    <contentText languageId="II">svhl</contentText>
                     <subjectCode>jucv</subjectCode>
                     <subjectCode>cfkq</subjectCode>
                     <subjectCode>athh</subjectCode>
@@ -6293,11 +6327,11 @@
         <unloadingEvent>
             <actualOccurrenceDateTime formatId="205">202712080403+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>gzgc</contentText>
+                <contentText languageId="ch">gzgc</contentText>
                 <subjectCode>uoif</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>abvl</contentText>
+                <contentText languageId="CR">abvl</contentText>
                 <subjectCode>bwqq</subjectCode>
                 <subjectCode>oxvq</subjectCode>
             </additionalSecurityMeasures>
@@ -6433,11 +6467,11 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>vuby</contentText>
+                    <contentText languageId="fr">vuby</contentText>
                     <subjectCode>oyzr</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>psog</contentText>
+                    <contentText languageId="EE">psog</contentText>
                     <subjectCode>iidw</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -6560,7 +6594,7 @@
         <arrivalEvent>
             <actualOccurrenceDateTime formatId="205">203805270614+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>tbfd</contentText>
+                <contentText languageId="VO">tbfd</contentText>
                 <subjectCode>wdko</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -6662,12 +6696,12 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>wjop</contentText>
+                    <contentText languageId="ne">wjop</contentText>
                     <subjectCode>sosk</subjectCode>
                     <subjectCode>zvsw</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>txuz</contentText>
+                    <contentText languageId="el">txuz</contentText>
                     <subjectCode>tbbp</subjectCode>
                     <subjectCode>wyua</subjectCode>
                     <subjectCode>iapc</subjectCode>
@@ -6675,11 +6709,11 @@
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>xtsd</contentText>
+                    <contentText languageId="SM">xtsd</contentText>
                     <subjectCode>vebr</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>mfzn</contentText>
+                    <contentText languageId="NR">mfzn</contentText>
                     <subjectCode>yplb</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -6696,14 +6730,14 @@
         <borderCrossingEvent>
             <actualOccurrenceDateTime formatId="205">203806091834+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>yegz</contentText>
-                <contentText>pwlf</contentText>
+                <contentText languageId="AM">yegz</contentText>
+                <contentText languageId="FA">pwlf</contentText>
                 <subjectCode>yjtb</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>pdnd</contentText>
-                <contentText>eqeb</contentText>
-                <contentText>oxfq</contentText>
+                <contentText languageId="fy">pdnd</contentText>
+                <contentText languageId="NR">eqeb</contentText>
+                <contentText languageId="se">oxfq</contentText>
                 <subjectCode>tlwd</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -6819,23 +6853,23 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>bdwr</contentText>
-                    <contentText>rvay</contentText>
+                    <contentText languageId="gn">bdwr</contentText>
+                    <contentText languageId="ia">rvay</contentText>
                     <subjectCode>vsvo</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>gpxu</contentText>
+                    <contentText languageId="SN">gpxu</contentText>
                     <subjectCode>ogvs</subjectCode>
                     <subjectCode>ytrm</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>gzvl</contentText>
+                    <contentText languageId="ae">gzvl</contentText>
                     <subjectCode>fght</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>ybkv</contentText>
+                    <contentText languageId="ne">ybkv</contentText>
                     <subjectCode>qslc</subjectCode>
                     <subjectCode>ebrh</subjectCode>
                     <subjectCode>vose</subjectCode>
@@ -6854,7 +6888,7 @@
         <borderCrossingEvent>
             <actualOccurrenceDateTime formatId="205">203503190731+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>zuwn</contentText>
+                <contentText languageId="km">zuwn</contentText>
                 <subjectCode>qfyu</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -7068,13 +7102,13 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>scpy</contentText>
-                    <contentText>dkyk</contentText>
+                    <contentText languageId="hr">scpy</contentText>
+                    <contentText languageId="uk">dkyk</contentText>
                     <subjectCode>rilz</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>ocfv</contentText>
-                    <contentText>fpds</contentText>
+                    <contentText languageId="TN">ocfv</contentText>
+                    <contentText languageId="iu">fpds</contentText>
                     <subjectCode>gaad</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -7093,11 +7127,11 @@
         <callEvent>
             <actualOccurrenceDateTime formatId="205">202812262023+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>vnos</contentText>
+                <contentText languageId="TE">vnos</contentText>
                 <subjectCode>oqyw</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>lqyq</contentText>
+                <contentText languageId="CR">lqyq</contentText>
                 <subjectCode>ylwe</subjectCode>
                 <subjectCode>wztv</subjectCode>
                 <subjectCode>fhdi</subjectCode>
@@ -7205,26 +7239,26 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>zhsj</contentText>
-                    <contentText>wsha</contentText>
+                    <contentText languageId="SC">zhsj</contentText>
+                    <contentText languageId="SM">wsha</contentText>
                     <subjectCode>wwzk</subjectCode>
                     <subjectCode>lczr</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>eprl</contentText>
+                    <contentText languageId="fy">eprl</contentText>
                     <subjectCode>fwuq</subjectCode>
                     <subjectCode>orbc</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>kbrk</contentText>
-                    <contentText>srqm</contentText>
+                    <contentText languageId="ga">kbrk</contentText>
+                    <contentText languageId="IO">srqm</contentText>
                     <subjectCode>yshd</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>pyix</contentText>
-                    <contentText>ztui</contentText>
+                    <contentText languageId="FF">pyix</contentText>
+                    <contentText languageId="st">ztui</contentText>
                     <subjectCode>icgq</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -7242,18 +7276,18 @@
         <departureEvent>
             <actualOccurrenceDateTime formatId="205">203211201758+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>nxeb</contentText>
+                <contentText languageId="cy">nxeb</contentText>
                 <subjectCode>gmnt</subjectCode>
                 <subjectCode>rosu</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>nhpi</contentText>
+                <contentText languageId="HT">nhpi</contentText>
                 <subjectCode>cshb</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>ngkv</contentText>
-                <contentText>dgwt</contentText>
-                <contentText>frtf</contentText>
+                <contentText languageId="av">ngkv</contentText>
+                <contentText languageId="VE">dgwt</contentText>
+                <contentText languageId="kg">frtf</contentText>
                 <subjectCode>oomu</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -7482,13 +7516,13 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>tttb</contentText>
+                    <contentText languageId="pl">tttb</contentText>
                     <subjectCode>bewl</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>wxas</contentText>
-                    <contentText>oqlw</contentText>
-                    <contentText>rkvb</contentText>
+                    <contentText languageId="ND">wxas</contentText>
+                    <contentText languageId="kr">oqlw</contentText>
+                    <contentText languageId="dz">rkvb</contentText>
                     <subjectCode>eemb</subjectCode>
                     <subjectCode>dwgz</subjectCode>
                 </applicableNote>
@@ -7506,7 +7540,7 @@
         <event>
             <actualOccurrenceDateTime formatId="205">203306071307+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>izhq</contentText>
+                <contentText languageId="ru">izhq</contentText>
                 <subjectCode>qczy</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -7633,8 +7667,8 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>szbp</contentText>
-                    <contentText>ebxt</contentText>
+                    <contentText languageId="jv">szbp</contentText>
+                    <contentText languageId="HO">ebxt</contentText>
                     <subjectCode>asrl</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -7655,7 +7689,7 @@
         <loadingEvent>
             <actualOccurrenceDateTime formatId="205">203604081102+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>hmkn</contentText>
+                <contentText languageId="ny">hmkn</contentText>
                 <subjectCode>cuwp</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -7786,21 +7820,21 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>pygg</contentText>
+                    <contentText languageId="MN">pygg</contentText>
                     <subjectCode>dfyq</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>atey</contentText>
-                    <contentText>plah</contentText>
-                    <contentText>sjpz</contentText>
+                    <contentText languageId="ve">atey</contentText>
+                    <contentText languageId="BN">plah</contentText>
+                    <contentText languageId="zu">sjpz</contentText>
                     <subjectCode>zouf</subjectCode>
                     <subjectCode>qhwm</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>djlv</contentText>
-                    <contentText>wujs</contentText>
+                    <contentText languageId="TA">djlv</contentText>
+                    <contentText languageId="nb">wujs</contentText>
                     <subjectCode>omcv</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -7827,7 +7861,7 @@
         <unloadingEvent>
             <actualOccurrenceDateTime formatId="205">203712111448+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>wupg</contentText>
+                <contentText languageId="LU">wupg</contentText>
                 <subjectCode>fbxx</subjectCode>
                 <subjectCode>lzxt</subjectCode>
             </additionalSecurityMeasures>
@@ -8047,8 +8081,8 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>nvbu</contentText>
-                    <contentText>bxex</contentText>
+                    <contentText languageId="az">nvbu</contentText>
+                    <contentText languageId="SC">bxex</contentText>
                     <subjectCode>dwct</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -8193,8 +8227,8 @@
         </usedTransportMeans>
     </mainCarriageTransportMovement>
     <natureIdentificationCargo>
-        <identificationText>ooel</identificationText>
-        <identificationText>gqii</identificationText>
+        <identificationText languageId="NY">ooel</identificationText>
+        <identificationText languageId="AY">gqii</identificationText>
         <operationalCategoryCode>derd</operationalCategoryCode>
         <statisticalClassificationCode>ydqi</statisticalClassificationCode>
         <typeCode>qbcr</typeCode>
@@ -8215,8 +8249,8 @@
         <arrivalEvent>
             <actualOccurrenceDateTime formatId="205">202902070045+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>vtil</contentText>
-                <contentText>goxy</contentText>
+                <contentText languageId="it">vtil</contentText>
+                <contentText languageId="BS">goxy</contentText>
                 <subjectCode>scol</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -8319,9 +8353,9 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>bcln</contentText>
-                    <contentText>rupu</contentText>
-                    <contentText>phuj</contentText>
+                    <contentText languageId="zu">bcln</contentText>
+                    <contentText languageId="nl">rupu</contentText>
+                    <contentText languageId="si">phuj</contentText>
                     <subjectCode>bgin</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -8338,8 +8372,8 @@
         <borderCrossingEvent>
             <actualOccurrenceDateTime formatId="205">202010242215+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>nylk</contentText>
-                <contentText>olhw</contentText>
+                <contentText languageId="AA">nylk</contentText>
+                <contentText languageId="OS">olhw</contentText>
                 <subjectCode>kgfl</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -8540,18 +8574,18 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>fanc</contentText>
+                    <contentText languageId="tl">fanc</contentText>
                     <subjectCode>diyk</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>qnem</contentText>
+                    <contentText languageId="za">qnem</contentText>
                     <subjectCode>wxya</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>ioxp</contentText>
-                    <contentText>gfbg</contentText>
+                    <contentText languageId="mr">ioxp</contentText>
+                    <contentText languageId="to">gfbg</contentText>
                     <subjectCode>uwtw</subjectCode>
                     <subjectCode>tzdy</subjectCode>
                     <subjectCode>bqzy</subjectCode>
@@ -8559,12 +8593,12 @@
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>avvw</contentText>
+                    <contentText languageId="NL">avvw</contentText>
                     <subjectCode>xkvj</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>qdyv</contentText>
-                    <contentText>gtdc</contentText>
+                    <contentText languageId="XH">qdyv</contentText>
+                    <contentText languageId="IK">gtdc</contentText>
                     <subjectCode>uqik</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -8582,7 +8616,7 @@
         <callEvent>
             <actualOccurrenceDateTime formatId="205">202904032215+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>wnlb</contentText>
+                <contentText languageId="hi">wnlb</contentText>
                 <subjectCode>ebjg</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -8788,7 +8822,7 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>nyfa</contentText>
+                    <contentText languageId="ks">nyfa</contentText>
                     <subjectCode>yjoq</subjectCode>
                     <subjectCode>bnir</subjectCode>
                 </applicableNote>
@@ -8808,9 +8842,9 @@
         <callEvent>
             <actualOccurrenceDateTime formatId="205">203805032329+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>hkka</contentText>
-                <contentText>hovh</contentText>
-                <contentText>ktxg</contentText>
+                <contentText languageId="tn">hkka</contentText>
+                <contentText languageId="kj">hovh</contentText>
+                <contentText languageId="sm">ktxg</contentText>
                 <subjectCode>vmuu</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -8969,13 +9003,13 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>tnbe</contentText>
+                    <contentText languageId="ET">tnbe</contentText>
                     <subjectCode>qxtq</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>fhae</contentText>
+                    <contentText languageId="HO">fhae</contentText>
                     <subjectCode>drov</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -8994,7 +9028,7 @@
         <departureEvent>
             <actualOccurrenceDateTime formatId="205">203707201958+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>etly</contentText>
+                <contentText languageId="mk">etly</contentText>
                 <subjectCode>alfs</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -9288,15 +9322,15 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>jgrj</contentText>
+                    <contentText languageId="FF">jgrj</contentText>
                     <subjectCode>uuda</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>lrmr</contentText>
-                    <contentText>gfno</contentText>
-                    <contentText>kxao</contentText>
+                    <contentText languageId="AA">lrmr</contentText>
+                    <contentText languageId="NV">gfno</contentText>
+                    <contentText languageId="is">kxao</contentText>
                     <subjectCode>mxix</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -9313,7 +9347,7 @@
         <event>
             <actualOccurrenceDateTime formatId="205">202308131356+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>xkmg</contentText>
+                <contentText languageId="sm">xkmg</contentText>
                 <subjectCode>qugk</subjectCode>
                 <subjectCode>cwcm</subjectCode>
                 <subjectCode>qcet</subjectCode>
@@ -9454,7 +9488,7 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>hnbd</contentText>
+                    <contentText languageId="br">hnbd</contentText>
                     <subjectCode>grha</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -9482,7 +9516,7 @@
         <loadingEvent>
             <actualOccurrenceDateTime formatId="205">203307052242+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>pmxw</contentText>
+                <contentText languageId="sq">pmxw</contentText>
                 <subjectCode>alyz</subjectCode>
                 <subjectCode>pxue</subjectCode>
                 <subjectCode>vnje</subjectCode>
@@ -9595,12 +9629,12 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>ywpf</contentText>
+                    <contentText languageId="li">ywpf</contentText>
                     <subjectCode>gsju</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>ehqr</contentText>
-                    <contentText>ojlt</contentText>
+                    <contentText languageId="RW">ehqr</contentText>
+                    <contentText languageId="om">ojlt</contentText>
                     <subjectCode>jvod</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -9627,8 +9661,8 @@
         <unloadingEvent>
             <actualOccurrenceDateTime formatId="205">202307041621+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>utnq</contentText>
-                <contentText>fbgb</contentText>
+                <contentText languageId="et">utnq</contentText>
+                <contentText languageId="TY">fbgb</contentText>
                 <subjectCode>rxkq</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -9797,13 +9831,13 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>ptav</contentText>
+                    <contentText languageId="KN">ptav</contentText>
                     <subjectCode>ywtb</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>ccjj</contentText>
+                    <contentText languageId="CV">ccjj</contentText>
                     <subjectCode>rxhu</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -9821,12 +9855,12 @@
         <unloadingEvent>
             <actualOccurrenceDateTime formatId="205">202306220101+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>pzlm</contentText>
+                <contentText languageId="st">pzlm</contentText>
                 <subjectCode>szrf</subjectCode>
                 <subjectCode>zrne</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>qoiu</contentText>
+                <contentText languageId="NY">qoiu</contentText>
                 <subjectCode>jswm</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -9990,15 +10024,15 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>upvq</contentText>
+                    <contentText languageId="lg">upvq</contentText>
                     <subjectCode>pbsj</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>tfzk</contentText>
+                    <contentText languageId="SV">tfzk</contentText>
                     <subjectCode>fobu</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>ypzn</contentText>
+                    <contentText languageId="aa">ypzn</contentText>
                     <subjectCode>gdye</subjectCode>
                     <subjectCode>wvcj</subjectCode>
                     <subjectCode>nxef</subjectCode>
@@ -10152,7 +10186,7 @@
         <arrivalEvent>
             <actualOccurrenceDateTime formatId="205">203401250421+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>kdgz</contentText>
+                <contentText languageId="yi">kdgz</contentText>
                 <subjectCode>fgvr</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -10282,7 +10316,7 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>qdhf</contentText>
+                    <contentText languageId="os">qdhf</contentText>
                     <subjectCode>xtdw</subjectCode>
                     <subjectCode>gbni</subjectCode>
                     <subjectCode>wtro</subjectCode>
@@ -10301,8 +10335,8 @@
         <arrivalEvent>
             <actualOccurrenceDateTime formatId="205">203503030916+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>xqar</contentText>
-                <contentText>sbgl</contentText>
+                <contentText languageId="TR">xqar</contentText>
+                <contentText languageId="ks">sbgl</contentText>
                 <subjectCode>jggk</subjectCode>
                 <subjectCode>tozv</subjectCode>
             </additionalSecurityMeasures>
@@ -10415,13 +10449,13 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>uqoc</contentText>
-                    <contentText>miag</contentText>
+                    <contentText languageId="it">uqoc</contentText>
+                    <contentText languageId="ml">miag</contentText>
                     <subjectCode>cmjr</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>lmlm</contentText>
-                    <contentText>bfps</contentText>
+                    <contentText languageId="wa">lmlm</contentText>
+                    <contentText languageId="FY">bfps</contentText>
                     <subjectCode>duvu</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -10439,8 +10473,8 @@
         <arrivalEvent>
             <actualOccurrenceDateTime formatId="205">203010290224+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>anjc</contentText>
-                <contentText>psby</contentText>
+                <contentText languageId="kv">anjc</contentText>
+                <contentText languageId="AN">psby</contentText>
                 <subjectCode>vppt</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -10565,7 +10599,7 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>nyrd</contentText>
+                    <contentText languageId="lg">nyrd</contentText>
                     <subjectCode>hzgx</subjectCode>
                     <subjectCode>ndnf</subjectCode>
                 </applicableNote>
@@ -10585,14 +10619,14 @@
         <borderCrossingEvent>
             <actualOccurrenceDateTime formatId="205">202211050332+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>rcfl</contentText>
-                <contentText>eges</contentText>
+                <contentText languageId="NR">rcfl</contentText>
+                <contentText languageId="vi">eges</contentText>
                 <subjectCode>xgsm</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>iswh</contentText>
-                <contentText>zzfn</contentText>
-                <contentText>igoy</contentText>
+                <contentText languageId="EU">iswh</contentText>
+                <contentText languageId="HA">zzfn</contentText>
+                <contentText languageId="as">igoy</contentText>
                 <subjectCode>pafl</subjectCode>
                 <subjectCode>lkoe</subjectCode>
             </additionalSecurityMeasures>
@@ -10702,18 +10736,18 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>vomu</contentText>
+                    <contentText languageId="si">vomu</contentText>
                     <subjectCode>rvyb</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>cewc</contentText>
+                    <contentText languageId="pt">cewc</contentText>
                     <subjectCode>wlhi</subjectCode>
                     <subjectCode>oevp</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>fmew</contentText>
+                    <contentText languageId="aa">fmew</contentText>
                     <subjectCode>deud</subjectCode>
                     <subjectCode>omlo</subjectCode>
                     <subjectCode>zjtc</subjectCode>
@@ -10733,11 +10767,11 @@
         <borderCrossingEvent>
             <actualOccurrenceDateTime formatId="205">202609022025+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>obnr</contentText>
+                <contentText languageId="ru">obnr</contentText>
                 <subjectCode>zplo</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>nyvn</contentText>
+                <contentText languageId="nr">nyvn</contentText>
                 <subjectCode>guxv</subjectCode>
                 <subjectCode>xmcb</subjectCode>
             </additionalSecurityMeasures>
@@ -11102,9 +11136,9 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>wyyq</contentText>
-                    <contentText>hozs</contentText>
-                    <contentText>zelw</contentText>
+                    <contentText languageId="FR">wyyq</contentText>
+                    <contentText languageId="or">hozs</contentText>
+                    <contentText languageId="tw">zelw</contentText>
                     <subjectCode>yjyd</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -11122,17 +11156,17 @@
         <callEvent>
             <actualOccurrenceDateTime formatId="205">202010161606+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>jyzq</contentText>
-                <contentText>yqwz</contentText>
+                <contentText languageId="KL">jyzq</contentText>
+                <contentText languageId="ET">yqwz</contentText>
                 <subjectCode>tfla</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>nvoz</contentText>
-                <contentText>jhlq</contentText>
+                <contentText languageId="ar">nvoz</contentText>
+                <contentText languageId="MS">jhlq</contentText>
                 <subjectCode>cvwi</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>itie</contentText>
+                <contentText languageId="ET">itie</contentText>
                 <subjectCode>udsr</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -11265,7 +11299,7 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>hcvt</contentText>
+                    <contentText languageId="ee">hcvt</contentText>
                     <subjectCode>cgth</subjectCode>
                     <subjectCode>tzbv</subjectCode>
                     <subjectCode>hrwe</subjectCode>
@@ -11284,7 +11318,7 @@
         <callEvent>
             <actualOccurrenceDateTime formatId="205">203911251513+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>ojmw</contentText>
+                <contentText languageId="mk">ojmw</contentText>
                 <subjectCode>txbo</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -11488,23 +11522,23 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>lkhs</contentText>
+                    <contentText languageId="TA">lkhs</contentText>
                     <subjectCode>ovkn</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>zvvf</contentText>
+                    <contentText languageId="bm">zvvf</contentText>
                     <subjectCode>okda</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>psar</contentText>
+                    <contentText languageId="AE">psar</contentText>
                     <subjectCode>qajz</subjectCode>
                     <subjectCode>xjbp</subjectCode>
                     <subjectCode>xwqc</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>iiwf</contentText>
+                    <contentText languageId="kj">iiwf</contentText>
                     <subjectCode>hqqc</subjectCode>
                     <subjectCode>adpz</subjectCode>
                 </applicableNote>
@@ -11523,8 +11557,8 @@
         <departureEvent>
             <actualOccurrenceDateTime formatId="205">203008041840+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>qhdh</contentText>
-                <contentText>kjua</contentText>
+                <contentText languageId="KN">qhdh</contentText>
+                <contentText languageId="BH">kjua</contentText>
                 <subjectCode>ijce</subjectCode>
                 <subjectCode>axec</subjectCode>
                 <subjectCode>mllu</subjectCode>
@@ -11673,14 +11707,14 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>cywt</contentText>
-                    <contentText>yhfc</contentText>
+                    <contentText languageId="ng">cywt</contentText>
+                    <contentText languageId="NG">yhfc</contentText>
                     <subjectCode>hzie</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>ngdk</contentText>
+                    <contentText languageId="sk">ngdk</contentText>
                     <subjectCode>cptr</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -11697,7 +11731,7 @@
         <event>
             <actualOccurrenceDateTime formatId="205">202511111439+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>guao</contentText>
+                <contentText languageId="rw">guao</contentText>
                 <subjectCode>moud</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -11846,25 +11880,25 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>qpnl</contentText>
+                    <contentText languageId="SR">qpnl</contentText>
                     <subjectCode>jcsq</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>cltc</contentText>
+                    <contentText languageId="mk">cltc</contentText>
                     <subjectCode>nrux</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>nzgg</contentText>
-                    <contentText>oufn</contentText>
-                    <contentText>emjt</contentText>
+                    <contentText languageId="an">nzgg</contentText>
+                    <contentText languageId="OR">oufn</contentText>
+                    <contentText languageId="ES">emjt</contentText>
                     <subjectCode>sveo</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>rjxc</contentText>
+                    <contentText languageId="ho">rjxc</contentText>
                     <subjectCode>sbye</subjectCode>
                     <subjectCode>vnee</subjectCode>
                 </applicableNote>
@@ -11882,8 +11916,8 @@
         <event>
             <actualOccurrenceDateTime formatId="205">202407061226+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>umun</contentText>
-                <contentText>uqft</contentText>
+                <contentText languageId="de">umun</contentText>
+                <contentText languageId="LV">uqft</contentText>
                 <subjectCode>roae</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -12097,12 +12131,12 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>mszg</contentText>
+                    <contentText languageId="NG">mszg</contentText>
                     <subjectCode>znto</subjectCode>
                     <subjectCode>qnpl</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>ihgj</contentText>
+                    <contentText languageId="sn">ihgj</contentText>
                     <subjectCode>aldc</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -12123,11 +12157,11 @@
         <loadingEvent>
             <actualOccurrenceDateTime formatId="205">203812150623+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>mrwo</contentText>
+                <contentText languageId="TE">mrwo</contentText>
                 <subjectCode>tabb</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>asyy</contentText>
+                <contentText languageId="MS">asyy</contentText>
                 <subjectCode>fzck</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -12302,7 +12336,7 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>hlay</contentText>
+                    <contentText languageId="OC">hlay</contentText>
                     <subjectCode>vzgh</subjectCode>
                     <subjectCode>qojx</subjectCode>
                 </applicableNote>
@@ -12320,7 +12354,7 @@
         <loadingEvent>
             <actualOccurrenceDateTime formatId="205">203109012159+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>lgxl</contentText>
+                <contentText languageId="LU">lgxl</contentText>
                 <subjectCode>auyj</subjectCode>
                 <subjectCode>ctfc</subjectCode>
             </additionalSecurityMeasures>
@@ -12422,7 +12456,7 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>auls</contentText>
+                    <contentText languageId="kv">auls</contentText>
                     <subjectCode>mngm</subjectCode>
                     <subjectCode>fgsq</subjectCode>
                 </applicableNote>
@@ -12450,8 +12484,8 @@
         <unloadingEvent>
             <actualOccurrenceDateTime formatId="205">203703292234+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>cvwi</contentText>
-                <contentText>rbgo</contentText>
+                <contentText languageId="hu">cvwi</contentText>
+                <contentText languageId="tn">rbgo</contentText>
                 <subjectCode>vzca</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -12664,14 +12698,14 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>yyyy</contentText>
+                    <contentText languageId="nl">yyyy</contentText>
                     <subjectCode>ymhq</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>fksi</contentText>
-                    <contentText>wbtz</contentText>
+                    <contentText languageId="LG">fksi</contentText>
+                    <contentText languageId="sk">wbtz</contentText>
                     <subjectCode>mncp</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -13000,8 +13034,8 @@
         <arrivalEvent>
             <actualOccurrenceDateTime formatId="205">203607042055+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>cdjs</contentText>
-                <contentText>nqpl</contentText>
+                <contentText languageId="he">cdjs</contentText>
+                <contentText languageId="io">nqpl</contentText>
                 <subjectCode>alft</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -13130,17 +13164,17 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>ihcm</contentText>
+                    <contentText languageId="FJ">ihcm</contentText>
                     <subjectCode>glyc</subjectCode>
                     <subjectCode>wddi</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>agku</contentText>
+                    <contentText languageId="ml">agku</contentText>
                     <subjectCode>lsrk</subjectCode>
                     <subjectCode>efzg</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>awxd</contentText>
+                    <contentText languageId="GN">awxd</contentText>
                     <subjectCode>twva</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -13157,7 +13191,7 @@
         <borderCrossingEvent>
             <actualOccurrenceDateTime formatId="205">203005212334+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>xnux</contentText>
+                <contentText languageId="XH">xnux</contentText>
                 <subjectCode>mqte</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -13379,28 +13413,28 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>lhej</contentText>
+                    <contentText languageId="UR">lhej</contentText>
                     <subjectCode>udpp</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>gshg</contentText>
+                    <contentText languageId="OC">gshg</contentText>
                     <subjectCode>ofhj</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>iipi</contentText>
+                    <contentText languageId="BI">iipi</contentText>
                     <subjectCode>fgzt</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>hgfc</contentText>
-                    <contentText>kjsh</contentText>
+                    <contentText languageId="HI">hgfc</contentText>
+                    <contentText languageId="tn">kjsh</contentText>
                     <subjectCode>jhmz</subjectCode>
                     <subjectCode>qpln</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>oemp</contentText>
-                    <contentText>mqjg</contentText>
+                    <contentText languageId="AF">oemp</contentText>
+                    <contentText languageId="MS">mqjg</contentText>
                     <subjectCode>kmtq</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -13417,8 +13451,8 @@
         <callEvent>
             <actualOccurrenceDateTime formatId="205">203105062130+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>cjcs</contentText>
-                <contentText>sior</contentText>
+                <contentText languageId="id">cjcs</contentText>
+                <contentText languageId="TG">sior</contentText>
                 <subjectCode>hddq</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -13728,9 +13762,9 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>zass</contentText>
-                    <contentText>dxgl</contentText>
-                    <contentText>rpdr</contentText>
+                    <contentText languageId="ja">zass</contentText>
+                    <contentText languageId="SN">dxgl</contentText>
+                    <contentText languageId="EO">rpdr</contentText>
                     <subjectCode>kosp</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -13747,7 +13781,7 @@
         <callEvent>
             <actualOccurrenceDateTime formatId="205">202808152307+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>ohoz</contentText>
+                <contentText languageId="gu">ohoz</contentText>
                 <subjectCode>mqmz</subjectCode>
                 <subjectCode>ldbn</subjectCode>
             </additionalSecurityMeasures>
@@ -13993,13 +14027,13 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>kjll</contentText>
-                    <contentText>gtse</contentText>
-                    <contentText>fzlk</contentText>
+                    <contentText languageId="si">kjll</contentText>
+                    <contentText languageId="VE">gtse</contentText>
+                    <contentText languageId="KA">fzlk</contentText>
                     <subjectCode>qdik</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>rjvr</contentText>
+                    <contentText languageId="FY">rjvr</contentText>
                     <subjectCode>bnqv</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -14018,14 +14052,14 @@
         <departureEvent>
             <actualOccurrenceDateTime formatId="205">203003160820+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>hnac</contentText>
-                <contentText>yefk</contentText>
+                <contentText languageId="ce">hnac</contentText>
+                <contentText languageId="tr">yefk</contentText>
                 <subjectCode>ojyq</subjectCode>
                 <subjectCode>dbvy</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>uljr</contentText>
-                <contentText>phhm</contentText>
+                <contentText languageId="LI">uljr</contentText>
+                <contentText languageId="bo">phhm</contentText>
                 <subjectCode>wtze</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -14251,12 +14285,12 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>cpum</contentText>
+                    <contentText languageId="WA">cpum</contentText>
                     <subjectCode>wrlg</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>fpmb</contentText>
-                    <contentText>cwwj</contentText>
+                    <contentText languageId="LT">fpmb</contentText>
+                    <contentText languageId="II">cwwj</contentText>
                     <subjectCode>ahig</subjectCode>
                     <subjectCode>klek</subjectCode>
                 </applicableNote>
@@ -14274,7 +14308,7 @@
         <departureEvent>
             <actualOccurrenceDateTime formatId="205">202705080603+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>fmua</contentText>
+                <contentText languageId="lt">fmua</contentText>
                 <subjectCode>hazq</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -14422,34 +14456,34 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>hrjr</contentText>
-                    <contentText>qzvd</contentText>
+                    <contentText languageId="AM">hrjr</contentText>
+                    <contentText languageId="th">qzvd</contentText>
                     <subjectCode>plgg</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>yayb</contentText>
+                    <contentText languageId="lt">yayb</contentText>
                     <subjectCode>ppcq</subjectCode>
                     <subjectCode>jopj</subjectCode>
                 </applicableNote>
             </relatedObservation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>hnbu</contentText>
+                    <contentText languageId="bn">hnbu</contentText>
                     <subjectCode>jdpn</subjectCode>
                     <subjectCode>utqp</subjectCode>
                     <subjectCode>bozw</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>eqfc</contentText>
-                    <contentText>nljn</contentText>
+                    <contentText languageId="za">eqfc</contentText>
+                    <contentText languageId="kv">nljn</contentText>
                     <subjectCode>qlaw</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>cbmx</contentText>
-                    <contentText>sisd</contentText>
-                    <contentText>jvta</contentText>
+                    <contentText languageId="ba">cbmx</contentText>
+                    <contentText languageId="bo">sisd</contentText>
+                    <contentText languageId="SR">jvta</contentText>
                     <subjectCode>ique</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -14466,13 +14500,13 @@
         <event>
             <actualOccurrenceDateTime formatId="205">203703031929+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>kthm</contentText>
+                <contentText languageId="ss">kthm</contentText>
                 <subjectCode>ibuo</subjectCode>
                 <subjectCode>pydv</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>hvvs</contentText>
-                <contentText>rdfe</contentText>
+                <contentText languageId="yo">hvvs</contentText>
+                <contentText languageId="ki">rdfe</contentText>
                 <subjectCode>cryy</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -14588,11 +14622,11 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>wylu</contentText>
+                    <contentText languageId="IE">wylu</contentText>
                     <subjectCode>qdqo</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>hlkl</contentText>
+                    <contentText languageId="ts">hlkl</contentText>
                     <subjectCode>qoki</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -14611,21 +14645,21 @@
         <event>
             <actualOccurrenceDateTime formatId="205">203207030408+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>lpvw</contentText>
-                <contentText>pgvp</contentText>
+                <contentText languageId="az">lpvw</contentText>
+                <contentText languageId="ky">pgvp</contentText>
                 <subjectCode>jsxx</subjectCode>
                 <subjectCode>zkzf</subjectCode>
                 <subjectCode>ehxu</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>noxo</contentText>
-                <contentText>tlxy</contentText>
+                <contentText languageId="ht">noxo</contentText>
+                <contentText languageId="om">tlxy</contentText>
                 <subjectCode>kogc</subjectCode>
                 <subjectCode>chuj</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>geic</contentText>
-                <contentText>vrza</contentText>
+                <contentText languageId="af">geic</contentText>
+                <contentText languageId="cr">vrza</contentText>
                 <subjectCode>ktyq</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -14750,9 +14784,9 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>nykr</contentText>
-                    <contentText>ijsm</contentText>
-                    <contentText>expd</contentText>
+                    <contentText languageId="FI">nykr</contentText>
+                    <contentText languageId="SO">ijsm</contentText>
+                    <contentText languageId="UR">expd</contentText>
                     <subjectCode>zsph</subjectCode>
                     <subjectCode>jais</subjectCode>
                 </applicableNote>
@@ -14770,7 +14804,7 @@
         <event>
             <actualOccurrenceDateTime formatId="205">202710230015+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>wxjz</contentText>
+                <contentText languageId="UG">wxjz</contentText>
                 <subjectCode>hksl</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -15129,9 +15163,9 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>jzjj</contentText>
-                    <contentText>hnga</contentText>
-                    <contentText>qvpm</contentText>
+                    <contentText languageId="RW">jzjj</contentText>
+                    <contentText languageId="ta">hnga</contentText>
+                    <contentText languageId="av">qvpm</contentText>
                     <subjectCode>ydxf</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -15153,9 +15187,9 @@
         <loadingEvent>
             <actualOccurrenceDateTime formatId="205">203606250630+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>yzsp</contentText>
-                <contentText>bwgh</contentText>
-                <contentText>toul</contentText>
+                <contentText languageId="eu">yzsp</contentText>
+                <contentText languageId="ha">bwgh</contentText>
+                <contentText languageId="CE">toul</contentText>
                 <subjectCode>qvdw</subjectCode>
             </additionalSecurityMeasures>
             <certifyingParty>
@@ -15283,13 +15317,13 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>keye</contentText>
-                    <contentText>vmpp</contentText>
+                    <contentText languageId="vo">keye</contentText>
+                    <contentText languageId="sv">vmpp</contentText>
                     <subjectCode>qmbw</subjectCode>
                 </applicableNote>
                 <applicableNote>
-                    <contentText>xkbm</contentText>
-                    <contentText>vxjb</contentText>
+                    <contentText languageId="GU">xkbm</contentText>
+                    <contentText languageId="mh">vxjb</contentText>
                     <subjectCode>tcxg</subjectCode>
                 </applicableNote>
             </relatedObservation>
@@ -15316,11 +15350,11 @@
         <unloadingEvent>
             <actualOccurrenceDateTime formatId="205">203007311522+0000</actualOccurrenceDateTime>
             <additionalSecurityMeasures>
-                <contentText>iyfd</contentText>
+                <contentText languageId="KS">iyfd</contentText>
                 <subjectCode>xhom</subjectCode>
             </additionalSecurityMeasures>
             <additionalSecurityMeasures>
-                <contentText>bijw</contentText>
+                <contentText languageId="ik">bijw</contentText>
                 <subjectCode>gruz</subjectCode>
                 <subjectCode>oymp</subjectCode>
             </additionalSecurityMeasures>
@@ -15606,7 +15640,7 @@
             </occurrenceLocation>
             <relatedObservation>
                 <applicableNote>
-                    <contentText>ikfd</contentText>
+                    <contentText languageId="fo">ikfd</contentText>
                     <subjectCode>rups</subjectCode>
                     <subjectCode>bykw</subjectCode>
                     <subjectCode>yqvt</subjectCode>
@@ -15858,8 +15892,8 @@
     <transportEvent>
         <actualOccurrenceDateTime formatId="205">202611121712+0000</actualOccurrenceDateTime>
         <additionalSecurityMeasures>
-            <contentText>xgya</contentText>
-            <contentText>lngg</contentText>
+            <contentText languageId="id">xgya</contentText>
+            <contentText languageId="lb">lngg</contentText>
             <subjectCode>uzst</subjectCode>
         </additionalSecurityMeasures>
         <certifyingParty>
@@ -15980,22 +16014,22 @@
         </occurrenceLocation>
         <relatedObservation>
             <applicableNote>
-                <contentText>jrka</contentText>
-                <contentText>cfcz</contentText>
-                <contentText>mnvk</contentText>
+                <contentText languageId="ba">jrka</contentText>
+                <contentText languageId="bo">cfcz</contentText>
+                <contentText languageId="NA">mnvk</contentText>
                 <subjectCode>khyo</subjectCode>
                 <subjectCode>aijn</subjectCode>
             </applicableNote>
             <applicableNote>
-                <contentText>nvfm</contentText>
+                <contentText languageId="ta">nvfm</contentText>
                 <subjectCode>rqga</subjectCode>
             </applicableNote>
         </relatedObservation>
         <relatedObservation>
             <applicableNote>
-                <contentText>niaq</contentText>
-                <contentText>muxf</contentText>
-                <contentText>bvtb</contentText>
+                <contentText languageId="II">niaq</contentText>
+                <contentText languageId="sr">muxf</contentText>
+                <contentText languageId="JA">bvtb</contentText>
                 <subjectCode>qwqi</subjectCode>
                 <subjectCode>oivw</subjectCode>
             </applicableNote>
@@ -16013,7 +16047,7 @@
     <transportEvent>
         <actualOccurrenceDateTime formatId="205">202407300016+0000</actualOccurrenceDateTime>
         <additionalSecurityMeasures>
-            <contentText>mspq</contentText>
+            <contentText languageId="nn">mspq</contentText>
             <subjectCode>lwlo</subjectCode>
         </additionalSecurityMeasures>
         <certifyingParty>
@@ -16232,20 +16266,20 @@
         </occurrenceLocation>
         <relatedObservation>
             <applicableNote>
-                <contentText>pqiw</contentText>
+                <contentText languageId="gl">pqiw</contentText>
                 <subjectCode>isoo</subjectCode>
             </applicableNote>
         </relatedObservation>
         <relatedObservation>
             <applicableNote>
-                <contentText>hkgk</contentText>
+                <contentText languageId="TN">hkgk</contentText>
                 <subjectCode>vuwc</subjectCode>
             </applicableNote>
         </relatedObservation>
         <relatedObservation>
             <applicableNote>
-                <contentText>qfdl</contentText>
-                <contentText>ikvh</contentText>
+                <contentText languageId="en">qfdl</contentText>
+                <contentText languageId="PS">ikvh</contentText>
                 <subjectCode>hopr</subjectCode>
                 <subjectCode>knli</subjectCode>
                 <subjectCode>qilq</subjectCode>
@@ -16405,8 +16439,8 @@
             <uRI schemeAgencyId="xopnyi">ofhv</uRI>
         </referencedDocument>
         <shippingMarks>
-            <markingText>sagk</markingText>
-            <markingText>eqin</markingText>
+            <markingText languageId="YI">sagk</markingText>
+            <markingText languageId="te">eqin</markingText>
         </shippingMarks>
         <statedCondition>
             <actionCode>ijig</actionCode>
@@ -16420,13 +16454,13 @@
                 <valueMeasure unitId="gxjn">2.59</valueMeasure>
             </calibratedMeasurement>
             <statementCode>ckwr</statementCode>
-            <statementText>digz</statementText>
+            <statementText languageId="yo">digz</statementText>
             <subjectTypeCode>qsgm</subjectTypeCode>
             <subjectTypeCode>oedd</subjectTypeCode>
             <valueMeasure unitId="dyoi">7.64</valueMeasure>
         </statedCondition>
         <typeCode>nebf</typeCode>
-        <typeText>qoto</typeText>
+        <typeText languageId="sc">qoto</typeText>
     </transportPackage>
     <transportService>
         <conditionTypeCode>jmhh</conditionTypeCode>
@@ -17243,12 +17277,12 @@
                         <uRI schemeAgencyId="lnudsr">ndoq</uRI>
                     </referencedDocument>
                     <shippingMarks>
-                        <markingText>onxw</markingText>
-                        <markingText>quwz</markingText>
-                        <markingText>yhtu</markingText>
+                        <markingText languageId="QU">onxw</markingText>
+                        <markingText languageId="as">quwz</markingText>
+                        <markingText languageId="vo">yhtu</markingText>
                     </shippingMarks>
                     <shippingMarks>
-                        <markingText>xebk</markingText>
+                        <markingText languageId="HO">xebk</markingText>
                     </shippingMarks>
                     <statedCondition>
                         <actionCode>mjiq</actionCode>
@@ -17259,7 +17293,7 @@
                         </calibratedMeasurement>
                         <statementCode>dvsp</statementCode>
                         <statementCode>fszj</statementCode>
-                        <statementText>owjf</statementText>
+                        <statementText languageId="HO">owjf</statementText>
                         <subjectTypeCode>dlma</subjectTypeCode>
                         <subjectTypeCode>goph</subjectTypeCode>
                         <subjectTypeCode>ezww</subjectTypeCode>
@@ -17273,13 +17307,13 @@
                             <valueMeasure unitId="zjve">9.00</valueMeasure>
                         </calibratedMeasurement>
                         <statementCode>uqhb</statementCode>
-                        <statementText>ahkx</statementText>
+                        <statementText languageId="tt">ahkx</statementText>
                         <subjectTypeCode>qwyx</subjectTypeCode>
                         <subjectTypeCode>hjpv</subjectTypeCode>
                         <valueMeasure unitId="tmxz">4.95</valueMeasure>
                     </statedCondition>
                     <typeCode>cpns</typeCode>
-                    <typeText>vcvb</typeText>
+                    <typeText languageId="az">vcvb</typeText>
                 </dangerousGoodsLogisticsPackage>
                 <densityMeasure unitId="clmo">4.96</densityMeasure>
                 <densityMeasure unitId="jvvo">3.26</densityMeasure>
@@ -17305,34 +17339,38 @@
                     <weightMeasure unitId="TNE">5.06</weightMeasure>
                     <workingPressureMeasure unitId="kkow">6.43</workingPressureMeasure>
                 </includedFuel>
-                <information>dveh</information>
+                <information languageId="FA">dveh</information>
                 <labelTypeCode>xkku</labelTypeCode>
                 <limitedQuantityCode>jugu</limitedQuantityCode>
                 <meltingPointTemperatureMeasure unitId="xspk">7.35</meltingPointTemperatureMeasure>
                 <netWeight unitId="GRM">0.01</netWeight>
                 <packagingDangerLevelCode>rgww</packagingDangerLevelCode>
-                <previousCargoInformation>uybu</previousCargoInformation>
-                <properShippingName>dcgz</properShippingName>
+                <previousCargoInformation languageId="mi">uybu</previousCargoInformation>
+                <properShippingName languageId="JV">dcgz</properShippingName>
+                <properShippingName languageId="ba">iaco</properShippingName>
+                <properShippingName languageId="ID">gjtf</properShippingName>
                 <radioactiveMaterial>
                     <applicableRadioactiveIsotope>
                         <activityLevelMeasure unitId="uhxz">4.67</activityLevelMeasure>
                         <activityLevelMeasure unitId="ijoz">1.04</activityLevelMeasure>
-                        <name>ylwd</name>
+                        <name languageId="CU">ylwd</name>
                     </applicableRadioactiveIsotope>
                     <applicableRadioactiveIsotope>
                         <activityLevelMeasure unitId="dhqo">3.80</activityLevelMeasure>
-                        <name>izst</name>
-                        <name>moma</name>
+                        <name languageId="da">izst</name>
+                        <name languageId="ie">moma</name>
                     </applicableRadioactiveIsotope>
                     <applicableRadioactiveIsotope>
                         <activityLevelMeasure unitId="htwi">6.44</activityLevelMeasure>
-                        <name>onlo</name>
-                        <name>cmxn</name>
+                        <name languageId="sq">onlo</name>
+                        <name languageId="qu">cmxn</name>
                     </applicableRadioactiveIsotope>
                     <fissileCriticalitySafetyIndexNumber>9.86</fissileCriticalitySafetyIndexNumber>
                     <radioactivePackageTransportIndexCode>aajv</radioactivePackageTransportIndexCode>
                     <radioactivePackageTransportIndexCode>ghbj</radioactivePackageTransportIndexCode>
-                    <specialFormInformation>qwlv</specialFormInformation>
+                    <specialFormInformation languageId="RU">qwlv</specialFormInformation>
+                    <specialFormInformation languageId="pa">fjct</specialFormInformation>
+                    <specialFormInformation languageId="SQ">dvzi</specialFormInformation>
                 </radioactiveMaterial>
                 <regulatoryAuthorityName>swoh</regulatoryAuthorityName>
                 <relatedDocument>
@@ -17637,13 +17675,23 @@
                     </calibratedMeasurement>
                     <statementCode>wnja</statementCode>
                     <statementCode>dypq</statementCode>
-                    <statementText>ybsw</statementText>
+                    <statementText languageId="SV">ybsw</statementText>
                     <subjectTypeCode>bbbh</subjectTypeCode>
                     <valueMeasure unitId="fuxp">6.38</valueMeasure>
                 </statedCondition>
-                <supplementaryInformation>rlib</supplementaryInformation>
-                <technicalName>ffss</technicalName>
-                <technicalName>noug</technicalName>
+                <supplementaryInformation languageId="tl">rlib</supplementaryInformation>
+                <technicalName languageId="kl">ffss</technicalName>
+                <technicalName languageId="DV">noug</technicalName>
+                <technicalNameNote>
+                    <contentText languageId="EU">dlum</contentText>
+                    <contentText languageId="OM">hijc</contentText>
+                    <subjectCode>haje</subjectCode>
+                    <subjectCode>mxgt</subjectCode>
+                </technicalNameNote>
+                <technicalNameNote>
+                    <contentText languageId="KO">qvlt</contentText>
+                    <subjectCode>vgvk</subjectCode>
+                </technicalNameNote>
                 <tunnelRestrictionCode>hozk</tunnelRestrictionCode>
                 <uNDGID>czut</uNDGID>
             </loadedDangerousGoods>
@@ -17790,8 +17838,8 @@
                         <uRI schemeAgencyId="ssylnq">eqij</uRI>
                     </referencedDocument>
                     <shippingMarks>
-                        <markingText>iact</markingText>
-                        <markingText>zsga</markingText>
+                        <markingText languageId="HT">iact</markingText>
+                        <markingText languageId="kv">zsga</markingText>
                     </shippingMarks>
                     <statedCondition>
                         <actionCode>bgjj</actionCode>
@@ -17806,7 +17854,7 @@
                         </calibratedMeasurement>
                         <statementCode>bgdv</statementCode>
                         <statementCode>gbcf</statementCode>
-                        <statementText>vqmj</statementText>
+                        <statementText languageId="nn">vqmj</statementText>
                         <subjectTypeCode>twil</subjectTypeCode>
                         <valueMeasure unitId="jvva">9.93</valueMeasure>
                         <valueMeasure unitId="bwal">3.30</valueMeasure>
@@ -17814,7 +17862,7 @@
                     <typeCode>qljt</typeCode>
                     <typeCode>zywq</typeCode>
                     <typeCode>xfqv</typeCode>
-                    <typeText>grlt</typeText>
+                    <typeText languageId="SM">grlt</typeText>
                 </dangerousGoodsLogisticsPackage>
                 <densityMeasure unitId="lkpc">0.80</densityMeasure>
                 <emergencyTemperature>
@@ -17834,33 +17882,34 @@
                     <weightMeasure unitId="GRM">3.72</weightMeasure>
                     <workingPressureMeasure unitId="aaao">9.53</workingPressureMeasure>
                 </includedFuel>
-                <information>zghd</information>
+                <information languageId="sg">zghd</information>
                 <labelTypeCode>ewfp</labelTypeCode>
                 <limitedQuantityCode>yzwa</limitedQuantityCode>
                 <meltingPointTemperatureMeasure unitId="pscx">2.64</meltingPointTemperatureMeasure>
                 <netWeight unitId="KGM">9.76</netWeight>
                 <packagingDangerLevelCode>jegv</packagingDangerLevelCode>
-                <previousCargoInformation>jbdy</previousCargoInformation>
-                <previousCargoInformation>ygme</previousCargoInformation>
-                <properShippingName>zqwt</properShippingName>
+                <previousCargoInformation languageId="EL">jbdy</previousCargoInformation>
+                <previousCargoInformation languageId="gd">ygme</previousCargoInformation>
+                <properShippingName languageId="KR">zqwt</properShippingName>
+                <properShippingName languageId="CU">piaz</properShippingName>
                 <radioactiveMaterial>
                     <applicableRadioactiveIsotope>
                         <activityLevelMeasure unitId="ctje">3.72</activityLevelMeasure>
-                        <name>qtzj</name>
-                        <name>ydrz</name>
+                        <name languageId="AR">qtzj</name>
+                        <name languageId="rn">ydrz</name>
                     </applicableRadioactiveIsotope>
                     <applicableRadioactiveIsotope>
                         <activityLevelMeasure unitId="nfbq">7.03</activityLevelMeasure>
-                        <name>ghqs</name>
+                        <name languageId="TO">ghqs</name>
                     </applicableRadioactiveIsotope>
                     <applicableRadioactiveIsotope>
                         <activityLevelMeasure unitId="gmnk">2.25</activityLevelMeasure>
-                        <name>xztn</name>
+                        <name languageId="CA">xztn</name>
                     </applicableRadioactiveIsotope>
                     <fissileCriticalitySafetyIndexNumber>7.39</fissileCriticalitySafetyIndexNumber>
                     <radioactivePackageTransportIndexCode>ssyh</radioactivePackageTransportIndexCode>
                     <radioactivePackageTransportIndexCode>ikcm</radioactivePackageTransportIndexCode>
-                    <specialFormInformation>tapu</specialFormInformation>
+                    <specialFormInformation languageId="TR">tapu</specialFormInformation>
                 </radioactiveMaterial>
                 <regulatoryAuthorityName>uein</regulatoryAuthorityName>
                 <relatedDocument>
@@ -18007,15 +18056,19 @@
                         <valueMeasure unitId="ifre">9.92</valueMeasure>
                     </calibratedMeasurement>
                     <statementCode>xudg</statementCode>
-                    <statementText>pmdq</statementText>
-                    <statementText>deaz</statementText>
+                    <statementText languageId="or">pmdq</statementText>
+                    <statementText languageId="kv">deaz</statementText>
                     <subjectTypeCode>cyts</subjectTypeCode>
                     <valueMeasure unitId="glze">2.67</valueMeasure>
                     <valueMeasure unitId="frea">2.55</valueMeasure>
                     <valueMeasure unitId="yrqg">3.20</valueMeasure>
                 </statedCondition>
-                <supplementaryInformation>cokx</supplementaryInformation>
-                <technicalName>illd</technicalName>
+                <supplementaryInformation languageId="az">cokx</supplementaryInformation>
+                <technicalName languageId="ZA">illd</technicalName>
+                <technicalNameNote>
+                    <contentText languageId="RU">fsfi</contentText>
+                    <subjectCode>xiwj</subjectCode>
+                </technicalNameNote>
                 <tunnelRestrictionCode>zpma</tunnelRestrictionCode>
                 <uNDGID>pfpj</uNDGID>
             </loadedDangerousGoods>
@@ -18260,8 +18313,8 @@
                     <uRI schemeAgencyId="wiqqqf">liag</uRI>
                 </referencedDocument>
                 <shippingMarks>
-                    <markingText>reke</markingText>
-                    <markingText>dgei</markingText>
+                    <markingText languageId="AA">reke</markingText>
+                    <markingText languageId="no">dgei</markingText>
                 </shippingMarks>
                 <statedCondition>
                     <actionCode>tezq</actionCode>
@@ -18272,15 +18325,15 @@
                         <valueMeasure unitId="oqwv">7.51</valueMeasure>
                     </calibratedMeasurement>
                     <statementCode>ufud</statementCode>
-                    <statementText>reqe</statementText>
+                    <statementText languageId="TW">reqe</statementText>
                     <subjectTypeCode>hqne</subjectTypeCode>
                     <subjectTypeCode>kngp</subjectTypeCode>
                     <valueMeasure unitId="yeiv">1.65</valueMeasure>
                 </statedCondition>
                 <typeCode>otrf</typeCode>
                 <typeCode>pgns</typeCode>
-                <typeText>begq</typeText>
-                <typeText>mgjt</typeText>
+                <typeText languageId="TE">begq</typeText>
+                <typeText languageId="za">mgjt</typeText>
             </dangerousGoodsLogisticsPackage>
             <dangerousGoodsLogisticsPackage>
                 <information>fivy</information>
@@ -18448,7 +18501,7 @@
                     <uRI schemeAgencyId="dlvzyz">agek</uRI>
                 </referencedDocument>
                 <shippingMarks>
-                    <markingText>gbqa</markingText>
+                    <markingText languageId="fj">gbqa</markingText>
                 </shippingMarks>
                 <statedCondition>
                     <actionCode>bfjw</actionCode>
@@ -18458,13 +18511,13 @@
                         <valueMeasure unitId="krbn">5.54</valueMeasure>
                     </calibratedMeasurement>
                     <statementCode>ljwy</statementCode>
-                    <statementText>shkw</statementText>
+                    <statementText languageId="so">shkw</statementText>
                     <subjectTypeCode>kzrs</subjectTypeCode>
                     <valueMeasure unitId="jcgu">7.77</valueMeasure>
                 </statedCondition>
                 <typeCode>trhl</typeCode>
                 <typeCode>ezyw</typeCode>
-                <typeText>smry</typeText>
+                <typeText languageId="ay">smry</typeText>
             </dangerousGoodsLogisticsPackage>
             <densityMeasure unitId="pyce">1.14</densityMeasure>
             <densityMeasure unitId="vqyv">5.69</densityMeasure>
@@ -18490,25 +18543,26 @@
                 <workingPressureMeasure unitId="vxgl">6.30</workingPressureMeasure>
                 <workingPressureMeasure unitId="xsxy">4.59</workingPressureMeasure>
             </includedFuel>
-            <information>onso</information>
+            <information languageId="RO">onso</information>
             <labelTypeCode>cqgv</labelTypeCode>
             <limitedQuantityCode>xcoj</limitedQuantityCode>
             <meltingPointTemperatureMeasure unitId="zekj">3.34</meltingPointTemperatureMeasure>
             <meltingPointTemperatureMeasure unitId="cxju">6.70</meltingPointTemperatureMeasure>
             <netWeight unitId="GRM">6.62</netWeight>
             <packagingDangerLevelCode>gyor</packagingDangerLevelCode>
-            <previousCargoInformation>jvbl</previousCargoInformation>
-            <properShippingName>pkxj</properShippingName>
+            <previousCargoInformation languageId="SR">jvbl</previousCargoInformation>
+            <properShippingName languageId="AM">pkxj</properShippingName>
             <radioactiveMaterial>
                 <applicableRadioactiveIsotope>
                     <activityLevelMeasure unitId="oftn">0.54</activityLevelMeasure>
-                    <name>ksaz</name>
+                    <name languageId="CU">ksaz</name>
                 </applicableRadioactiveIsotope>
                 <fissileCriticalitySafetyIndexNumber>1.04</fissileCriticalitySafetyIndexNumber>
                 <radioactivePackageTransportIndexCode>tkbj</radioactivePackageTransportIndexCode>
                 <radioactivePackageTransportIndexCode>dmwn</radioactivePackageTransportIndexCode>
                 <radioactivePackageTransportIndexCode>pabf</radioactivePackageTransportIndexCode>
-                <specialFormInformation>fttx</specialFormInformation>
+                <specialFormInformation languageId="lo">fttx</specialFormInformation>
+                <specialFormInformation languageId="RO">gyny</specialFormInformation>
             </radioactiveMaterial>
             <regulatoryAuthorityName>mihb</regulatoryAuthorityName>
             <relatedDocument>
@@ -18835,16 +18889,27 @@
                 </calibratedMeasurement>
                 <statementCode>chhf</statementCode>
                 <statementCode>lpps</statementCode>
-                <statementText>idjg</statementText>
-                <statementText>tfmj</statementText>
+                <statementText languageId="ZH">idjg</statementText>
+                <statementText languageId="SQ">tfmj</statementText>
                 <subjectTypeCode>fbnb</subjectTypeCode>
                 <subjectTypeCode>vtri</subjectTypeCode>
                 <subjectTypeCode>qvlc</subjectTypeCode>
                 <valueMeasure unitId="qake">3.35</valueMeasure>
                 <valueMeasure unitId="ramd">2.99</valueMeasure>
             </statedCondition>
-            <supplementaryInformation>sxtk</supplementaryInformation>
-            <technicalName>qjxl</technicalName>
+            <supplementaryInformation languageId="fo">sxtk</supplementaryInformation>
+            <supplementaryInformation languageId="ia">clqg</supplementaryInformation>
+            <technicalName languageId="om">qjxl</technicalName>
+            <technicalNameNote>
+                <contentText languageId="BM">fjel</contentText>
+                <subjectCode>mgvy</subjectCode>
+                <subjectCode>xmmj</subjectCode>
+            </technicalNameNote>
+            <technicalNameNote>
+                <contentText languageId="AY">uxwg</contentText>
+                <subjectCode>xkqu</subjectCode>
+                <subjectCode>yvmh</subjectCode>
+            </technicalNameNote>
             <tunnelRestrictionCode>cbjx</tunnelRestrictionCode>
             <uNDGID>xkpl</uNDGID>
         </loadedDangerousGoods>
@@ -19620,7 +19685,7 @@
                         <uRI schemeAgencyId="rbjfvh">mhnq</uRI>
                     </referencedDocument>
                     <shippingMarks>
-                        <markingText>jaol</markingText>
+                        <markingText languageId="fa">jaol</markingText>
                     </shippingMarks>
                     <statedCondition>
                         <actionCode>nfyc</actionCode>
@@ -19629,14 +19694,14 @@
                             <valueMeasure unitId="poru">0.37</valueMeasure>
                         </calibratedMeasurement>
                         <statementCode>eemx</statementCode>
-                        <statementText>uomo</statementText>
+                        <statementText languageId="aa">uomo</statementText>
                         <subjectTypeCode>uqmh</subjectTypeCode>
                         <valueMeasure unitId="kukb">8.61</valueMeasure>
                     </statedCondition>
                     <typeCode>miib</typeCode>
-                    <typeText>gbgj</typeText>
-                    <typeText>lyca</typeText>
-                    <typeText>bqgg</typeText>
+                    <typeText languageId="TR">gbgj</typeText>
+                    <typeText languageId="AS">lyca</typeText>
+                    <typeText languageId="LN">bqgg</typeText>
                 </dangerousGoodsLogisticsPackage>
                 <densityMeasure unitId="ihue">7.45</densityMeasure>
                 <emergencyTemperature>
@@ -19665,24 +19730,24 @@
                     <weightMeasure unitId="TNE">5.06</weightMeasure>
                     <workingPressureMeasure unitId="lleb">5.69</workingPressureMeasure>
                 </includedFuel>
-                <information>fynk</information>
+                <information languageId="tr">fynk</information>
                 <labelTypeCode>lzni</labelTypeCode>
                 <labelTypeCode>bzzh</labelTypeCode>
                 <limitedQuantityCode>qgcm</limitedQuantityCode>
                 <meltingPointTemperatureMeasure unitId="amci">5.91</meltingPointTemperatureMeasure>
                 <netWeight unitId="GRM">7.48</netWeight>
                 <packagingDangerLevelCode>dubb</packagingDangerLevelCode>
-                <previousCargoInformation>ridg</previousCargoInformation>
-                <properShippingName>tybh</properShippingName>
+                <previousCargoInformation languageId="KW">ridg</previousCargoInformation>
+                <properShippingName languageId="ZH">tybh</properShippingName>
                 <radioactiveMaterial>
                     <applicableRadioactiveIsotope>
                         <activityLevelMeasure unitId="pcnu">9.89</activityLevelMeasure>
-                        <name>rgqo</name>
-                        <name>uzpg</name>
+                        <name languageId="cr">rgqo</name>
+                        <name languageId="LA">uzpg</name>
                     </applicableRadioactiveIsotope>
                     <fissileCriticalitySafetyIndexNumber>8.34</fissileCriticalitySafetyIndexNumber>
                     <radioactivePackageTransportIndexCode>bbhp</radioactivePackageTransportIndexCode>
-                    <specialFormInformation>zqmu</specialFormInformation>
+                    <specialFormInformation languageId="iu">zqmu</specialFormInformation>
                 </radioactiveMaterial>
                 <regulatoryAuthorityName>citg</regulatoryAuthorityName>
                 <relatedDocument>
@@ -19840,12 +19905,23 @@
                     </calibratedMeasurement>
                     <statementCode>nsof</statementCode>
                     <statementCode>svzk</statementCode>
-                    <statementText>zvcw</statementText>
+                    <statementText languageId="tk">zvcw</statementText>
                     <subjectTypeCode>dddk</subjectTypeCode>
                     <valueMeasure unitId="reit">9.46</valueMeasure>
                 </statedCondition>
-                <supplementaryInformation>ryxd</supplementaryInformation>
-                <technicalName>seiz</technicalName>
+                <supplementaryInformation languageId="IE">ryxd</supplementaryInformation>
+                <supplementaryInformation languageId="fa">zbjv</supplementaryInformation>
+                <supplementaryInformation languageId="lt">fpxs</supplementaryInformation>
+                <technicalName languageId="kg">seiz</technicalName>
+                <technicalNameNote>
+                    <contentText languageId="VI">fzrj</contentText>
+                    <subjectCode>snzd</subjectCode>
+                </technicalNameNote>
+                <technicalNameNote>
+                    <contentText languageId="SC">gheh</contentText>
+                    <subjectCode>tjsf</subjectCode>
+                    <subjectCode>dbwd</subjectCode>
+                </technicalNameNote>
                 <tunnelRestrictionCode>ujdv</tunnelRestrictionCode>
                 <uNDGID>tupj</uNDGID>
             </loadedDangerousGoods>
@@ -20567,9 +20643,9 @@
                         <uRI schemeAgencyId="gcmgyq">wcfi</uRI>
                     </referencedDocument>
                     <shippingMarks>
-                        <markingText>geez</markingText>
-                        <markingText>ogse</markingText>
-                        <markingText>ytpa</markingText>
+                        <markingText languageId="SK">geez</markingText>
+                        <markingText languageId="MY">ogse</markingText>
+                        <markingText languageId="SK">ytpa</markingText>
                     </shippingMarks>
                     <statedCondition>
                         <actionCode>kqqf</actionCode>
@@ -20581,7 +20657,7 @@
                             <valueMeasure unitId="gxrh">3.81</valueMeasure>
                         </calibratedMeasurement>
                         <statementCode>dcds</statementCode>
-                        <statementText>iote</statementText>
+                        <statementText languageId="lt">iote</statementText>
                         <subjectTypeCode>mptf</subjectTypeCode>
                         <subjectTypeCode>dibt</subjectTypeCode>
                         <valueMeasure unitId="ddvg">2.48</valueMeasure>
@@ -20596,15 +20672,15 @@
                         <statementCode>bmze</statementCode>
                         <statementCode>sodb</statementCode>
                         <statementCode>yvup</statementCode>
-                        <statementText>hgso</statementText>
+                        <statementText languageId="RO">hgso</statementText>
                         <subjectTypeCode>tjoa</subjectTypeCode>
                         <subjectTypeCode>huhc</subjectTypeCode>
                         <valueMeasure unitId="mbhc">3.81</valueMeasure>
                     </statedCondition>
                     <typeCode>orxh</typeCode>
                     <typeCode>lhay</typeCode>
-                    <typeText>htst</typeText>
-                    <typeText>gfpk</typeText>
+                    <typeText languageId="EO">htst</typeText>
+                    <typeText languageId="co">gfpk</typeText>
                 </dangerousGoodsLogisticsPackage>
                 <densityMeasure unitId="yzdy">0.94</densityMeasure>
                 <emergencyTemperature>
@@ -20634,36 +20710,36 @@
                     <workingPressureMeasure unitId="qqln">9.52</workingPressureMeasure>
                     <workingPressureMeasure unitId="yvqj">5.78</workingPressureMeasure>
                 </includedFuel>
-                <information>rkzw</information>
-                <information>pwwl</information>
-                <information>bewv</information>
+                <information languageId="IG">rkzw</information>
+                <information languageId="IA">pwwl</information>
+                <information languageId="MY">bewv</information>
                 <labelTypeCode>rppu</labelTypeCode>
                 <limitedQuantityCode>bkwd</limitedQuantityCode>
                 <meltingPointTemperatureMeasure unitId="ibdm">6.59</meltingPointTemperatureMeasure>
                 <netWeight unitId="KGM">4.09</netWeight>
                 <packagingDangerLevelCode>iygo</packagingDangerLevelCode>
-                <previousCargoInformation>ussn</previousCargoInformation>
-                <properShippingName>xnhi</properShippingName>
+                <previousCargoInformation languageId="KL">ussn</previousCargoInformation>
+                <properShippingName languageId="uk">xnhi</properShippingName>
                 <radioactiveMaterial>
                     <applicableRadioactiveIsotope>
                         <activityLevelMeasure unitId="lcwd">0.10</activityLevelMeasure>
-                        <name>axst</name>
-                        <name>qnxz</name>
+                        <name languageId="ff">axst</name>
+                        <name languageId="NY">qnxz</name>
                     </applicableRadioactiveIsotope>
                     <applicableRadioactiveIsotope>
                         <activityLevelMeasure unitId="dwjj">8.83</activityLevelMeasure>
                         <activityLevelMeasure unitId="qlzq">4.81</activityLevelMeasure>
-                        <name>fpcc</name>
-                        <name>hmiv</name>
+                        <name languageId="ks">fpcc</name>
+                        <name languageId="VE">hmiv</name>
                     </applicableRadioactiveIsotope>
                     <applicableRadioactiveIsotope>
                         <activityLevelMeasure unitId="voea">1.20</activityLevelMeasure>
-                        <name>pwwl</name>
+                        <name languageId="cr">pwwl</name>
                     </applicableRadioactiveIsotope>
                     <fissileCriticalitySafetyIndexNumber>5.73</fissileCriticalitySafetyIndexNumber>
                     <radioactivePackageTransportIndexCode>igvg</radioactivePackageTransportIndexCode>
                     <radioactivePackageTransportIndexCode>bfpd</radioactivePackageTransportIndexCode>
-                    <specialFormInformation>isuo</specialFormInformation>
+                    <specialFormInformation languageId="LI">isuo</specialFormInformation>
                 </radioactiveMaterial>
                 <regulatoryAuthorityName>znko</regulatoryAuthorityName>
                 <relatedDocument>
@@ -20809,7 +20885,7 @@
                     </calibratedMeasurement>
                     <statementCode>nblf</statementCode>
                     <statementCode>erpm</statementCode>
-                    <statementText>minq</statementText>
+                    <statementText languageId="UK">minq</statementText>
                     <subjectTypeCode>cqyr</subjectTypeCode>
                     <valueMeasure unitId="tgvf">3.37</valueMeasure>
                 </statedCondition>
@@ -20824,14 +20900,20 @@
                         <valueMeasure unitId="soou">1.75</valueMeasure>
                     </calibratedMeasurement>
                     <statementCode>odet</statementCode>
-                    <statementText>biau</statementText>
+                    <statementText languageId="ur">biau</statementText>
                     <subjectTypeCode>gaof</subjectTypeCode>
                     <subjectTypeCode>wbad</subjectTypeCode>
                     <subjectTypeCode>mmkc</subjectTypeCode>
                     <valueMeasure unitId="irhv">0.13</valueMeasure>
                 </statedCondition>
-                <supplementaryInformation>ffqg</supplementaryInformation>
-                <technicalName>ovtd</technicalName>
+                <supplementaryInformation languageId="BH">ffqg</supplementaryInformation>
+                <supplementaryInformation languageId="hz">lvdh</supplementaryInformation>
+                <technicalName languageId="hz">ovtd</technicalName>
+                <technicalNameNote>
+                    <contentText languageId="BO">wvcp</contentText>
+                    <contentText languageId="it">hdva</contentText>
+                    <subjectCode>zrvm</subjectCode>
+                </technicalNameNote>
                 <tunnelRestrictionCode>kbtd</tunnelRestrictionCode>
                 <uNDGID>oewq</uNDGID>
             </loadedDangerousGoods>
@@ -20999,7 +21081,7 @@
                         <uRI schemeAgencyId="hagkov">tmfk</uRI>
                     </referencedDocument>
                     <shippingMarks>
-                        <markingText>gyyg</markingText>
+                        <markingText languageId="UZ">gyyg</markingText>
                     </shippingMarks>
                     <statedCondition>
                         <actionCode>fivs</actionCode>
@@ -21008,12 +21090,12 @@
                             <valueMeasure unitId="qolg">4.40</valueMeasure>
                         </calibratedMeasurement>
                         <statementCode>eqei</statementCode>
-                        <statementText>rfkw</statementText>
+                        <statementText languageId="MK">rfkw</statementText>
                         <subjectTypeCode>lgzc</subjectTypeCode>
                         <valueMeasure unitId="uleb">8.22</valueMeasure>
                     </statedCondition>
                     <typeCode>ensh</typeCode>
-                    <typeText>rmax</typeText>
+                    <typeText languageId="VO">rmax</typeText>
                 </dangerousGoodsLogisticsPackage>
                 <densityMeasure unitId="mxdj">7.02</densityMeasure>
                 <emergencyTemperature>
@@ -21040,7 +21122,7 @@
                     <weightMeasure unitId="GRM">2.94</weightMeasure>
                     <workingPressureMeasure unitId="dwrp">6.20</workingPressureMeasure>
                 </includedFuel>
-                <information>ytif</information>
+                <information languageId="om">ytif</information>
                 <labelTypeCode>tnfv</labelTypeCode>
                 <limitedQuantityCode>zcbx</limitedQuantityCode>
                 <limitedQuantityCode>hfne</limitedQuantityCode>
@@ -21050,29 +21132,29 @@
                 <meltingPointTemperatureMeasure unitId="lqsh">3.79</meltingPointTemperatureMeasure>
                 <netWeight unitId="TNE">9.92</netWeight>
                 <packagingDangerLevelCode>cyqd</packagingDangerLevelCode>
-                <previousCargoInformation>oqvb</previousCargoInformation>
-                <properShippingName>pspr</properShippingName>
+                <previousCargoInformation languageId="ii">oqvb</previousCargoInformation>
+                <properShippingName languageId="jv">pspr</properShippingName>
                 <radioactiveMaterial>
                     <applicableRadioactiveIsotope>
                         <activityLevelMeasure unitId="oevx">9.92</activityLevelMeasure>
                         <activityLevelMeasure unitId="aybw">8.22</activityLevelMeasure>
                         <activityLevelMeasure unitId="voxc">7.86</activityLevelMeasure>
-                        <name>kjzq</name>
-                        <name>qvty</name>
+                        <name languageId="yi">kjzq</name>
+                        <name languageId="sc">qvty</name>
                     </applicableRadioactiveIsotope>
                     <applicableRadioactiveIsotope>
                         <activityLevelMeasure unitId="zdvl">5.41</activityLevelMeasure>
-                        <name>uxxl</name>
-                        <name>mfmp</name>
+                        <name languageId="IO">uxxl</name>
+                        <name languageId="NL">mfmp</name>
                     </applicableRadioactiveIsotope>
                     <applicableRadioactiveIsotope>
                         <activityLevelMeasure unitId="nbov">9.68</activityLevelMeasure>
-                        <name>zhfi</name>
-                        <name>hjtn</name>
+                        <name languageId="BR">zhfi</name>
+                        <name languageId="AK">hjtn</name>
                     </applicableRadioactiveIsotope>
                     <fissileCriticalitySafetyIndexNumber>1.35</fissileCriticalitySafetyIndexNumber>
                     <radioactivePackageTransportIndexCode>rtqk</radioactivePackageTransportIndexCode>
-                    <specialFormInformation>mvqj</specialFormInformation>
+                    <specialFormInformation languageId="su">mvqj</specialFormInformation>
                 </radioactiveMaterial>
                 <regulatoryAuthorityName>zhdp</regulatoryAuthorityName>
                 <relatedDocument>
@@ -21225,15 +21307,20 @@
                         <valueMeasure unitId="gxst">0.19</valueMeasure>
                     </calibratedMeasurement>
                     <statementCode>erdy</statementCode>
-                    <statementText>xkoi</statementText>
-                    <statementText>irxv</statementText>
+                    <statementText languageId="th">xkoi</statementText>
+                    <statementText languageId="nl">irxv</statementText>
                     <subjectTypeCode>pydl</subjectTypeCode>
                     <subjectTypeCode>hxjg</subjectTypeCode>
                     <valueMeasure unitId="lgjo">7.90</valueMeasure>
                 </statedCondition>
-                <supplementaryInformation>zyde</supplementaryInformation>
-                <technicalName>rsoc</technicalName>
-                <technicalName>epml</technicalName>
+                <supplementaryInformation languageId="AE">zyde</supplementaryInformation>
+                <supplementaryInformation languageId="KW">nqpg</supplementaryInformation>
+                <technicalName languageId="BG">rsoc</technicalName>
+                <technicalName languageId="TH">epml</technicalName>
+                <technicalNameNote>
+                    <contentText languageId="sm">qbls</contentText>
+                    <subjectCode>asra</subjectCode>
+                </technicalNameNote>
                 <tunnelRestrictionCode>cbam</tunnelRestrictionCode>
                 <uNDGID>pozx</uNDGID>
             </loadedDangerousGoods>
@@ -21531,7 +21618,7 @@
                     <uRI schemeAgencyId="qcfdsc">xbgt</uRI>
                 </referencedDocument>
                 <shippingMarks>
-                    <markingText>thoi</markingText>
+                    <markingText languageId="KM">thoi</markingText>
                 </shippingMarks>
                 <statedCondition>
                     <actionCode>hmgr</actionCode>
@@ -21546,9 +21633,9 @@
                         <valueMeasure unitId="eqob">0.96</valueMeasure>
                     </calibratedMeasurement>
                     <statementCode>zhit</statementCode>
-                    <statementText>vjyv</statementText>
-                    <statementText>hryc</statementText>
-                    <statementText>raxr</statementText>
+                    <statementText languageId="CR">vjyv</statementText>
+                    <statementText languageId="ro">hryc</statementText>
+                    <statementText languageId="IT">raxr</statementText>
                     <subjectTypeCode>xphj</subjectTypeCode>
                     <valueMeasure unitId="reyo">9.05</valueMeasure>
                     <valueMeasure unitId="dryj">8.92</valueMeasure>
@@ -21563,13 +21650,13 @@
                         <valueMeasure unitId="nwue">3.16</valueMeasure>
                     </calibratedMeasurement>
                     <statementCode>tdoh</statementCode>
-                    <statementText>reve</statementText>
+                    <statementText languageId="ab">reve</statementText>
                     <subjectTypeCode>oyne</subjectTypeCode>
                     <valueMeasure unitId="yjmo">6.17</valueMeasure>
                     <valueMeasure unitId="uyhq">9.76</valueMeasure>
                 </statedCondition>
                 <typeCode>octm</typeCode>
-                <typeText>xtqg</typeText>
+                <typeText languageId="la">xtqg</typeText>
             </dangerousGoodsLogisticsPackage>
             <densityMeasure unitId="reno">1.20</densityMeasure>
             <emergencyTemperature>
@@ -21596,7 +21683,7 @@
                 <weightMeasure unitId="TNE">0.03</weightMeasure>
                 <workingPressureMeasure unitId="ixbu">9.35</workingPressureMeasure>
             </includedFuel>
-            <information>cqrq</information>
+            <information languageId="TI">cqrq</information>
             <labelTypeCode>kawc</labelTypeCode>
             <labelTypeCode>jegg</labelTypeCode>
             <labelTypeCode>cphd</labelTypeCode>
@@ -21606,18 +21693,20 @@
             <meltingPointTemperatureMeasure unitId="sgza">5.52</meltingPointTemperatureMeasure>
             <netWeight unitId="TNE">5.88</netWeight>
             <packagingDangerLevelCode>jafz</packagingDangerLevelCode>
-            <previousCargoInformation>wukx</previousCargoInformation>
-            <properShippingName>tuxz</properShippingName>
+            <previousCargoInformation languageId="av">wukx</previousCargoInformation>
+            <properShippingName languageId="NB">tuxz</properShippingName>
+            <properShippingName languageId="TH">pinr</properShippingName>
             <radioactiveMaterial>
                 <applicableRadioactiveIsotope>
                     <activityLevelMeasure unitId="jkko">7.25</activityLevelMeasure>
-                    <name>rbsu</name>
-                    <name>yirj</name>
+                    <name languageId="cr">rbsu</name>
+                    <name languageId="et">yirj</name>
                 </applicableRadioactiveIsotope>
                 <fissileCriticalitySafetyIndexNumber>3.25</fissileCriticalitySafetyIndexNumber>
                 <radioactivePackageTransportIndexCode>uxgy</radioactivePackageTransportIndexCode>
                 <radioactivePackageTransportIndexCode>gllr</radioactivePackageTransportIndexCode>
-                <specialFormInformation>dirx</specialFormInformation>
+                <specialFormInformation languageId="KR">dirx</specialFormInformation>
+                <specialFormInformation languageId="gd">oryk</specialFormInformation>
             </radioactiveMaterial>
             <regulatoryAuthorityName>akvl</regulatoryAuthorityName>
             <relatedDocument>
@@ -21805,16 +21894,32 @@
                     <valueMeasure unitId="lclt">6.13</valueMeasure>
                 </calibratedMeasurement>
                 <statementCode>hbxy</statementCode>
-                <statementText>gldg</statementText>
+                <statementText languageId="ka">gldg</statementText>
                 <subjectTypeCode>kefb</subjectTypeCode>
                 <subjectTypeCode>vgtg</subjectTypeCode>
                 <valueMeasure unitId="tjdz">7.26</valueMeasure>
                 <valueMeasure unitId="jhfr">8.14</valueMeasure>
             </statedCondition>
-            <supplementaryInformation>rifi</supplementaryInformation>
-            <technicalName>ncio</technicalName>
-            <technicalName>eukv</technicalName>
-            <technicalName>nhyi</technicalName>
+            <supplementaryInformation languageId="BO">rifi</supplementaryInformation>
+            <supplementaryInformation languageId="mi">maxc</supplementaryInformation>
+            <technicalName languageId="TO">ncio</technicalName>
+            <technicalName languageId="as">eukv</technicalName>
+            <technicalName languageId="BE">nhyi</technicalName>
+            <technicalNameNote>
+                <contentText languageId="AB">wejr</contentText>
+                <subjectCode>xzfs</subjectCode>
+                <subjectCode>ghpe</subjectCode>
+            </technicalNameNote>
+            <technicalNameNote>
+                <contentText languageId="FA">lhtu</contentText>
+                <subjectCode>kxda</subjectCode>
+                <subjectCode>jkso</subjectCode>
+                <subjectCode>itqe</subjectCode>
+            </technicalNameNote>
+            <technicalNameNote>
+                <contentText languageId="kl">ljru</contentText>
+                <subjectCode>irmc</subjectCode>
+            </technicalNameNote>
             <tunnelRestrictionCode>iuet</tunnelRestrictionCode>
             <uNDGID>vymk</uNDGID>
         </loadedDangerousGoods>
@@ -21972,7 +22077,7 @@
                     <uRI schemeAgencyId="gxqpkn">jise</uRI>
                 </referencedDocument>
                 <shippingMarks>
-                    <markingText>zlbs</markingText>
+                    <markingText languageId="ay">zlbs</markingText>
                 </shippingMarks>
                 <statedCondition>
                     <actionCode>moft</actionCode>
@@ -21982,14 +22087,14 @@
                         <valueMeasure unitId="acdr">6.04</valueMeasure>
                     </calibratedMeasurement>
                     <statementCode>tczx</statementCode>
-                    <statementText>juaw</statementText>
+                    <statementText languageId="PL">juaw</statementText>
                     <subjectTypeCode>ofhx</subjectTypeCode>
                     <valueMeasure unitId="imgj">3.76</valueMeasure>
                 </statedCondition>
                 <typeCode>vysq</typeCode>
                 <typeCode>nodw</typeCode>
-                <typeText>fmbu</typeText>
-                <typeText>ytsy</typeText>
+                <typeText languageId="TG">fmbu</typeText>
+                <typeText languageId="QU">ytsy</typeText>
             </dangerousGoodsLogisticsPackage>
             <dangerousGoodsLogisticsPackage>
                 <information>aidl</information>
@@ -22116,7 +22221,7 @@
                     <uRI schemeAgencyId="onqfjk">kigc</uRI>
                 </referencedDocument>
                 <shippingMarks>
-                    <markingText>txqs</markingText>
+                    <markingText languageId="ng">txqs</markingText>
                 </shippingMarks>
                 <statedCondition>
                     <actionCode>hqiu</actionCode>
@@ -22125,15 +22230,15 @@
                         <valueMeasure unitId="zbnc">3.23</valueMeasure>
                     </calibratedMeasurement>
                     <statementCode>exvb</statementCode>
-                    <statementText>ujao</statementText>
-                    <statementText>kbvp</statementText>
+                    <statementText languageId="SM">ujao</statementText>
+                    <statementText languageId="st">kbvp</statementText>
                     <subjectTypeCode>iejz</subjectTypeCode>
                     <valueMeasure unitId="ndov">7.64</valueMeasure>
                     <valueMeasure unitId="gstc">8.29</valueMeasure>
                     <valueMeasure unitId="thfg">4.66</valueMeasure>
                 </statedCondition>
                 <typeCode>emxo</typeCode>
-                <typeText>gebh</typeText>
+                <typeText languageId="AS">gebh</typeText>
             </dangerousGoodsLogisticsPackage>
             <densityMeasure unitId="qocs">6.01</densityMeasure>
             <densityMeasure unitId="styx">9.64</densityMeasure>
@@ -22165,7 +22270,7 @@
                 <workingPressureMeasure unitId="knjj">1.68</workingPressureMeasure>
                 <workingPressureMeasure unitId="uclm">1.64</workingPressureMeasure>
             </includedFuel>
-            <information>nnxh</information>
+            <information languageId="am">nnxh</information>
             <labelTypeCode>lsku</labelTypeCode>
             <labelTypeCode>ovnb</labelTypeCode>
             <limitedQuantityCode>imzz</limitedQuantityCode>
@@ -22175,17 +22280,17 @@
             <meltingPointTemperatureMeasure unitId="irnw">2.68</meltingPointTemperatureMeasure>
             <netWeight unitId="TNE">7.40</netWeight>
             <packagingDangerLevelCode>iodm</packagingDangerLevelCode>
-            <previousCargoInformation>bria</previousCargoInformation>
-            <properShippingName>rjsf</properShippingName>
+            <previousCargoInformation languageId="am">bria</previousCargoInformation>
+            <properShippingName languageId="sl">rjsf</properShippingName>
             <radioactiveMaterial>
                 <applicableRadioactiveIsotope>
                     <activityLevelMeasure unitId="uxhc">6.91</activityLevelMeasure>
                     <activityLevelMeasure unitId="qqjn">4.20</activityLevelMeasure>
-                    <name>nokn</name>
+                    <name languageId="id">nokn</name>
                 </applicableRadioactiveIsotope>
                 <fissileCriticalitySafetyIndexNumber>3.54</fissileCriticalitySafetyIndexNumber>
                 <radioactivePackageTransportIndexCode>uqbl</radioactivePackageTransportIndexCode>
-                <specialFormInformation>cafo</specialFormInformation>
+                <specialFormInformation languageId="SO">cafo</specialFormInformation>
             </radioactiveMaterial>
             <regulatoryAuthorityName>qmvv</regulatoryAuthorityName>
             <relatedDocument>
@@ -22537,14 +22642,20 @@
                     <valueMeasure unitId="txhw">3.23</valueMeasure>
                 </calibratedMeasurement>
                 <statementCode>umiq</statementCode>
-                <statementText>qcqp</statementText>
-                <statementText>bkxb</statementText>
-                <statementText>tlcw</statementText>
+                <statementText languageId="IA">qcqp</statementText>
+                <statementText languageId="id">bkxb</statementText>
+                <statementText languageId="ty">tlcw</statementText>
                 <subjectTypeCode>mrhz</subjectTypeCode>
                 <valueMeasure unitId="vizi">9.31</valueMeasure>
             </statedCondition>
-            <supplementaryInformation>eosn</supplementaryInformation>
-            <technicalName>cpbo</technicalName>
+            <supplementaryInformation languageId="RO">eosn</supplementaryInformation>
+            <technicalName languageId="sg">cpbo</technicalName>
+            <technicalNameNote>
+                <contentText languageId="mi">qukv</contentText>
+                <contentText languageId="GV">qgoj</contentText>
+                <subjectCode>hzio</subjectCode>
+                <subjectCode>fldf</subjectCode>
+            </technicalNameNote>
             <tunnelRestrictionCode>knfz</tunnelRestrictionCode>
             <uNDGID>yqri</uNDGID>
         </loadedDangerousGoods>

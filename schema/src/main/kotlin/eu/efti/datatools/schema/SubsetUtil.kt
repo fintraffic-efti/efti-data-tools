@@ -25,18 +25,6 @@ object SubsetUtil {
         filterSubsets(doc, subsets, javaCommonSchema, consignmentCommonSchema)
 
     /**
-     * Create a copy of the consignment identifier document and drop all elements that are not included in the given
-     * subsets. The subset ids are not validated.
-     * @param doc consignment identifier document
-     * @param subsets set of subsets to keep
-     * @return new document containing only elements that are included in the given subsets
-     * @throws IllegalArgumentException if `doc` does not conform to consignment identifier schema
-     */
-    @JvmStatic
-    fun filterIdentifierSubsets(doc: Document, subsets: Set<XmlSchemaElement.SubsetId>): Document =
-        filterSubsets(doc, subsets, javaIdentifiersSchema, consignmentIdentifierSchema)
-
-    /**
      * Drop recursively all nodes that are not included in the given subsets. The subset ids are not validated.
      * @param subsets set of subsets to keep
      * @param schema schema element for `node`
