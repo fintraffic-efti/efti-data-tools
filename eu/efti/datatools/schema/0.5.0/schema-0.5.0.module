@@ -1,0 +1,144 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "eu.efti.datatools",
+    "module": "schema",
+    "version": "0.5.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.12"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "schema-0.5.0.jar",
+          "url": "schema-0.5.0.jar",
+          "size": 154182,
+          "sha512": "c47acc459c866cae91b7a5ada2c6b750cbb3549d0dc5396f454c228342288a0a1aba14f86bb3a40c2d6ce19b0cc28971cc4c1ce8118b79b7df9aae7f5f31b17f",
+          "sha256": "347019d7fc5e41dab3dcec8858a8a7cc6b0794262f56a5ab70dcb318a10d2864",
+          "sha1": "11aba25f4af35bce4c4f0003623b68b1784a030f",
+          "md5": "e452dd8ccf2a71338de0aa79a64ea4a2"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.apache.xmlbeans",
+          "module": "xmlbeans",
+          "version": {
+            "requires": "5.3.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.10"
+          }
+        },
+        {
+          "group": "org.apache.logging.log4j",
+          "module": "log4j-bom",
+          "version": {
+            "requires": "2.24.3"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          },
+          "endorseStrictVersions": true
+        },
+        {
+          "group": "org.apache.logging.log4j",
+          "module": "log4j-core"
+        }
+      ],
+      "files": [
+        {
+          "name": "schema-0.5.0.jar",
+          "url": "schema-0.5.0.jar",
+          "size": 154182,
+          "sha512": "c47acc459c866cae91b7a5ada2c6b750cbb3549d0dc5396f454c228342288a0a1aba14f86bb3a40c2d6ce19b0cc28971cc4c1ce8118b79b7df9aae7f5f31b17f",
+          "sha256": "347019d7fc5e41dab3dcec8858a8a7cc6b0794262f56a5ab70dcb318a10d2864",
+          "sha1": "11aba25f4af35bce4c4f0003623b68b1784a030f",
+          "md5": "e452dd8ccf2a71338de0aa79a64ea4a2"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "schema-0.5.0-javadoc.jar",
+          "url": "schema-0.5.0-javadoc.jar",
+          "size": 261,
+          "sha512": "031c2c8ccde1090e53ad824c5b1c5a65d1fa6201e00041916f6bc82405787a646dbd9b7c1b300c5d44fb12d6357e18ae5d9b85d855f69be23a3c4185a372911f",
+          "sha256": "520292618d8fd314cd67281e3a1759ad302ed4eab3daa75810086d8c621a8f5e",
+          "sha1": "4262cc10d13d3deb9fffea8aeaeaffe1dd51842f",
+          "md5": "5eb36cf1a94a830f57b461b83cef91e7"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "schema-0.5.0-sources.jar",
+          "url": "schema-0.5.0-sources.jar",
+          "size": 128674,
+          "sha512": "43147db8a899a03aa951a62951d4bbe4a44e59544b1d3bceb284d08be7b9b8e2417884ea34be8c8a9a2d69f8fcf7ece0cd5cc38d1e6afe24ac9d1fcec77459d7",
+          "sha256": "e4030f4b95a24ab4ff69666bcdc3f1f0db858993cd18c94657beb808b931a026",
+          "sha1": "50beb4e821799f0114efe18f556e49cbdf11880a",
+          "md5": "85bbdc5896b2d3b8b25fb71e5b99f36c"
+        }
+      ]
+    }
+  ]
+}
