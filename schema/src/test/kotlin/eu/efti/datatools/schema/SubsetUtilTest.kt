@@ -4,6 +4,7 @@ import eu.efti.datatools.schema.SubsetUtil.dropNodesNotInSubsets
 import eu.efti.datatools.schema.XmlSchemaElement.SubsetId
 import eu.efti.datatools.schema.XmlUtil.deserializeToDocument
 import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
@@ -53,6 +54,18 @@ class SubsetUtilTest {
             doc,
             isSimilarTo(case.expectedXml.removeExtraWhitespace())
         )
+    }
+
+    @Test
+    fun `commonSchemaHasSubset should return false for subset that does not exist`() {
+        assertThat(SubsetUtil.commonSchemaHasSubset(SubsetId("this isn't a subset")),
+            equalTo(false))
+    }
+
+    @Test
+    fun `commonSchemaHasSubset should return true for a subset that does exist`() {
+        assertThat(SubsetUtil.commonSchemaHasSubset(SubsetId("BE03a")),
+            equalTo(true))
     }
 
     companion object {
@@ -236,3 +249,4 @@ class SubsetUtilTest {
         private fun randomLong(): Long = Random.nextLong(1, 10)
     }
 }
+

@@ -32,6 +32,10 @@ object EftiSchemas {
     val javaIdentifiersSchema: Schema =
         schemaFactory.newSchema(getResourceUrl(PATH_IDENTIFIER))
 
+    @JvmStatic
+    val consignmentCommonSubsetIds: Set<XmlSchemaElement.SubsetId> =
+        consignmentCommonSchema.children.flatMap { it.subsets }.toSet()
+
     private fun readConsignmentCommonSchema(): XmlSchemaElement = XmlSchemaParser.parse(
         readXmlBeansSchema(PATH_COMMON),
         XmlSchemaElement.XmlName("http://efti.eu/v1/consignment/common", "consignment"),
