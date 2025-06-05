@@ -6,6 +6,7 @@ val xmlunitVersion = "2.10.0"
 
 plugins {
     kotlin("jvm")
+    id("io.gitlab.arturbosch.detekt")
     `maven-publish`
 }
 
@@ -61,6 +62,21 @@ tasks.register<Test>("updateTestExpectations") {
     // Always run task even if it has successfully completed earlier
     outputs.upToDateWhen { false }
 }
+
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    config.setFrom(rootProject.file("detekt.yml"))
+}
+
+tasks.named("check") {
+    dependsOn(
+        tasks.getByName("detekt"),
+//        tasks.getByName("ktlintCheck"),
+        tasks.getByName("test"),
+    )
+}
+
 
 java {
     withJavadocJar()
