@@ -10,6 +10,7 @@ import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ValueSource
 import org.xmlunit.matchers.CompareMatcher.isSimilarTo
 import java.util.stream.Stream
 import kotlin.random.Random
@@ -56,16 +57,27 @@ class SubsetUtilTest {
         )
     }
 
-    @Test
-    fun `commonSchemaHasSubset should return false for subset that does not exist`() {
-        assertThat(SubsetUtil.commonSchemaHasSubset(SubsetId("this isn't a subset")),
-            equalTo(false))
+    @ParameterizedTest
+    @ValueSource(
+        strings = ["this isn't a subset",
+            "BE0", // Partial subset id
+            "be03a" // Valid subset id but in lowercase
+        ]
+    )
+    fun `commonSchemaHasSubset should return false for subset that does not exist`(invalidSubsetId: String) {
+        assertThat(
+            SubsetUtil.commonSchemaHasSubset(SubsetId(invalidSubsetId)),
+            equalTo(false)
+        )
     }
 
-    @Test
-    fun `commonSchemaHasSubset should return true for a subset that does exist`() {
-        assertThat(SubsetUtil.commonSchemaHasSubset(SubsetId("BE03a")),
-            equalTo(true))
+    @ParameterizedTest
+    @ValueSource(strings = ["BE03a", "SI03"])
+    fun `commonSchemaHasSubset should return true for a subset that does exist`(subsetId: String) {
+        assertThat(
+            SubsetUtil.commonSchemaHasSubset(SubsetId(subsetId)),
+            equalTo(true)
+        )
     }
 
     companion object {
