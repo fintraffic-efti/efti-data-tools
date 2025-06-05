@@ -60,7 +60,7 @@ class TextContentOverrideValidator : IParameterValidator {
     override fun validate(name: String, value: String) {
         try {
             TextContentOverrideConverter().convert(value)
-        } catch (e: ParameterException) {
+        } catch (@Suppress("detekt:SwallowedException") e: ParameterException) {
             throw ParameterException("Parameter $name: ${e.message}")
         }
     }
@@ -70,7 +70,7 @@ class DeleteNodeOverrideValidator : IParameterValidator {
     override fun validate(name: String, value: String) {
         try {
             DeleteNodeOverrideConverter().convert(value)
-        } catch (e: ParameterException) {
+        } catch (@Suppress("detekt:SwallowedException") e: ParameterException) {
             throw ParameterException("Parameter $name: ${e.message}")
         }
     }
@@ -107,6 +107,7 @@ class CommandFilter : CommonArgs() {
 
 @Parameters(commandDescription = "Populate random documents")
 class CommandPopulate : CommonArgs() {
+    @Suppress("detekt:EnumNaming")
     enum class SchemaOption {
         both, common, identifier
     }
@@ -163,6 +164,7 @@ fun main(argv: Array<String>) {
         .build()
 
     try {
+        @Suppress("detekt:SpreadOperator")
         parser.parse(*argv)
     } catch (e: ParameterException) {
         System.err.println(e.message)
@@ -217,6 +219,7 @@ private fun doFilter(args: CommandFilter) {
     validateAndWrite(javaCommonSchema, filterCommonSubsets(doc, subsets), checkNotNull(outputFile))
 }
 
+@Suppress("detekt:LongMethod", "detekt:CyclomaticComplexMethod")
 private fun doPopulate(args: CommandPopulate) {
     if (args.seed == null) {
         args.seed = randomShortSeed()
@@ -312,5 +315,6 @@ private fun documentValidatorAndWriter(prettyPrint: Boolean): (schema: Schema, d
         }
     }
 
+@Suppress("detekt:MagicNumber")
 private fun randomShortSeed() =
     System.currentTimeMillis().let { number -> number - (number / 100000 * 100000) }

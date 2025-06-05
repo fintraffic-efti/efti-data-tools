@@ -88,7 +88,7 @@ class EftiDomPopulatorTest {
             .map { (expression, value) ->
                 expression to EftiDomPopulator.TextContentOverride.tryToParse(expression, value)
             }
-            .onEach { (expression, parsed) -> if (parsed == null) throw IllegalArgumentException("""Could not parse "$expression"""") }
+            .onEach { (expression, parsed) -> requireNotNull(parsed) {"""Could not parse "$expression""""} }
             .mapNotNull(Pair<String, EftiDomPopulator.TextContentOverride?>::second)
 
         val populator = EftiDomPopulator(seed, repeatableMode)

@@ -37,7 +37,7 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
                 val xpath = xpathFactory.newXPath()
                 return try {
                     XPathRawAndCompiled(expression, xpath.compile(expression))
-                } catch (e: XPathExpressionException) {
+                } catch (@Suppress("detekt:SwallowedException") e: XPathExpressionException) {
                     null
                 }
             }

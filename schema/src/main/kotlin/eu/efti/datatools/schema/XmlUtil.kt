@@ -26,6 +26,7 @@ object XmlUtil {
     }
 
     @JvmStatic
+    @Suppress("detekt:TooGenericExceptionThrown")
     fun validate(doc: Document, javaSchema: Schema): String? {
         val xmlSource: Source = DOMSource(doc)
         val error = try {
