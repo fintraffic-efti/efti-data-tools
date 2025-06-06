@@ -32,9 +32,9 @@ class SubsetUtilTest {
                 "root",
                 subsetIds = emptySet(),
                 children =
-                    listOf(
-                        xmlSchemaElement(localName = "a", subsetIds = emptySet(), children = emptyList()),
-                    ),
+                listOf(
+                    xmlSchemaElement(localName = "a", subsetIds = emptySet(), children = emptyList()),
+                ),
             )
 
         assertAll(
@@ -105,11 +105,11 @@ class SubsetUtilTest {
                         </root>
                     """,
                     schema =
-                        xmlSchemaElement(
-                            "root",
-                            subsetIds = emptySet(),
-                            children = emptyList(),
-                        ),
+                    xmlSchemaElement(
+                        "root",
+                        subsetIds = emptySet(),
+                        children = emptyList(),
+                    ),
                     requestedSubsetIds = setOf("x"),
                 ),
                 TestCase(
@@ -124,14 +124,14 @@ class SubsetUtilTest {
                         </root>
                     """,
                     schema =
-                        xmlSchemaElement(
-                            "root",
-                            subsetIds = emptySet(),
-                            children =
-                                listOf(
-                                    xmlSchemaElement(localName = "a", subsetIds = setOf("x"), children = emptyList()),
-                                ),
+                    xmlSchemaElement(
+                        "root",
+                        subsetIds = emptySet(),
+                        children =
+                        listOf(
+                            xmlSchemaElement(localName = "a", subsetIds = setOf("x"), children = emptyList()),
                         ),
+                    ),
                     requestedSubsetIds = setOf("x"),
                 ),
                 TestCase(
@@ -146,14 +146,18 @@ class SubsetUtilTest {
                         </root>
                     """,
                     schema =
-                        xmlSchemaElement(
-                            "root",
-                            subsetIds = emptySet(),
-                            children =
-                                listOf(
-                                    xmlSchemaElement(localName = "a", subsetIds = setOf("x", "y"), children = emptyList()),
-                                ),
+                    xmlSchemaElement(
+                        "root",
+                        subsetIds = emptySet(),
+                        children =
+                        listOf(
+                            xmlSchemaElement(
+                                localName = "a",
+                                subsetIds = setOf("x", "y"),
+                                children = emptyList(),
+                            ),
                         ),
+                    ),
                     requestedSubsetIds = setOf("y", "z"),
                 ),
                 TestCase(
@@ -167,14 +171,18 @@ class SubsetUtilTest {
                         </root>
                     """,
                     schema =
-                        xmlSchemaElement(
-                            "root",
-                            subsetIds = emptySet(),
-                            children =
-                                listOf(
-                                    xmlSchemaElement(localName = "a", subsetIds = setOf("x", "y"), children = emptyList()),
-                                ),
+                    xmlSchemaElement(
+                        "root",
+                        subsetIds = emptySet(),
+                        children =
+                        listOf(
+                            xmlSchemaElement(
+                                localName = "a",
+                                subsetIds = setOf("x", "y"),
+                                children = emptyList(),
+                            ),
                         ),
+                    ),
                     requestedSubsetIds = setOf("z"),
                 ),
                 TestCase(
@@ -188,14 +196,14 @@ class SubsetUtilTest {
                         </root>
                     """,
                     schema =
-                        xmlSchemaElement(
-                            "root",
-                            subsetIds = emptySet(),
-                            children =
-                                listOf(
-                                    xmlSchemaElement(localName = "a", subsetIds = emptySet(), children = emptyList()),
-                                ),
+                    xmlSchemaElement(
+                        "root",
+                        subsetIds = emptySet(),
+                        children =
+                        listOf(
+                            xmlSchemaElement(localName = "a", subsetIds = emptySet(), children = emptyList()),
                         ),
+                    ),
                     requestedSubsetIds = setOf("z"),
                 ),
                 TestCase(
@@ -218,39 +226,35 @@ class SubsetUtilTest {
                             </b>
                         </root>
                     """,
-                    schema =
-                        xmlSchemaElement(
-                            "root",
-                            subsetIds = emptySet(),
-                            children =
-                                listOf(
-                                    xmlSchemaElement(localName = "a", subsetIds = setOf("y"), children = emptyList()),
+                    schema = xmlSchemaElement(
+                        "root",
+                        subsetIds = emptySet(),
+                        children = listOf(
+                            xmlSchemaElement(localName = "a", subsetIds = setOf("y"), children = emptyList()),
+                            xmlSchemaElement(
+                                localName = "b",
+                                subsetIds = setOf("x", "y"),
+                                children = listOf(
                                     xmlSchemaElement(
-                                        localName = "b",
-                                        subsetIds = setOf("x", "y"),
-                                        children =
-                                            listOf(
-                                                xmlSchemaElement(
-                                                    localName = "c",
-                                                    subsetIds = setOf("y", "z"),
-                                                    children = emptyList(),
-                                                ),
-                                                xmlSchemaElement(
-                                                    localName = "d",
-                                                    subsetIds = setOf("y"),
-                                                    children =
-                                                        listOf(
-                                                            xmlSchemaElement(
-                                                                localName = "e",
-                                                                subsetIds = setOf("x", "z"),
-                                                                children = emptyList(),
-                                                            ),
-                                                        ),
-                                                ),
+                                        localName = "c",
+                                        subsetIds = setOf("y", "z"),
+                                        children = emptyList(),
+                                    ),
+                                    xmlSchemaElement(
+                                        localName = "d",
+                                        subsetIds = setOf("y"),
+                                        children = listOf(
+                                            xmlSchemaElement(
+                                                localName = "e",
+                                                subsetIds = setOf("x", "z"),
+                                                children = emptyList(),
                                             ),
+                                        ),
                                     ),
                                 ),
+                            ),
                         ),
+                    ),
                     requestedSubsetIds = setOf("x", "z"),
                 ),
             ).asStream()
@@ -278,7 +282,8 @@ class SubsetUtilTest {
 
         private fun randomAsciiLetter(): Char = "abcdefghijklmnopqrstuvwxyz".random()
 
-        private fun randomAsciiLetterString(length: Int = 6): String = (1..length).joinToString("") { randomAsciiLetter().toString() }
+        private fun randomAsciiLetterString(length: Int = 6): String =
+            (1..length).joinToString("") { randomAsciiLetter().toString() }
 
         private fun randomLong(): Long = Random.nextLong(1, 10)
     }

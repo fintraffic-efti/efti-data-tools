@@ -4,14 +4,15 @@ import eu.efti.datatools.schema.XmlSchemaElement
 import eu.efti.datatools.schema.XmlSchemaElement.XmlName
 import eu.efti.datatools.schema.XmlSchemaElement.XmlType
 import eu.efti.datatools.schema.XmlUtil.asIterable
-import eu.efti.datatools.schema.XmlUtil.serializeToString
 import eu.efti.datatools.schema.XmlUtil.deserializeToDocument
+import eu.efti.datatools.schema.XmlUtil.serializeToString
 import org.w3c.dom.Document
 import org.w3c.dom.Node
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
-import java.util.*
+import java.util.Base64
+import java.util.Locale
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.xpath.XPathExpression
 import javax.xml.xpath.XPathExpressionException
@@ -113,7 +114,7 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
     fun populate(
         schema: XmlSchemaElement,
         overrides: List<Override> = emptyList(),
-        namespaceAware: Boolean = true
+        namespaceAware: Boolean = true,
     ): Document {
         val doc: Document = newDocument()
 
@@ -129,41 +130,45 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
         schema: XmlSchemaElement,
         originalDoc: Document,
         overrides: List<Override>,
-        namespaceAware: Boolean
-    ): Document {
-        return if (overrides.isNotEmpty()) {
-            val overridesDoc = if (!namespaceAware) {
-                // Java xpath implementation is strict about namespaces. If we want to ignore default namespace in
-                // xpath expressions, we need to remove namespaces altogether from the document...
-                removeNamespaces(originalDoc)
-            } else {
-                originalDoc
-            }
-
-            overrides.forEach { override ->
-                when (override) {
-                    is DeleteNodeOverride -> EftiXPathDocumentManipulator.deleteNode(overridesDoc, override.xpath.compiled)
-                    is TextContentOverride -> EftiXPathDocumentManipulator.setTextContent(
-                        overridesDoc,
-                        override.xpath.compiled,
-                        override.value
-                    )
-                }
-            }
-
-            if (!namespaceAware) {
-                // ...however, we want to produce documents that pass validation. Therefore, we need to restore
-                // the namespace declaration.
-                restoreEftiNamespace(schema, overridesDoc)
-            } else {
-                overridesDoc
-            }
+        namespaceAware: Boolean,
+    ): Document = if (overrides.isNotEmpty()) {
+        val overridesDoc = if (!namespaceAware) {
+            // Java xpath implementation is strict about namespaces. If we want to ignore default namespace in
+            // xpath expressions, we need to remove namespaces altogether from the document...
+            removeNamespaces(originalDoc)
         } else {
             originalDoc
         }
+
+        overrides.forEach { override ->
+            when (override) {
+                is DeleteNodeOverride -> EftiXPathDocumentManipulator.deleteNode(
+                    overridesDoc,
+                    override.xpath.compiled,
+                )
+
+                is TextContentOverride -> EftiXPathDocumentManipulator.setTextContent(
+                    overridesDoc,
+                    override.xpath.compiled,
+                    override.value,
+                )
+            }
+        }
+
+        if (!namespaceAware) {
+            // ...however, we want to produce documents that pass validation. Therefore, we need to restore
+            // the namespace declaration.
+            restoreEftiNamespace(schema, overridesDoc)
+        } else {
+            overridesDoc
+        }
+    } else {
+        originalDoc
     }
 
-    private fun noArgsGenerator(block: (gen: EftiValueGeneratorFactory.EftiValueGenerator) -> String): XmlValueGenerator =
+    private fun noArgsGenerator(
+        block: (gen: EftiValueGeneratorFactory.EftiValueGenerator) -> String,
+    ): XmlValueGenerator =
         { valuePath, _, _ -> block(gen.forPath(valuePath)) }
 
     private fun repeatIndexGenerator(block: (Int) -> String): XmlValueGenerator =
@@ -177,20 +182,20 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
             RepeatablePopulateMode.RANDOM ->
                 schema.cardinality.min to repeatGenerator.nextLong(
                     0,
-                    min(schema.cardinality.max ?: 3, 3)
+                    min(schema.cardinality.max ?: 3, 3),
                 ) + max(schema.cardinality.min, 2)
 
             RepeatablePopulateMode.MINIMUM_ONE ->
                 max(schema.cardinality.min, 1) to repeatGenerator.nextLong(
                     0,
-                    min(schema.cardinality.max ?: 3, 3)
+                    min(schema.cardinality.max ?: 3, 3),
                 ) + max(schema.cardinality.min, 2)
 
             RepeatablePopulateMode.EXACTLY_ONE -> 1 to 2
         }
         val count = repeatGenerator.nextLong(
             startInclusive = repeatRange.first.toLong(),
-            endExclusive = repeatRange.second.toLong()
+            endExclusive = repeatRange.second.toLong(),
         )
 
         repeat(count.toInt()) { repeatIndex ->
@@ -240,7 +245,7 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
 
         private fun restoreEftiNamespace(
             schema: XmlSchemaElement,
-            originalDoc: Document
+            originalDoc: Document,
         ): Document {
             val doc: Document = newDocument()
 

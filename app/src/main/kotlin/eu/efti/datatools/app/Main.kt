@@ -32,7 +32,9 @@ class TextContentOverrideConverter : IStringConverter<TextContentOverride> {
     override fun convert(raw: String): TextContentOverride {
         val parts = raw.split(XPATH_VALUE_SEPARATOR)
         if (parts.size != 2) {
-            throw ParameterException(""""$raw" should be of the form: <xpath-expression>$XPATH_VALUE_SEPARATOR<value>""")
+            throw ParameterException(
+                """"$raw" should be of the form: <xpath-expression>$XPATH_VALUE_SEPARATOR<value>""",
+            )
         }
         val (xpathString, valueString) = parts.map(String::trim)
 
@@ -100,49 +102,55 @@ class CommandFilter : CommonArgs() {
     @Parameter(
         names = ["--subset-id", "-s"],
         required = true,
-        description = "List of subset ids to use for filtering. A document element is dropped if it is not included in any of the given subsets."
+        description = "List of subset ids to use for filtering. A document element is dropped if it" +
+            " is not included in any of the given subsets.",
     )
     var subsetIds: List<String> = emptyList()
 }
 
 @Parameters(commandDescription = "Populate random documents")
 class CommandPopulate : CommonArgs() {
-    @Suppress("detekt:EnumNaming")
     enum class SchemaOption {
-        both, common, identifier
+        BOTH,
+        COMMON,
+        IDENTIFIER,
     }
 
     @Parameter(
         names = ["--seed", "-s"],
-        description = "Seed to use, by default a random seed is used. Identical seeds should produce identical documents for a given version of the application."
+        description = "Seed to use, by default a random seed is used. " +
+            "Identical seeds should produce identical documents " +
+            "for a given version of the application.",
     )
     var seed: Long? = null
 
     @Parameter(
         names = ["--schema", "-x"],
-        description = "Schema to use"
+        description = "Schema to use",
     )
-    var schema: SchemaOption = SchemaOption.common
+    var schema: SchemaOption = SchemaOption.COMMON
 
     @Parameter(
         names = ["--repeatable-mode", "-r"],
-        description = "How many instances of a repeatable element should be generated"
+        description = "How many instances of a repeatable element should be generated",
     )
     var repeatableMode: RepeatablePopulateMode = RepeatablePopulateMode.MINIMUM_ONE
 
+    @Suppress("ktlint:standard:max-line-length")
     @Parameter(
         names = ["--delete-overrides", "-d"],
         converter = DeleteNodeOverrideConverter::class,
         validateWith = [DeleteNodeOverrideValidator::class],
-        description = """Override to apply to the populated document. The format is "<xpath-expression>". Expression can use local xml names, namespaces can be ignored. If multiple instances of this parameter are defined, then each override will be applied in the given order."""
+        description = """Override to apply to the populated document. The format is "<xpath-expression>". Expression can use local xml names, namespaces can be ignored. If multiple instances of this parameter are defined, then each override will be applied in the given order.""",
     )
     var deleteOverrides: List<DeleteNodeOverride> = emptyList()
 
+    @Suppress("ktlint:standard:max-line-length")
     @Parameter(
         names = ["--text-overrides", "-t"],
         converter = TextContentOverrideConverter::class,
         validateWith = [TextContentOverrideValidator::class],
-        description = """Override to apply to the populated document. The format is "<xpath-expression>:=<value>". Expression can use local xml names, namespaces can be ignored. If multiple instances of this parameter are defined, then each override will be applied in the given order."""
+        description = """Override to apply to the populated document. The format is "<xpath-expression>:=<value>". Expression can use local xml names, namespaces can be ignored. If multiple instances of this parameter are defined, then each override will be applied in the given order.""",
     )
     var textOverrides: List<TextContentOverride> = emptyList()
 
@@ -195,7 +203,7 @@ private fun doFilter(args: CommandFilter) {
             "pretty" to args.pretty,
         )
             .filter { it.second != null }
-            .joinToString("\n") { (label, value) -> """  * $label: $value""" }
+            .joinToString("\n") { (label, value) -> """  * $label: $value""" },
     )
 
     val outputFile = args.outputPath?.let(::File)
@@ -210,7 +218,6 @@ private fun doFilter(args: CommandFilter) {
         exitProcess(1)
     }
 
-
     val subsets = args.subsetIds.map(::SubsetId).toSet()
     val doc = deserializeToDocument(InputStreamReader(FileInputStream(checkNotNull(args.inputPath))).readText())
 
@@ -224,16 +231,18 @@ private fun doPopulate(args: CommandPopulate) {
     if (args.seed == null) {
         args.seed = randomShortSeed()
     }
-    if (args.pathCommon == null && args.schema in setOf(
-            CommandPopulate.SchemaOption.both,
-            CommandPopulate.SchemaOption.common
+    if (args.pathCommon == null &&
+        args.schema in setOf(
+            CommandPopulate.SchemaOption.BOTH,
+            CommandPopulate.SchemaOption.COMMON,
         )
     ) {
         args.pathCommon = "consignment-${args.seed}-common.xml"
     }
-    if (args.pathIdentifiers == null && args.schema in setOf(
-            CommandPopulate.SchemaOption.both,
-            CommandPopulate.SchemaOption.identifier
+    if (args.pathIdentifiers == null &&
+        args.schema in setOf(
+            CommandPopulate.SchemaOption.BOTH,
+            CommandPopulate.SchemaOption.IDENTIFIER,
         )
     ) {
         args.pathIdentifiers = "consignment-${args.seed}-identifiers.xml"
@@ -259,7 +268,7 @@ private fun doPopulate(args: CommandPopulate) {
             "pretty" to args.pretty,
         )
             .filter { it.second != null }
-            .joinToString("\n") { (label, value) -> """  * $label: $value""" }
+            .joinToString("\n") { (label, value) -> """  * $label: $value""" },
     )
 
     val fileCommon = args.pathCommon?.let(::File)
@@ -278,9 +287,9 @@ private fun doPopulate(args: CommandPopulate) {
     val doc = EftiDomPopulator(checkNotNull(args.seed), args.repeatableMode)
         .populate(
             schema = when (args.schema) {
-                CommandPopulate.SchemaOption.both -> consignmentCommonSchema
-                CommandPopulate.SchemaOption.common -> consignmentCommonSchema
-                CommandPopulate.SchemaOption.identifier -> consignmentIdentifierSchema
+                CommandPopulate.SchemaOption.BOTH -> consignmentCommonSchema
+                CommandPopulate.SchemaOption.COMMON -> consignmentCommonSchema
+                CommandPopulate.SchemaOption.IDENTIFIER -> consignmentIdentifierSchema
             },
             overrides = overrides,
             namespaceAware = false,
@@ -289,17 +298,17 @@ private fun doPopulate(args: CommandPopulate) {
     val validateAndWrite = documentValidatorAndWriter(args.pretty)
 
     when (args.schema) {
-        CommandPopulate.SchemaOption.both -> {
+        CommandPopulate.SchemaOption.BOTH -> {
             val identifiers = commonToIdentifiers(doc)
             validateAndWrite(javaCommonSchema, doc, checkNotNull(fileCommon))
             validateAndWrite(javaIdentifiersSchema, identifiers, checkNotNull(fileIdentifiers))
         }
 
-        CommandPopulate.SchemaOption.common -> {
+        CommandPopulate.SchemaOption.COMMON -> {
             validateAndWrite(javaCommonSchema, doc, checkNotNull(fileCommon))
         }
 
-        CommandPopulate.SchemaOption.identifier -> {
+        CommandPopulate.SchemaOption.IDENTIFIER -> {
             validateAndWrite(javaIdentifiersSchema, doc, checkNotNull(fileIdentifiers))
         }
     }
@@ -308,7 +317,9 @@ private fun doPopulate(args: CommandPopulate) {
 private fun documentValidatorAndWriter(prettyPrint: Boolean): (schema: Schema, doc: Document, file: File) -> Unit =
     { schema, doc, file ->
         XmlUtil.validate(doc, schema)?.also {
-            throw IllegalStateException("Application produced an invalid document. Please report the parameters and the this error message to the maintainers. Validation error: $it")
+            throw IllegalStateException(
+                "Application produced an invalid document. Please report the parameters and the this error message to the maintainers. Validation error: $it",
+            )
         }
         file.printWriter().use { out ->
             out.print(serializeToString(doc, prettyPrint = prettyPrint))
