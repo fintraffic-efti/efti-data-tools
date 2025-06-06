@@ -37,7 +37,7 @@ object SubsetUtil {
         dropNodesRecursively(
             schema = schema,
             node = node,
-            namespaceAware = true
+            namespaceAware = true,
         ) { candidateNode: Node, maybeSchemaElement: XmlSchemaElement? ->
             val schemaElement = checkNotNull(maybeSchemaElement) {
                 "Schema element for ${candidateNode.localName} must not be null"
@@ -53,14 +53,15 @@ object SubsetUtil {
         subsetId in EftiSchemas.consignmentCommonSubsetIds
 
     private fun filterSubsets(
-        doc: Document, subsets: Set<XmlSchemaElement.SubsetId>, javaSchema: Schema, schema: XmlSchemaElement
-    ): Document {
-        return validate(doc, javaSchema)
-            ?.let { error -> throw IllegalArgumentException("Input document is not valid: $error") }
-            ?: clone(doc)
-                .also { cloned ->
-                    dropNodesNotInSubsets(subsets, schema, cloned.firstChild)
-                    validate(cloned, javaSchema)
-                }
-    }
+        doc: Document,
+        subsets: Set<XmlSchemaElement.SubsetId>,
+        javaSchema: Schema,
+        schema: XmlSchemaElement,
+    ): Document = validate(doc, javaSchema)
+        ?.let { error -> throw IllegalArgumentException("Input document is not valid: $error") }
+        ?: clone(doc)
+            .also { cloned ->
+                dropNodesNotInSubsets(subsets, schema, cloned.firstChild)
+                validate(cloned, javaSchema)
+            }
 }

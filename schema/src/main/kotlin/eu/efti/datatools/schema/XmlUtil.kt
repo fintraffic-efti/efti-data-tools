@@ -26,6 +26,7 @@ object XmlUtil {
     }
 
     @JvmStatic
+    @Suppress("detekt:TooGenericExceptionThrown")
     fun validate(doc: Document, javaSchema: Schema): String? {
         val xmlSource: Source = DOMSource(doc)
         val error = try {
@@ -74,7 +75,7 @@ object XmlUtil {
         schema: XmlSchemaElement,
         node: Node,
         namespaceAware: Boolean,
-        dropCondition: (node: Node, maybeSchemaElement: XmlSchemaElement?) -> Boolean
+        dropCondition: (node: Node, maybeSchemaElement: XmlSchemaElement?) -> Boolean,
     ) {
         fun isFilterableNode(node: Node): Boolean = when (node.nodeType) {
             Node.COMMENT_NODE, Node.TEXT_NODE -> false
@@ -86,7 +87,8 @@ object XmlUtil {
             .filter(::isFilterableNode)
             .filter { childNode ->
                 val schemaElement = schema.children.find { sc ->
-                    sc.name.localPart == childNode.localName && (!namespaceAware || sc.name.namespaceURI == childNode.namespaceURI)
+                    sc.name.localPart == childNode.localName &&
+                        (!namespaceAware || sc.name.namespaceURI == childNode.namespaceURI)
                 }
                 dropCondition(childNode, schemaElement)
             }

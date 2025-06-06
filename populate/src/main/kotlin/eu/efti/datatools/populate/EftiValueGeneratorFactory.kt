@@ -7,7 +7,9 @@ import kotlin.random.asKotlinRandom
 @Suppress("MemberVisibilityCanBePrivate")
 class EftiValueGeneratorFactory(private val seed: Long) {
     fun forPath(valuePath: ValuePath): EftiValueGenerator =
-        EftiValueGenerator(java.util.Random("${valuePath.path.joinToString(".")}.$seed".hashCode().toLong()).asKotlinRandom())
+        EftiValueGenerator(
+            java.util.Random("${valuePath.path.joinToString(".")}.$seed".hashCode().toLong()).asKotlinRandom(),
+        )
 
     class EftiValueGenerator(private val random: Random) {
         fun nextAsciiChar(): Char = "abcdefghijklmnopqrstuvwxyz".random(random)

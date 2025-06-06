@@ -1,6 +1,10 @@
 package eu.efti.datatools.schema
 
-import eu.efti.datatools.schema.XmlSchemaElement.*
+import eu.efti.datatools.schema.XmlSchemaElement.SubsetId
+import eu.efti.datatools.schema.XmlSchemaElement.XmlAttribute
+import eu.efti.datatools.schema.XmlSchemaElement.XmlCardinality
+import eu.efti.datatools.schema.XmlSchemaElement.XmlName
+import eu.efti.datatools.schema.XmlSchemaElement.XmlType
 import org.apache.xmlbeans.SchemaLocalElement
 import org.apache.xmlbeans.SchemaParticle
 import org.apache.xmlbeans.SchemaType
@@ -12,17 +16,22 @@ object XmlSchemaParser {
     fun parse(xmlBeansSchema: SchemaTypeSystem, documentType: XmlName): XmlSchemaElement {
         val documentSchema = checkNotNull(
             xmlBeansSchema.documentTypes().find {
-                it.contentModel.name.namespaceURI == documentType.namespaceURI && it.contentModel.name.localPart == documentType.localPart
+                it.contentModel.name.namespaceURI == documentType.namespaceURI &&
+                    it.contentModel.name.localPart == documentType.localPart
             },
         ) { "Not found: $documentType" }
 
-        require(documentSchema.contentType == SchemaType.ELEMENT_CONTENT) { "Unsupported document type ${documentSchema.contentType}" }
+        require(documentSchema.contentType == SchemaType.ELEMENT_CONTENT) {
+            "Unsupported document type ${documentSchema.contentType}"
+        }
 
         return parseElement(documentSchema.contentModel)
     }
 
     private fun parseElement(particle: SchemaParticle): XmlSchemaElement {
-        require(particle.particleType == SchemaParticle.ELEMENT) { "Unsupported particle type ${particle.particleType}" }
+        require(particle.particleType == SchemaParticle.ELEMENT) {
+            "Unsupported particle type ${particle.particleType}"
+        }
 
         val base = toXmlElement((particle as SchemaLocalElement))
 
@@ -106,7 +115,9 @@ object XmlSchemaParser {
     private tailrec fun collectBaseTypes(type: SchemaType, accumulator: List<XmlType>): List<XmlType> {
         val base = type.baseType
         // Simplify base types list by leaving out the "anyType".
-        return if (base != null && !(base.name.namespaceURI == "http://www.w3.org/2001/XMLSchema" && base.name.localPart == "anyType")) {
+        return if (base != null &&
+            !(base.name.namespaceURI == "http://www.w3.org/2001/XMLSchema" && base.name.localPart == "anyType")
+        ) {
             collectBaseTypes(base, accumulator + toXmlType(base))
         } else {
             accumulator
