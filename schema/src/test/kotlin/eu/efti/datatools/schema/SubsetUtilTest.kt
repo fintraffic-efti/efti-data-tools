@@ -4,11 +4,13 @@ import eu.efti.datatools.schema.SubsetUtil.dropNodesNotInSubsets
 import eu.efti.datatools.schema.XmlSchemaElement.SubsetId
 import eu.efti.datatools.schema.XmlUtil.deserializeToDocument
 import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.equalTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ValueSource
 import org.xmlunit.matchers.CompareMatcher.isSimilarTo
 import java.util.stream.Stream
 import kotlin.random.Random
@@ -52,6 +54,29 @@ class SubsetUtilTest {
         assertThat(
             doc,
             isSimilarTo(case.expectedXml.removeExtraWhitespace())
+        )
+    }
+
+    @ParameterizedTest
+    @ValueSource(
+        strings = ["this isn't a subset",
+            "BE0", // Partial subset id
+            "be03a" // Valid subset id but in lowercase
+        ]
+    )
+    fun `commonSchemaHasSubset should return false for subset that does not exist`(invalidSubsetId: String) {
+        assertThat(
+            SubsetUtil.commonSchemaHasSubset(SubsetId(invalidSubsetId)),
+            equalTo(false)
+        )
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["BE03a", "SI03"])
+    fun `commonSchemaHasSubset should return true for a subset that does exist`(subsetId: String) {
+        assertThat(
+            SubsetUtil.commonSchemaHasSubset(SubsetId(subsetId)),
+            equalTo(true)
         )
     }
 
@@ -236,3 +261,4 @@ class SubsetUtilTest {
         private fun randomLong(): Long = Random.nextLong(1, 10)
     }
 }
+

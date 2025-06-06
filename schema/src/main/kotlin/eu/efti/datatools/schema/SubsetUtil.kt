@@ -1,9 +1,7 @@
 package eu.efti.datatools.schema
 
 import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
-import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
 import eu.efti.datatools.schema.EftiSchemas.javaCommonSchema
-import eu.efti.datatools.schema.EftiSchemas.javaIdentifiersSchema
 import eu.efti.datatools.schema.XmlUtil.clone
 import eu.efti.datatools.schema.XmlUtil.dropNodesRecursively
 import eu.efti.datatools.schema.XmlUtil.validate
@@ -49,6 +47,10 @@ object SubsetUtil {
             !isInRequestedSubsets
         }
     }
+
+    @JvmStatic
+    fun commonSchemaHasSubset(subsetId: XmlSchemaElement.SubsetId): Boolean =
+        subsetId in EftiSchemas.consignmentCommonSubsetIds
 
     private fun filterSubsets(
         doc: Document, subsets: Set<XmlSchemaElement.SubsetId>, javaSchema: Schema, schema: XmlSchemaElement
