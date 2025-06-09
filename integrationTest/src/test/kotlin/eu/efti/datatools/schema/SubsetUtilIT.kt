@@ -72,13 +72,13 @@ class SubsetUtilIT {
 
         private fun populateTestCasesForVariant(
             allSubsets: Set<SubsetId>,
-            schemaVariant: String
+            schemaVariant: String,
         ): Sequence<PopulateTestCase> {
             val (javaSchema, eftiSchema, filteringFunction) = when (schemaVariant) {
                 "common" -> Triple(
                     javaCommonSchema,
                     consignmentCommonSchema,
-                    SubsetUtil::filterCommonSubsets
+                    SubsetUtil::filterCommonSubsets,
                 )
 
                 else -> throw IllegalArgumentException(schemaVariant)

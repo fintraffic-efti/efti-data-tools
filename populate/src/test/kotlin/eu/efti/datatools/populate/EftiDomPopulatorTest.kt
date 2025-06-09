@@ -16,7 +16,10 @@ import org.junit.jupiter.api.fail
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.w3c.dom.Document
-import java.io.*
+import java.io.File
+import java.io.FileWriter
+import java.io.InputStream
+import java.io.InputStreamReader
 import javax.xml.validation.Schema
 import kotlin.streams.asStream
 
@@ -66,8 +69,9 @@ class EftiDomPopulatorTest {
                     // Use junit assertEquals because it formats the expected value better than hamcrest.
                     // Also, CompareMatcher.isSimilarTo does not work with consignment-common document, maybe it's too big?
                     assertEquals(
-                        expected, formatXml(doc),
-                        "Populated document did not match the expected document, please update test expectations with: ./gradlew updateTestExpectations"
+                        expected,
+                        formatXml(doc),
+                        "Populated document did not match the expected document, please update test expectations with: ./gradlew updateTestExpectations",
                     )
                 },
             )
@@ -88,7 +92,7 @@ class EftiDomPopulatorTest {
             .map { (expression, value) ->
                 expression to EftiDomPopulator.TextContentOverride.tryToParse(expression, value)
             }
-            .onEach { (expression, parsed) -> if (parsed == null) throw IllegalArgumentException("""Could not parse "$expression"""") }
+            .onEach { (expression, parsed) -> requireNotNull(parsed) { """Could not parse "$expression"""" } }
             .mapNotNull(Pair<String, EftiDomPopulator.TextContentOverride?>::second)
 
         val populator = EftiDomPopulator(seed, repeatableMode)
@@ -110,8 +114,9 @@ class EftiDomPopulatorTest {
                 {
                     // Use junit assertEquals because it formats the expected value better than hamcrest.
                     assertEquals(
-                        expected, formatXml(doc),
-                        "Populated document did not match the expected document, please update test expectations with: ./gradlew updateTestExpectations"
+                        expected,
+                        formatXml(doc),
+                        "Populated document did not match the expected document, please update test expectations with: ./gradlew updateTestExpectations",
                     )
                 },
             )

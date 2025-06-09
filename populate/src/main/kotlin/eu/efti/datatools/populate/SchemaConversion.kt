@@ -28,7 +28,7 @@ object SchemaConversion {
         XmlUtil.dropNodesRecursively(
             schema = schema,
             node = node,
-            namespaceAware = false
+            namespaceAware = false,
         ) { _: Node, maybeSchemaElement: XmlSchemaElement? ->
             maybeSchemaElement == null
         }

@@ -28,8 +28,8 @@ class SchemaConversionTest {
 
         val identifiersDoc = commonToIdentifiers(
             EftiDomPopulator(1234, RepeatablePopulateMode.MINIMUM_ONE).populate(
-                consignmentCommonSchema
-            )
+                consignmentCommonSchema,
+            ),
         )
 
         if (updateTestExpectations) {
@@ -49,8 +49,9 @@ class SchemaConversionTest {
                     // Use junit assertEquals because it formats the expected value better than hamcrest.
                     // Also, CompareMatcher.isSimilarTo does not work with consignment-common document, maybe it's too big?
                     assertEquals(
-                        expected, formatXml(identifiersDoc),
-                        "Populated document did not match the expected document, please update test expectations with: ./gradlew updateTestExpectations"
+                        expected,
+                        formatXml(identifiersDoc),
+                        "Populated document did not match the expected document, please update test expectations with: ./gradlew updateTestExpectations",
                     )
                 },
             )

@@ -4,8 +4,11 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 val xmlunitVersion = "2.10.0"
 
+val ktlint: Configuration by configurations.creating
+
 plugins {
     kotlin("jvm")
+    id("io.gitlab.arturbosch.detekt")
     `maven-publish`
 }
 
@@ -22,6 +25,12 @@ dependencies {
     testImplementation("org.xmlunit:xmlunit-jakarta-jaxb-impl:$xmlunitVersion")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    ktlint("com.pinterest.ktlint:ktlint-cli:1.5.0") {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling::class, Bundling.EXTERNAL))
+        }
+    }
 }
 
 kotlin {
@@ -61,6 +70,45 @@ tasks.register<Test>("updateTestExpectations") {
     // Always run task even if it has successfully completed earlier
     outputs.upToDateWhen { false }
 }
+
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    config.setFrom(rootProject.file("detekt.yml"))
+}
+
+tasks.register<JavaExec>("ktlintCheck") {
+    group = "verification"
+    description = "Check Kotlin code style"
+    classpath = ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    args = listOfNotNull(
+        properties["ci"]?.let {
+            "--reporter=plain?group_by_file"
+        },
+        "src/**/*.kt",
+        "**.kts",
+        "!**/build/**",
+    )
+}
+
+tasks.register<JavaExec>("ktlintFormat") {
+    group = "formatting"
+    description = "Fix Kotlin code style deviations"
+    classpath = ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    jvmArgs = listOf("--add-opens=java.base/java.lang=ALL-UNNAMED")
+    args = listOf("-F", "src/**/*.kt", "**.kts", "!**/build/**")
+}
+
+tasks.named("check") {
+    dependsOn(
+        tasks.getByName("detekt"),
+        tasks.getByName("ktlintCheck"),
+        tasks.getByName("test"),
+    )
+}
+
 
 java {
     withJavadocJar()
