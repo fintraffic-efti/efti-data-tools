@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-val kotlinVersion = "2.2.10"
+val kotlinVersion = "2.2.20"
 val detektVersion = "1.23.8"
 
 repositories {
