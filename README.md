@@ -59,10 +59,10 @@ See [Java example](./example/java) for a complete example on library usage.
 Get efti-data-tools-cli-<version>.zip from [releases](https://github.com/fintraffic-efti/efti-data-tools/releases), unzip it and run with:
 ```
 # On *nix:
-./efti-datatools-cli-<version>/bin/app --help
+./efti-datatools-cli-<version>/bin/efti-data-tools-cli --help
 
 # On Windows:
-efti-datatools-cli-<version>\bin\app.bat --help
+efti-datatools-cli-<version>\bin\efti-data-tools-cli.bat --help
 ```
 
 The following examples use gradle to simplify testing. Note how the xpath expressions use local xml names and ignore namespaces.
