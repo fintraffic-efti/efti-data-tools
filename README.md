@@ -76,7 +76,7 @@ The following examples use gradle to simplify testing. Note how the xpath expres
 #### Subset filtering
 
 ```shell
-./gradlew app:run --args="filter -w -x identifier -i ../xsd/examples/consignment.xml -s FI01,FI02"
+./gradlew app:run --args="filter -w -i ../xsd/examples/consignment-common.xml -s FI01,FI02"
 ```
 
 #### Populate documents
