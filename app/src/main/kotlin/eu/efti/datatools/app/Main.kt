@@ -88,7 +88,7 @@ abstract class CommonArgs {
     var overwrite: Boolean = false
 
     @Parameter(names = ["--pretty", "-p"], required = false, description = "Pretty print.")
-    var pretty: Boolean = true
+    var pretty: Boolean = false
 }
 
 @Parameters(commandDescription = "Filter subsets on consignment document")
