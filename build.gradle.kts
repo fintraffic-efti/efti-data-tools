@@ -1,5 +1,5 @@
 plugins {
-    id("com.github.jk1.dependency-license-report") version "2.9"
+    id("com.github.jk1.dependency-license-report") version "3.0.1"
 }
 
 group = "eu.efti.datatools"
