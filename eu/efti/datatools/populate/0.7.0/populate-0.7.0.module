@@ -1,0 +1,136 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "eu.efti.datatools",
+    "module": "populate",
+    "version": "0.7.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "eu.efti.datatools",
+          "module": "schema",
+          "version": {
+            "requires": "0.7.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "populate-0.7.0.jar",
+          "url": "populate-0.7.0.jar",
+          "size": 39094,
+          "sha512": "e652601fd5c10dd4cd293e25d85b9149e9e14032fd4b9a4c50fdc02321dae5fdf7abf8e6634f5a7c67800f1d4fe5ab70f8267cbf88494b3395be47b0ee88cb1c",
+          "sha256": "d326e10d840a7f3af569582808d782035d431a416469944ba7a190372c5775df",
+          "sha1": "bc54f7781c3dc5ed4ed3e11171a6afcb221b0583",
+          "md5": "87d6cab499860b24fc4f172c0f28e7a9"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "eu.efti.datatools",
+          "module": "schema",
+          "version": {
+            "requires": "0.7.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "populate-0.7.0.jar",
+          "url": "populate-0.7.0.jar",
+          "size": 39094,
+          "sha512": "e652601fd5c10dd4cd293e25d85b9149e9e14032fd4b9a4c50fdc02321dae5fdf7abf8e6634f5a7c67800f1d4fe5ab70f8267cbf88494b3395be47b0ee88cb1c",
+          "sha256": "d326e10d840a7f3af569582808d782035d431a416469944ba7a190372c5775df",
+          "sha1": "bc54f7781c3dc5ed4ed3e11171a6afcb221b0583",
+          "md5": "87d6cab499860b24fc4f172c0f28e7a9"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "populate-0.7.0-javadoc.jar",
+          "url": "populate-0.7.0-javadoc.jar",
+          "size": 261,
+          "sha512": "ffcb8f0d070092f5b924cb2b86fd469830f7c325f7814d3408ff8ae1878222a946e45937986935549a68324e9f11d3437f37065259517560e683d1a35bc51a9f",
+          "sha256": "af2bbd03e3e8842eb1486fbc84f253c8a2fa915d0b08a4069f2186d2039f2c46",
+          "sha1": "f3a2fe1172a140d0f857a796f3c477c5762b0124",
+          "md5": "3d1e3c584269445668eb9ac8259e09bc"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "populate-0.7.0-sources.jar",
+          "url": "populate-0.7.0-sources.jar",
+          "size": 5959,
+          "sha512": "1e630fcc021b3baa5fe7df32fae9b1d805481098e4dc793a982f5644fb22f4d4336add5a8106737e9d55ed36a6c3301bbd6f1a99978de0fe43db6747fa7ac2fa",
+          "sha256": "6ee23ac55e127c6b7793f20e5083ff173e2e190b78002897c7c072b9120f0ab5",
+          "sha1": "8c07f9bca6354265fe00d6aec0e76fb0406d02ed",
+          "md5": "d52126e5e753fb2ccc648e5c47a6509d"
+        }
+      ]
+    }
+  ]
+}
