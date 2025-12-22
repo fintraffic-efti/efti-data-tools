@@ -13,7 +13,7 @@ sourceSets {
 dependencies {
     implementation("org.apache.xmlbeans:xmlbeans:5.3.0")
 
-    runtimeOnly(platform("org.apache.logging.log4j:log4j-bom:2.25.2"))
+    runtimeOnly(platform("org.apache.logging.log4j:log4j-bom:2.25.3"))
     runtimeOnly("org.apache.logging.log4j:log4j-core")
 }
 
