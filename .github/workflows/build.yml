@@ -32,7 +32,7 @@ jobs:
       # Try to upload report even if previous step fails
       if: '!cancelled()'
       continue-on-error: true
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         if-no-files-found: error
         name: license-check-report
@@ -48,14 +48,14 @@ jobs:
       run: ./gradlew test
 
     - name: Upload library artifacts
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: efti-data-tools-lib
         path: ./build/local-maven-repo/
         if-no-files-found: error
 
     - name: Upload app artifact
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: efti-data-tools-cli
         path: ./app/build/distributions/efti-data-tools-cli-*.zip
