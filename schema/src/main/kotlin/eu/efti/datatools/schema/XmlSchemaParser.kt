@@ -1,6 +1,5 @@
 package eu.efti.datatools.schema
 
-import eu.efti.datatools.schema.XmlSchemaElement.SubsetId
 import eu.efti.datatools.schema.XmlSchemaElement.XmlAttribute
 import eu.efti.datatools.schema.XmlSchemaElement.XmlCardinality
 import eu.efti.datatools.schema.XmlSchemaElement.XmlName

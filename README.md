@@ -83,10 +83,10 @@ src/main/resources/efti-xsd/codes/codes.xsd
 // compiles a given schema at most once, so this is cheap to call.
 EftiSchemas schemas = EftiSchemas.fromClasspath("/efti-xsd");
 
-Document doc = new EftiDomPopulator(1234, RepeatablePopulateMode.MINIMUM_ONE)
-        .populate(schemas, EftiSchemaId.CONSIGNMENT_COMMON);
+Document doc = new EftiDomPopulator(schemas, 1234, RepeatablePopulateMode.MINIMUM_ONE)
+        .populate(EftiSchemaId.CONSIGNMENT_COMMON);
 
-Document filtered = SubsetUtil.filterCommonSubsets(schemas, doc, Set.of(new XmlSchemaElement.SubsetId("FI01")));
+Document filtered = schemas.filterCommonSubsets(doc, Set.of(new SubsetId("FI01")));
 ```
 
 Schemas can also be read from a directory of the local file system with `EftiSchemas.fromDirectory(File)`.
@@ -105,7 +105,8 @@ efti-data-tools-cli populate --schema-dir /path/to/xsd -x common
 #### Migrating from 0.8.0 or earlier
 
 Earlier versions bundled the schemas and exposed them as static fields of `EftiSchemas`. Replace those with an
-`EftiSchemas` instance and an `EftiSchemaId`:
+`EftiSchemas` instance and an `EftiSchemaId`. Filtering and populating are now done through `EftiSchemas` and
+`EftiDomPopulator` themselves instead of passing the schemas to helper objects:
 
 | Before | After |
 | --- | --- |
@@ -114,9 +115,12 @@ Earlier versions bundled the schemas and exposed them as static fields of `EftiS
 | `EftiSchemas.getJavaCommonSchema()` | `schemas.javaSchema(EftiSchemaId.CONSIGNMENT_COMMON)` |
 | `EftiSchemas.getJavaIdentifiersSchema()` | `schemas.javaSchema(EftiSchemaId.CONSIGNMENT_IDENTIFIER)` |
 | `EftiSchemas.getConsignmentCommonSubsetIds()` | `schemas.subsetIds(EftiSchemaId.CONSIGNMENT_COMMON)` |
-| `SubsetUtil.filterCommonSubsets(doc, subsets)` | `SubsetUtil.filterCommonSubsets(schemas, doc, subsets)` |
-| `SubsetUtil.commonSchemaHasSubset(subsetId)` | `SubsetUtil.commonSchemaHasSubset(schemas, subsetId)` |
+| `SubsetUtil.filterCommonSubsets(doc, subsets)` | `schemas.filterCommonSubsets(doc, subsets)` |
+| `SubsetUtil.commonSchemaHasSubset(subsetId)` | `schemas.hasCommonSubset(subsetId)` |
 | `SchemaConversion.commonToIdentifiers(doc)` | `SchemaConversion.commonToIdentifiers(schemas, doc)` |
+| `new XmlSchemaElement.SubsetId("FI01")` | `new SubsetId("FI01")` |
+| `new EftiDomPopulator(seed, mode)` | `new EftiDomPopulator(schemas, seed, mode)` |
+| `populator.populate(eftiSchema, ...)` | `populator.populate(EftiSchemaId.CONSIGNMENT_COMMON, ...)` |
 
 Command line users must add `--schema-dir`.
 

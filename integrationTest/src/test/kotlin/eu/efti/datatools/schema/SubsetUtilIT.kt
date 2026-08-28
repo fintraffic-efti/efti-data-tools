@@ -2,9 +2,6 @@ package eu.efti.datatools.schema
 
 import eu.efti.datatools.populate.EftiDomPopulator
 import eu.efti.datatools.populate.RepeatablePopulateMode
-import eu.efti.datatools.schema.TestSchemas.consignmentCommonSchema
-import eu.efti.datatools.schema.TestSchemas.javaCommonSchema
-import eu.efti.datatools.schema.XmlSchemaElement.SubsetId
 import eu.efti.datatools.schema.XmlUtil.serializeToString
 import eu.efti.datatools.schema.XmlUtil.validate
 import org.hamcrest.MatcherAssert.assertThat
@@ -23,8 +20,8 @@ class SubsetUtilIT {
     @ParameterizedTest
     @MethodSource("filteringTestCases")
     fun `should produce valid documents by filtering random subsets on random documents`(testCase: PopulateTestCase) {
-        val populator = EftiDomPopulator(testCase.seed, testCase.repeatablePopulateMode)
-        val doc = populator.populate(testCase.eftiSchema)
+        val populator = EftiDomPopulator(TestSchemas.schemas, testCase.seed, testCase.repeatablePopulateMode)
+        val doc = populator.populate(testCase.schemaId)
 
         val filtered = testCase.filteringFunction(doc, testCase.requestedSubsets)
         val validationError = validate(filtered, testCase.javaSchema)
@@ -50,7 +47,7 @@ class SubsetUtilIT {
             val seed: Long,
             val repeatablePopulateMode: RepeatablePopulateMode,
             val requestedSubsets: Set<SubsetId>,
-            val eftiSchema: XmlSchemaElement,
+            val schemaId: EftiSchemaId,
             val javaSchema: Schema,
             val filteringFunction: (doc: Document, subsets: Set<SubsetId>) -> Document,
         ) {
@@ -65,7 +62,7 @@ class SubsetUtilIT {
 
         @JvmStatic
         fun filteringTestCases(): java.util.stream.Stream<PopulateTestCase> {
-            val subsets = collectSubsets(consignmentCommonSchema)
+            val subsets = collectSubsets(TestSchemas.consignmentCommonSchema)
             return populateTestCasesForVariant(subsets, "common")
                 .asStream()
         }
@@ -74,16 +71,14 @@ class SubsetUtilIT {
             allSubsets: Set<SubsetId>,
             schemaVariant: String,
         ): Sequence<PopulateTestCase> {
-            val (javaSchema, eftiSchema, filteringFunction) = when (schemaVariant) {
-                "common" -> Triple(
-                    javaCommonSchema,
-                    consignmentCommonSchema,
-                ) { doc: Document, subsets: Set<SubsetId> ->
-                    SubsetUtil.filterCommonSubsets(TestSchemas.schemas, doc, subsets)
-                }
-
+            val filterCommon = { doc: Document, subsets: Set<SubsetId> ->
+                TestSchemas.schemas.filterCommonSubsets(doc, subsets)
+            }
+            val (schemaId, filteringFunction) = when (schemaVariant) {
+                "common" -> EftiSchemaId.CONSIGNMENT_COMMON to filterCommon
                 else -> throw IllegalArgumentException(schemaVariant)
             }
+            val javaSchema = TestSchemas.schemas.javaSchema(schemaId)
 
             return (1..20).asSequence().map { seed ->
                 val random = java.util.Random(seed.toLong()).asKotlinRandom()
@@ -99,7 +94,7 @@ class SubsetUtilIT {
                     },
                     requestedSubsets = generateSequence { allSubsets.random(random) }.take(1 + random.nextInt(3))
                         .toSet(),
-                    eftiSchema = eftiSchema,
+                    schemaId = schemaId,
                     javaSchema = javaSchema,
                     filteringFunction = filteringFunction,
                 )

@@ -5,6 +5,7 @@ import org.apache.xmlbeans.XmlBeans
 import org.apache.xmlbeans.XmlException
 import org.apache.xmlbeans.XmlObject
 import org.apache.xmlbeans.XmlOptions
+import org.w3c.dom.Document
 import org.xml.sax.InputSource
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
@@ -28,22 +29,59 @@ class EftiSchemas private constructor(private val source: XsdSource) {
 
     private val javaSchemas = ConcurrentHashMap<EftiSchemaId, Schema>()
 
-    private val subsetIds = ConcurrentHashMap<EftiSchemaId, Set<XmlSchemaElement.SubsetId>>()
+    private val subsetIds = ConcurrentHashMap<EftiSchemaId, Set<SubsetId>>()
+
+    /**
+     * Create a copy of the consignment common document and drop all elements that are not included in the given
+     * subsets. The subset ids are not validated.
+     * @param doc consignment common document
+     * @param subsets set of subsets to keep
+     * @return new document containing only elements that are included in the given subsets
+     * @throws IllegalArgumentException if `doc` does not conform to consignment common schema
+     */
+    fun filterCommonSubsets(doc: Document, subsets: Set<SubsetId>): Document {
+        val javaSchema = javaSchema(EftiSchemaId.CONSIGNMENT_COMMON)
+
+        XmlUtil.validate(doc, javaSchema)?.let { error ->
+            throw IllegalArgumentException("Input document is not valid: $error")
+        }
+
+        return XmlUtil.clone(doc).also { cloned ->
+            SubsetUtil.dropNodesNotInSubsets(
+                subsets,
+                xmlSchema(EftiSchemaId.CONSIGNMENT_COMMON),
+                cloned.firstChild,
+            )
+            XmlUtil.validate(cloned, javaSchema)
+        }
+    }
+
+    /**
+     * @param subsetId subset id to look for
+     * @return true if the consignment common schema declares the given subset
+     */
+    fun hasCommonSubset(subsetId: SubsetId): Boolean = subsetId in subsetIds(EftiSchemaId.CONSIGNMENT_COMMON)
 
     /**
      * Parsed representation of the given schema, including subset annotations.
+     *
+     * This is a low level accessor, most users should not need it.
      */
     fun xmlSchema(id: EftiSchemaId): XmlSchemaElement = xmlSchemas.computeIfAbsent(id, ::readXmlSchema)
 
     /**
      * Schema of the given id for xml validation.
+     *
+     * This is a low level accessor, most users should not need it.
      */
     fun javaSchema(id: EftiSchemaId): Schema = javaSchemas.computeIfAbsent(id, ::readJavaSchema)
 
     /**
      * All subset ids that are declared on the direct children of the document element of the given schema.
+     *
+     * This is a low level accessor, most users should not need it.
      */
-    fun subsetIds(id: EftiSchemaId): Set<XmlSchemaElement.SubsetId> = subsetIds.computeIfAbsent(id) {
+    fun subsetIds(id: EftiSchemaId): Set<SubsetId> = subsetIds.computeIfAbsent(id) {
         xmlSchema(it).children.flatMap(XmlSchemaElement::subsets).toSet()
     }
 

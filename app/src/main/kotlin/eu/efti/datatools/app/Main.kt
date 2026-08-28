@@ -15,8 +15,7 @@ import eu.efti.datatools.populate.SchemaConversion.commonToIdentifiers
 import eu.efti.datatools.schema.EftiSchemaException
 import eu.efti.datatools.schema.EftiSchemaId
 import eu.efti.datatools.schema.EftiSchemas
-import eu.efti.datatools.schema.SubsetUtil.filterCommonSubsets
-import eu.efti.datatools.schema.XmlSchemaElement.SubsetId
+import eu.efti.datatools.schema.SubsetId
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.deserializeToDocument
 import eu.efti.datatools.schema.XmlUtil.serializeToString
@@ -242,7 +241,7 @@ private fun doFilter(args: CommandFilter) {
 
     validateAndWrite(
         schemas.javaSchema(EftiSchemaId.CONSIGNMENT_COMMON),
-        filterCommonSubsets(schemas, doc, subsets),
+        schemas.filterCommonSubsets(doc, subsets),
         checkNotNull(outputFile),
     )
 }
@@ -308,15 +307,13 @@ private fun doPopulate(args: CommandPopulate) {
 
     val schemas = args.loadSchemas()
 
-    val doc = EftiDomPopulator(checkNotNull(args.seed), args.repeatableMode)
+    val doc = EftiDomPopulator(schemas, checkNotNull(args.seed), args.repeatableMode)
         .populate(
-            schema = schemas.xmlSchema(
-                when (args.schema) {
-                    CommandPopulate.SchemaOption.BOTH -> EftiSchemaId.CONSIGNMENT_COMMON
-                    CommandPopulate.SchemaOption.COMMON -> EftiSchemaId.CONSIGNMENT_COMMON
-                    CommandPopulate.SchemaOption.IDENTIFIER -> EftiSchemaId.CONSIGNMENT_IDENTIFIER
-                },
-            ),
+            schemaId = when (args.schema) {
+                CommandPopulate.SchemaOption.BOTH -> EftiSchemaId.CONSIGNMENT_COMMON
+                CommandPopulate.SchemaOption.COMMON -> EftiSchemaId.CONSIGNMENT_COMMON
+                CommandPopulate.SchemaOption.IDENTIFIER -> EftiSchemaId.CONSIGNMENT_IDENTIFIER
+            },
             overrides = overrides,
             namespaceAware = false,
         )

@@ -20,9 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class JavaExampleTest {
     @Test
     public void shouldFilterSubsetsOnPopulatedDocument() {
-        var populator = new EftiDomPopulator(1234, RepeatablePopulateMode.MINIMUM_ONE);
-        var originalDoc = populator.populate(
-                JavaExample.SCHEMAS, EftiSchemaId.CONSIGNMENT_COMMON, List.of(), true);
+        var populator = new EftiDomPopulator(JavaExample.SCHEMAS, 1234, RepeatablePopulateMode.MINIMUM_ONE);
+        var originalDoc = populator.populate(EftiSchemaId.CONSIGNMENT_COMMON);
 
         var filteredDoc = JavaExample.filterCommonSubsets(originalDoc, Set.of("FI01", "FI02"));
 

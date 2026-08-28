@@ -1,9 +1,7 @@
 package eu.efti.datatools.populate
 
+import eu.efti.datatools.schema.EftiSchemaId
 import eu.efti.datatools.schema.TestSchemas
-import eu.efti.datatools.schema.TestSchemas.consignmentCommonSchema
-import eu.efti.datatools.schema.TestSchemas.consignmentIdentifierSchema
-import eu.efti.datatools.schema.XmlSchemaElement
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.serializeToString
 import org.hamcrest.MatcherAssert.assertThat
@@ -30,8 +28,8 @@ class EftiDomPopulatorTest {
     @ParameterizedTest
     @MethodSource("populateTestCases")
     fun `should create valid documents with different generator seeds`(testCase: PopulateTestCase) {
-        val populator = EftiDomPopulator(testCase.seed, testCase.repeatablePopulateMode)
-        val doc = populator.populate(testCase.eftiSchema)
+        val populator = EftiDomPopulator(TestSchemas.schemas, testCase.seed, testCase.repeatablePopulateMode)
+        val doc = populator.populate(testCase.schemaId)
 
         val error = XmlUtil.validate(doc, testCase.javaSchema)
 
@@ -47,10 +45,9 @@ class EftiDomPopulatorTest {
     @Tag("expectation-update")
     fun `should populate common document that matches the expected document`() {
         val expectationFilename = "common-expected.xml"
-        val eftiSchema = consignmentCommonSchema
 
-        val populator = EftiDomPopulator(42, RepeatablePopulateMode.MINIMUM_ONE)
-        val doc = populator.populate(eftiSchema)
+        val populator = EftiDomPopulator(TestSchemas.schemas, 42, RepeatablePopulateMode.MINIMUM_ONE)
+        val doc = populator.populate(EftiSchemaId.CONSIGNMENT_COMMON)
 
         if (updateTestExpectations) {
             val updated = formatXml(doc)
@@ -95,8 +92,8 @@ class EftiDomPopulatorTest {
             .onEach { (expression, parsed) -> requireNotNull(parsed) { """Could not parse "$expression"""" } }
             .mapNotNull(Pair<String, EftiDomPopulator.TextContentOverride?>::second)
 
-        val populator = EftiDomPopulator(seed, repeatableMode)
-        val doc = populator.populate(consignmentIdentifierSchema, overrides, namespaceAware = false)
+        val populator = EftiDomPopulator(TestSchemas.schemas, seed, repeatableMode)
+        val doc = populator.populate(EftiSchemaId.CONSIGNMENT_IDENTIFIER, overrides, namespaceAware = false)
 
         if (updateTestExpectations) {
             val updated = formatXml(doc)
@@ -128,7 +125,7 @@ class EftiDomPopulatorTest {
             val schemaVariant: String,
             val seed: Long,
             val repeatablePopulateMode: RepeatablePopulateMode,
-            val eftiSchema: XmlSchemaElement,
+            val schemaId: EftiSchemaId,
             val javaSchema: Schema,
         ) {
             override fun toString(): String =
@@ -140,11 +137,12 @@ class EftiDomPopulatorTest {
             populateTestCasesForVariant("identifier").plus(populateTestCasesForVariant("common")).asStream()
 
         private fun populateTestCasesForVariant(schemaVariant: String): Sequence<PopulateTestCase> {
-            val (javaSchema, eftiSchema) = when (schemaVariant) {
-                "common" -> TestSchemas.javaCommonSchema to consignmentCommonSchema
-                "identifier" -> TestSchemas.javaIdentifiersSchema to consignmentIdentifierSchema
+            val schemaId = when (schemaVariant) {
+                "common" -> EftiSchemaId.CONSIGNMENT_COMMON
+                "identifier" -> EftiSchemaId.CONSIGNMENT_IDENTIFIER
                 else -> throw IllegalArgumentException(schemaVariant)
             }
+            val javaSchema = TestSchemas.schemas.javaSchema(schemaId)
 
             return (1..100).asSequence().map { seed ->
                 PopulateTestCase(
@@ -156,7 +154,7 @@ class EftiDomPopulatorTest {
                         2 -> RepeatablePopulateMode.EXACTLY_ONE
                         else -> RepeatablePopulateMode.RANDOM
                     },
-                    eftiSchema = eftiSchema,
+                    schemaId = schemaId,
                     javaSchema = javaSchema,
                 )
             }

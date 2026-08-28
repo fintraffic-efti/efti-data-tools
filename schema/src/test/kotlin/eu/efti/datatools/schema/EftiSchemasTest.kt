@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.io.TempDir
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 import java.io.File
 
 class EftiSchemasTest {
@@ -59,9 +61,75 @@ class EftiSchemasTest {
         val schemas = EftiSchemas.fromDirectory(TestSchemas.xsdDirectory)
 
         assertThat(
-            XmlSchemaElement.SubsetId("BE03a") in schemas.subsetIds(EftiSchemaId.CONSIGNMENT_COMMON),
+            SubsetId("BE03a") in schemas.subsetIds(EftiSchemaId.CONSIGNMENT_COMMON),
             equalTo(true),
         )
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["BE03a", "SI03"])
+    fun `hasCommonSubset should return true for a subset that does exist`(subsetId: String) {
+        assertThat(TestSchemas.schemas.hasCommonSubset(SubsetId(subsetId)), equalTo(true))
+    }
+
+    @ParameterizedTest
+    @ValueSource(
+        strings = [
+            "this isn't a subset",
+            "BE0", // Partial subset id
+            "be03a", // Valid subset id but in lowercase
+        ],
+    )
+    fun `hasCommonSubset should return false for subset that does not exist`(invalidSubsetId: String) {
+        assertThat(TestSchemas.schemas.hasCommonSubset(SubsetId(invalidSubsetId)), equalTo(false))
+    }
+
+    @Test
+    fun `filterCommonSubsets should drop nodes that are not in the requested subsets`() {
+        val doc = XmlUtil.deserializeToDocument(
+            """
+            <consignment xmlns="${EftiSchemaId.CONSIGNMENT_COMMON.namespaceURI}">
+                <contractTermsText>terms</contractTermsText>
+                <information>info</information>
+            </consignment>
+            """.trimIndent(),
+        )
+
+        val filtered = TestSchemas.schemas.filterCommonSubsets(doc, setOf(SubsetId("FI01")))
+
+        assertAll(
+            {
+                assertThat(
+                    "contractTermsText belongs to FI01 and is kept",
+                    filtered.getElementsByTagName("*").length,
+                    equalTo(2),
+                )
+            },
+            {
+                assertThat(
+                    "information does not belong to FI01 and is dropped",
+                    filtered.documentElement.getElementsByTagName("information").length,
+                    equalTo(0),
+                )
+            },
+        )
+    }
+
+    @Test
+    fun `filterCommonSubsets should reject a document that is not valid against the common schema`() {
+        val doc = XmlUtil.deserializeToDocument(
+            """
+            <consignment xmlns="${EftiSchemaId.CONSIGNMENT_COMMON.namespaceURI}">
+                <notAnEftiElement/>
+            </consignment>
+            """.trimIndent(),
+        )
+
+        val exception = assertThrows<IllegalArgumentException> {
+            TestSchemas.schemas.filterCommonSubsets(doc, setOf(SubsetId("FI01")))
+        }
+
+        assertThat(exception.message, containsString("not valid"))
     }
 
     @Test

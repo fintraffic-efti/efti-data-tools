@@ -1,8 +1,7 @@
 package eu.efti.datatools.javaexample;
 
 import eu.efti.datatools.schema.EftiSchemas;
-import eu.efti.datatools.schema.SubsetUtil;
-import eu.efti.datatools.schema.XmlSchemaElement;
+import eu.efti.datatools.schema.SubsetId;
 import org.w3c.dom.Document;
 
 import java.util.Set;
@@ -19,9 +18,8 @@ public class JavaExample {
     public static final EftiSchemas SCHEMAS = EftiSchemas.fromClasspath("/efti-xsd");
 
     public static Document filterCommonSubsets(Document doc, Set<String> subsets) {
-        return SubsetUtil.filterCommonSubsets(
-                SCHEMAS,
+        return SCHEMAS.filterCommonSubsets(
                 doc,
-                subsets.stream().map(XmlSchemaElement.SubsetId::new).collect(Collectors.toSet()));
+                subsets.stream().map(SubsetId::new).collect(Collectors.toSet()));
     }
 }

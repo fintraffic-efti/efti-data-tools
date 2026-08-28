@@ -33,7 +33,7 @@ class EftiSchemaTest {
             { assertThat(element.name.localPart, equalTo("consignment")) },
             { assertThat(element.children, hasSize(43)) },
             { assertThat(applicableServiceCharge.subsets, hasSize(24)) },
-            { assertThat(applicableServiceCharge.subsets, hasItem(XmlSchemaElement.SubsetId("LT01"))) },
+            { assertThat(applicableServiceCharge.subsets, hasItem(SubsetId("LT01"))) },
         )
     }
 }
