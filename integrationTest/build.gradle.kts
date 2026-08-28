@@ -5,4 +5,5 @@ plugins {
 dependencies {
     testImplementation(project(":populate"))
     testImplementation(project(":schema"))
+    testImplementation(testFixtures(project(":schema")))
 }

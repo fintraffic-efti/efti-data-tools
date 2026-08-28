@@ -70,7 +70,7 @@ class SubsetUtilTest {
     )
     fun `commonSchemaHasSubset should return false for subset that does not exist`(invalidSubsetId: String) {
         assertThat(
-            SubsetUtil.commonSchemaHasSubset(SubsetId(invalidSubsetId)),
+            SubsetUtil.commonSchemaHasSubset(TestSchemas.schemas, SubsetId(invalidSubsetId)),
             equalTo(false),
         )
     }
@@ -79,7 +79,7 @@ class SubsetUtilTest {
     @ValueSource(strings = ["BE03a", "SI03"])
     fun `commonSchemaHasSubset should return true for a subset that does exist`(subsetId: String) {
         assertThat(
-            SubsetUtil.commonSchemaHasSubset(SubsetId(subsetId)),
+            SubsetUtil.commonSchemaHasSubset(TestSchemas.schemas, SubsetId(subsetId)),
             equalTo(true),
         )
     }

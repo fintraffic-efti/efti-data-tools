@@ -1,7 +1,7 @@
 package eu.efti.datatools.schema
 
-import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
-import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
+import eu.efti.datatools.schema.TestSchemas.consignmentCommonSchema
+import eu.efti.datatools.schema.TestSchemas.consignmentIdentifierSchema
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.hasItem
 import org.hamcrest.MatcherAssert.assertThat
