@@ -34,9 +34,6 @@ dependencies {
     testImplementation("eu.efti.datatools:populate:$libraryVersion")
 }
 
-// The eFTI xsd files are not shipped with the libraries: every user provides their own copy of the schemas. This
-// example packages the schemas of this repository onto its own classpath under "efti-xsd", which is the root path
-// that JavaExample passes to EftiSchemas.fromClasspath.
 val eftiXsdResources = layout.buildDirectory.dir("efti-xsd-resources")
 
 val copyEftiXsd by tasks.registering(Copy::class) {

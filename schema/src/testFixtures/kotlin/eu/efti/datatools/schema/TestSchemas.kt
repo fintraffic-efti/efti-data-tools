@@ -1,7 +1,6 @@
 package eu.efti.datatools.schema
 
 import java.io.File
-import javax.xml.validation.Schema
 
 /**
  * Schemas for tests of this repository. The xsd files are not packaged into the artifacts anymore, so tests read
@@ -15,13 +14,7 @@ object TestSchemas {
         },
     )
 
-    val schemas: EftiSchemas by lazy { EftiSchemas.fromDirectory(xsdDirectory) }
+    val common: EftiSchema by lazy { EftiSchema.fromDirectory(EftiSchemaId.CONSIGNMENT_COMMON, xsdDirectory) }
 
-    val consignmentCommonSchema: XmlSchemaElement get() = schemas.xmlSchema(EftiSchemaId.CONSIGNMENT_COMMON)
-
-    val consignmentIdentifierSchema: XmlSchemaElement get() = schemas.xmlSchema(EftiSchemaId.CONSIGNMENT_IDENTIFIER)
-
-    val javaCommonSchema: Schema get() = schemas.javaSchema(EftiSchemaId.CONSIGNMENT_COMMON)
-
-    val javaIdentifiersSchema: Schema get() = schemas.javaSchema(EftiSchemaId.CONSIGNMENT_IDENTIFIER)
+    val identifier: EftiSchema by lazy { EftiSchema.fromDirectory(EftiSchemaId.CONSIGNMENT_IDENTIFIER, xsdDirectory) }
 }
