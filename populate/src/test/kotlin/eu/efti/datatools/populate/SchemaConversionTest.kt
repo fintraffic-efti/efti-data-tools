@@ -1,8 +1,8 @@
 package eu.efti.datatools.populate
 
 import eu.efti.datatools.populate.SchemaConversion.commonToIdentifiers
-import eu.efti.datatools.schema.EftiSchemas
-import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
+import eu.efti.datatools.schema.TestSchemas
+import eu.efti.datatools.schema.TestSchemas.consignmentCommonSchema
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.serializeToString
 import org.hamcrest.MatcherAssert.assertThat
@@ -27,6 +27,7 @@ class SchemaConversionTest {
         val expectationFilename = "conversion-expected.xml"
 
         val identifiersDoc = commonToIdentifiers(
+            TestSchemas.schemas,
             EftiDomPopulator(1234, RepeatablePopulateMode.MINIMUM_ONE).populate(
                 consignmentCommonSchema,
             ),
@@ -44,7 +45,7 @@ class SchemaConversionTest {
                 InputStreamReader(classpathInputStream(expectationFilename)).use { it.readText() }
 
             assertAll(
-                { assertThat(XmlUtil.validate(identifiersDoc, EftiSchemas.javaIdentifiersSchema), nullValue()) },
+                { assertThat(XmlUtil.validate(identifiersDoc, TestSchemas.javaIdentifiersSchema), nullValue()) },
                 {
                     // Use junit assertEquals because it formats the expected value better than hamcrest.
                     // Also, CompareMatcher.isSimilarTo does not work with consignment-common document, maybe it's too big?

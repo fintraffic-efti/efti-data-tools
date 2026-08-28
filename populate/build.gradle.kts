@@ -4,6 +4,8 @@ plugins {
 
 dependencies {
     api(project(":schema"))
+
+    testImplementation(testFixtures(project(":schema")))
 }
 
 java {

@@ -1,6 +1,7 @@
 package eu.efti.datatools.populate
 
-import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
+import eu.efti.datatools.schema.EftiSchemaId
+import eu.efti.datatools.schema.EftiSchemas
 import eu.efti.datatools.schema.XmlSchemaElement
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.clone
@@ -10,16 +11,16 @@ import org.w3c.dom.Document
 import org.w3c.dom.Node
 
 object SchemaConversion {
-    fun commonToIdentifiers(common: Document): Document {
+    fun commonToIdentifiers(schemas: EftiSchemas, common: Document): Document {
         val identifier = clone(common)
 
-        dropNodesNotInSchema(consignmentIdentifierSchema, identifier.firstChild)
+        dropNodesNotInSchema(schemas.xmlSchema(EftiSchemaId.CONSIGNMENT_IDENTIFIER), identifier.firstChild)
 
         return deserializeToDocument(
             // Note: this is a dirty way of fixing the namespace, but it is simple and works in our context.
             serializeToString(identifier).replace(
-                "http://efti.eu/v1/consignment/common",
-                "http://efti.eu/v1/consignment/identifier",
+                EftiSchemaId.CONSIGNMENT_COMMON.namespaceURI,
+                EftiSchemaId.CONSIGNMENT_IDENTIFIER.namespaceURI,
             ),
         )
     }

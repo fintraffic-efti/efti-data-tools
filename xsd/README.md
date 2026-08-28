@@ -1,3 +1,8 @@
+> [!NOTE]
+> This copy of the schemas is kept in the repository for testing and for the examples only. It is **not** packaged
+> into the released libraries or the command line application, see the
+> [Providing the schemas](../README.md#providing-the-schemas) section of the main readme.
+
 eDelivery xsd schemas v0.5
 ===
 

@@ -1,8 +1,8 @@
 package eu.efti.datatools.populate
 
-import eu.efti.datatools.schema.EftiSchemas
-import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
-import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
+import eu.efti.datatools.schema.TestSchemas
+import eu.efti.datatools.schema.TestSchemas.consignmentCommonSchema
+import eu.efti.datatools.schema.TestSchemas.consignmentIdentifierSchema
 import eu.efti.datatools.schema.XmlSchemaElement
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.serializeToString
@@ -64,7 +64,7 @@ class EftiDomPopulatorTest {
                 InputStreamReader(classpathInputStream(expectationFilename)).use { it.readText() }
 
             assertAll(
-                { assertThat(XmlUtil.validate(doc, EftiSchemas.javaCommonSchema), nullValue()) },
+                { assertThat(XmlUtil.validate(doc, TestSchemas.javaCommonSchema), nullValue()) },
                 {
                     // Use junit assertEquals because it formats the expected value better than hamcrest.
                     // Also, CompareMatcher.isSimilarTo does not work with consignment-common document, maybe it's too big?
@@ -110,7 +110,7 @@ class EftiDomPopulatorTest {
                 InputStreamReader(classpathInputStream(expectationFilename)).use { it.readText() }
 
             assertAll(
-                { assertThat(XmlUtil.validate(doc, EftiSchemas.javaIdentifiersSchema), nullValue()) },
+                { assertThat(XmlUtil.validate(doc, TestSchemas.javaIdentifiersSchema), nullValue()) },
                 {
                     // Use junit assertEquals because it formats the expected value better than hamcrest.
                     assertEquals(
@@ -141,8 +141,8 @@ class EftiDomPopulatorTest {
 
         private fun populateTestCasesForVariant(schemaVariant: String): Sequence<PopulateTestCase> {
             val (javaSchema, eftiSchema) = when (schemaVariant) {
-                "common" -> EftiSchemas.javaCommonSchema to consignmentCommonSchema
-                "identifier" -> EftiSchemas.javaIdentifiersSchema to consignmentIdentifierSchema
+                "common" -> TestSchemas.javaCommonSchema to consignmentCommonSchema
+                "identifier" -> TestSchemas.javaIdentifiersSchema to consignmentIdentifierSchema
                 else -> throw IllegalArgumentException(schemaVariant)
             }
 

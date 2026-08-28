@@ -1,5 +1,7 @@
 package eu.efti.datatools.populate
 
+import eu.efti.datatools.schema.EftiSchemaId
+import eu.efti.datatools.schema.EftiSchemas
 import eu.efti.datatools.schema.XmlSchemaElement
 import eu.efti.datatools.schema.XmlSchemaElement.XmlName
 import eu.efti.datatools.schema.XmlSchemaElement.XmlType
@@ -111,6 +113,24 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
         EnumTypeMatcher to enumerationGenerator,
     )
 
+    /**
+     * Populate a pseudo-random document of the given schema.
+     * @param schemas schemas to use, see [eu.efti.datatools.schema.EftiSchemas]
+     * @param schemaId schema to populate
+     */
+    @JvmOverloads
+    fun populate(
+        schemas: EftiSchemas,
+        schemaId: EftiSchemaId,
+        overrides: List<Override> = emptyList(),
+        namespaceAware: Boolean = true,
+    ): Document = populate(schemas.xmlSchema(schemaId), overrides, namespaceAware)
+
+    /**
+     * Populate a pseudo-random document of the given parsed schema. Prefer the [EftiSchemaId] based overload
+     * unless you need to populate a document of a schema that is not an eFTI consignment schema.
+     */
+    @JvmOverloads
     fun populate(
         schema: XmlSchemaElement,
         overrides: List<Override> = emptyList(),

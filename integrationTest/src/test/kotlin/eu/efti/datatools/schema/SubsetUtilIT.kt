@@ -2,8 +2,8 @@ package eu.efti.datatools.schema
 
 import eu.efti.datatools.populate.EftiDomPopulator
 import eu.efti.datatools.populate.RepeatablePopulateMode
-import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
-import eu.efti.datatools.schema.EftiSchemas.javaCommonSchema
+import eu.efti.datatools.schema.TestSchemas.consignmentCommonSchema
+import eu.efti.datatools.schema.TestSchemas.javaCommonSchema
 import eu.efti.datatools.schema.XmlSchemaElement.SubsetId
 import eu.efti.datatools.schema.XmlUtil.serializeToString
 import eu.efti.datatools.schema.XmlUtil.validate
@@ -78,8 +78,9 @@ class SubsetUtilIT {
                 "common" -> Triple(
                     javaCommonSchema,
                     consignmentCommonSchema,
-                    SubsetUtil::filterCommonSubsets,
-                )
+                ) { doc: Document, subsets: Set<SubsetId> ->
+                    SubsetUtil.filterCommonSubsets(TestSchemas.schemas, doc, subsets)
+                }
 
                 else -> throw IllegalArgumentException(schemaVariant)
             }

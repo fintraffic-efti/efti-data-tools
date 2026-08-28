@@ -2,7 +2,7 @@ package eu.efti.datatools.javaexample;
 
 import eu.efti.datatools.populate.EftiDomPopulator;
 import eu.efti.datatools.populate.RepeatablePopulateMode;
-import eu.efti.datatools.schema.EftiSchemas;
+import eu.efti.datatools.schema.EftiSchemaId;
 import eu.efti.datatools.schema.XmlUtil;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
@@ -21,7 +21,8 @@ public class JavaExampleTest {
     @Test
     public void shouldFilterSubsetsOnPopulatedDocument() {
         var populator = new EftiDomPopulator(1234, RepeatablePopulateMode.MINIMUM_ONE);
-        var originalDoc = populator.populate(EftiSchemas.getConsignmentCommonSchema(), List.of(), true);
+        var originalDoc = populator.populate(
+                JavaExample.SCHEMAS, EftiSchemaId.CONSIGNMENT_COMMON, List.of(), true);
 
         var filteredDoc = JavaExample.filterCommonSubsets(originalDoc, Set.of("FI01", "FI02"));
 
