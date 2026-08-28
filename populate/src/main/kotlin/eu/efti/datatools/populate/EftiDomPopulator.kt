@@ -1,7 +1,6 @@
 package eu.efti.datatools.populate
 
-import eu.efti.datatools.schema.EftiSchemaId
-import eu.efti.datatools.schema.EftiSchemas
+import eu.efti.datatools.schema.EftiSchema
 import eu.efti.datatools.schema.XmlSchemaElement
 import eu.efti.datatools.schema.XmlSchemaElement.XmlName
 import eu.efti.datatools.schema.XmlSchemaElement.XmlType
@@ -31,7 +30,11 @@ enum class RepeatablePopulateMode {
 }
 
 @Suppress("detekt:MagicNumber")
-class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulateMode = RepeatablePopulateMode.RANDOM) {
+class EftiDomPopulator(
+    private val schema: EftiSchema,
+    seed: Long,
+    private val repeatableMode: RepeatablePopulateMode = RepeatablePopulateMode.RANDOM,
+) {
     data class XPathRawAndCompiled(val raw: String, val compiled: XPathExpression) {
         companion object {
             private val xpathFactory = XPathFactory.newInstance()
@@ -114,24 +117,17 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
     )
 
     /**
-     * Populate a pseudo-random document of the given schema.
-     * @param schemas schemas to use, see [eu.efti.datatools.schema.EftiSchemas]
-     * @param schemaId schema to populate
+     * Populate a pseudo-random document of the schema of this populator.
+     * @param overrides overrides to apply to the populated document
+     * @param namespaceAware if false, xpath expressions of the overrides may ignore namespaces
      */
     @JvmOverloads
     fun populate(
-        schemas: EftiSchemas,
-        schemaId: EftiSchemaId,
         overrides: List<Override> = emptyList(),
         namespaceAware: Boolean = true,
-    ): Document = populate(schemas.xmlSchema(schemaId), overrides, namespaceAware)
+    ): Document = populate(schema.xmlSchema, overrides, namespaceAware)
 
-    /**
-     * Populate a pseudo-random document of the given parsed schema. Prefer the [EftiSchemaId] based overload
-     * unless you need to populate a document of a schema that is not an eFTI consignment schema.
-     */
-    @JvmOverloads
-    fun populate(
+    internal fun populate(
         schema: XmlSchemaElement,
         overrides: List<Override> = emptyList(),
         namespaceAware: Boolean = true,

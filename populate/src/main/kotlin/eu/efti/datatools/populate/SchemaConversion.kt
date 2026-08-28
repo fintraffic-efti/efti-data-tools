@@ -1,20 +1,24 @@
 package eu.efti.datatools.populate
 
+import eu.efti.datatools.schema.EftiSchema
 import eu.efti.datatools.schema.EftiSchemaId
-import eu.efti.datatools.schema.EftiSchemas
-import eu.efti.datatools.schema.XmlSchemaElement
-import eu.efti.datatools.schema.XmlUtil
-import eu.efti.datatools.schema.XmlUtil.clone
 import eu.efti.datatools.schema.XmlUtil.deserializeToDocument
 import eu.efti.datatools.schema.XmlUtil.serializeToString
 import org.w3c.dom.Document
-import org.w3c.dom.Node
 
+/**
+ * Internal utility of the eFTI data tools, not part of the supported api of this library.
+ */
 object SchemaConversion {
-    fun commonToIdentifiers(schemas: EftiSchemas, common: Document): Document {
-        val identifier = clone(common)
-
-        dropNodesNotInSchema(schemas.xmlSchema(EftiSchemaId.CONSIGNMENT_IDENTIFIER), identifier.firstChild)
+    /**
+     * Convert a consignment common document into a consignment identifiers document.
+     *
+     * @param identifierSchema consignment identifier schema to convert into
+     * @param common consignment common document
+     */
+    fun commonToIdentifiers(identifierSchema: EftiSchema, common: Document): Document {
+        // Note: the document is in the common namespace, so the elements must be matched by local name only.
+        val identifier = identifierSchema.dropNodesNotInSchema(common, namespaceAware = false)
 
         return deserializeToDocument(
             // Note: this is a dirty way of fixing the namespace, but it is simple and works in our context.
@@ -23,15 +27,5 @@ object SchemaConversion {
                 EftiSchemaId.CONSIGNMENT_IDENTIFIER.namespaceURI,
             ),
         )
-    }
-
-    private fun dropNodesNotInSchema(schema: XmlSchemaElement, node: Node) {
-        XmlUtil.dropNodesRecursively(
-            schema = schema,
-            node = node,
-            namespaceAware = false,
-        ) { _: Node, maybeSchemaElement: XmlSchemaElement? ->
-            maybeSchemaElement == null
-        }
     }
 }

@@ -5,9 +5,8 @@ example project uses a local Maven repository and not the official one (this mak
 
 The xsd schema files are not shipped with the library, so this example provides its own copy of them: the schemas of
 this repository are copied onto the example's classpath under `efti-xsd` (see [build.gradle.kts](./build.gradle.kts))
-and read with `EftiSchemas.fromClasspath("/efti-xsd")` (see
-[JavaExample.java](./src/main/java/eu/efti/datatools/javaexample/JavaExample.java)). In a real project you would
-typically keep your own copy of the schema files under `src/main/resources`.
+and read with `EftiSchema.fromClasspath(EftiSchemaId.CONSIGNMENT_COMMON, "/efti-xsd")` (see
+[JavaExample.java](./src/main/java/eu/efti/datatools/javaexample/JavaExample.java)).
 
 ## Usage
 

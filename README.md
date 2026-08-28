@@ -67,7 +67,7 @@ made available to the tools. "Complete" means the main schema together with ever
 
 #### In a library
 
-Place the schema files on the classpath, keeping their directory structure, and point `EftiSchemas` at the classpath
+Place the schema files on the classpath, keeping their directory structure, and point `EftiSchema` at the classpath
 root under which they live. In a Gradle or Maven project this is typically a directory under `src/main/resources`:
 
 ```
@@ -77,18 +77,25 @@ src/main/resources/efti-xsd/types/types.xsd
 src/main/resources/efti-xsd/codes/codes.xsd
 ```
 
+An `EftiSchema` instance is one schema, read from one location. The schema is read and compiled when the instance is
+created, so problems with the provided xsd files are reported immediately. Compiling a schema is expensive and
+instances are not cached by the library, so hold on to the instances you need, for example in a `static final` field
+or in a singleton bean.
+
 ```java
-// Compiling a schema is expensive. Repeated calls with the same root return the same instance, and each instance
-// compiles a given schema at most once, so this is cheap to call.
-EftiSchemas schemas = EftiSchemas.fromClasspath("/efti-xsd");
+static final EftiSchema COMMON_SCHEMA = EftiSchema.fromClasspath(EftiSchemaId.CONSIGNMENT_COMMON, "/efti-xsd");
 
-Document doc = new EftiDomPopulator(1234, RepeatablePopulateMode.MINIMUM_ONE)
-        .populate(schemas, EftiSchemaId.CONSIGNMENT_COMMON);
+Document doc = new EftiDomPopulator(COMMON_SCHEMA, 1234, RepeatablePopulateMode.MINIMUM_ONE)
+        .populate();
 
-Document filtered = SubsetUtil.filterCommonSubsets(schemas, doc, Set.of(new XmlSchemaElement.SubsetId("FI01")));
+Document filtered = COMMON_SCHEMA.filterSubsets(doc, Set.of(new SubsetId("FI01")));
+
+// Drop elements that the schema does not declare.
+Document cleaned = COMMON_SCHEMA.dropNodesNotInSchema(doc);
 ```
 
-Schemas can also be read from a directory of the local file system with `EftiSchemas.fromDirectory(File)`.
+A schema can also be read from a directory of the local file system with
+`EftiSchema.fromDirectory(EftiSchemaId, File)`.
 
 If the files cannot be found, or they are not eFTI schemas of a supported version, an `EftiSchemaException` with a
 description of the problem is thrown.
@@ -100,24 +107,6 @@ Unzip a complete set of eFTI xsd files somewhere and pass the root directory wit
 ```shell
 efti-data-tools-cli populate --schema-dir /path/to/xsd -x common
 ```
-
-#### Migrating from 0.8.0 or earlier
-
-Earlier versions bundled the schemas and exposed them as static fields of `EftiSchemas`. Replace those with an
-`EftiSchemas` instance and an `EftiSchemaId`:
-
-| Before | After |
-| --- | --- |
-| `EftiSchemas.getConsignmentCommonSchema()` | `schemas.xmlSchema(EftiSchemaId.CONSIGNMENT_COMMON)` |
-| `EftiSchemas.getConsignmentIdentifierSchema()` | `schemas.xmlSchema(EftiSchemaId.CONSIGNMENT_IDENTIFIER)` |
-| `EftiSchemas.getJavaCommonSchema()` | `schemas.javaSchema(EftiSchemaId.CONSIGNMENT_COMMON)` |
-| `EftiSchemas.getJavaIdentifiersSchema()` | `schemas.javaSchema(EftiSchemaId.CONSIGNMENT_IDENTIFIER)` |
-| `EftiSchemas.getConsignmentCommonSubsetIds()` | `schemas.subsetIds(EftiSchemaId.CONSIGNMENT_COMMON)` |
-| `SubsetUtil.filterCommonSubsets(doc, subsets)` | `SubsetUtil.filterCommonSubsets(schemas, doc, subsets)` |
-| `SubsetUtil.commonSchemaHasSubset(subsetId)` | `SubsetUtil.commonSchemaHasSubset(schemas, subsetId)` |
-| `SchemaConversion.commonToIdentifiers(doc)` | `SchemaConversion.commonToIdentifiers(schemas, doc)` |
-
-Command line users must add `--schema-dir`.
 
 ### Command line application
 

@@ -8,8 +8,8 @@ import java.net.URL
  * Locates eFTI xsd files under some root. The schema files are provided by the user of this library, they are not
  * shipped with it.
  *
- * Implementations must be immutable and must implement `equals`/`hashCode`, because they are used as cache keys by
- * [EftiSchemas].
+ * Implementations must be immutable and should implement `equals`/`hashCode`, so that [EftiSchema] instances of the
+ * same source can be compared.
  */
 interface XsdSource {
     /**
@@ -69,8 +69,10 @@ constructor(
         }
 
     private fun notFound(relativePath: String) = EftiSchemaException(
-        "Schema file \"$relativePath\" was not found on the classpath as \"${resourceName(relativePath)}\"." +
-            " Make sure that a complete set of eFTI xsd files is available on the classpath under $description.",
+        """
+            Schema file "$relativePath" was not found on the classpath as "${resourceName(relativePath)}".
+            Make sure that a complete set of eFTI xsd files is available on the classpath under $description.
+        """.trimIndent(),
     )
 
     companion object {
@@ -93,9 +95,11 @@ class DirectoryXsdSource(directory: File) : XsdSource {
     init {
         if (!root.isDirectory) {
             throw EftiSchemaException(
-                "Schema directory \"$root\" does not exist or is not a directory. It should contain a complete set" +
-                    " of eFTI xsd files, for example \"${EftiSchemaId.CONSIGNMENT_COMMON.mainXsdPath}\" and the" +
-                    " files it imports.",
+                """
+                    Schema directory "$root" does not exist or is not a directory. It should contain a complete set
+                    of eFTI xsd files, for example "${EftiSchemaId.CONSIGNMENT_COMMON.mainXsdPath}" and the
+                    files it imports.
+                """.trimIndent(),
             )
         }
     }
@@ -116,8 +120,10 @@ class DirectoryXsdSource(directory: File) : XsdSource {
         val file = File(root, relativePath.trim('/')).normalize()
         if (!file.isFile) {
             throw EftiSchemaException(
-                "Schema file \"$relativePath\" was not found at \"$file\". Make sure that a complete set of eFTI" +
-                    " xsd files is available in $description.",
+                """
+                    Schema file "$relativePath" was not found at "$file". Make sure that a complete set of eFTI
+                    xsd files is available in $description.
+                """.trimIndent(),
             )
         }
         return file
