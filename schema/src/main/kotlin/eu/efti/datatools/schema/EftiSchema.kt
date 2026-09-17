@@ -200,6 +200,7 @@ class EftiSchema(val source: XsdSource, val id: EftiSchemaId) {
         private fun toRelativePath(systemId: String): String = when {
             // IDE tooling may resolve imports into this form.
             systemId.startsWith(LOCAL_PROJECT_PREFIX) -> systemId.removePrefix(LOCAL_PROJECT_PREFIX)
+
             else -> systemId
         }
     }

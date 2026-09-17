@@ -61,7 +61,9 @@ object XmlUtil {
         val errors = validationErrors(doc, javaSchema)
         return when {
             errors.isEmpty() -> null
+
             errors.size <= MAX_REPORTED_ERRORS -> errors.joinToString("\n")
+
             else -> errors.take(MAX_REPORTED_ERRORS).joinToString("\n") +
                 "\n... and ${errors.size - MAX_REPORTED_ERRORS} more validation errors"
         }

@@ -104,6 +104,22 @@ class ValueGenerators(private val gen: EftiValueGeneratorFactory) {
                 dateTimeFormatter205.format(OffsetDateTime.ofInstant(it.nextInstant(), ZoneOffset.UTC))
             },
             EnumTypeMatcher to enumerationGenerator(),
+            ValueTypeMatcher(
+                "token_4",
+                "urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34",
+            ) to noArgsGenerator { it.nextToken(1, 3) },
+            ValueTypeMatcher(
+                "token_33",
+                "urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34",
+            ) to noArgsGenerator { it.nextToken(2) },
+            ValueTypeMatcher(
+                "token_3",
+                "urn:eu:move:eFTI:data:standard:QualifiedDataType:34",
+            ) to noArgsGenerator { it.nextToken(1, 3) },
+            ValueTypeMatcher(
+                "token_4",
+                "urn:eu:move:eFTI:data:standard:QualifiedDataType:34",
+            ) to noArgsGenerator { it.nextToken(2) },
             ValueTypeMatcher("base64Binary") to noArgsGenerator {
                 Base64.getEncoder().encodeToString(it.nextToken().toByteArray())
             },

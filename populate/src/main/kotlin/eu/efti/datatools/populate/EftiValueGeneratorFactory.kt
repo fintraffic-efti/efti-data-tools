@@ -34,6 +34,9 @@ class EftiValueGeneratorFactory(private val seed: Long) {
         fun nextLong(startInclusive: Long = 0, endExclusive: Long = Long.MAX_VALUE): Long =
             random.nextLong(startInclusive, endExclusive)
 
-        fun nextToken(length: Int = 6): String = (1..length).joinToString("") { nextAsciiChar().toString() }
+        fun nextToken(length: Int = 6): String = nextToken(1, length)
+
+        fun nextToken(minLength: Int, length: Int = 6): String =
+            (minLength..length).joinToString("") { nextAsciiChar().toString() }
     }
 }
