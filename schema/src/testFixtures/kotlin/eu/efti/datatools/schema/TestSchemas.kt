@@ -4,7 +4,7 @@ import java.io.File
 
 /**
  * Schemas for tests of this repository. The xsd files are not packaged into the artifacts anymore, so tests read
- * them from the `xsd` and `xsd-v1` directories of the repository. The directories are passed in by the build, see
+ * them from the `xsd` and `xsd/v1` directories of the repository. The directories are passed in by the build, see
  * `data-tools.kotlin-conventions.gradle.kts`.
  */
 object TestSchemas {
