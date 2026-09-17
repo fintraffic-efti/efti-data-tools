@@ -4,14 +4,15 @@ import java.io.File
 
 /**
  * Schemas for tests of this repository. The xsd files are not packaged into the artifacts anymore, so tests read
- * them from the `xsd` and `xsd/v1` directories of the repository. The directories are passed in by the build, see
+ * them from the `xsd/v0` and `xsd/v1` directories of the repository. The directories are passed in by the build, see
  * `data-tools.kotlin-conventions.gradle.kts`.
  */
 object TestSchemas {
     val xsdDirectory: File = directoryFromSystemProperty("eu.efti.datatools.test.xsdDir")
 
     /**
-     * Directory of the v1 schemas, that is, the directory that contains `FTI010s.xsd` and the files it imports.
+     * Root directory of the v1 schemas, that is, the directory that contains the `FTI010` and `eFTI XM SubMap`
+     * directories.
      */
     val xsdV1Directory: File = directoryFromSystemProperty("eu.efti.datatools.test.xsdV1Dir")
 

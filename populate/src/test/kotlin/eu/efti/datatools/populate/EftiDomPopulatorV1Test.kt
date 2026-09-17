@@ -9,6 +9,7 @@ import org.hamcrest.Matchers.equalTo
 import org.hamcrest.Matchers.everyItem
 import org.hamcrest.Matchers.greaterThan
 import org.hamcrest.Matchers.hasItem
+import org.hamcrest.Matchers.nullValue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.w3c.dom.Document
@@ -16,14 +17,14 @@ import org.w3c.dom.Element
 
 /**
  * Tests for populating documents of the v1 eFTI schemas.
- *
- * Note: value generator coverage of the v1 schemas is deliberately incomplete at this point, these tests
- * demonstrate that the generator mechanism works with the v1 type system. They therefore assert the structure of
- * the populated document and the behaviour of the generators, not that the document is valid against the whole
- * v1 schema.
  */
 class EftiDomPopulatorV1Test {
     private val seed = 42L
+
+    @Test
+    fun `should populate a valid v1 document`() {
+        assertThat(XmlUtil.validate(populate(), TestSchemas.commonV1.javaSchema), nullValue())
+    }
 
     @Test
     fun `should populate a v1 document`() {

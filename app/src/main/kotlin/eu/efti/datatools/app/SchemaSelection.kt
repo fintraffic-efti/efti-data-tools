@@ -23,7 +23,7 @@ class SchemaSelectionException(message: String) : RuntimeException(message)
  * line application onto the schemas of that version.
  *
  * The version is detected from the contents of the schema directory: each version has its own main xsd file, for
- * example `consignment-common.xsd` for v0 and `FTI010s.xsd` for v1.
+ * example `consignment-common.xsd` for v0 and `FTI010/FTI010s.xsd` for v1.
  */
 object SchemaSelection {
     /**

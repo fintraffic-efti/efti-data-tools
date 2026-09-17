@@ -7,6 +7,14 @@ data class XmlSchemaElement(
     val children: List<XmlSchemaElement>,
     val subsets: Set<SubsetId>,
     /**
+     * The `eFTI_ID` that the v1 schemas assign to this element, or null if the element has none. The v0 schemas do
+     * not use these ids, so this is always null for them.
+     *
+     * The id is stable across v1 schema files, which is what allows subsets declared in one v1 schema to be applied
+     * to the elements of another, see [EftiSchemaId.subsetSource].
+     */
+    val eftiId: String? = null,
+    /**
      * Value that the schema fixes for this element, or null if the element has no fixed value. A document is only
      * valid if an element with a fixed value has exactly that value.
      */
