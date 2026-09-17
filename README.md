@@ -222,7 +222,7 @@ Only available for the v0 schemas.
 ##### Populate a v1 document
 
 ```shell
-./gradlew app:run --args="populate -X '../xsd-v1/FTI010' -x common -w -p -s 42"
+./gradlew app:run --args="populate -X '../xsd/v1/FTI010' -x common -w -p -s 42"
 ```
 
 Only `-x common` is supported for v1, and the generated document may not yet validate against the whole schema.
