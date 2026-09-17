@@ -5,12 +5,10 @@ import org.hamcrest.CoreMatchers.hasItem
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.containsString
 import org.hamcrest.Matchers.empty
 import org.hamcrest.Matchers.notNullValue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
-import org.junit.jupiter.api.assertThrows
 
 /**
  * Tests for the v1 eFTI schemas. The v1 schemas differ from the v0 schemas in ways that matter to this library:
@@ -96,35 +94,10 @@ class EftiSchemaV1Test {
     }
 
     @Test
-    fun `v1 schema should not declare subsets`() {
+    fun `v1 schema should declare the subsets that are read from the SubMap schema`() {
         assertAll(
-            { assertThat(TestSchemas.commonV1.subsetIds, empty()) },
-            { assertThat(TestSchemas.commonV1.supportsSubsets, equalTo(false)) },
-            { assertThat(EftiSchemaId.CONSIGNMENT_COMMON_V1.supportsSubsets, equalTo(false)) },
+            { assertThat(TestSchemas.commonV1.subsetIds, not(empty())) },
             { assertThat(EftiSchemaId.CONSIGNMENT_COMMON_V1.version, equalTo(EftiSchemaVersion.V1)) },
-        )
-    }
-
-    @Test
-    fun `filterSubsets should fail with an explanatory message for a schema without subsets`() {
-        val doc = XmlUtil.deserializeToDocument(
-            """
-            <FTI010GetCmdsResponse xmlns="${EftiSchemaId.CONSIGNMENT_COMMON_V1.namespaceURI}"/>
-            """.trimIndent(),
-        )
-
-        val exception = assertThrows<UnsupportedOperationException> {
-            TestSchemas.commonV1.filterSubsets(doc, setOf(SubsetId("EU01")))
-        }
-
-        assertThat(exception.message, containsString("does not declare eFTI subsets"))
-    }
-
-    @Test
-    fun `v0 schemas should still support subsets`() {
-        assertAll(
-            { assertThat(TestSchemas.common.supportsSubsets, equalTo(true)) },
-            { assertThat(EftiSchemaId.CONSIGNMENT_COMMON.version, equalTo(EftiSchemaVersion.V0)) },
         )
     }
 

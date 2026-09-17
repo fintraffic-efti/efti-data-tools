@@ -45,7 +45,7 @@ tasks.withType<Test>().configureEach {
     // The xsd files are not bundled with the libraries anymore, tests read them from the repository.
     systemProperty("eu.efti.datatools.test.xsdDir", rootProject.file("xsd/v0").absolutePath)
     // The v1 schemas live in their own directory tree, one directory per message type.
-    systemProperty("eu.efti.datatools.test.xsdV1Dir", rootProject.file("xsd/v1/FTI010").absolutePath)
+    systemProperty("eu.efti.datatools.test.xsdV1Dir", rootProject.file("xsd/v1").absolutePath)
 }
 
 tasks.test {

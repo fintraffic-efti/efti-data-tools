@@ -75,19 +75,34 @@ feature is available for both.
 |---|---|---|---|
 | v0 consignment common | `CONSIGNMENT_COMMON` | `consignment-common.xsd` | `consignment` |
 | v0 consignment identifier | `CONSIGNMENT_IDENTIFIER` | `consignment-identifier.xsd` | `consignment` |
-| v1 consignment common | `CONSIGNMENT_COMMON_V1` | `FTI010s.xsd` | `FTI010GetCmdsResponse` |
+| v1 consignment common | `CONSIGNMENT_COMMON_V1` | `FTI010/FTI010s.xsd` | `FTI010GetCmdsResponse` |
 
 The v1 schemas correspond to the eFTI Delegated Act (EU) 2024/2024. Their document element is a message envelope
 that carries the consignment in its `SpecifiedSupplyChainConsignment` child, and a single document spans several
 namespaces.
 
+The v1 schemas are organised into one directory per message type, so the paths above are relative to the root of
+the v1 schemas: point the library and the command line application at the directory that contains both `FTI010`
+and `eFTI XM SubMap`, not at `FTI010` itself.
+
 > [!NOTE]
-> Support for the v1 schemas is still being built. The following are **not** available for them yet:
-> * **Subset filtering** — the v1 `FTI010s.xsd` files do not declare eFTI subsets at all, so `filterSubsets` throws
->   an `UnsupportedOperationException`. Use `EftiSchemaId.supportsSubsets` to check.
-> * **Converting common documents into identifier documents** — the v1 schemas have no identifier schema.
-> * **Complete value generation** — `EftiDomPopulator` works with the v1 schemas, but value generator coverage is
->   still partial, so a populated v1 document may not yet validate against the whole schema.
+> Support for the v1 schemas is still being built. **Converting common documents into identifier documents** is not
+> available for them, because the v1 schemas have no identifier schema.
+
+##### Subset filtering of v1 documents
+
+The v1 message schemas do not declare eFTI subsets themselves. The subsets are declared by the eFTI XM SubMap
+schema, which describes the same elements and tags each of them with the subsets it belongs to. The two schemas
+cannot be matched by element name or type, because they use a different document element and different generated
+type names for the same concept, so they are matched by the `eFTI_ID` that both of them assign to an element.
+
+This is done automatically, and it is the reason why `--schema-dir` must point at the root of the v1 schemas: both
+schemas have to be readable. The SubMap schema is only read when subsets are actually used, so populating documents
+does not pay for it.
+
+Elements that the eFTI data model does not classify, such as the mandatory `DateTimeString` wrappers, carry no
+`eFTI_ID`. They are structural rather than data carrying, so they belong to the same subsets as their parent and
+are kept whenever their parent is kept.
 
 #### In a library
 
@@ -140,16 +155,19 @@ efti-data-tools-cli populate --schema-dir /path/to/xsd -x common
 ```
 
 The schema version is **detected automatically** from the contents of the directory: a directory containing
-`consignment-common.xsd` is read as v0, and one containing `FTI010s.xsd` as v1. Point `--schema-dir` at the schemas
-of a single version.
+`consignment-common.xsd` is read as v0, and one containing `FTI010/FTI010s.xsd` as v1. Point `--schema-dir` at the
+schemas of a single version.
 
 ```shell
 # Populate a v1 document
-efti-data-tools-cli populate --schema-dir /path/to/xsd-v1/FTI010 -x common
+efti-data-tools-cli populate --schema-dir /path/to/xsd-v1 -x common
+
+# Filter a v1 document into the EU01 subset
+efti-data-tools-cli filter --schema-dir /path/to/xsd-v1 -s EU01 -i my-common.xml -o filtered.xml
 ```
 
-Operations that are not available for the detected version, such as `filter` for v1, fail with an explanatory
-message.
+Operations that are not available for the detected version, such as generating identifier documents for v1, fail
+with an explanatory message.
 
 ### Command line application
 
@@ -222,10 +240,16 @@ Only available for the v0 schemas.
 ##### Populate a v1 document
 
 ```shell
-./gradlew app:run --args="populate -X '../xsd/v1/FTI010' -x common -w -p -s 42"
+./gradlew app:run --args="populate -X '../xsd/v1' -x common -w -p -s 42"
 ```
 
-Only `-x common` is supported for v1, and the generated document may not yet validate against the whole schema.
+Only `-x common` is supported for v1, because the v1 schemas have no identifier schema.
+
+##### Filter a v1 document
+
+```shell
+./gradlew app:run --args="filter -X '../xsd/v1' -s EU01 -i my-common.xml -o filtered.xml -w -p"
+```
 
 ## Development
 

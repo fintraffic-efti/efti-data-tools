@@ -9,8 +9,6 @@ import org.apache.xmlbeans.SchemaParticle
 import org.apache.xmlbeans.SchemaProperty
 import org.apache.xmlbeans.SchemaType
 import org.apache.xmlbeans.SchemaTypeSystem
-import org.apache.xmlbeans.SimpleValue
-import javax.xml.namespace.QName
 
 object XmlSchemaParser {
     fun parse(xmlBeansSchema: SchemaTypeSystem, documentType: XmlName): XmlSchemaElement {
@@ -63,20 +61,8 @@ object XmlSchemaParser {
             schemaElement.maxOccurs?.longValueExact(),
         ),
         children = emptyList(),
-        subsets = schemaElement
-            .annotation
-            ?.applicationInformation
-            ?.asSequence()
-            ?.flatMap { appInfo ->
-                appInfo
-                    .selectChildren(QName("efti")).asSequence()
-                    .flatMap { efti -> efti.selectChildren(QName("subset")).asSequence() }
-            }
-            ?.map { subset -> (subset.selectAttribute(QName("id")) as SimpleValue).stringValue }
-            ?.filterNotNull()
-            ?.map(::SubsetId)
-            ?.toSet()
-            ?: emptySet(),
+        subsets = SchemaAnnotations.subsets(schemaElement),
+        eftiId = SchemaAnnotations.eftiId(schemaElement),
         fixedValue = schemaElement.defaultText?.takeIf { schemaElement.isFixed },
     )
 

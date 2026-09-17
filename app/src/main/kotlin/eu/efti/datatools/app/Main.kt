@@ -246,13 +246,6 @@ private fun doFilter(args: CommandFilter) {
     )
 
     val commonSchemaId = args.schemaIdFor(SchemaRole.COMMON)
-    if (!commonSchemaId.supportsSubsets) {
-        System.err.println(
-            "Subset filtering is not available for the eFTI ${args.schemaVersion} schemas, because they do not" +
-                " declare eFTI subsets. It is currently supported for the eFTI ${EftiSchemaVersion.V0} schemas only.",
-        )
-        exitProcess(1)
-    }
 
     val outputFile = args.outputPath?.let(::File)
     if (!args.overwrite) {
@@ -268,6 +261,7 @@ private fun doFilter(args: CommandFilter) {
 
     val subsets = args.subsetIds.map(::SubsetId).toSet()
     val commonSchema = args.loadSchema(commonSchemaId)
+
     val doc = deserializeToDocument(InputStreamReader(FileInputStream(checkNotNull(args.inputPath))).readText())
 
     val validateAndWrite = documentValidatorAndWriter(args.pretty)
