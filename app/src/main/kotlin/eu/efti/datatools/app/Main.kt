@@ -15,6 +15,7 @@ import eu.efti.datatools.populate.SchemaConversion.commonToIdentifiers
 import eu.efti.datatools.schema.EftiSchema
 import eu.efti.datatools.schema.EftiSchemaException
 import eu.efti.datatools.schema.EftiSchemaId
+import eu.efti.datatools.schema.EftiSchemaVersion
 import eu.efti.datatools.schema.SubsetId
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.deserializeToDocument
@@ -86,7 +87,8 @@ abstract class CommonArgs {
         names = ["--schema-dir", "-X"],
         required = true,
         description = "Directory containing the eFTI xsd schema files, for example the directory that contains" +
-            " consignment-common.xsd together with the files it imports. The schemas are not bundled with this" +
+            " consignment-common.xsd (v0) or FTI010s.xsd (v1) together with the files they import. The schema" +
+            " version is detected from the contents of the directory. The schemas are not bundled with this" +
             " application, so this parameter is required.",
     )
     var schemaDir: String? = null
@@ -96,6 +98,27 @@ abstract class CommonArgs {
 
     @Parameter(names = ["--pretty", "-p"], required = false, description = "Pretty print.")
     var pretty: Boolean = false
+
+    /**
+     * Version of the eFTI schemas found in [schemaDir].
+     */
+    val schemaVersion: EftiSchemaVersion by lazy {
+        try {
+            SchemaSelection.detectVersion(File(checkNotNull(schemaDir)))
+        } catch (e: SchemaSelectionException) {
+            System.err.println(e.message)
+            exitProcess(1)
+        }
+    }
+
+    fun loadSchema(role: SchemaRole): EftiSchema = loadSchema(schemaIdFor(role))
+
+    fun schemaIdFor(role: SchemaRole): EftiSchemaId = try {
+        SchemaSelection.schemaIdFor(schemaVersion, role)
+    } catch (e: SchemaSelectionException) {
+        System.err.println(e.message)
+        exitProcess(1)
+    }
 
     fun loadSchema(id: EftiSchemaId): EftiSchema = try {
         EftiSchema.fromDirectory(id, File(checkNotNull(schemaDir)))
@@ -212,6 +235,7 @@ private fun doFilter(args: CommandFilter) {
         listOf(
             "subsets" to args.subsetIds.joinToString(", "),
             "schema dir" to args.schemaDir,
+            "schema version" to args.schemaVersion,
             "input" to args.inputPath,
             "output" to args.outputPath,
             "overwrite" to args.overwrite,
@@ -220,6 +244,15 @@ private fun doFilter(args: CommandFilter) {
             .filter { it.second != null }
             .joinToString("\n") { (label, value) -> """  * $label: $value""" },
     )
+
+    val commonSchemaId = args.schemaIdFor(SchemaRole.COMMON)
+    if (!commonSchemaId.supportsSubsets) {
+        System.err.println(
+            "Subset filtering is not available for the eFTI ${args.schemaVersion} schemas, because they do not" +
+                " declare eFTI subsets. It is currently supported for the eFTI ${EftiSchemaVersion.V0} schemas only.",
+        )
+        exitProcess(1)
+    }
 
     val outputFile = args.outputPath?.let(::File)
     if (!args.overwrite) {
@@ -234,10 +267,10 @@ private fun doFilter(args: CommandFilter) {
     }
 
     val subsets = args.subsetIds.map(::SubsetId).toSet()
-    val commonSchema = args.loadSchema(EftiSchemaId.CONSIGNMENT_COMMON)
+    val commonSchema = args.loadSchema(commonSchemaId)
     val doc = deserializeToDocument(InputStreamReader(FileInputStream(checkNotNull(args.inputPath))).readText())
 
-    val validateAndWrite = documentValidatorAndWriter(args.pretty)
+    val validateAndWrite = documentValidatorAndWriter(args.pretty, args.schemaVersion)
 
     validateAndWrite(
         commonSchema.javaSchema,
@@ -248,6 +281,11 @@ private fun doFilter(args: CommandFilter) {
 
 @Suppress("detekt:LongMethod", "detekt:CyclomaticComplexMethod")
 private fun doPopulate(args: CommandPopulate) {
+    // Fail fast if the schemas of the detected version cannot satisfy the request.
+    if (args.schema in setOf(CommandPopulate.SchemaOption.BOTH, CommandPopulate.SchemaOption.IDENTIFIER)) {
+        args.schemaIdFor(SchemaRole.IDENTIFIER)
+    }
+
     if (args.seed == null) {
         args.seed = randomShortSeed()
     }
@@ -275,6 +313,7 @@ private fun doPopulate(args: CommandPopulate) {
         listOf(
             "schema" to args.schema,
             "schema dir" to args.schemaDir,
+            "schema version" to args.schemaVersion,
             "seed" to args.seed,
             "repeatable mode" to args.repeatableMode.name,
             "overrides" to overrides.map {
@@ -307,9 +346,9 @@ private fun doPopulate(args: CommandPopulate) {
 
     val populateSchema = args.loadSchema(
         when (args.schema) {
-            CommandPopulate.SchemaOption.BOTH -> EftiSchemaId.CONSIGNMENT_COMMON
-            CommandPopulate.SchemaOption.COMMON -> EftiSchemaId.CONSIGNMENT_COMMON
-            CommandPopulate.SchemaOption.IDENTIFIER -> EftiSchemaId.CONSIGNMENT_IDENTIFIER
+            CommandPopulate.SchemaOption.BOTH -> SchemaRole.COMMON
+            CommandPopulate.SchemaOption.COMMON -> SchemaRole.COMMON
+            CommandPopulate.SchemaOption.IDENTIFIER -> SchemaRole.IDENTIFIER
         },
     )
 
@@ -319,11 +358,11 @@ private fun doPopulate(args: CommandPopulate) {
             namespaceAware = false,
         )
 
-    val validateAndWrite = documentValidatorAndWriter(args.pretty)
+    val validateAndWrite = documentValidatorAndWriter(args.pretty, args.schemaVersion)
 
     when (args.schema) {
         CommandPopulate.SchemaOption.BOTH -> {
-            val identifierSchema = args.loadSchema(EftiSchemaId.CONSIGNMENT_IDENTIFIER)
+            val identifierSchema = args.loadSchema(SchemaRole.IDENTIFIER)
             val identifiers = commonToIdentifiers(identifierSchema, doc)
             validateAndWrite(populateSchema.javaSchema, doc, checkNotNull(fileCommon))
             validateAndWrite(
@@ -343,12 +382,25 @@ private fun doPopulate(args: CommandPopulate) {
     }
 }
 
-private fun documentValidatorAndWriter(prettyPrint: Boolean): (schema: Schema, doc: Document, file: File) -> Unit =
+private fun documentValidatorAndWriter(
+    prettyPrint: Boolean,
+    schemaVersion: EftiSchemaVersion,
+): (schema: Schema, doc: Document, file: File) -> Unit =
     { schema, doc, file ->
-        XmlUtil.validate(doc, schema)?.also {
-            throw IllegalStateException(
-                "Application produced an invalid document. Please report the parameters and the this error message to the maintainers. Validation error: $it",
-            )
+        XmlUtil.validate(doc, schema)?.also { validationError ->
+            if (schemaVersion == EftiSchemaVersion.V0) {
+                error(
+                    "Application produced an invalid document. Please report the parameters and the this error message to the maintainers. Validation error: $validationError",
+                )
+            } else {
+                // Value generator coverage of the v1 schemas is still incomplete, so an invalid document is an
+                // expected limitation rather than a bug. Write the document anyway, it is still useful.
+                System.err.println(
+                    "Warning: the generated document is not valid against the eFTI $schemaVersion schema, because" +
+                        " value generator support for these schemas is still incomplete. Validation error:" +
+                        " $validationError",
+                )
+            }
         }
         file.printWriter().use { out ->
             out.print(serializeToString(doc, prettyPrint = prettyPrint))

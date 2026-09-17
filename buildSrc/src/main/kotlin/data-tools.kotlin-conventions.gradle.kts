@@ -44,6 +44,8 @@ kotlin {
 tasks.withType<Test>().configureEach {
     // The xsd files are not bundled with the libraries anymore, tests read them from the repository.
     systemProperty("eu.efti.datatools.test.xsdDir", rootProject.file("xsd").absolutePath)
+    // The v1 schemas live in their own directory tree, one directory per message type.
+    systemProperty("eu.efti.datatools.test.xsdV1Dir", rootProject.file("xsd-v1/FTI010").absolutePath)
 }
 
 tasks.test {

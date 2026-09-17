@@ -48,12 +48,18 @@ class EftiSchema(val source: XsdSource, val id: EftiSchemaId) {
      * Create a copy of the given document and drop all elements that are not included in the given subsets. The
      * subset ids are not validated.
      *
+     * Subset filtering requires a schema that declares eFTI subsets in its annotations. Not all eFTI schemas do,
+     * see [EftiSchemaId.supportsSubsets].
+     *
      * @param doc document of this schema
      * @param subsets set of subsets to keep
      * @return new document containing only elements that are included in the given subsets
      * @throws IllegalArgumentException if `doc` does not conform to this schema
+     * @throws UnsupportedOperationException if this schema does not declare subsets
      */
     fun filterSubsets(doc: Document, subsets: Set<SubsetId>): Document {
+        requireSubsetSupport()
+
         XmlUtil.validate(doc, javaSchema)?.let { error ->
             throw IllegalArgumentException("Input document is not valid: $error")
         }
@@ -61,6 +67,27 @@ class EftiSchema(val source: XsdSource, val id: EftiSchemaId) {
         return XmlUtil.clone(doc).also { cloned ->
             SubsetUtil.dropNodesNotInSubsets(subsets, xmlSchema, cloned.firstChild)
             XmlUtil.validate(cloned, javaSchema)
+        }
+    }
+
+    /**
+     * True if subset filtering can be used with this schema, that is, the schema declares eFTI subsets in its
+     * annotations.
+     */
+    val supportsSubsets: Boolean get() = id.supportsSubsets && subsetIds.isNotEmpty()
+
+    /**
+     * @throws UnsupportedOperationException if this schema does not support subset filtering
+     */
+    private fun requireSubsetSupport() {
+        if (!supportsSubsets) {
+            throw UnsupportedOperationException(
+                """
+                   Schema $id (eFTI ${id.version}) does not declare eFTI subsets, so subset filtering is not 
+                   available for it. Subset filtering is currently supported for the eFTI 
+                   ${EftiSchemaVersion.V0} schemas only.
+                """.trimIndent(),
+            )
         }
     }
 

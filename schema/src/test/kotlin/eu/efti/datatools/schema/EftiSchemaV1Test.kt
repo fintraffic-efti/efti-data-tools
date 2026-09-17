@@ -1,0 +1,139 @@
+package eu.efti.datatools.schema
+
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.hasItem
+import org.hamcrest.CoreMatchers.not
+import org.hamcrest.CoreMatchers.nullValue
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.containsString
+import org.hamcrest.Matchers.empty
+import org.hamcrest.Matchers.notNullValue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
+import org.junit.jupiter.api.assertThrows
+
+/**
+ * Tests for the v1 eFTI schemas. The v1 schemas differ from the v0 schemas in ways that matter to this library:
+ * they use anonymous types, spread the document over several namespaces, and do not declare eFTI subsets.
+ */
+class EftiSchemaV1Test {
+    @Test
+    fun `should parse the v1 common schema to XmlSchemaElement`() {
+        val element = TestSchemas.commonV1.xmlSchema
+
+        assertAll(
+            { assertThat(element.name.localPart, equalTo("FTI010GetCmdsResponse")) },
+            {
+                assertThat(
+                    element.name.namespaceURI,
+                    equalTo("urn:eu:move:eFTI:data:standard:FTI010GetCmdsResponse:1"),
+                )
+            },
+            { assertThat(element.children.map { it.name.localPart }, hasItem("SpecifiedSupplyChainConsignment")) },
+            { assertThat(element.children, not(empty())) },
+        )
+    }
+
+    @Test
+    fun `should read the v1 java schema for validation`() {
+        assertThat(TestSchemas.commonV1.javaSchema, notNullValue())
+    }
+
+    @Test
+    fun `v1 documents should span several namespaces`() {
+        // The envelope is in the message namespace, but the consignment content comes from the reusable
+        // components namespace.
+        val consignment = checkNotNull(
+            TestSchemas.commonV1.xmlSchema.children.find { it.name.localPart == "SpecifiedSupplyChainConsignment" },
+        )
+
+        assertAll(
+            {
+                assertThat(
+                    consignment.name.namespaceURI,
+                    equalTo("urn:eu:move:eFTI:data:standard:FTI010GetCmdsResponse:1"),
+                )
+            },
+            {
+                assertThat(
+                    consignment.children.map { it.name.namespaceURI }.toSet(),
+                    hasItem("urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34"),
+                )
+            },
+        )
+    }
+
+    @Test
+    fun `should parse anonymous types without a name`() {
+        // The v1 schemas declare the type of DateTimeString inline, so the type has no name. The v0 schemas do not
+        // use anonymous types at all.
+        val dateTimeString = checkNotNull(
+            findFirst(TestSchemas.commonV1.xmlSchema) {
+                it.name.localPart ==
+                    "DateTimeString"
+            },
+        ) {
+            "Expected to find a DateTimeString element in the v1 schema"
+        }
+
+        assertAll(
+            { assertThat("anonymous type has no name", dateTimeString.type.name, nullValue()) },
+            {
+                assertThat(
+                    "anonymous type still carries its attributes",
+                    dateTimeString.type.attributes.map { it.name.localPart },
+                    hasItem("format"),
+                )
+            },
+            {
+                assertThat(
+                    "anonymous type still carries its base types",
+                    dateTimeString.type.baseTypes,
+                    not(empty()),
+                )
+            },
+        )
+    }
+
+    @Test
+    fun `v1 schema should not declare subsets`() {
+        assertAll(
+            { assertThat(TestSchemas.commonV1.subsetIds, empty()) },
+            { assertThat(TestSchemas.commonV1.supportsSubsets, equalTo(false)) },
+            { assertThat(EftiSchemaId.CONSIGNMENT_COMMON_V1.supportsSubsets, equalTo(false)) },
+            { assertThat(EftiSchemaId.CONSIGNMENT_COMMON_V1.version, equalTo(EftiSchemaVersion.V1)) },
+        )
+    }
+
+    @Test
+    fun `filterSubsets should fail with an explanatory message for a schema without subsets`() {
+        val doc = XmlUtil.deserializeToDocument(
+            """
+            <FTI010GetCmdsResponse xmlns="${EftiSchemaId.CONSIGNMENT_COMMON_V1.namespaceURI}"/>
+            """.trimIndent(),
+        )
+
+        val exception = assertThrows<UnsupportedOperationException> {
+            TestSchemas.commonV1.filterSubsets(doc, setOf(SubsetId("EU01")))
+        }
+
+        assertThat(exception.message, containsString("does not declare eFTI subsets"))
+    }
+
+    @Test
+    fun `v0 schemas should still support subsets`() {
+        assertAll(
+            { assertThat(TestSchemas.common.supportsSubsets, equalTo(true)) },
+            { assertThat(EftiSchemaId.CONSIGNMENT_COMMON.version, equalTo(EftiSchemaVersion.V0)) },
+        )
+    }
+
+    private fun findFirst(
+        element: XmlSchemaElement,
+        predicate: (XmlSchemaElement) -> Boolean,
+    ): XmlSchemaElement? = if (predicate(element)) {
+        element
+    } else {
+        element.children.firstNotNullOfOrNull { child -> findFirst(child, predicate) }
+    }
+}
