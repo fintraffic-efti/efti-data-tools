@@ -397,8 +397,8 @@ private fun documentValidatorAndWriter(
                 // expected limitation rather than a bug. Write the document anyway, it is still useful.
                 System.err.println(
                     "Warning: the generated document is not valid against the eFTI $schemaVersion schema, because" +
-                        " value generator support for these schemas is still incomplete. Validation error:" +
-                        " $validationError",
+                        " value generator support for these schemas is still incomplete. Validation errors:\n" +
+                        validationError,
                 )
             }
         }
