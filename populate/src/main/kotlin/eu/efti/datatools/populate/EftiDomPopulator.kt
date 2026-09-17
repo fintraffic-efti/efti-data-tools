@@ -40,7 +40,7 @@ class EftiDomPopulator(
                 val xpath = xpathFactory.newXPath()
                 return try {
                     XPathRawAndCompiled(expression, xpath.compile(expression))
-                } catch (@Suppress("detekt:SwallowedException") e: XPathExpressionException) {
+                } catch (@Suppress("detekt:SwallowedException") _: XPathExpressionException) {
                     null
                 }
             }
@@ -71,9 +71,10 @@ class EftiDomPopulator(
         override fun match(name: XmlName, type: XmlType) = name.localPart == localPart
     }
 
-    data class ValueTypeMatcher(val typeLocalPart: String) : SchemaValueMatcher {
+    data class ValueTypeMatcher(val typeLocalPart: String, val typeNamespace: String? = null) : SchemaValueMatcher {
         override fun match(name: XmlName, type: XmlType) =
-            type.name?.localPart == typeLocalPart
+            (typeNamespace == null || type.name?.namespaceURI == typeNamespace) &&
+                type.name?.localPart == typeLocalPart
     }
 
     object EnumTypeMatcher : SchemaValueMatcher {

@@ -270,7 +270,7 @@ private fun doFilter(args: CommandFilter) {
     val commonSchema = args.loadSchema(commonSchemaId)
     val doc = deserializeToDocument(InputStreamReader(FileInputStream(checkNotNull(args.inputPath))).readText())
 
-    val validateAndWrite = documentValidatorAndWriter(args.pretty, args.schemaVersion)
+    val validateAndWrite = documentValidatorAndWriter(args.pretty)
 
     validateAndWrite(
         commonSchema.javaSchema,
@@ -358,7 +358,7 @@ private fun doPopulate(args: CommandPopulate) {
             namespaceAware = false,
         )
 
-    val validateAndWrite = documentValidatorAndWriter(args.pretty, args.schemaVersion)
+    val validateAndWrite = documentValidatorAndWriter(args.pretty)
 
     when (args.schema) {
         CommandPopulate.SchemaOption.BOTH -> {
@@ -384,23 +384,16 @@ private fun doPopulate(args: CommandPopulate) {
 
 private fun documentValidatorAndWriter(
     prettyPrint: Boolean,
-    schemaVersion: EftiSchemaVersion,
 ): (schema: Schema, doc: Document, file: File) -> Unit =
     { schema, doc, file ->
         XmlUtil.validate(doc, schema)?.also { validationError ->
-            if (schemaVersion == EftiSchemaVersion.V0) {
-                error(
-                    "Application produced an invalid document. Please report the parameters and the this error message to the maintainers. Validation error: $validationError",
-                )
-            } else {
-                // Value generator coverage of the v1 schemas is still incomplete, so an invalid document is an
-                // expected limitation rather than a bug. Write the document anyway, it is still useful.
-                System.err.println(
-                    "Warning: the generated document is not valid against the eFTI $schemaVersion schema, because" +
-                        " value generator support for these schemas is still incomplete. Validation errors:\n" +
-                        validationError,
-                )
-            }
+            error(
+                """
+                    |Application produced an invalid document. Please report the parameters and the this error message
+                    |to the maintainers. Validation errors:
+                    |$validationError
+                """.trimMargin(),
+            )
         }
         file.printWriter().use { out ->
             out.print(serializeToString(doc, prettyPrint = prettyPrint))
