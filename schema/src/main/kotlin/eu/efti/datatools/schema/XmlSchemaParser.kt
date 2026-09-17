@@ -6,6 +6,7 @@ import eu.efti.datatools.schema.XmlSchemaElement.XmlName
 import eu.efti.datatools.schema.XmlSchemaElement.XmlType
 import org.apache.xmlbeans.SchemaLocalElement
 import org.apache.xmlbeans.SchemaParticle
+import org.apache.xmlbeans.SchemaProperty
 import org.apache.xmlbeans.SchemaType
 import org.apache.xmlbeans.SchemaTypeSystem
 import org.apache.xmlbeans.SimpleValue
@@ -76,6 +77,7 @@ object XmlSchemaParser {
             ?.map(::SubsetId)
             ?.toSet()
             ?: emptySet(),
+        fixedValue = schemaElement.defaultText?.takeIf { schemaElement.isFixed },
     )
 
     private fun toXmlType(type: SchemaType): XmlType {
@@ -83,7 +85,7 @@ object XmlSchemaParser {
             XmlAttribute(
                 name = XmlName(attr.name.namespaceURI, attr.name.localPart),
                 type = XmlType(
-                    name = XmlName(attr.type.name.namespaceURI, attr.type.name.localPart),
+                    name = toXmlName(attr.type),
                     enumerationValues = attr.type.enumerationValues
                         ?.map { e -> e.stringValue }
                         ?: emptyList(),
@@ -91,14 +93,12 @@ object XmlSchemaParser {
                     baseTypes = collectBaseTypes(attr.type, emptyList()),
                     isTextContentType = isTextContentType(attr.type),
                 ),
+                fixedValue = attr.defaultText?.takeIf { attr.hasFixed() != SchemaProperty.NEVER },
             )
         } ?: emptyList()
 
         return XmlType(
-            name = XmlName(
-                type.name.namespaceURI,
-                type.name.localPart,
-            ),
+            name = toXmlName(type),
             enumerationValues = type.enumerationValues
                 ?.map { e -> e.stringValue }
                 ?: emptyList(),
@@ -108,18 +108,28 @@ object XmlSchemaParser {
         )
     }
 
+    /**
+     * Name of the given type, or null if the type is anonymous. Types that are declared inline in an element or an
+     * attribute, as the v1 schemas do for example for `DateTimeString`, do not have a name.
+     */
+    private fun toXmlName(type: SchemaType): XmlName? =
+        type.name?.let { name -> XmlName(name.namespaceURI, name.localPart) }
+
     private fun isTextContentType(schemaType: SchemaType) =
         schemaType.contentType == SchemaType.SIMPLE_CONTENT || schemaType.isSimpleType
 
     private tailrec fun collectBaseTypes(type: SchemaType, accumulator: List<XmlType>): List<XmlType> {
         val base = type.baseType
-        // Simplify base types list by leaving out the "anyType".
-        return if (base != null &&
-            !(base.name.namespaceURI == "http://www.w3.org/2001/XMLSchema" && base.name.localPart == "anyType")
-        ) {
+        // Simplify base types list by leaving out the "anyType". Anonymous base types have no name, but they are
+        // still meaningful, so they are kept.
+        return if (base != null && !isXsdAnyType(base)) {
             collectBaseTypes(base, accumulator + toXmlType(base))
         } else {
             accumulator
         }
     }
+
+    private fun isXsdAnyType(type: SchemaType): Boolean = type.name?.let { name ->
+        name.namespaceURI == "http://www.w3.org/2001/XMLSchema" && name.localPart == "anyType"
+    } ?: false
 }
