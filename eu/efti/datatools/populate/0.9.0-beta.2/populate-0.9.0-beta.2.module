@@ -1,0 +1,136 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "eu.efti.datatools",
+    "module": "populate",
+    "version": "0.9.0-beta.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.4.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "eu.efti.datatools",
+          "module": "schema",
+          "version": {
+            "requires": "0.9.0-beta.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.3.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "populate-0.9.0-beta.2.jar",
+          "url": "populate-0.9.0-beta.2.jar",
+          "size": 39163,
+          "sha512": "59116141f24fd20fce2928b896ecb476a2b0060d7f6beed9776d7210d34c80aac23b2242814452af9cacbcfab8b13cbaf7ef901998164c0b5ae388b63483fdd1",
+          "sha256": "d47760f336ed5c7ec6b9c4f03558e404880091133e48f44e0c5d7555d092edcb",
+          "sha1": "4a4563a26e26a55ab69848b3c1cea96b4f199ea1",
+          "md5": "48de9b96272768c69c810a754134b3f3"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "eu.efti.datatools",
+          "module": "schema",
+          "version": {
+            "requires": "0.9.0-beta.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.3.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "populate-0.9.0-beta.2.jar",
+          "url": "populate-0.9.0-beta.2.jar",
+          "size": 39163,
+          "sha512": "59116141f24fd20fce2928b896ecb476a2b0060d7f6beed9776d7210d34c80aac23b2242814452af9cacbcfab8b13cbaf7ef901998164c0b5ae388b63483fdd1",
+          "sha256": "d47760f336ed5c7ec6b9c4f03558e404880091133e48f44e0c5d7555d092edcb",
+          "sha1": "4a4563a26e26a55ab69848b3c1cea96b4f199ea1",
+          "md5": "48de9b96272768c69c810a754134b3f3"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "populate-0.9.0-beta.2-javadoc.jar",
+          "url": "populate-0.9.0-beta.2-javadoc.jar",
+          "size": 261,
+          "sha512": "1487e5a20c9e4d74f298e07c42e96a61be11b7a768c3fbc199ee138cd68e1fc2267d1cfe3f11f288acc05df755315344d052cc5f6f751f126ab4fe1caa5125ea",
+          "sha256": "c6deada2fac53b8ea6523dbda77597b128006674616f140f04df23264c6d1aa3",
+          "sha1": "2ad14aed781c4a73ed4dbb421966d408a0a06686",
+          "md5": "f43436d6bec321290f6af228ad602604"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "populate-0.9.0-beta.2-sources.jar",
+          "url": "populate-0.9.0-beta.2-sources.jar",
+          "size": 6146,
+          "sha512": "e08984108baa998e617f0b19f894ef7963a7af56ae2e58b7e4a75c94aec474fa4e7b54b02fa92e7756d2fc70217284bb196d57cfa90001f10ee207e15e989fce",
+          "sha256": "25b53635cb31fb24b37fc0686b4a57c448c84858973b8e6e710cc212e4830f9d",
+          "sha1": "7254c3d7a616f309dd10fb9c5b611b135475a91c",
+          "md5": "a43c4d364bd19596398c87932b13d98e"
+        }
+      ]
+    }
+  ]
+}
