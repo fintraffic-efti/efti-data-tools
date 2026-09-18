@@ -24,7 +24,7 @@ class EftiDomPopulatorV1Test {
 
     @Test
     fun `should populate a valid v1 document`() {
-        assertThat(XmlUtil.validate(populate(), TestSchemas.commonV1.javaSchema), nullValue())
+        assertThat(XmlUtil.validate(populate(), TestSchemas.cmdsResponseV1.javaSchema), nullValue())
     }
 
     @Test
@@ -83,7 +83,7 @@ class EftiDomPopulatorV1Test {
         // This is the code path that the command line application uses: namespaces are removed so that the xpath
         // expressions of the overrides can ignore them, and restored afterwards. A v1 document spans several
         // namespaces, so they cannot be restored by declaring a single namespace on the document element.
-        val withOverrides = EftiDomPopulator(TestSchemas.commonV1, seed, RepeatablePopulateMode.EXACTLY_ONE)
+        val withOverrides = EftiDomPopulator(TestSchemas.cmdsResponseV1, seed, RepeatablePopulateMode.EXACTLY_ONE)
             .populate(
                 overrides = listOf(
                     checkNotNull(
@@ -173,7 +173,7 @@ class EftiDomPopulatorV1Test {
     }
 
     private fun populate(): Document =
-        EftiDomPopulator(TestSchemas.commonV1, seed, RepeatablePopulateMode.EXACTLY_ONE).populate()
+        EftiDomPopulator(TestSchemas.cmdsResponseV1, seed, RepeatablePopulateMode.EXACTLY_ONE).populate()
 
     private fun childElementNames(element: Element): List<String> =
         element.childNodes.asIterable().filterIsInstance<Element>().map { it.localName }

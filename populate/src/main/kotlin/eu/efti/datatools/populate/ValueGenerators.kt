@@ -151,7 +151,7 @@ class ValueGenerators(private val gen: EftiValueGeneratorFactory) {
         EftiSchemaId.CONSIGNMENT_IDENTIFIER.rootElement,
         -> v0
 
-        EftiSchemaId.CONSIGNMENT_COMMON_V1.rootElement -> v1
+        EftiSchemaId.CMDS_RESPONSE_V1.rootElement -> v1
 
         else -> throw IllegalArgumentException(
             "No value generators are defined for document element \"${rootElement.localPart}\" of namespace" +

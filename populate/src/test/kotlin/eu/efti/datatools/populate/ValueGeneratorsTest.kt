@@ -26,7 +26,7 @@ class ValueGeneratorsTest {
             sameInstance(generators.v0),
         )
         assertThat(
-            generators.forRootElement(EftiSchemaId.CONSIGNMENT_COMMON_V1.rootElement),
+            generators.forRootElement(EftiSchemaId.CMDS_RESPONSE_V1.rootElement),
             sameInstance(generators.v1),
         )
     }
@@ -75,7 +75,7 @@ class ValueGeneratorsTest {
 
     @Test
     fun `every v1 rule should be used when populating a v1 schema`() {
-        assertThat(unusedRulesOf(generators.v1, TestSchemas.commonV1), empty())
+        assertThat(unusedRulesOf(generators.v1, TestSchemas.cmdsResponseV1), empty())
     }
 
     /**

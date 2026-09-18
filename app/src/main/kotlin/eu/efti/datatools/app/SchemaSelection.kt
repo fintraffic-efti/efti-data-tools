@@ -8,7 +8,7 @@ import java.io.File
  * The role that a schema plays in the command line application, independent of the eFTI schema version.
  */
 enum class SchemaRole {
-    COMMON,
+    MAIN,
     IDENTIFIER,
 }
 
@@ -36,6 +36,7 @@ object SchemaSelection {
 
         return when (detected.size) {
             1 -> detected.single()
+
             0 -> throw SchemaSelectionException(
                 """
                    Could not determine the eFTI schema version of directory "$schemaDir". Expected to find one of 
@@ -59,13 +60,14 @@ object SchemaSelection {
      * @throws SchemaSelectionException if the version has no schema for the role
      */
     fun schemaIdFor(version: EftiSchemaVersion, role: SchemaRole): EftiSchemaId = when (role) {
-        SchemaRole.COMMON -> when (version) {
+        SchemaRole.MAIN -> when (version) {
             EftiSchemaVersion.V0 -> EftiSchemaId.CONSIGNMENT_COMMON
-            EftiSchemaVersion.V1 -> EftiSchemaId.CONSIGNMENT_COMMON_V1
+            EftiSchemaVersion.V1 -> EftiSchemaId.CMDS_RESPONSE_V1
         }
 
         SchemaRole.IDENTIFIER -> when (version) {
             EftiSchemaVersion.V0 -> EftiSchemaId.CONSIGNMENT_IDENTIFIER
+
             EftiSchemaVersion.V1 -> throw SchemaSelectionException(
                 """
                    The eFTI $version schemas do not have a consignment identifier schema, so this operation is not 
