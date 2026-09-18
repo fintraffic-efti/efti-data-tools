@@ -1,9 +1,7 @@
 package eu.efti.datatools.populate
 
-import eu.efti.datatools.schema.EftiSchemas
-import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
-import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
-import eu.efti.datatools.schema.XmlSchemaElement
+import eu.efti.datatools.schema.EftiSchema
+import eu.efti.datatools.schema.TestSchemas
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.serializeToString
 import org.hamcrest.MatcherAssert.assertThat
@@ -20,7 +18,6 @@ import java.io.File
 import java.io.FileWriter
 import java.io.InputStream
 import java.io.InputStreamReader
-import javax.xml.validation.Schema
 import kotlin.streams.asStream
 
 @Suppress("SameParameterValue")
@@ -30,10 +27,10 @@ class EftiDomPopulatorTest {
     @ParameterizedTest
     @MethodSource("populateTestCases")
     fun `should create valid documents with different generator seeds`(testCase: PopulateTestCase) {
-        val populator = EftiDomPopulator(testCase.seed, testCase.repeatablePopulateMode)
-        val doc = populator.populate(testCase.eftiSchema)
+        val populator = EftiDomPopulator(testCase.schema, testCase.seed, testCase.repeatablePopulateMode)
+        val doc = populator.populate()
 
-        val error = XmlUtil.validate(doc, testCase.javaSchema)
+        val error = XmlUtil.validate(doc, testCase.schema.javaSchema)
 
         // Optimization: catch assertion error so that we can generate full error message lazily
         try {
@@ -47,10 +44,9 @@ class EftiDomPopulatorTest {
     @Tag("expectation-update")
     fun `should populate common document that matches the expected document`() {
         val expectationFilename = "common-expected.xml"
-        val eftiSchema = consignmentCommonSchema
 
-        val populator = EftiDomPopulator(42, RepeatablePopulateMode.MINIMUM_ONE)
-        val doc = populator.populate(eftiSchema)
+        val populator = EftiDomPopulator(TestSchemas.common, 42, RepeatablePopulateMode.MINIMUM_ONE)
+        val doc = populator.populate()
 
         if (updateTestExpectations) {
             val updated = formatXml(doc)
@@ -64,7 +60,7 @@ class EftiDomPopulatorTest {
                 InputStreamReader(classpathInputStream(expectationFilename)).use { it.readText() }
 
             assertAll(
-                { assertThat(XmlUtil.validate(doc, EftiSchemas.javaCommonSchema), nullValue()) },
+                { assertThat(XmlUtil.validate(doc, TestSchemas.common.javaSchema), nullValue()) },
                 {
                     // Use junit assertEquals because it formats the expected value better than hamcrest.
                     // Also, CompareMatcher.isSimilarTo does not work with consignment-common document, maybe it's too big?
@@ -95,8 +91,8 @@ class EftiDomPopulatorTest {
             .onEach { (expression, parsed) -> requireNotNull(parsed) { """Could not parse "$expression"""" } }
             .mapNotNull(Pair<String, EftiDomPopulator.TextContentOverride?>::second)
 
-        val populator = EftiDomPopulator(seed, repeatableMode)
-        val doc = populator.populate(consignmentIdentifierSchema, overrides, namespaceAware = false)
+        val populator = EftiDomPopulator(TestSchemas.identifier, seed, repeatableMode)
+        val doc = populator.populate(overrides, namespaceAware = false)
 
         if (updateTestExpectations) {
             val updated = formatXml(doc)
@@ -110,7 +106,7 @@ class EftiDomPopulatorTest {
                 InputStreamReader(classpathInputStream(expectationFilename)).use { it.readText() }
 
             assertAll(
-                { assertThat(XmlUtil.validate(doc, EftiSchemas.javaIdentifiersSchema), nullValue()) },
+                { assertThat(XmlUtil.validate(doc, TestSchemas.identifier.javaSchema), nullValue()) },
                 {
                     // Use junit assertEquals because it formats the expected value better than hamcrest.
                     assertEquals(
@@ -128,8 +124,7 @@ class EftiDomPopulatorTest {
             val schemaVariant: String,
             val seed: Long,
             val repeatablePopulateMode: RepeatablePopulateMode,
-            val eftiSchema: XmlSchemaElement,
-            val javaSchema: Schema,
+            val schema: EftiSchema,
         ) {
             override fun toString(): String =
                 """schemaVariant=$schemaVariant, seed=$seed, repeatablePopulateMode=$repeatablePopulateMode"""
@@ -140,9 +135,9 @@ class EftiDomPopulatorTest {
             populateTestCasesForVariant("identifier").plus(populateTestCasesForVariant("common")).asStream()
 
         private fun populateTestCasesForVariant(schemaVariant: String): Sequence<PopulateTestCase> {
-            val (javaSchema, eftiSchema) = when (schemaVariant) {
-                "common" -> EftiSchemas.javaCommonSchema to consignmentCommonSchema
-                "identifier" -> EftiSchemas.javaIdentifiersSchema to consignmentIdentifierSchema
+            val schema = when (schemaVariant) {
+                "common" -> TestSchemas.common
+                "identifier" -> TestSchemas.identifier
                 else -> throw IllegalArgumentException(schemaVariant)
             }
 
@@ -156,8 +151,7 @@ class EftiDomPopulatorTest {
                         2 -> RepeatablePopulateMode.EXACTLY_ONE
                         else -> RepeatablePopulateMode.RANDOM
                     },
-                    eftiSchema = eftiSchema,
-                    javaSchema = javaSchema,
+                    schema = schema,
                 )
             }
         }

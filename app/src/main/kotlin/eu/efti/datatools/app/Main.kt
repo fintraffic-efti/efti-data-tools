@@ -12,12 +12,10 @@ import eu.efti.datatools.populate.EftiDomPopulator.TextContentOverride
 import eu.efti.datatools.populate.EftiDomPopulator.XPathRawAndCompiled
 import eu.efti.datatools.populate.RepeatablePopulateMode
 import eu.efti.datatools.populate.SchemaConversion.commonToIdentifiers
-import eu.efti.datatools.schema.EftiSchemas.consignmentCommonSchema
-import eu.efti.datatools.schema.EftiSchemas.consignmentIdentifierSchema
-import eu.efti.datatools.schema.EftiSchemas.javaCommonSchema
-import eu.efti.datatools.schema.EftiSchemas.javaIdentifiersSchema
-import eu.efti.datatools.schema.SubsetUtil.filterCommonSubsets
-import eu.efti.datatools.schema.XmlSchemaElement.SubsetId
+import eu.efti.datatools.schema.EftiSchema
+import eu.efti.datatools.schema.EftiSchemaException
+import eu.efti.datatools.schema.EftiSchemaId
+import eu.efti.datatools.schema.SubsetId
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.deserializeToDocument
 import eu.efti.datatools.schema.XmlUtil.serializeToString
@@ -84,11 +82,27 @@ class CommandMain {
 }
 
 abstract class CommonArgs {
+    @Parameter(
+        names = ["--schema-dir", "-X"],
+        required = true,
+        description = "Directory containing the eFTI xsd schema files, for example the directory that contains" +
+            " consignment-common.xsd together with the files it imports. The schemas are not bundled with this" +
+            " application, so this parameter is required.",
+    )
+    var schemaDir: String? = null
+
     @Parameter(names = ["--overwrite", "-w"], required = false, description = "Overwrite existing documents.")
     var overwrite: Boolean = false
 
     @Parameter(names = ["--pretty", "-p"], required = false, description = "Pretty print.")
     var pretty: Boolean = false
+
+    fun loadSchema(id: EftiSchemaId): EftiSchema = try {
+        EftiSchema.fromDirectory(id, File(checkNotNull(schemaDir)))
+    } catch (e: EftiSchemaException) {
+        System.err.println(e.message)
+        exitProcess(1)
+    }
 }
 
 @Parameters(commandDescription = "Filter subsets on consignment document")
@@ -197,6 +211,7 @@ private fun doFilter(args: CommandFilter) {
     println(
         listOf(
             "subsets" to args.subsetIds.joinToString(", "),
+            "schema dir" to args.schemaDir,
             "input" to args.inputPath,
             "output" to args.outputPath,
             "overwrite" to args.overwrite,
@@ -219,11 +234,16 @@ private fun doFilter(args: CommandFilter) {
     }
 
     val subsets = args.subsetIds.map(::SubsetId).toSet()
+    val commonSchema = args.loadSchema(EftiSchemaId.CONSIGNMENT_COMMON)
     val doc = deserializeToDocument(InputStreamReader(FileInputStream(checkNotNull(args.inputPath))).readText())
 
     val validateAndWrite = documentValidatorAndWriter(args.pretty)
 
-    validateAndWrite(javaCommonSchema, filterCommonSubsets(doc, subsets), checkNotNull(outputFile))
+    validateAndWrite(
+        commonSchema.javaSchema,
+        commonSchema.filterSubsets(doc, subsets),
+        checkNotNull(outputFile),
+    )
 }
 
 @Suppress("detekt:LongMethod", "detekt:CyclomaticComplexMethod")
@@ -254,6 +274,7 @@ private fun doPopulate(args: CommandPopulate) {
     println(
         listOf(
             "schema" to args.schema,
+            "schema dir" to args.schemaDir,
             "seed" to args.seed,
             "repeatable mode" to args.repeatableMode.name,
             "overrides" to overrides.map {
@@ -284,13 +305,16 @@ private fun doPopulate(args: CommandPopulate) {
         }
     }
 
-    val doc = EftiDomPopulator(checkNotNull(args.seed), args.repeatableMode)
+    val populateSchema = args.loadSchema(
+        when (args.schema) {
+            CommandPopulate.SchemaOption.BOTH -> EftiSchemaId.CONSIGNMENT_COMMON
+            CommandPopulate.SchemaOption.COMMON -> EftiSchemaId.CONSIGNMENT_COMMON
+            CommandPopulate.SchemaOption.IDENTIFIER -> EftiSchemaId.CONSIGNMENT_IDENTIFIER
+        },
+    )
+
+    val doc = EftiDomPopulator(populateSchema, checkNotNull(args.seed), args.repeatableMode)
         .populate(
-            schema = when (args.schema) {
-                CommandPopulate.SchemaOption.BOTH -> consignmentCommonSchema
-                CommandPopulate.SchemaOption.COMMON -> consignmentCommonSchema
-                CommandPopulate.SchemaOption.IDENTIFIER -> consignmentIdentifierSchema
-            },
             overrides = overrides,
             namespaceAware = false,
         )
@@ -299,17 +323,22 @@ private fun doPopulate(args: CommandPopulate) {
 
     when (args.schema) {
         CommandPopulate.SchemaOption.BOTH -> {
-            val identifiers = commonToIdentifiers(doc)
-            validateAndWrite(javaCommonSchema, doc, checkNotNull(fileCommon))
-            validateAndWrite(javaIdentifiersSchema, identifiers, checkNotNull(fileIdentifiers))
+            val identifierSchema = args.loadSchema(EftiSchemaId.CONSIGNMENT_IDENTIFIER)
+            val identifiers = commonToIdentifiers(identifierSchema, doc)
+            validateAndWrite(populateSchema.javaSchema, doc, checkNotNull(fileCommon))
+            validateAndWrite(
+                identifierSchema.javaSchema,
+                identifiers,
+                checkNotNull(fileIdentifiers),
+            )
         }
 
         CommandPopulate.SchemaOption.COMMON -> {
-            validateAndWrite(javaCommonSchema, doc, checkNotNull(fileCommon))
+            validateAndWrite(populateSchema.javaSchema, doc, checkNotNull(fileCommon))
         }
 
         CommandPopulate.SchemaOption.IDENTIFIER -> {
-            validateAndWrite(javaIdentifiersSchema, doc, checkNotNull(fileIdentifiers))
+            validateAndWrite(populateSchema.javaSchema, doc, checkNotNull(fileIdentifiers))
         }
     }
 }
