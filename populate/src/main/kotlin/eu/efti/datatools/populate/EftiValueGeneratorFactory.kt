@@ -1,9 +1,13 @@
 package eu.efti.datatools.populate
 
 import java.time.Instant
+import java.util.UUID
 import kotlin.random.Random
 import kotlin.random.asKotlinRandom
 
+/**
+ * Pseudo random generators that produce repeatable values for a given seed and value path.
+ */
 @Suppress("MemberVisibilityCanBePrivate")
 class EftiValueGeneratorFactory(private val seed: Long) {
     fun forPath(valuePath: ValuePath): EftiValueGenerator =
@@ -33,6 +37,18 @@ class EftiValueGeneratorFactory(private val seed: Long) {
 
         fun nextLong(startInclusive: Long = 0, endExclusive: Long = Long.MAX_VALUE): Long =
             random.nextLong(startInclusive, endExclusive)
+
+        /**
+         * Generates a version 4 UUID, as specified by RFC 9562.
+         */
+        @Suppress("detekt:MagicNumber")
+        fun nextUuid(): UUID {
+            val bytes = random.nextBytes(16)
+            bytes[6] = ((bytes[6].toInt() and 0x0f) or 0x40).toByte()
+            bytes[8] = ((bytes[8].toInt() and 0x3f) or 0x80).toByte()
+            val buffer = java.nio.ByteBuffer.wrap(bytes)
+            return UUID(buffer.long, buffer.long)
+        }
 
         fun nextToken(length: Int = 6): String = nextToken(1, length)
 
