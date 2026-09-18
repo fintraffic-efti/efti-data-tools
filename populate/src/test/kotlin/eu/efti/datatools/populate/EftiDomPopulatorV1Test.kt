@@ -20,6 +20,7 @@ import org.w3c.dom.Element
  */
 class EftiDomPopulatorV1Test {
     private val seed = 42L
+    private val uuidV4Regex = Regex("[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}")
 
     @Test
     fun `should populate a valid v1 document`() {
@@ -139,6 +140,25 @@ class EftiDomPopulatorV1Test {
                     "the content of a date/time element is generated",
                     dateTimeStrings.map { it.textContent.length }.toSet(),
                     everyItem(greaterThan(0)),
+                )
+            },
+        )
+    }
+
+    @Test
+    fun `should generate a uuid for an id whose schemeID is fixed to the RFC 9562 version 4 scheme`() {
+        // The v1 schemas do not model these ids as anything more specific than a token of at most 36 characters.
+        // The fixed "schemeID" attribute is what tells that the content must be a version 4 UUID.
+        val uuidIds = elements(populate())
+            .filter { it.getAttribute("schemeID") == "RFC 9562-4" }
+
+        assertAll(
+            { assertThat("the document contains such ids", uuidIds.size, greaterThan(0)) },
+            {
+                assertThat(
+                    "every one of them holds a version 4 uuid",
+                    uuidIds.map { it.textContent }.filterNot { it.matches(uuidV4Regex) },
+                    empty(),
                 )
             },
         )

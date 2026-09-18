@@ -82,6 +82,21 @@ class EftiDomPopulator(
             type.enumerationValues.isNotEmpty()
     }
 
+    /**
+     * Matches an element whose type declares an attribute of the given name with the given fixed value. The fixed
+     * attribute tells how the text content of the element is to be interpreted, so it also tells how that content
+     * is to be generated. For example, an id element whose `schemeID` is fixed to "RFC 9562-4" must hold a UUID.
+     */
+    data class FixedAttributeValueMatcher(
+        val attributeLocalPart: String,
+        val attributeFixedValue: String,
+    ) : SchemaValueMatcher {
+        override fun match(name: XmlName, type: XmlType) =
+            type.attributes.any {
+                it.name.localPart == attributeLocalPart && it.fixedValue == attributeFixedValue
+            }
+    }
+
     private val gen = EftiValueGeneratorFactory(seed)
 
     /**
