@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 class EftiSchemaV1SubsetTest {
     @Test
     fun `should find the subsets that the SubMap schema declares`() {
-        val subsetIds = TestSchemas.commonV1.subsetIds
+        val subsetIds = TestSchemas.cmdsResponseV1.subsetIds
 
         assertEquals(EXPECTED_SUBSET_COUNT, subsetIds.size)
         assertTrue(SubsetId("EU01") in subsetIds)
@@ -24,7 +24,7 @@ class EftiSchemaV1SubsetTest {
      */
     @Test
     fun `should resolve subsets for every element that has an efti id`() {
-        val withEftiId = elements(TestSchemas.commonV1.subsetAwareSchema).filter { it.eftiId != null }
+        val withEftiId = elements(TestSchemas.cmdsResponseV1.subsetAwareSchema).filter { it.eftiId != null }
         val withoutSubsets = withEftiId.filter { it.subsets.isEmpty() }
 
         assertEquals(

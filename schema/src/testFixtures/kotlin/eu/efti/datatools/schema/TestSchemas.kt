@@ -20,8 +20,8 @@ object TestSchemas {
 
     val identifier: EftiSchema by lazy { EftiSchema.fromDirectory(EftiSchemaId.CONSIGNMENT_IDENTIFIER, xsdDirectory) }
 
-    val commonV1: EftiSchema by lazy {
-        EftiSchema.fromDirectory(EftiSchemaId.CONSIGNMENT_COMMON_V1, xsdV1Directory)
+    val cmdsResponseV1: EftiSchema by lazy {
+        EftiSchema.fromDirectory(EftiSchemaId.CMDS_RESPONSE_V1, xsdV1Directory)
     }
 
     private fun directoryFromSystemProperty(name: String): File = File(

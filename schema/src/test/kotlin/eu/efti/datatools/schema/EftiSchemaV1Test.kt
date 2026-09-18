@@ -17,7 +17,7 @@ import org.junit.jupiter.api.assertAll
 class EftiSchemaV1Test {
     @Test
     fun `should parse the v1 common schema to XmlSchemaElement`() {
-        val element = TestSchemas.commonV1.xmlSchema
+        val element = TestSchemas.cmdsResponseV1.xmlSchema
 
         assertAll(
             { assertThat(element.name.localPart, equalTo("FTI010GetCmdsResponse")) },
@@ -34,7 +34,7 @@ class EftiSchemaV1Test {
 
     @Test
     fun `should read the v1 java schema for validation`() {
-        assertThat(TestSchemas.commonV1.javaSchema, notNullValue())
+        assertThat(TestSchemas.cmdsResponseV1.javaSchema, notNullValue())
     }
 
     @Test
@@ -42,7 +42,9 @@ class EftiSchemaV1Test {
         // The envelope is in the message namespace, but the consignment content comes from the reusable
         // components namespace.
         val consignment = checkNotNull(
-            TestSchemas.commonV1.xmlSchema.children.find { it.name.localPart == "SpecifiedSupplyChainConsignment" },
+            TestSchemas.cmdsResponseV1.xmlSchema.children.find {
+                it.name.localPart == "SpecifiedSupplyChainConsignment"
+            },
         )
 
         assertAll(
@@ -66,7 +68,7 @@ class EftiSchemaV1Test {
         // The v1 schemas declare the type of DateTimeString inline, so the type has no name. The v0 schemas do not
         // use anonymous types at all.
         val dateTimeString = checkNotNull(
-            findFirst(TestSchemas.commonV1.xmlSchema) {
+            findFirst(TestSchemas.cmdsResponseV1.xmlSchema) {
                 it.name.localPart ==
                     "DateTimeString"
             },
@@ -96,8 +98,8 @@ class EftiSchemaV1Test {
     @Test
     fun `v1 schema should declare the subsets that are read from the SubMap schema`() {
         assertAll(
-            { assertThat(TestSchemas.commonV1.subsetIds, not(empty())) },
-            { assertThat(EftiSchemaId.CONSIGNMENT_COMMON_V1.version, equalTo(EftiSchemaVersion.V1)) },
+            { assertThat(TestSchemas.cmdsResponseV1.subsetIds, not(empty())) },
+            { assertThat(EftiSchemaId.CMDS_RESPONSE_V1.version, equalTo(EftiSchemaVersion.V1)) },
         )
     }
 

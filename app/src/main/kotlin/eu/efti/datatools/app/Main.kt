@@ -150,6 +150,11 @@ class CommandPopulate : CommonArgs() {
     enum class SchemaOption {
         BOTH,
         COMMON,
+
+        /**
+         * Synonym to "common" for backward compatibility
+         */
+        MAIN,
         IDENTIFIER,
     }
 
@@ -163,9 +168,9 @@ class CommandPopulate : CommonArgs() {
 
     @Parameter(
         names = ["--schema", "-x"],
-        description = "Schema to use",
+        description = "Schema to use (MAIN and COMMON are synonyms)",
     )
-    var schema: SchemaOption = SchemaOption.COMMON
+    var schema: SchemaOption = SchemaOption.MAIN
 
     @Parameter(
         names = ["--repeatable-mode", "-r"],
@@ -191,8 +196,12 @@ class CommandPopulate : CommonArgs() {
     )
     var textOverrides: List<TextContentOverride> = emptyList()
 
-    @Parameter(names = ["--output", "-o", "-oc"], required = false, description = "Output file for common.")
-    var pathCommon: String? = null
+    @Parameter(
+        names = ["--output", "-o", "-oc"],
+        required = false,
+        description = "Output file for \"main\" doc (common/cmds).",
+    )
+    var pathMain: String? = null
 
     @Parameter(names = ["--output-identifiers", "-oi"], required = false, description = "Output file for identifiers.")
     var pathIdentifiers: String? = null
@@ -245,7 +254,7 @@ private fun doFilter(args: CommandFilter) {
             .joinToString("\n") { (label, value) -> """  * $label: $value""" },
     )
 
-    val commonSchemaId = args.schemaIdFor(SchemaRole.COMMON)
+    val schemaId = args.schemaIdFor(SchemaRole.MAIN)
 
     val outputFile = args.outputPath?.let(::File)
     if (!args.overwrite) {
@@ -260,15 +269,15 @@ private fun doFilter(args: CommandFilter) {
     }
 
     val subsets = args.subsetIds.map(::SubsetId).toSet()
-    val commonSchema = args.loadSchema(commonSchemaId)
+    val schema = args.loadSchema(schemaId)
 
     val doc = deserializeToDocument(InputStreamReader(FileInputStream(checkNotNull(args.inputPath))).readText())
 
     val validateAndWrite = documentValidatorAndWriter(args.pretty)
 
     validateAndWrite(
-        commonSchema.javaSchema,
-        commonSchema.filterSubsets(doc, subsets),
+        schema.javaSchema,
+        schema.filterSubsets(doc, subsets),
         checkNotNull(outputFile),
     )
 }
@@ -283,13 +292,13 @@ private fun doPopulate(args: CommandPopulate) {
     if (args.seed == null) {
         args.seed = randomShortSeed()
     }
-    if (args.pathCommon == null &&
+    if (args.pathMain == null &&
         args.schema in setOf(
             CommandPopulate.SchemaOption.BOTH,
-            CommandPopulate.SchemaOption.COMMON,
+            CommandPopulate.SchemaOption.MAIN,
         )
     ) {
-        args.pathCommon = "consignment-${args.seed}-common.xml"
+        args.pathMain = "consignment-${args.seed}-main.xml"
     }
     if (args.pathIdentifiers == null &&
         args.schema in setOf(
@@ -316,7 +325,7 @@ private fun doPopulate(args: CommandPopulate) {
                     is TextContentOverride -> """Set "${it.xpath.raw}" to "${it.value}""""
                 }
             },
-            "output common" to args.pathCommon,
+            "output main" to args.pathMain,
             "output identifiers" to args.pathIdentifiers,
             "overwrite" to args.overwrite,
             "pretty" to args.pretty,
@@ -325,11 +334,11 @@ private fun doPopulate(args: CommandPopulate) {
             .joinToString("\n") { (label, value) -> """  * $label: $value""" },
     )
 
-    val fileCommon = args.pathCommon?.let(::File)
+    val fileMain = args.pathMain?.let(::File)
     val fileIdentifiers = args.pathIdentifiers?.let(::File)
     if (!args.overwrite) {
-        if (fileCommon?.exists() == true) {
-            println("Output file ${args.pathCommon} already exists")
+        if (fileMain?.exists() == true) {
+            println("Output file ${args.pathMain} already exists")
             exitProcess(1)
         }
         if (fileIdentifiers?.exists() == true) {
@@ -340,8 +349,9 @@ private fun doPopulate(args: CommandPopulate) {
 
     val populateSchema = args.loadSchema(
         when (args.schema) {
-            CommandPopulate.SchemaOption.BOTH -> SchemaRole.COMMON
-            CommandPopulate.SchemaOption.COMMON -> SchemaRole.COMMON
+            CommandPopulate.SchemaOption.BOTH -> SchemaRole.MAIN
+            CommandPopulate.SchemaOption.COMMON -> SchemaRole.MAIN
+            CommandPopulate.SchemaOption.MAIN -> SchemaRole.MAIN
             CommandPopulate.SchemaOption.IDENTIFIER -> SchemaRole.IDENTIFIER
         },
     )
@@ -358,7 +368,7 @@ private fun doPopulate(args: CommandPopulate) {
         CommandPopulate.SchemaOption.BOTH -> {
             val identifierSchema = args.loadSchema(SchemaRole.IDENTIFIER)
             val identifiers = commonToIdentifiers(identifierSchema, doc)
-            validateAndWrite(populateSchema.javaSchema, doc, checkNotNull(fileCommon))
+            validateAndWrite(populateSchema.javaSchema, doc, checkNotNull(fileMain))
             validateAndWrite(
                 identifierSchema.javaSchema,
                 identifiers,
@@ -366,8 +376,8 @@ private fun doPopulate(args: CommandPopulate) {
             )
         }
 
-        CommandPopulate.SchemaOption.COMMON -> {
-            validateAndWrite(populateSchema.javaSchema, doc, checkNotNull(fileCommon))
+        CommandPopulate.SchemaOption.COMMON, CommandPopulate.SchemaOption.MAIN -> {
+            validateAndWrite(populateSchema.javaSchema, doc, checkNotNull(fileMain))
         }
 
         CommandPopulate.SchemaOption.IDENTIFIER -> {

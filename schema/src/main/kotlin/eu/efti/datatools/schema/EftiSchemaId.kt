@@ -57,7 +57,7 @@ enum class EftiSchemaId(
      * Note that the paths are relative to the root of the v1 schemas, so `--schema-dir` must point at the directory
      * that holds both the `FTI010` and the `eFTI XM SubMap` directories.
      */
-    CONSIGNMENT_COMMON_V1(
+    CMDS_RESPONSE_V1(
         mainXsdPath = "FTI010/FTI010s.xsd",
         rootElement = XmlSchemaElement.XmlName(
             "urn:eu:move:eFTI:data:standard:FTI010GetCmdsResponse:1",

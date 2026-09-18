@@ -26,7 +26,7 @@ class SubsetFilteringV1Test {
     @Test
     fun `should drop elements that are not in the requested subset`() {
         val doc = populateValidDocument()
-        val filtered = TestSchemas.commonV1.filterSubsets(doc, setOf(SubsetId("EU01")))
+        val filtered = TestSchemas.cmdsResponseV1.filterSubsets(doc, setOf(SubsetId("EU01")))
 
         assertAll(
             { assertThat(elementNames(filtered).size, greaterThan(0)) },
@@ -44,7 +44,7 @@ class SubsetFilteringV1Test {
      */
     @Test
     fun `should keep mandatory structural elements that carry no subsets of their own`() {
-        val filtered = TestSchemas.commonV1.filterSubsets(populateValidDocument(), setOf(SubsetId("EU01")))
+        val filtered = TestSchemas.cmdsResponseV1.filterSubsets(populateValidDocument(), setOf(SubsetId("EU01")))
 
         val issueDateTime = elements(filtered).single { it.localName == "IssueDateTime" }
 
@@ -56,23 +56,23 @@ class SubsetFilteringV1Test {
 
     @Test
     fun `should produce a valid document`() {
-        val filtered = TestSchemas.commonV1.filterSubsets(populateValidDocument(), setOf(SubsetId("EU01")))
+        val filtered = TestSchemas.cmdsResponseV1.filterSubsets(populateValidDocument(), setOf(SubsetId("EU01")))
 
-        assertThat(XmlUtil.validate(filtered, TestSchemas.commonV1.javaSchema), nullValue())
+        assertThat(XmlUtil.validate(filtered, TestSchemas.cmdsResponseV1.javaSchema), nullValue())
     }
 
     @Test
     fun `should produce different documents for different subsets`() {
         val doc = populateValidDocument()
 
-        val eu01 = elementNames(TestSchemas.commonV1.filterSubsets(doc, setOf(SubsetId("EU01"))))
-        val eu02 = elementNames(TestSchemas.commonV1.filterSubsets(doc, setOf(SubsetId("EU02"))))
+        val eu01 = elementNames(TestSchemas.cmdsResponseV1.filterSubsets(doc, setOf(SubsetId("EU01"))))
+        val eu02 = elementNames(TestSchemas.cmdsResponseV1.filterSubsets(doc, setOf(SubsetId("EU02"))))
 
         assertThat(eu01, not(equalTo(eu02)))
     }
 
     private fun populateValidDocument(): Document = EftiDomPopulator(
-        TestSchemas.commonV1,
+        TestSchemas.cmdsResponseV1,
         SEED,
         RepeatablePopulateMode.EXACTLY_ONE,
     ).populate()
