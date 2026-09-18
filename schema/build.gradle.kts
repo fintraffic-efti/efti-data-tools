@@ -10,12 +10,12 @@ val testXsdPrefixRoot: Provider<Directory> = layout.buildDirectory.dir("test-xsd
 val testXsdClasspathRoot: Provider<Directory> = layout.buildDirectory.dir("test-xsd/root")
 
 val copyTestXsdToPrefixedClasspath by tasks.registering(Copy::class) {
-    from(rootProject.file("xsd"))
+    from(rootProject.file("xsd/v0"))
     into(testXsdPrefixRoot.map { it.dir(testClasspathXsdPrefix) })
 }
 
 val copyTestXsdToClasspathRoot by tasks.registering(Copy::class) {
-    from(rootProject.file("xsd"))
+    from(rootProject.file("xsd/v0"))
     into(testXsdClasspathRoot)
 }
 

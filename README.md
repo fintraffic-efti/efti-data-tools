@@ -63,7 +63,23 @@ See [Java example](./example/java) for a complete example on library usage.
 A complete set of eFTI xsd files, for example from
 [reference-implementation](https://github.com/fintraffic-efti/reference-implementation/tree/main/schema/xsd), must be
 made available to the tools. "Complete" means the main schema together with everything it imports, for example
-`consignment-common.xsd`, `types/types.xsd` and `codes/codes.xsd`.
+`consignment-common.xsd`, `types/types.xsd` and `codes/codes.xsd` for v0, or `FTI010s.xsd` together with its
+`FTI010s_urn_eu_move_*.xsd` files for v1.
+
+### Supported schema versions
+
+Two versions of the eFTI schemas are supported. They are structurally very different from each other, so not every
+feature is available for both.
+
+| Schema | `EftiSchemaId` | Main xsd | Document element |
+|---|---|---|---|
+| v0 consignment common | `CONSIGNMENT_COMMON` | `consignment-common.xsd` | `consignment` |
+| v0 consignment identifier | `CONSIGNMENT_IDENTIFIER` | `consignment-identifier.xsd` | `consignment` |
+| v1 consignment common | `CMDS_RESPONSE_V1` | `FTI010/FTI010s.xsd` | `FTI010GetCmdsResponse` |
+
+The v1 schemas are organised into one directory per message type, so the paths above are relative to the root of
+the v1 schemas: point the library and the command line application at the directory that contains the semantic
+versions for both `FTI010` and `eFTI XM SubMap`.
 
 #### In a library
 
@@ -94,6 +110,13 @@ Document filtered = COMMON_SCHEMA.filterSubsets(doc, Set.of(new SubsetId("FI01")
 Document cleaned = COMMON_SCHEMA.dropNodesNotInSchema(doc);
 ```
 
+A v1 schema is read in exactly the same way, only the `EftiSchemaId` differs:
+
+```java
+static final EftiSchema COMMON_V1_SCHEMA =
+        EftiSchema.fromClasspath(EftiSchemaId.CONSIGNMENT_COMMON_V1, "/efti-xsd-v1");
+```
+
 A schema can also be read from a directory of the local file system with
 `EftiSchema.fromDirectory(EftiSchemaId, File)`.
 
@@ -107,6 +130,21 @@ Unzip a complete set of eFTI xsd files somewhere and pass the root directory wit
 ```shell
 efti-data-tools-cli populate --schema-dir /path/to/xsd -x common
 ```
+
+The schema version is **detected automatically** from the contents of the directory: a directory containing
+`consignment-common.xsd` is read as v0, and one containing `FTI010/FTI010s.xsd` as v1. Point `--schema-dir` at the
+schemas of a single version.
+
+```shell
+# Populate a v1 document
+efti-data-tools-cli populate --schema-dir /path/to/xsd-v1 -x common
+
+# Filter a v1 document into the EU01 subset
+efti-data-tools-cli filter --schema-dir /path/to/xsd-v1 -s EU01 -i my-common.xml -o filtered.xml
+```
+
+Operations that are not available for the detected version, such as generating identifier documents for v1, fail
+with an explanatory message.
 
 ### Command line application
 
@@ -132,8 +170,10 @@ the xpath expressions use local xml names and ignore namespaces.
 
 #### Subset filtering
 
+Only available for the v0 schemas.
+
 ```shell
-./gradlew app:run --args="filter -X ../xsd -w -i ../xsd/examples/consignment-common.xml -s FI01,FI02"
+./gradlew app:run --args="filter -X ../xsd/v0 -w -i ../xsd/examples/consignment-common.xml -s FI01,FI02"
 ```
 
 #### Populate documents
@@ -141,37 +181,51 @@ the xpath expressions use local xml names and ignore namespaces.
 ##### Set single value
 
 ```shell
-./gradlew app:run --args="populate -X ../xsd -x identifier -w -p -s 42 -t 'consignment/deliveryEvent/actualOccurrenceDateTime:=202412312359+0000'"
+./gradlew app:run --args="populate -X ../xsd/v0 -x identifier -w -p -s 42 -t 'consignment/deliveryEvent/actualOccurrenceDateTime:=202412312359+0000'"
 ```
 
 ##### Delete node
 
 ```shell
-./gradlew app:run --args="populate -X ../xsd -x identifier -w -p -s 42 -d 'consignment/deliveryEvent/actualOccurrenceDateTime'"
+./gradlew app:run --args="populate -X ../xsd/v0 -x identifier -w -p -s 42 -d 'consignment/deliveryEvent/actualOccurrenceDateTime'"
 ```
 
 ##### Set multiple identifiers to same value
 
 ```shell
-./gradlew app:run --args="populate -X ../xsd -x identifier -w -p -s 42 -t 'consignment/usedTransportEquipment/id:=ABC-123'"
+./gradlew app:run --args="populate -X ../xsd/v0 -x identifier -w -p -s 42 -t 'consignment/usedTransportEquipment/id:=ABC-123'"
 ```
 
 ##### Set multiple identifiers to different values
 
 ```shell
-./gradlew app:run --args="populate -X ../xsd -x identifier -w -p -s 42 -t 'consignment/usedTransportEquipment[1]/id:=ABC-123' -t 'consignment/usedTransportEquipment[2]/id:=XYZ-789'"
+./gradlew app:run --args="populate -X ../xsd/v0 -x identifier -w -p -s 42 -t 'consignment/usedTransportEquipment[1]/id:=ABC-123' -t 'consignment/usedTransportEquipment[2]/id:=XYZ-789'"
 ```
 
 ##### Output both common and identifier documents with default filenames
 
 ```shell
-./gradlew app:run --args="populate -X ../xsd -x both -w -p -s 42
+./gradlew app:run --args="populate -X ../xsd/v0 -x both -w -p -s 42
 ```
 
 ##### Output both common and identifier documents with custom filenames
 
 ```shell
-./gradlew app:run --args="populate -X ../xsd -x both -w -p -s 42 -oc my-common.xml -oi my-identifiers.xml
+./gradlew app:run --args="populate -X ../xsd/v0 -x both -w -p -s 42 -oc my-common.xml -oi my-identifiers.xml
+```
+
+##### Populate a v1 document
+
+```shell
+./gradlew app:run --args="populate -X '../xsd/v1' -x main -w -p -s 42 -oc my-fti010s.xml"
+```
+
+Only `-x common` is supported for v1, because the v1 schemas have no identifier schema.
+
+##### Filter a v1 document
+
+```shell
+./gradlew app:run --args="filter -X '../xsd/v1' -s FI01 -i my-fti010s.xml -o filtered.xml -w -p"
 ```
 
 ## Development
