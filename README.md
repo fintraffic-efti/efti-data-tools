@@ -7,6 +7,10 @@ These tools may be used in implementing, development and testing of eFTI applica
 
 Requires Java 17 or later.
 
+> [!IMPORTANT]
+> The xsd schema files are **not** bundled with the libraries or the command line application. Get your own copy
+> of the schemas fomr https://github.com/EFTI4EU/reference-implementation/tree/main/schema/xsd.
+
 ## Usage
 
 This project releases libraries and a command line application.
@@ -54,6 +58,56 @@ Maven/Gradle project:
 
 See [Java example](./example/java) for a complete example on library usage.
 
+### Providing the schemas
+
+A complete set of eFTI xsd files, for example from
+[reference-implementation](https://github.com/fintraffic-efti/reference-implementation/tree/main/schema/xsd), must be
+made available to the tools. "Complete" means the main schema together with everything it imports, for example
+`consignment-common.xsd`, `types/types.xsd` and `codes/codes.xsd`.
+
+#### In a library
+
+Place the schema files on the classpath, keeping their directory structure, and point `EftiSchema` at the classpath
+root under which they live. In a Gradle or Maven project this is typically a directory under `src/main/resources`:
+
+```
+src/main/resources/efti-xsd/consignment-common.xsd
+src/main/resources/efti-xsd/consignment-identifier.xsd
+src/main/resources/efti-xsd/types/types.xsd
+src/main/resources/efti-xsd/codes/codes.xsd
+```
+
+An `EftiSchema` instance is one schema, read from one location. The schema is read and compiled when the instance is
+created, so problems with the provided xsd files are reported immediately. Compiling a schema is expensive and
+instances are not cached by the library, so hold on to the instances you need, for example in a `static final` field
+or in a singleton bean.
+
+```java
+static final EftiSchema COMMON_SCHEMA = EftiSchema.fromClasspath(EftiSchemaId.CONSIGNMENT_COMMON, "/efti-xsd");
+
+Document doc = new EftiDomPopulator(COMMON_SCHEMA, 1234, RepeatablePopulateMode.MINIMUM_ONE)
+        .populate();
+
+Document filtered = COMMON_SCHEMA.filterSubsets(doc, Set.of(new SubsetId("FI01")));
+
+// Drop elements that the schema does not declare.
+Document cleaned = COMMON_SCHEMA.dropNodesNotInSchema(doc);
+```
+
+A schema can also be read from a directory of the local file system with
+`EftiSchema.fromDirectory(EftiSchemaId, File)`.
+
+If the files cannot be found, or they are not eFTI schemas of a supported version, an `EftiSchemaException` with a
+description of the problem is thrown.
+
+#### In the command line application
+
+Unzip a complete set of eFTI xsd files somewhere and pass the root directory with `--schema-dir` (`-X`):
+
+```shell
+efti-data-tools-cli populate --schema-dir /path/to/xsd -x common
+```
+
 ### Command line application
 
 Get efti-data-tools-cli-<version>.zip from [releases](https://github.com/fintraffic-efti/efti-data-tools/releases), unzip it and run with:
@@ -65,7 +119,10 @@ Get efti-data-tools-cli-<version>.zip from [releases](https://github.com/fintraf
 efti-datatools-cli-<version>\bin\efti-data-tools-cli.bat --help
 ```
 
-The following examples use gradle to simplify testing. Note how the xpath expressions use local xml names and ignore namespaces.
+The schema files are not included in the zip, see [Providing the schemas](#providing-the-schemas).
+
+The following examples use gradle to simplify testing, and the schemas of this repository with `-X ../xsd`. Note how
+the xpath expressions use local xml names and ignore namespaces.
 
 #### Get help
 
@@ -76,7 +133,7 @@ The following examples use gradle to simplify testing. Note how the xpath expres
 #### Subset filtering
 
 ```shell
-./gradlew app:run --args="filter -w -i ../xsd/examples/consignment-common.xml -s FI01,FI02"
+./gradlew app:run --args="filter -X ../xsd -w -i ../xsd/examples/consignment-common.xml -s FI01,FI02"
 ```
 
 #### Populate documents
@@ -84,37 +141,37 @@ The following examples use gradle to simplify testing. Note how the xpath expres
 ##### Set single value
 
 ```shell
-./gradlew app:run --args="populate -x identifier -w -p -s 42 -t 'consignment/deliveryEvent/actualOccurrenceDateTime:=202412312359+0000'"
+./gradlew app:run --args="populate -X ../xsd -x identifier -w -p -s 42 -t 'consignment/deliveryEvent/actualOccurrenceDateTime:=202412312359+0000'"
 ```
 
 ##### Delete node
 
 ```shell
-./gradlew app:run --args="populate -x identifier -w -p -s 42 -d 'consignment/deliveryEvent/actualOccurrenceDateTime'"
+./gradlew app:run --args="populate -X ../xsd -x identifier -w -p -s 42 -d 'consignment/deliveryEvent/actualOccurrenceDateTime'"
 ```
 
 ##### Set multiple identifiers to same value
 
 ```shell
-./gradlew app:run --args="populate -x identifier -w -p -s 42 -t 'consignment/usedTransportEquipment/id:=ABC-123'"
+./gradlew app:run --args="populate -X ../xsd -x identifier -w -p -s 42 -t 'consignment/usedTransportEquipment/id:=ABC-123'"
 ```
 
 ##### Set multiple identifiers to different values
 
 ```shell
-./gradlew app:run --args="populate -x identifier -w -p -s 42 -t 'consignment/usedTransportEquipment[1]/id:=ABC-123' -t 'consignment/usedTransportEquipment[2]/id:=XYZ-789'"
+./gradlew app:run --args="populate -X ../xsd -x identifier -w -p -s 42 -t 'consignment/usedTransportEquipment[1]/id:=ABC-123' -t 'consignment/usedTransportEquipment[2]/id:=XYZ-789'"
 ```
 
 ##### Output both common and identifier documents with default filenames
 
 ```shell
-./gradlew app:run --args="populate -x both -w -p -s 42
+./gradlew app:run --args="populate -X ../xsd -x both -w -p -s 42
 ```
 
 ##### Output both common and identifier documents with custom filenames
 
 ```shell
-./gradlew app:run --args="populate -x both -w -p -s 42 -oc my-common.xml -oi my-identifiers.xml
+./gradlew app:run --args="populate -X ../xsd -x both -w -p -s 42 -oc my-common.xml -oi my-identifiers.xml
 ```
 
 ## Development

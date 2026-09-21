@@ -34,6 +34,19 @@ dependencies {
     testImplementation("eu.efti.datatools:populate:$libraryVersion")
 }
 
+val eftiXsdResources = layout.buildDirectory.dir("efti-xsd-resources")
+
+val copyEftiXsd by tasks.registering(Copy::class) {
+    from(file("../../xsd"))
+    into(eftiXsdResources.map { it.dir("efti-xsd") })
+}
+
+sourceSets {
+    main {
+        output.dir(mapOf("builtBy" to copyEftiXsd), eftiXsdResources)
+    }
+}
+
 tasks.test {
     useJUnitPlatform()
 }

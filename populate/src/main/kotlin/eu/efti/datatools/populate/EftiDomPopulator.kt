@@ -1,5 +1,6 @@
 package eu.efti.datatools.populate
 
+import eu.efti.datatools.schema.EftiSchema
 import eu.efti.datatools.schema.XmlSchemaElement
 import eu.efti.datatools.schema.XmlSchemaElement.XmlName
 import eu.efti.datatools.schema.XmlSchemaElement.XmlType
@@ -29,7 +30,11 @@ enum class RepeatablePopulateMode {
 }
 
 @Suppress("detekt:MagicNumber")
-class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulateMode = RepeatablePopulateMode.RANDOM) {
+class EftiDomPopulator(
+    private val schema: EftiSchema,
+    seed: Long,
+    private val repeatableMode: RepeatablePopulateMode = RepeatablePopulateMode.RANDOM,
+) {
     data class XPathRawAndCompiled(val raw: String, val compiled: XPathExpression) {
         companion object {
             private val xpathFactory = XPathFactory.newInstance()
@@ -111,7 +116,18 @@ class EftiDomPopulator(seed: Long, private val repeatableMode: RepeatablePopulat
         EnumTypeMatcher to enumerationGenerator,
     )
 
+    /**
+     * Populate a pseudo-random document of the schema of this populator.
+     * @param overrides overrides to apply to the populated document
+     * @param namespaceAware if false, xpath expressions of the overrides may ignore namespaces
+     */
+    @JvmOverloads
     fun populate(
+        overrides: List<Override> = emptyList(),
+        namespaceAware: Boolean = true,
+    ): Document = populate(schema.xmlSchema, overrides, namespaceAware)
+
+    internal fun populate(
         schema: XmlSchemaElement,
         overrides: List<Override> = emptyList(),
         namespaceAware: Boolean = true,

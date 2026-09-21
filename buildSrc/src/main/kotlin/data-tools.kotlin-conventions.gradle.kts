@@ -41,6 +41,11 @@ kotlin {
     }
 }
 
+tasks.withType<Test>().configureEach {
+    // The xsd files are not bundled with the libraries anymore, tests read them from the repository.
+    systemProperty("eu.efti.datatools.test.xsdDir", rootProject.file("xsd").absolutePath)
+}
+
 tasks.test {
     useJUnitPlatform()
 

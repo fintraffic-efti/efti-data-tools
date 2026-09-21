@@ -1,13 +1,33 @@
 plugins {
     id("data-tools.kotlin-conventions")
+    `java-test-fixtures`
+}
+
+// The xsd schema files are deliberately not packaged into the published artifacts: users of this library provide
+// their own copy of the schemas. Tests get them from the repository, see below and the kotlin conventions plugin.
+val testClasspathXsdPrefix = "efti-xsd"
+val testXsdPrefixRoot: Provider<Directory> = layout.buildDirectory.dir("test-xsd/prefixed")
+val testXsdClasspathRoot: Provider<Directory> = layout.buildDirectory.dir("test-xsd/root")
+
+val copyTestXsdToPrefixedClasspath by tasks.registering(Copy::class) {
+    from(rootProject.file("xsd"))
+    into(testXsdPrefixRoot.map { it.dir(testClasspathXsdPrefix) })
+}
+
+val copyTestXsdToClasspathRoot by tasks.registering(Copy::class) {
+    from(rootProject.file("xsd"))
+    into(testXsdClasspathRoot)
 }
 
 sourceSets {
-    main {
-        resources {
-            srcDir(rootProject.file("xsd"))
-        }
+    test {
+        runtimeClasspath += files(testXsdPrefixRoot, testXsdClasspathRoot)
     }
+}
+
+tasks.test {
+    dependsOn(copyTestXsdToPrefixedClasspath, copyTestXsdToClasspathRoot)
+    systemProperty("eu.efti.datatools.test.xsdClasspathPrefix", testClasspathXsdPrefix)
 }
 
 dependencies {
@@ -21,6 +41,11 @@ java {
     withJavadocJar()
     withSourcesJar()
 }
+
+// Test fixtures are meant for the tests of this repository only, do not publish them.
+val javaComponent = components["java"] as AdhocComponentWithVariants
+javaComponent.withVariantsFromConfiguration(configurations["testFixturesApiElements"]) { skip() }
+javaComponent.withVariantsFromConfiguration(configurations["testFixturesRuntimeElements"]) { skip() }
 
 publishing {
     publications {
