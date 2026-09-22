@@ -114,7 +114,7 @@ A v1 schema is read in exactly the same way, only the `EftiSchemaId` differs:
 
 ```java
 static final EftiSchema COMMON_V1_SCHEMA =
-        EftiSchema.fromClasspath(EftiSchemaId.CONSIGNMENT_COMMON_V1, "/efti-xsd-v1");
+        EftiSchema.fromClasspath(EftiSchemaId.CMDS_RESPONSE_V1, "/efti-xsd-v1");
 ```
 
 A schema can also be read from a directory of the local file system with
