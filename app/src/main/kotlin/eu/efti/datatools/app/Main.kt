@@ -15,6 +15,7 @@ import eu.efti.datatools.populate.SchemaConversion.commonToIdentifiers
 import eu.efti.datatools.schema.EftiSchema
 import eu.efti.datatools.schema.EftiSchemaException
 import eu.efti.datatools.schema.EftiSchemaId
+import eu.efti.datatools.schema.EftiSchemaVersion
 import eu.efti.datatools.schema.SubsetId
 import eu.efti.datatools.schema.XmlUtil
 import eu.efti.datatools.schema.XmlUtil.deserializeToDocument
@@ -86,7 +87,8 @@ abstract class CommonArgs {
         names = ["--schema-dir", "-X"],
         required = true,
         description = "Directory containing the eFTI xsd schema files, for example the directory that contains" +
-            " consignment-common.xsd together with the files it imports. The schemas are not bundled with this" +
+            " consignment-common.xsd (v0) or FTI010s.xsd (v1) together with the files they import. The schema" +
+            " version is detected from the contents of the directory. The schemas are not bundled with this" +
             " application, so this parameter is required.",
     )
     var schemaDir: String? = null
@@ -96,6 +98,27 @@ abstract class CommonArgs {
 
     @Parameter(names = ["--pretty", "-p"], required = false, description = "Pretty print.")
     var pretty: Boolean = false
+
+    /**
+     * Version of the eFTI schemas found in [schemaDir].
+     */
+    val schemaVersion: EftiSchemaVersion by lazy {
+        try {
+            SchemaSelection.detectVersion(File(checkNotNull(schemaDir)))
+        } catch (e: SchemaSelectionException) {
+            System.err.println(e.message)
+            exitProcess(1)
+        }
+    }
+
+    fun loadSchema(role: SchemaRole): EftiSchema = loadSchema(schemaIdFor(role))
+
+    fun schemaIdFor(role: SchemaRole): EftiSchemaId = try {
+        SchemaSelection.schemaIdFor(schemaVersion, role)
+    } catch (e: SchemaSelectionException) {
+        System.err.println(e.message)
+        exitProcess(1)
+    }
 
     fun loadSchema(id: EftiSchemaId): EftiSchema = try {
         EftiSchema.fromDirectory(id, File(checkNotNull(schemaDir)))
@@ -127,6 +150,11 @@ class CommandPopulate : CommonArgs() {
     enum class SchemaOption {
         BOTH,
         COMMON,
+
+        /**
+         * Synonym to "common" for backward compatibility
+         */
+        MAIN,
         IDENTIFIER,
     }
 
@@ -140,9 +168,9 @@ class CommandPopulate : CommonArgs() {
 
     @Parameter(
         names = ["--schema", "-x"],
-        description = "Schema to use",
+        description = "Schema to use (MAIN and COMMON are synonyms)",
     )
-    var schema: SchemaOption = SchemaOption.COMMON
+    var schema: SchemaOption = SchemaOption.MAIN
 
     @Parameter(
         names = ["--repeatable-mode", "-r"],
@@ -168,8 +196,12 @@ class CommandPopulate : CommonArgs() {
     )
     var textOverrides: List<TextContentOverride> = emptyList()
 
-    @Parameter(names = ["--output", "-o", "-oc"], required = false, description = "Output file for common.")
-    var pathCommon: String? = null
+    @Parameter(
+        names = ["--output", "-o", "-oc"],
+        required = false,
+        description = "Output file for \"main\" doc (common/cmds).",
+    )
+    var pathMain: String? = null
 
     @Parameter(names = ["--output-identifiers", "-oi"], required = false, description = "Output file for identifiers.")
     var pathIdentifiers: String? = null
@@ -212,6 +244,7 @@ private fun doFilter(args: CommandFilter) {
         listOf(
             "subsets" to args.subsetIds.joinToString(", "),
             "schema dir" to args.schemaDir,
+            "schema version" to args.schemaVersion,
             "input" to args.inputPath,
             "output" to args.outputPath,
             "overwrite" to args.overwrite,
@@ -220,6 +253,8 @@ private fun doFilter(args: CommandFilter) {
             .filter { it.second != null }
             .joinToString("\n") { (label, value) -> """  * $label: $value""" },
     )
+
+    val schemaId = args.schemaIdFor(SchemaRole.MAIN)
 
     val outputFile = args.outputPath?.let(::File)
     if (!args.overwrite) {
@@ -234,30 +269,36 @@ private fun doFilter(args: CommandFilter) {
     }
 
     val subsets = args.subsetIds.map(::SubsetId).toSet()
-    val commonSchema = args.loadSchema(EftiSchemaId.CONSIGNMENT_COMMON)
+    val schema = args.loadSchema(schemaId)
+
     val doc = deserializeToDocument(InputStreamReader(FileInputStream(checkNotNull(args.inputPath))).readText())
 
     val validateAndWrite = documentValidatorAndWriter(args.pretty)
 
     validateAndWrite(
-        commonSchema.javaSchema,
-        commonSchema.filterSubsets(doc, subsets),
+        schema.javaSchema,
+        schema.filterSubsets(doc, subsets),
         checkNotNull(outputFile),
     )
 }
 
 @Suppress("detekt:LongMethod", "detekt:CyclomaticComplexMethod")
 private fun doPopulate(args: CommandPopulate) {
+    // Fail fast if the schemas of the detected version cannot satisfy the request.
+    if (args.schema in setOf(CommandPopulate.SchemaOption.BOTH, CommandPopulate.SchemaOption.IDENTIFIER)) {
+        args.schemaIdFor(SchemaRole.IDENTIFIER)
+    }
+
     if (args.seed == null) {
         args.seed = randomShortSeed()
     }
-    if (args.pathCommon == null &&
+    if (args.pathMain == null &&
         args.schema in setOf(
             CommandPopulate.SchemaOption.BOTH,
-            CommandPopulate.SchemaOption.COMMON,
+            CommandPopulate.SchemaOption.MAIN,
         )
     ) {
-        args.pathCommon = "consignment-${args.seed}-common.xml"
+        args.pathMain = "consignment-${args.seed}-main.xml"
     }
     if (args.pathIdentifiers == null &&
         args.schema in setOf(
@@ -275,6 +316,7 @@ private fun doPopulate(args: CommandPopulate) {
         listOf(
             "schema" to args.schema,
             "schema dir" to args.schemaDir,
+            "schema version" to args.schemaVersion,
             "seed" to args.seed,
             "repeatable mode" to args.repeatableMode.name,
             "overrides" to overrides.map {
@@ -283,7 +325,7 @@ private fun doPopulate(args: CommandPopulate) {
                     is TextContentOverride -> """Set "${it.xpath.raw}" to "${it.value}""""
                 }
             },
-            "output common" to args.pathCommon,
+            "output main" to args.pathMain,
             "output identifiers" to args.pathIdentifiers,
             "overwrite" to args.overwrite,
             "pretty" to args.pretty,
@@ -292,11 +334,11 @@ private fun doPopulate(args: CommandPopulate) {
             .joinToString("\n") { (label, value) -> """  * $label: $value""" },
     )
 
-    val fileCommon = args.pathCommon?.let(::File)
+    val fileMain = args.pathMain?.let(::File)
     val fileIdentifiers = args.pathIdentifiers?.let(::File)
     if (!args.overwrite) {
-        if (fileCommon?.exists() == true) {
-            println("Output file ${args.pathCommon} already exists")
+        if (fileMain?.exists() == true) {
+            println("Output file ${args.pathMain} already exists")
             exitProcess(1)
         }
         if (fileIdentifiers?.exists() == true) {
@@ -307,9 +349,10 @@ private fun doPopulate(args: CommandPopulate) {
 
     val populateSchema = args.loadSchema(
         when (args.schema) {
-            CommandPopulate.SchemaOption.BOTH -> EftiSchemaId.CONSIGNMENT_COMMON
-            CommandPopulate.SchemaOption.COMMON -> EftiSchemaId.CONSIGNMENT_COMMON
-            CommandPopulate.SchemaOption.IDENTIFIER -> EftiSchemaId.CONSIGNMENT_IDENTIFIER
+            CommandPopulate.SchemaOption.BOTH -> SchemaRole.MAIN
+            CommandPopulate.SchemaOption.COMMON -> SchemaRole.MAIN
+            CommandPopulate.SchemaOption.MAIN -> SchemaRole.MAIN
+            CommandPopulate.SchemaOption.IDENTIFIER -> SchemaRole.IDENTIFIER
         },
     )
 
@@ -323,9 +366,9 @@ private fun doPopulate(args: CommandPopulate) {
 
     when (args.schema) {
         CommandPopulate.SchemaOption.BOTH -> {
-            val identifierSchema = args.loadSchema(EftiSchemaId.CONSIGNMENT_IDENTIFIER)
+            val identifierSchema = args.loadSchema(SchemaRole.IDENTIFIER)
             val identifiers = commonToIdentifiers(identifierSchema, doc)
-            validateAndWrite(populateSchema.javaSchema, doc, checkNotNull(fileCommon))
+            validateAndWrite(populateSchema.javaSchema, doc, checkNotNull(fileMain))
             validateAndWrite(
                 identifierSchema.javaSchema,
                 identifiers,
@@ -333,8 +376,8 @@ private fun doPopulate(args: CommandPopulate) {
             )
         }
 
-        CommandPopulate.SchemaOption.COMMON -> {
-            validateAndWrite(populateSchema.javaSchema, doc, checkNotNull(fileCommon))
+        CommandPopulate.SchemaOption.COMMON, CommandPopulate.SchemaOption.MAIN -> {
+            validateAndWrite(populateSchema.javaSchema, doc, checkNotNull(fileMain))
         }
 
         CommandPopulate.SchemaOption.IDENTIFIER -> {
@@ -343,11 +386,17 @@ private fun doPopulate(args: CommandPopulate) {
     }
 }
 
-private fun documentValidatorAndWriter(prettyPrint: Boolean): (schema: Schema, doc: Document, file: File) -> Unit =
+private fun documentValidatorAndWriter(
+    prettyPrint: Boolean,
+): (schema: Schema, doc: Document, file: File) -> Unit =
     { schema, doc, file ->
-        XmlUtil.validate(doc, schema)?.also {
-            throw IllegalStateException(
-                "Application produced an invalid document. Please report the parameters and the this error message to the maintainers. Validation error: $it",
+        XmlUtil.validate(doc, schema)?.also { validationError ->
+            error(
+                """
+                    |Application produced an invalid document. Please report the parameters and the this error message
+                    |to the maintainers. Validation errors:
+                    |$validationError
+                """.trimMargin(),
             )
         }
         file.printWriter().use { out ->

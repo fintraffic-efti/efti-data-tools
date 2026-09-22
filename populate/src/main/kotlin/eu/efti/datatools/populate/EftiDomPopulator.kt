@@ -8,12 +8,9 @@ import eu.efti.datatools.schema.XmlUtil.asIterable
 import eu.efti.datatools.schema.XmlUtil.deserializeToDocument
 import eu.efti.datatools.schema.XmlUtil.serializeToString
 import org.w3c.dom.Document
+import org.w3c.dom.Element
+import org.w3c.dom.NamedNodeMap
 import org.w3c.dom.Node
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
-import java.util.Base64
-import java.util.Locale
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.xpath.XPathExpression
 import javax.xml.xpath.XPathExpressionException
@@ -43,7 +40,7 @@ class EftiDomPopulator(
                 val xpath = xpathFactory.newXPath()
                 return try {
                     XPathRawAndCompiled(expression, xpath.compile(expression))
-                } catch (@Suppress("detekt:SwallowedException") e: XPathExpressionException) {
+                } catch (@Suppress("detekt:SwallowedException") _: XPathExpressionException) {
                     null
                 }
             }
@@ -74,9 +71,10 @@ class EftiDomPopulator(
         override fun match(name: XmlName, type: XmlType) = name.localPart == localPart
     }
 
-    data class ValueTypeMatcher(val typeLocalPart: String) : SchemaValueMatcher {
+    data class ValueTypeMatcher(val typeLocalPart: String, val typeNamespace: String? = null) : SchemaValueMatcher {
         override fun match(name: XmlName, type: XmlType) =
-            type.name.localPart == typeLocalPart
+            (typeNamespace == null || type.name?.namespaceURI == typeNamespace) &&
+                type.name?.localPart == typeLocalPart
     }
 
     object EnumTypeMatcher : SchemaValueMatcher {
@@ -84,37 +82,27 @@ class EftiDomPopulator(
             type.enumerationValues.isNotEmpty()
     }
 
-    private val gen = EftiValueGeneratorFactory(seed)
-
-    private val dateTimeFormatter205 = DateTimeFormatter.ofPattern("uuuuMMddHHmmxx")
-
-    private val enumerationGenerator: XmlValueGenerator = { valuePath, _, type ->
-        gen.forPath(valuePath).nextChoice(
-            type.enumerationValues,
-        )
+    /**
+     * Matches an element whose type declares an attribute of the given name with the given fixed value. The fixed
+     * attribute tells how the text content of the element is to be interpreted, so it also tells how that content
+     * is to be generated. For example, an id element whose `schemeID` is fixed to "RFC 9562-4" must hold a UUID.
+     */
+    data class FixedAttributeValueMatcher(
+        val attributeLocalPart: String,
+        val attributeFixedValue: String,
+    ) : SchemaValueMatcher {
+        override fun match(name: XmlName, type: XmlType) =
+            type.attributes.any {
+                it.name.localPart == attributeLocalPart && it.fixedValue == attributeFixedValue
+            }
     }
 
-    private val generators: List<Pair<SchemaValueMatcher, XmlValueGenerator>> = listOf(
-        ValueNameMatcher("schemeAgencyId") to noArgsGenerator { it.nextToken() },
-        ValueNameMatcher("sequenceNumber") to repeatIndexGenerator { repeatIndex -> repeatIndex.toString() },
-        ValueTypeMatcher("base64Binary") to noArgsGenerator {
-            Base64.getEncoder().encodeToString(it.nextToken().toByteArray())
-        },
-        ValueTypeMatcher("boolean") to noArgsGenerator { it.nextBoolean().toString() },
-        ValueTypeMatcher("DateTimeFormat") to noArgsGenerator {
-            // Note: for simplicity, always use the same format
-            "205"
-        },
-        ValueTypeMatcher("DateTime") to noArgsGenerator {
-            // Note: for simplicity, always use the same format
-            dateTimeFormatter205.format(OffsetDateTime.ofInstant(it.nextInstant(), ZoneOffset.UTC))
-        },
-        ValueTypeMatcher("decimal") to noArgsGenerator { String.format(Locale.UK, "%.2f", it.nextDouble(0.0, 10.0)) },
-        ValueTypeMatcher("Identifier17") to noArgsGenerator { it.nextToken() },
-        ValueTypeMatcher("integer") to noArgsGenerator { it.nextInt(1000, 9999).toString() },
-        ValueTypeMatcher("string") to noArgsGenerator { it.nextToken(4) },
-        EnumTypeMatcher to enumerationGenerator,
-    )
+    private val gen = EftiValueGeneratorFactory(seed)
+
+    /**
+     * Value generators of the schema being populated, selected by its document element.
+     */
+    private val valueGenerators: ValueGeneratorSet = ValueGenerators(gen).forRootElement(schema.xmlSchema.name)
 
     /**
      * Populate a pseudo-random document of the schema of this populator.
@@ -173,22 +161,14 @@ class EftiDomPopulator(
 
         if (!namespaceAware) {
             // ...however, we want to produce documents that pass validation. Therefore, we need to restore
-            // the namespace declaration.
-            restoreEftiNamespace(schema, overridesDoc)
+            // the namespaces.
+            restoreNamespacesFromSchema(schema, overridesDoc)
         } else {
             overridesDoc
         }
     } else {
         originalDoc
     }
-
-    private fun noArgsGenerator(
-        block: (gen: EftiValueGeneratorFactory.EftiValueGenerator) -> String,
-    ): XmlValueGenerator =
-        { valuePath, _, _ -> block(gen.forPath(valuePath)) }
-
-    private fun repeatIndexGenerator(block: (Int) -> String): XmlValueGenerator =
-        { _, repeatIndex, _ -> block(repeatIndex) }
 
     private fun populateElement(doc: Document, parent: Node, parentPath: ValuePath, schema: XmlSchemaElement) {
         val currentPath = parentPath.append(schema)
@@ -221,7 +201,11 @@ class EftiDomPopulator(
                 val attribute =
                     doc.createAttributeNS(schemaAttribute.name.namespaceURI, schemaAttribute.name.localPart)
 
-                if (schemaAttribute.type.isTextContentType) {
+                val fixedValue = schemaAttribute.fixedValue
+                if (fixedValue != null) {
+                    // A document is only valid if an attribute with a fixed value has exactly that value.
+                    attribute.value = fixedValue
+                } else if (schemaAttribute.type.isTextContentType) {
                     val generator = findMostSpecificGenerator(schemaAttribute.name, schemaAttribute.type)
                     attribute.value =
                         generator(currentPath.append(repeatIndex).append(schemaAttribute), 0, schemaAttribute.type)
@@ -233,7 +217,11 @@ class EftiDomPopulator(
                 populateElement(doc, element, currentPath.append(repeatIndex), child)
             }
 
-            if (schema.type.isTextContentType) {
+            val fixedValue = schema.fixedValue
+            if (fixedValue != null) {
+                // A document is only valid if an element with a fixed value has exactly that value.
+                element.textContent = fixedValue
+            } else if (schema.type.isTextContentType) {
                 val generator = findMostSpecificGenerator(schema.name, schema.type)
                 element.textContent = generator(currentPath.append(repeatIndex), repeatIndex, schema.type)
             }
@@ -241,13 +229,12 @@ class EftiDomPopulator(
     }
 
     private fun findMostSpecificGenerator(name: XmlName, type: XmlType): XmlValueGenerator =
-        requireNotNull(
-            sequenceOf(type).plus(type.baseTypes)
-                .firstNotNullOfOrNull { t ->
-                    generators.firstOrNull { it.first.match(name, t) }?.second
-                },
-        ) {
-            "No generator found for: $name $type"
+        requireNotNull(valueGenerators.findRule(name, type)?.second) {
+            val typeNames = sequenceOf(type).plus(type.baseTypes)
+                .map { it.name?.localPart ?: "<anonymous>" }
+                .joinToString(" -> ")
+            "No ${valueGenerators.description} value generator is defined for element \"${name.localPart}\" of" +
+                " type $typeNames. Please report this element and type to the maintainers."
         }
 
     companion object {
@@ -259,24 +246,82 @@ class EftiDomPopulator(
             return doc
         }
 
-        private fun restoreEftiNamespace(
+        /**
+         * Restore the namespaces that were removed by [removeNamespaces].
+         *
+         * The namespaces cannot be restored by simply declaring one namespace on the document element: the v1
+         * schemas spread a single document over several namespaces, for example the message envelope, the reusable
+         * components and the datatypes each have their own. Therefore the document is rebuilt by walking it
+         * alongside the schema, taking the namespace of each element and attribute from the schema.
+         */
+        private fun restoreNamespacesFromSchema(
             schema: XmlSchemaElement,
             originalDoc: Document,
         ): Document {
             val doc: Document = newDocument()
 
-            // Create new root in the desired namespace
-            val root = doc.appendChild(doc.createElementNS(schema.name.namespaceURI, schema.name.localPart))
+            doc.appendChild(copyWithNamespaces(doc, originalDoc.documentElement, schema))
 
-            // Import children from the original document
-            originalDoc.firstChild.childNodes.asIterable().forEach { child ->
-                val importedChild = doc.importNode(child, /* deep */ true)
-                root.appendChild(importedChild)
-            }
-
-            // Another serialization round is required to convert all elements to the desired namespace
+            // Another serialization round is required to normalize the namespace declarations.
             return deserializeToDocument(serializeToString(doc, prettyPrint = false), namespaceAware = true)
         }
+
+        private fun copyWithNamespaces(doc: Document, source: Element, schema: XmlSchemaElement?): Element {
+            val target = createElement(doc, localNameOf(source), schema?.name?.namespaceURI)
+
+            source.attributes.asIterable()
+                // Namespace declarations are plain attributes in a document that was parsed without namespace
+                // awareness. They must not be copied, because the namespaces are taken from the schema instead.
+                .filterNot { attribute -> isNamespaceDeclaration(attribute) }
+                .forEach { attribute ->
+                    val attributeName = localNameOf(attribute)
+                    val attributeNamespace = schema?.type?.attributes
+                        ?.find { it.name.localPart == attributeName }
+                        ?.name
+                        ?.namespaceURI
+
+                    if (attributeNamespace.isNullOrEmpty()) {
+                        target.setAttribute(attributeName, attribute.nodeValue)
+                    } else {
+                        target.setAttributeNS(attributeNamespace, attributeName, attribute.nodeValue)
+                    }
+                }
+
+            source.childNodes.asIterable().forEach { child ->
+                when (child.nodeType) {
+                    Node.ELEMENT_NODE -> {
+                        val childElement = child as Element
+                        val childSchema = schema?.children
+                            ?.find { it.name.localPart == localNameOf(childElement) }
+                        target.appendChild(copyWithNamespaces(doc, childElement, childSchema))
+                    }
+
+                    Node.TEXT_NODE, Node.CDATA_SECTION_NODE ->
+                        target.appendChild(doc.createTextNode(child.nodeValue))
+
+                    else -> Unit
+                }
+            }
+
+            return target
+        }
+
+        private fun createElement(doc: Document, localName: String, namespaceURI: String?): Element =
+            if (namespaceURI.isNullOrEmpty()) {
+                doc.createElement(localName)
+            } else {
+                doc.createElementNS(namespaceURI, localName)
+            }
+
+        private fun isNamespaceDeclaration(attribute: Node): Boolean {
+            val name = attribute.nodeName
+            return name == "xmlns" || name.startsWith("xmlns:")
+        }
+
+        private fun localNameOf(node: Node): String = node.localName ?: node.nodeName
+
+        private fun NamedNodeMap.asIterable(): Iterable<Node> =
+            (0 until this.length).asSequence().map { this.item(it) }.asIterable()
 
         private fun removeNamespaces(doc: Document): Document {
             // Note: a clumsy way of making unaware of namespaces

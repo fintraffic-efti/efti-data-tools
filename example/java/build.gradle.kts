@@ -37,7 +37,7 @@ dependencies {
 val eftiXsdResources = layout.buildDirectory.dir("efti-xsd-resources")
 
 val copyEftiXsd by tasks.registering(Copy::class) {
-    from(file("../../xsd"))
+    from(file("../../xsd/v0"))
     into(eftiXsdResources.map { it.dir("efti-xsd") })
 }
 

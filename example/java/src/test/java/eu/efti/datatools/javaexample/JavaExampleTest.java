@@ -38,7 +38,7 @@ public class JavaExampleTest {
 
     @Test
     public void shouldFilterSubsetsOnExampleDocument() {
-        var originalXml = readXml("../../xsd/examples/consignment-common.xml");
+        var originalXml = readXml("../../xsd/v0/examples/consignment-common.xml");
         var originalDoc = deserializeToDocument(originalXml);
 
         var filteredDoc = JavaExample.filterCommonSubsets(originalDoc, Set.of("FI01", "FI02"));

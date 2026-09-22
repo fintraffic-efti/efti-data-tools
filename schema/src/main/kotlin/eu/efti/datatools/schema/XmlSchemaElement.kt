@@ -6,13 +6,37 @@ data class XmlSchemaElement(
     val cardinality: XmlCardinality,
     val children: List<XmlSchemaElement>,
     val subsets: Set<SubsetId>,
+    /**
+     * The `eFTI_ID` that the v1 schemas assign to this element, or null if the element has none. The v0 schemas do
+     * not use these ids, so this is always null for them.
+     *
+     * The id is stable across v1 schema files, which is what allows subsets declared in one v1 schema to be applied
+     * to the elements of another, see [EftiSchemaId.subsetSource].
+     */
+    val eftiId: String? = null,
+    /**
+     * Value that the schema fixes for this element, or null if the element has no fixed value. A document is only
+     * valid if an element with a fixed value has exactly that value.
+     */
+    val fixedValue: String? = null,
 ) {
-    data class XmlAttribute(val name: XmlName, val type: XmlType)
+    data class XmlAttribute(
+        val name: XmlName,
+        val type: XmlType,
+        /**
+         * Value that the schema fixes for this attribute, or null if the attribute has no fixed value.
+         */
+        val fixedValue: String? = null,
+    )
 
     data class XmlName(val namespaceURI: String, val localPart: String)
 
     data class XmlType(
-        val name: XmlName,
+        /**
+         * Qualified name of the type, or null if the type is anonymous, that is, declared inline in an element or
+         * an attribute. The v1 eFTI schemas use anonymous types, for example for the `DateTimeString` elements.
+         */
+        val name: XmlName?,
         val enumerationValues: List<String> = emptyList(),
         val attributes: List<XmlAttribute> = emptyList(),
         val baseTypes: List<XmlType> = emptyList(),
