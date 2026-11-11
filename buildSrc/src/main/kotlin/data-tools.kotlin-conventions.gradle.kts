@@ -61,9 +61,6 @@ tasks.test {
         )
         exceptionFormat = TestExceptionFormat.FULL
     }
-
-    // Always run task even if it has successfully completed earlier
-    outputs.upToDateWhen { false }
 }
 
 tasks.register("updateTestExpectations", Test::class) {
