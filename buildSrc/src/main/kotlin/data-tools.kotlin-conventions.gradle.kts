@@ -66,7 +66,10 @@ tasks.test {
     outputs.upToDateWhen { false }
 }
 
-tasks.register<Test>("updateTestExpectations") {
+tasks.register("updateTestExpectations", Test::class) {
+    testClassesDirs = sourceSets.test.get().output.classesDirs
+    classpath = sourceSets.test.get().runtimeClasspath
+
     useJUnitPlatform {
         includeTags("expectation-update")
         ignoreFailures = true
