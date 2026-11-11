@@ -585,7 +585,7 @@
             <CategoryCode>T5</CategoryCode>
             <CharacteristicCode listAgencyID="12">qagn</CharacteristicCode>
             <UsedCapacityCode>T14</UsedCapacityCode>
-            <SequenceNumeric>6.99</SequenceNumeric>
+            <SequenceNumeric>1</SequenceNumeric>
             <SealQuantity>6.39</SealQuantity>
             <StowagePositionID>yeur</StowagePositionID>
             <GrossGoodsWeightMeasure unitCode="GRM">3.56</GrossGoodsWeightMeasure>
@@ -633,7 +633,7 @@
                 <CategoryCode>T7</CategoryCode>
                 <GrossWeightMeasure unitCode="KGM">3.83</GrossWeightMeasure>
                 <UsedCapacityCode>T14</UsedCapacityCode>
-                <SequenceNumeric>7.14</SequenceNumeric>
+                <SequenceNumeric>1</SequenceNumeric>
                 <VerifiedGrossWeightMeasure unitCode="KGM">0.95</VerifiedGrossWeightMeasure>
                 <GrossGoodsWeightMeasure unitCode="GRM">1.58</GrossGoodsWeightMeasure>
                 <NetGoodsWeightMeasure unitCode="KGM">1.06</NetGoodsWeightMeasure>
@@ -686,7 +686,7 @@
                 <CategoryCode>BPQ</CategoryCode>
                 <GrossWeightMeasure unitCode="KGM">1.69</GrossWeightMeasure>
                 <UsedCapacityCode>T14</UsedCapacityCode>
-                <SequenceNumeric>8.22</SequenceNumeric>
+                <SequenceNumeric>1</SequenceNumeric>
                 <VerifiedGrossWeightMeasure unitCode="KGM">8.23</VerifiedGrossWeightMeasure>
                 <GrossGoodsWeightMeasure unitCode="KGM">5.35</GrossGoodsWeightMeasure>
                 <NetGoodsWeightMeasure unitCode="GRM">7.16</NetGoodsWeightMeasure>
@@ -771,7 +771,7 @@
         <MainCarriageLogisticsTransportMovement xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
             <ModeCode>8</ModeCode>
             <ID>xqyy</ID>
-            <SequenceNumeric>9.57</SequenceNumeric>
+            <SequenceNumeric>1</SequenceNumeric>
             <MasterResponsibleTransportPerson>
                 <ID schemeAgencyID="87">isnb</ID>
                 <BirthDateTime>

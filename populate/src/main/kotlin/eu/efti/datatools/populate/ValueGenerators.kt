@@ -110,6 +110,7 @@ class ValueGenerators(private val gen: EftiValueGeneratorFactory) {
                 dateTimeFormatter205.format(OffsetDateTime.ofInstant(it.nextInstant(), ZoneOffset.UTC))
             },
             EnumTypeMatcher to enumerationGenerator(),
+            ValueNameMatcher("SequenceNumeric") to repeatIndexGenerator { repeatIndex -> repeatIndex.inc().toString() },
             ValueTypeMatcher(
                 "token_4",
                 "urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34",
