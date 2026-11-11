@@ -42,7 +42,7 @@ class EftiDomPopulatorTest {
 
     @Test
     @Tag("expectation-update")
-    fun `should populate common document that matches the expected document`() {
+    fun `should populate v0 common document that matches the expected document`() {
         val expectationFilename = "common-expected.xml"
 
         val populator = EftiDomPopulator(TestSchemas.common, 42, RepeatablePopulateMode.MINIMUM_ONE)
@@ -61,6 +61,40 @@ class EftiDomPopulatorTest {
 
             assertAll(
                 { assertThat(XmlUtil.validate(doc, TestSchemas.common.javaSchema), nullValue()) },
+                {
+                    // Use junit assertEquals because it formats the expected value better than hamcrest.
+                    // Also, CompareMatcher.isSimilarTo does not work with consignment-common document, maybe it's too big?
+                    assertEquals(
+                        expected,
+                        formatXml(doc),
+                        "Populated document did not match the expected document, please update test expectations with: ./gradlew updateTestExpectations",
+                    )
+                },
+            )
+        }
+    }
+
+    @Test
+    @Tag("expectation-update")
+    fun `should populate v1 cmds document that matches the expected document`() {
+        val expectationFilename = "v1-cmds-expected.xml"
+
+        val populator = EftiDomPopulator(TestSchemas.cmdsResponseV1, 42, RepeatablePopulateMode.MINIMUM_ONE)
+        val doc = populator.populate()
+
+        if (updateTestExpectations) {
+            val updated = formatXml(doc)
+            FileWriter(testResourceFile(expectationFilename)).use {
+                it.write(updated)
+                it.flush()
+            }
+            fail("Test expectations updated, run test again to verify")
+        } else {
+            val expected =
+                InputStreamReader(classpathInputStream(expectationFilename)).use { it.readText() }
+
+            assertAll(
+                { assertThat(XmlUtil.validate(doc, TestSchemas.cmdsResponseV1.javaSchema), nullValue()) },
                 {
                     // Use junit assertEquals because it formats the expected value better than hamcrest.
                     // Also, CompareMatcher.isSimilarTo does not work with consignment-common document, maybe it's too big?
