@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.w3c.dom.Document
 import org.w3c.dom.Element
+import java.time.format.DateTimeFormatter
 
 /**
  * Tests for populating documents of the v1 eFTI schemas.
@@ -140,6 +141,37 @@ class EftiDomPopulatorV1Test {
                     "the content of a date/time element is generated",
                     dateTimeStrings.map { it.textContent.length }.toSet(),
                     everyItem(greaterThan(0)),
+                )
+            },
+        )
+    }
+
+    @Test
+    fun `should generate v1 date time content that matches its own format attribute`() {
+        // The format attribute and the text content used to be generated independently: the format was a random
+        // pick from the attribute's enumeration, while the content always used the "205" layout, regardless of
+        // which format code was actually chosen. This produced documents that validated against the schema but
+        // were not business-rule valid, because the content did not match its own format attribute.
+        val formatPatterns = mapOf(
+            "102" to "uuuuMMdd",
+            "203" to "uuuuMMddHHmm",
+            "205" to "uuuuMMddHHmmxx",
+            "207" to "uuuuMMddHHmmssxx",
+        )
+        val dateTimeStrings = elements(populate()).filter { it.localName == "DateTimeString" }
+
+        assertAll(
+            { assertThat("the document contains date/time elements", dateTimeStrings.size, greaterThan(0)) },
+            {
+                assertThat(
+                    "every date/time element's content parses with the pattern its own format attribute declares",
+                    dateTimeStrings.filterNot { element ->
+                        val pattern = checkNotNull(formatPatterns[element.getAttribute("format")])
+                        runCatching {
+                            DateTimeFormatter.ofPattern(pattern).parse(element.textContent)
+                        }.isSuccess
+                    },
+                    empty(),
                 )
             },
         )

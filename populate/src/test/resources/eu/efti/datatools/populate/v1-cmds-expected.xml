@@ -12,7 +12,7 @@
         <TypeCode xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">010</TypeCode>
         <StatusCode xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">E</StatusCode>
         <IssueDateTime xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
-            <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="207">203702221034+0000</DateTimeString>
+            <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="207">20321215004533+0000</DateTimeString>
         </IssueDateTime>
         <IncludedNote xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
             <ContentCode>400</ContentCode>
@@ -34,7 +34,7 @@
     </EFTIIDInformation>
     <SpecifiedSupplyChainConsignment>
         <CarrierAcceptanceDateTime xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
-            <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="205">203410170121+0000</DateTimeString>
+            <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20390303</DateTimeString>
         </CarrierAcceptanceDateTime>
         <GrossWeightMeasure xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34" unitCode="KGM">7.69</GrossWeightMeasure>
         <NetWeightMeasure xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34" unitCode="KGM">3.09</NetWeightMeasure>
@@ -151,7 +151,7 @@
             </SpecifiedContactPerson>
             <AgreedTradeContract>
                 <IssueDateTime>
-                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">202004060930+0000</DateTimeString>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20270905</DateTimeString>
                 </IssueDateTime>
                 <SpecifiedDurationMeasure unitCode="DAY">8.03</SpecifiedDurationMeasure>
                 <SignedSpecifiedLocation>
@@ -241,7 +241,7 @@
             <TypeCode>700</TypeCode>
             <ID>eypv</ID>
             <FormattedIssueDateTime>
-                <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">202608102101+0000</DateTimeString>
+                <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20240723</DateTimeString>
             </FormattedIssueDateTime>
             <SubtypeCode>T3</SubtypeCode>
             <IssueLogisticsLocation>
@@ -268,13 +268,13 @@
         </AssociatedReferencedDocument>
         <DeliveryTransportEvent xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
             <ActualOccurrenceDateTime>
-                <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">202012170248+0000</DateTimeString>
+                <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20380817</DateTimeString>
             </ActualOccurrenceDateTime>
             <ScheduledOccurrenceDateTime>
-                <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">203010010429+0000</DateTimeString>
+                <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20370707</DateTimeString>
             </ScheduledOccurrenceDateTime>
             <RequestedOccurrenceDateTime>
-                <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">202402111803+0000</DateTimeString>
+                <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20340804</DateTimeString>
             </RequestedOccurrenceDateTime>
             <OccurrenceLogisticsLocation>
                 <ID schemeAgencyID="ZZZ">rfkp</ID>
@@ -289,10 +289,10 @@
             <ScheduledOccurrenceSpecifiedPeriod>
                 <DurationMeasure unitCode="DAY">3.02</DurationMeasure>
                 <StartDateTime>
-                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">203001121546+0000</DateTimeString>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20350831</DateTimeString>
                 </StartDateTime>
                 <EndDateTime>
-                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">203209091622+0000</DateTimeString>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20320822</DateTimeString>
                 </EndDateTime>
                 <MaximumDurationMeasure unitCode="DAY">2.67</MaximumDurationMeasure>
             </ScheduledOccurrenceSpecifiedPeriod>
@@ -306,7 +306,7 @@
                 </SpecifiedAuthoritativeSignatoryPerson>
                 <ConfirmedDocumentAuthentication>
                     <ActualDateTime>
-                        <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">203710130053+0000</DateTimeString>
+                        <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="205">203512261523+0000</DateTimeString>
                     </ActualDateTime>
                 </ConfirmedDocumentAuthentication>
             </CertifyingTradeParty>
@@ -609,7 +609,7 @@
                     <ValueMeasure unitCode="IA">1.24</ValueMeasure>
                     <ActionCode>A1</ActionCode>
                     <ActionDateTime>
-                        <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="205">203005261944+0000</DateTimeString>
+                        <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20220821</DateTimeString>
                     </ActionDateTime>
                     <StatementCode>18</StatementCode>
                     <Statement languageID="ceb">ombr</Statement>
@@ -659,7 +659,7 @@
                         <ValueMeasure unitCode="LBR">0.36</ValueMeasure>
                         <ActionCode>A1</ActionCode>
                         <ActionDateTime>
-                            <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">203509031101+0000</DateTimeString>
+                            <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20221003</DateTimeString>
                         </ActionDateTime>
                         <StatementCode>27</StatementCode>
                         <Statement languageID="jpm">npqz</Statement>
@@ -712,7 +712,7 @@
                         <ValueMeasure unitCode="N49">2.71</ValueMeasure>
                         <ActionCode>A1</ActionCode>
                         <ActionDateTime>
-                            <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">202501082209+0000</DateTimeString>
+                            <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20280118</DateTimeString>
                         </ActionDateTime>
                         <StatementCode>29</StatementCode>
                         <Statement languageID="zuo">hvtf</Statement>
@@ -775,20 +775,20 @@
             <MasterResponsibleTransportPerson>
                 <ID schemeAgencyID="87">isnb</ID>
                 <BirthDateTime>
-                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">202108120723+0000</DateTimeString>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20290901</DateTimeString>
                 </BirthDateTime>
                 <GivenName>thrh</GivenName>
                 <FamilyName>pbdg</FamilyName>
             </MasterResponsibleTransportPerson>
             <LoadingTransportEvent>
                 <ActualOccurrenceDateTime>
-                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="205">202806230031+0000</DateTimeString>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="205">202506122214+0000</DateTimeString>
                 </ActualOccurrenceDateTime>
                 <ScheduledOccurrenceDateTime>
-                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">203110221643+0000</DateTimeString>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20380114</DateTimeString>
                 </ScheduledOccurrenceDateTime>
                 <RequestedOccurrenceDateTime>
-                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">202401040144+0000</DateTimeString>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20361105</DateTimeString>
                 </RequestedOccurrenceDateTime>
                 <OccurrenceLogisticsLocation>
                     <ID schemeAgencyID="6">ypuz</ID>
@@ -819,19 +819,19 @@
                 </AdditionalSecurityMeasuresApplicableNote>
                 <ScheduledOccurrenceSpecifiedPeriod>
                     <EndDateTime>
-                        <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">203011140106+0000</DateTimeString>
+                        <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20341211</DateTimeString>
                     </EndDateTime>
                 </ScheduledOccurrenceSpecifiedPeriod>
             </LoadingTransportEvent>
             <UnloadingTransportEvent>
                 <EstimatedOccurrenceDateTime>
-                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">202406281200+0000</DateTimeString>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20370707</DateTimeString>
                 </EstimatedOccurrenceDateTime>
                 <ActualOccurrenceDateTime>
-                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">203005112041+0000</DateTimeString>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20211222</DateTimeString>
                 </ActualOccurrenceDateTime>
                 <ScheduledOccurrenceDateTime>
-                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">202106050456+0000</DateTimeString>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20390822</DateTimeString>
                 </ScheduledOccurrenceDateTime>
                 <OccurrenceLogisticsLocation>
                     <ID schemeAgencyID="6">ebkp</ID>
@@ -859,7 +859,7 @@
             </UnloadingTransportEvent>
             <DepartureTransportEvent>
                 <ScheduledOccurrenceDateTime>
-                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">203311031302+0000</DateTimeString>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20201215</DateTimeString>
                 </ScheduledOccurrenceDateTime>
             </DepartureTransportEvent>
             <UsedLogisticsTransportMeans>
@@ -894,7 +894,7 @@
             </CallTransportEvent>
             <BorderCrossingTransportEvent>
                 <ActualOccurrenceDateTime>
-                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">203611071530+0000</DateTimeString>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20310328</DateTimeString>
                 </ActualOccurrenceDateTime>
                 <OccurrenceLogisticsLocation>
                     <Name>njen</Name>
@@ -905,7 +905,7 @@
             <ModeCode>3</ModeCode>
             <ArrivalTransportEvent>
                 <ScheduledOccurrenceDateTime>
-                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">202402071939+0000</DateTimeString>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20270217</DateTimeString>
                 </ScheduledOccurrenceDateTime>
             </ArrivalTransportEvent>
         </PreCarriageLogisticsTransportMovement>
