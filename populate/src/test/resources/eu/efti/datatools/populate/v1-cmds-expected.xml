@@ -1,0 +1,1031 @@
+<?xml version="1.0" encoding="UTF-8"?><FTI010GetCmdsResponse xmlns="urn:eu:move:eFTI:data:standard:FTI010GetCmdsResponse:1">
+    <ExchangedDocumentContext>
+        <MessageStandardSpecifiedDocumentContextParameter xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ID>eFTI</ID>
+            <SpecifiedDocumentVersion>
+                <ID>1.0</ID>
+            </SpecifiedDocumentVersion>
+        </MessageStandardSpecifiedDocumentContextParameter>
+    </ExchangedDocumentContext>
+    <ExchangedDocument>
+        <ID xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34" schemeID="RFC 9562-4">2ba39b9a-18cb-4bad-95ea-5d9548049a5c</ID>
+        <TypeCode xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">010</TypeCode>
+        <StatusCode xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">E</StatusCode>
+        <IssueDateTime xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="207">20321215004533+0000</DateTimeString>
+        </IssueDateTime>
+        <IncludedNote xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ContentCode>400</ContentCode>
+            <Content languageID="ffd">pqij</Content>
+        </IncludedNote>
+        <RequestedSpecifiedQuery xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ID schemeID="RFC 9562-4">737c086b-bb26-4fae-874a-5990f7e53318</ID>
+        </RequestedSpecifiedQuery>
+    </ExchangedDocument>
+    <MessageInformation>
+        <SubsetID xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">CY01</SubsetID>
+    </MessageInformation>
+    <EFTIIDInformation>
+        <UniqueIDSetUniqueIDSet xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <GateID>nxxx</GateID>
+            <PlatformID>okab</PlatformID>
+            <DatasetID schemeID="RFC 9562-4">1dde1821-4dc3-4894-9b88-61c28931e95b</DatasetID>
+        </UniqueIDSetUniqueIDSet>
+    </EFTIIDInformation>
+    <SpecifiedSupplyChainConsignment>
+        <CarrierAcceptanceDateTime xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20390303</DateTimeString>
+        </CarrierAcceptanceDateTime>
+        <GrossWeightMeasure xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34" unitCode="KGM">7.69</GrossWeightMeasure>
+        <NetWeightMeasure xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34" unitCode="KGM">3.09</NetWeightMeasure>
+        <GrossVolumeMeasure xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34" unitCode="MTQ">9.46</GrossVolumeMeasure>
+        <CODAmount xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34" currencyID="hlx">9.91</CODAmount>
+        <PackageQuantity xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">7.01</PackageQuantity>
+        <TransportEquipmentQuantity xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">9.48</TransportEquipmentQuantity>
+        <Information xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">nbue</Information>
+        <DeclaredValueForCarriageAmount xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34" currencyID="ime">8.89</DeclaredValueForCarriageAmount>
+        <PaymentArrangementCode xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34" listAgencyID="6">akg</PaymentArrangementCode>
+        <DeliveryInformation xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">nfga</DeliveryInformation>
+        <CargoInsuranceInstructionsInformation xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">qdkl</CargoInsuranceInstructionsInformation>
+        <TransshipmentPermissionIndicator xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">false</TransshipmentPermissionIndicator>
+        <ConsignorProvidedInformation xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">vcuv</ConsignorProvidedInformation>
+        <ContractTermsInformation xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">ffgg</ContractTermsInformation>
+        <ConsignorTradeParty xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ID schemeAgencyID="87">ukqk</ID>
+            <Name>phzz</Name>
+            <DefinedTradeContact>
+                <TelephoneUniversalCommunication>
+                    <CompleteNumber>wfuq</CompleteNumber>
+                </TelephoneUniversalCommunication>
+                <EmailURIUniversalCommunication>
+                    <URIID>omqy</URIID>
+                </EmailURIUniversalCommunication>
+            </DefinedTradeContact>
+            <PostalTradeAddress>
+                <PostcodeCode>fznd</PostcodeCode>
+                <PostOfficeBox>pvol</PostOfficeBox>
+                <StreetName>iouo</StreetName>
+                <CityName>msco</CityName>
+                <CountryID>yk</CountryID>
+                <CountrySubDivisionName>rmvg</CountrySubDivisionName>
+                <BuildingNumber>mvcg</BuildingNumber>
+                <DepartmentName>bhfo</DepartmentName>
+                <AdditionalStreetName>bkro</AdditionalStreetName>
+            </PostalTradeAddress>
+            <SpecifiedTaxRegistration>
+                <ID schemeAgencyID="97">nbmc</ID>
+            </SpecifiedTaxRegistration>
+            <SpecifiedContactPerson>
+                <GivenName>vyzh</GivenName>
+                <FamilyName>wzvd</FamilyName>
+            </SpecifiedContactPerson>
+            <OwnedCreditorFinancialAccount>
+                <ProprietaryID schemeAgencyID="20">wzyy</ProprietaryID>
+            </OwnedCreditorFinancialAccount>
+            <ConfirmedDocumentAuthentication>
+                <StatementCode>1</StatementCode>
+            </ConfirmedDocumentAuthentication>
+        </ConsignorTradeParty>
+        <ConsigneeTradeParty xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ID schemeAgencyID="87">wazu</ID>
+            <Name>gpye</Name>
+            <DefinedTradeContact>
+                <PersonName>hbwp</PersonName>
+                <TelephoneUniversalCommunication>
+                    <CompleteNumber>sxmq</CompleteNumber>
+                </TelephoneUniversalCommunication>
+                <FaxUniversalCommunication>
+                    <CompleteNumber>dxnf</CompleteNumber>
+                </FaxUniversalCommunication>
+                <EmailURIUniversalCommunication>
+                    <URIID>lyco</URIID>
+                </EmailURIUniversalCommunication>
+            </DefinedTradeContact>
+            <PostalTradeAddress>
+                <PostcodeCode>gvpz</PostcodeCode>
+                <PostOfficeBox>kzsk</PostOfficeBox>
+                <StreetName>pqif</StreetName>
+                <CityName>apos</CityName>
+                <CountryID>mv</CountryID>
+                <CountrySubDivisionName>gaph</CountrySubDivisionName>
+                <BuildingNumber>nfqf</BuildingNumber>
+                <AdditionalStreetName>isoq</AdditionalStreetName>
+            </PostalTradeAddress>
+            <SpecifiedTaxRegistration>
+                <ID schemeAgencyID="T7">dpww</ID>
+            </SpecifiedTaxRegistration>
+            <SpecifiedContactPerson>
+                <GivenName>hdql</GivenName>
+                <FamilyName>dxhx</FamilyName>
+            </SpecifiedContactPerson>
+            <ConfirmedDocumentAuthentication>
+                <StatementCode>1</StatementCode>
+            </ConfirmedDocumentAuthentication>
+        </ConsigneeTradeParty>
+        <CarrierTradeParty xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ID schemeAgencyID="20">smhp</ID>
+            <Name>lais</Name>
+            <RoleCode>EV</RoleCode>
+            <DefinedTradeContact>
+                <PersonName>ccgj</PersonName>
+                <TelephoneUniversalCommunication>
+                    <CompleteNumber>npwp</CompleteNumber>
+                </TelephoneUniversalCommunication>
+            </DefinedTradeContact>
+            <PostalTradeAddress>
+                <PostcodeCode>qykm</PostcodeCode>
+                <PostOfficeBox>kiip</PostOfficeBox>
+                <StreetName>hebu</StreetName>
+                <CityName>nrav</CityName>
+                <CountryID>jc</CountryID>
+                <CountrySubDivisionName>ewom</CountrySubDivisionName>
+                <BuildingNumber>gqwi</BuildingNumber>
+                <AdditionalStreetName>zaux</AdditionalStreetName>
+            </PostalTradeAddress>
+            <SpecifiedTaxRegistration>
+                <ID schemeAgencyID="T7">jpjp</ID>
+            </SpecifiedTaxRegistration>
+            <SpecifiedContactPerson>
+                <GivenName>jjtv</GivenName>
+                <FamilyName>tlds</FamilyName>
+            </SpecifiedContactPerson>
+            <AgreedTradeContract>
+                <IssueDateTime>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20270905</DateTimeString>
+                </IssueDateTime>
+                <SpecifiedDurationMeasure unitCode="DAY">8.03</SpecifiedDurationMeasure>
+                <SignedSpecifiedLocation>
+                    <Name>ffop</Name>
+                </SignedSpecifiedLocation>
+            </AgreedTradeContract>
+            <ApplicableSpecifiedLicence>
+                <ID schemeAgencyID="97">ayiz</ID>
+                <TypeCode listAgencyID="2">clk</TypeCode>
+            </ApplicableSpecifiedLicence>
+            <ConfirmedDocumentAuthentication>
+                <StatementCode>1</StatementCode>
+            </ConfirmedDocumentAuthentication>
+        </CarrierTradeParty>
+        <FreightForwarderTradeParty xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <Name>tuxm</Name>
+            <PostalTradeAddress>
+                <PostcodeCode>wrrv</PostcodeCode>
+                <PostOfficeBox>cgcx</PostOfficeBox>
+                <StreetName>nkoi</StreetName>
+                <CityName>scnh</CityName>
+                <CountryID>ry</CountryID>
+                <CountrySubDivisionName>ernn</CountrySubDivisionName>
+                <BuildingNumber>xsxv</BuildingNumber>
+                <DepartmentName>nizl</DepartmentName>
+                <AdditionalStreetName>jspa</AdditionalStreetName>
+            </PostalTradeAddress>
+        </FreightForwarderTradeParty>
+        <ConnectingCarrierTradeParty xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ID schemeAgencyID="87">uhhe</ID>
+            <Name>eihb</Name>
+            <PostalTradeAddress>
+                <PostcodeCode>yehc</PostcodeCode>
+                <PostOfficeBox>hsem</PostOfficeBox>
+                <StreetName>jhtr</StreetName>
+                <CityName>mpzr</CityName>
+                <CountryID>sz</CountryID>
+                <CountrySubDivisionName>ktgx</CountrySubDivisionName>
+                <BuildingNumber>ogod</BuildingNumber>
+                <AdditionalStreetName>oden</AdditionalStreetName>
+            </PostalTradeAddress>
+            <ApplicableSpecifiedLicence>
+                <ID schemeAgencyID="107">zyhc</ID>
+                <TypeCode listAgencyID="2">pkm</TypeCode>
+            </ApplicableSpecifiedLicence>
+        </ConnectingCarrierTradeParty>
+        <CarrierAcceptanceLogisticsLocation xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ID schemeAgencyID="503">udqx</ID>
+            <Name>mchw</Name>
+            <PhysicalGeographicalCoordinate>
+                <LatitudeMeasure>5.03</LatitudeMeasure>
+                <LongitudeMeasure>6.66</LongitudeMeasure>
+            </PhysicalGeographicalCoordinate>
+            <PostalTradeAddress>
+                <PostcodeCode>zwbq</PostcodeCode>
+                <StreetName>vgis</StreetName>
+                <CityName>jfcr</CityName>
+                <CountryID>zn</CountryID>
+                <CountrySubDivisionName>zfuk</CountrySubDivisionName>
+                <BuildingNumber>bzev</BuildingNumber>
+                <AdditionalStreetName>ojrs</AdditionalStreetName>
+            </PostalTradeAddress>
+        </CarrierAcceptanceLogisticsLocation>
+        <TransshipmentLogisticsLocation xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ID schemeAgencyID="503">cazg</ID>
+            <Name>mbzb</Name>
+        </TransshipmentLogisticsLocation>
+        <ConsigneeReceiptLogisticsLocation xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ID schemeAgencyID="503">xkok</ID>
+            <Name>hogv</Name>
+            <PhysicalGeographicalCoordinate>
+                <LatitudeMeasure>7.49</LatitudeMeasure>
+                <LongitudeMeasure>4.95</LongitudeMeasure>
+            </PhysicalGeographicalCoordinate>
+            <PostalTradeAddress>
+                <PostcodeCode>fayp</PostcodeCode>
+                <StreetName>lnxq</StreetName>
+                <CityName>vbsk</CityName>
+                <CountryID>nc</CountryID>
+                <CountrySubDivisionName>lium</CountrySubDivisionName>
+                <BuildingNumber>qrbx</BuildingNumber>
+                <AdditionalStreetName>wiqi</AdditionalStreetName>
+            </PostalTradeAddress>
+        </ConsigneeReceiptLogisticsLocation>
+        <TransportContractReferencedDocument xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <URIID>zrrg</URIID>
+            <TypeCode>700</TypeCode>
+            <ID>eypv</ID>
+            <FormattedIssueDateTime>
+                <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20240723</DateTimeString>
+            </FormattedIssueDateTime>
+            <SubtypeCode>T3</SubtypeCode>
+            <IssueLogisticsLocation>
+                <Name>txyk</Name>
+            </IssueLogisticsLocation>
+            <ContractualDocumentClause>
+                <Content>mmac</Content>
+            </ContractualDocumentClause>
+        </TransportContractReferencedDocument>
+        <AssociatedReferencedDocument xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <TypeCode>333</TypeCode>
+            <ID>type</ID>
+            <ReferenceTypeCode>AWZ</ReferenceTypeCode>
+            <IssuerTradeParty>
+                <Name>eftw</Name>
+                <SpecifiedRepresentativePerson>
+                    <Name>ktgq</Name>
+                </SpecifiedRepresentativePerson>
+            </IssuerTradeParty>
+            <AttachedSpecifiedBinaryFile>
+                <ID>czcu</ID>
+                <IncludedBinaryObject filename="imtw" uri="https://example.com/xvcyge">c3V3cWVp</IncludedBinaryObject>
+            </AttachedSpecifiedBinaryFile>
+        </AssociatedReferencedDocument>
+        <DeliveryTransportEvent xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ActualOccurrenceDateTime>
+                <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20380817</DateTimeString>
+            </ActualOccurrenceDateTime>
+            <ScheduledOccurrenceDateTime>
+                <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20370707</DateTimeString>
+            </ScheduledOccurrenceDateTime>
+            <RequestedOccurrenceDateTime>
+                <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20340804</DateTimeString>
+            </RequestedOccurrenceDateTime>
+            <OccurrenceLogisticsLocation>
+                <ID schemeAgencyID="ZZZ">rfkp</ID>
+                <Name>cuiw</Name>
+            </OccurrenceLogisticsLocation>
+            <RelatedSpecifiedObservation>
+                <ApplicableNote>
+                    <Content>alrg</Content>
+                    <SubjectCode>odv</SubjectCode>
+                </ApplicableNote>
+            </RelatedSpecifiedObservation>
+            <ScheduledOccurrenceSpecifiedPeriod>
+                <DurationMeasure unitCode="DAY">3.02</DurationMeasure>
+                <StartDateTime>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20350831</DateTimeString>
+                </StartDateTime>
+                <EndDateTime>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20320822</DateTimeString>
+                </EndDateTime>
+                <MaximumDurationMeasure unitCode="DAY">2.67</MaximumDurationMeasure>
+            </ScheduledOccurrenceSpecifiedPeriod>
+        </DeliveryTransportEvent>
+        <TransportEvent xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <CertifyingTradeParty>
+                <ID schemeAgencyID="87">svze</ID>
+                <SpecifiedAuthoritativeSignatoryPerson>
+                    <Name>gxny</Name>
+                    <ID>qxnw</ID>
+                </SpecifiedAuthoritativeSignatoryPerson>
+                <ConfirmedDocumentAuthentication>
+                    <ActualDateTime>
+                        <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="205">203512261523+0000</DateTimeString>
+                    </ActualDateTime>
+                </ConfirmedDocumentAuthentication>
+            </CertifyingTradeParty>
+        </TransportEvent>
+        <IncludedSupplyChainConsignmentItem xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <GrossVolumeMeasure unitCode="MTQ">0.02</GrossVolumeMeasure>
+            <GoodsUnitQuantity unitCode="C62">5.14</GoodsUnitQuantity>
+            <ApplicableTransportDangerousGoods>
+                <UNDGIdentificationCode>iijs</UNDGIdentificationCode>
+                <TechnicalName languageID="bua">vvzw</TechnicalName>
+                <PackagingDangerLevelCode>I-WHITE</PackagingDangerLevelCode>
+                <GrossWeightMeasure unitCode="GRM">7.02</GrossWeightMeasure>
+                <HazardTypeCode listAgencyID="T1">cche</HazardTypeCode>
+                <HazardTypeCode listAgencyID="T1">opmx</HazardTypeCode>
+                <HazardClassificationID>prmq</HazardClassificationID>
+                <GrossVolumeMeasure unitCode="MTQ">4.16</GrossVolumeMeasure>
+                <NetWeightMeasure unitCode="KGM">1.31</NetWeightMeasure>
+                <ExplosiveCargoNetWeightMeasure unitCode="KGM">4.35</ExplosiveCargoNetWeightMeasure>
+                <ProperShippingName languageID="roo">abjl</ProperShippingName>
+                <TunnelRestrictionCode>hnbg</TunnelRestrictionCode>
+                <SpecialProvisionID>SP392</SpecialProvisionID>
+                <SpecialProvisionID>SP390</SpecialProvisionID>
+                <HazardCategoryCode>3</HazardCategoryCode>
+                <LimitedQuantityCode>1</LimitedQuantityCode>
+                <DensityMeasure unitCode="A19">0.05</DensityMeasure>
+                <MeltingPointTemperatureMeasure unitCode="CEL">5.93</MeltingPointTemperatureMeasure>
+                <LabelTypeCode>tdg</LabelTypeCode>
+                <LabelTypeCode>lts</LabelTypeCode>
+                <ControlTemperatureMeasurement>
+                    <ConditionMeasure unitCode="CEL">3.36</ConditionMeasure>
+                    <TypeCode>T1</TypeCode>
+                </ControlTemperatureMeasurement>
+                <EmergencyTemperatureMeasurement>
+                    <ConditionMeasure unitCode="CEL">8.76</ConditionMeasure>
+                    <TypeCode>T1</TypeCode>
+                </EmergencyTemperatureMeasurement>
+                <RadioactiveMaterial>
+                    <SpecialFormInformation languageID="qje">souj</SpecialFormInformation>
+                    <RadioactivePackageTransportIndexCode>spb</RadioactivePackageTransportIndexCode>
+                    <FissileCriticalitySafetyIndexNumeric>0.57</FissileCriticalitySafetyIndexNumeric>
+                    <ApplicableSpecifiedRadioactiveIsotope>
+                        <Name languageID="wxf">ntmc</Name>
+                        <ActivityLevelMeasure unitCode="HEA">6.82</ActivityLevelMeasure>
+                    </ApplicableSpecifiedRadioactiveIsotope>
+                </RadioactiveMaterial>
+                <SpecifiedLogisticsPackage>
+                    <ItemQuantity>8.74</ItemQuantity>
+                    <TypeCode>dmnx</TypeCode>
+                    <Type languageID="ord">jufe</Type>
+                    <PhysicalLogisticsShippingMarks>
+                        <Marking languageID="akx">ndrt</Marking>
+                    </PhysicalLogisticsShippingMarks>
+                    <AssociatedReferencedDocument>
+                        <URIID>zvtn</URIID>
+                        <TypeCode>4</TypeCode>
+                    </AssociatedReferencedDocument>
+                    <StatedSpecifiedCondition>
+                        <StatementCode>43</StatementCode>
+                        <Statement languageID="mns">ulwr</Statement>
+                    </StatedSpecifiedCondition>
+                    <StatedSpecifiedCondition>
+                        <StatementCode>40</StatementCode>
+                        <Statement languageID="okq">xuqo</Statement>
+                    </StatedSpecifiedCondition>
+                </SpecifiedLogisticsPackage>
+                <StatedSpecifiedCondition>
+                    <SubjectTypeCode>S5</SubjectTypeCode>
+                    <StatementCode>44</StatementCode>
+                    <Statement languageID="rfv">mrjb</Statement>
+                    <SpecifiedCalibratedMeasurement>
+                        <ValueMeasure unitCode="60">1.31</ValueMeasure>
+                    </SpecifiedCalibratedMeasurement>
+                </StatedSpecifiedCondition>
+                <RelatedReferencedDocument>
+                    <TypeCode>T10</TypeCode>
+                    <AttachmentBinaryObject filename="mdnw" uri="https://example.com/bimszt">d3NwbW14</AttachmentBinaryObject>
+                </RelatedReferencedDocument>
+                <IncludedSpecifiedFuel>
+                    <TypeCode>1</TypeCode>
+                    <VolumeMeasure unitCode="MTQ">3.32</VolumeMeasure>
+                    <WeightMeasure unitCode="KGM">9.35</WeightMeasure>
+                    <WorkingPressureMeasure unitCode="BAR">6.50</WorkingPressureMeasure>
+                </IncludedSpecifiedFuel>
+                <TechnicalNameNote>
+                    <Content languageID="wqr">xfue</Content>
+                    <SubjectCode>3</SubjectCode>
+                </TechnicalNameNote>
+            </ApplicableTransportDangerousGoods>
+            <ApplicableTransportDangerousGoods>
+                <UNDGIdentificationCode>itve</UNDGIdentificationCode>
+                <TechnicalName languageID="agl">escz</TechnicalName>
+                <PackagingDangerLevelCode>I</PackagingDangerLevelCode>
+                <GrossWeightMeasure unitCode="GRM">9.07</GrossWeightMeasure>
+                <HazardTypeCode listAgencyID="T1">ehnj</HazardTypeCode>
+                <HazardTypeCode listAgencyID="6">qjil</HazardTypeCode>
+                <HazardClassificationID>sfon</HazardClassificationID>
+                <GrossVolumeMeasure unitCode="LTR">7.97</GrossVolumeMeasure>
+                <NetWeightMeasure unitCode="KGM">5.46</NetWeightMeasure>
+                <ExplosiveCargoNetWeightMeasure unitCode="KGM">4.62</ExplosiveCargoNetWeightMeasure>
+                <ProperShippingName languageID="hnw">qyui</ProperShippingName>
+                <TunnelRestrictionCode>plyb</TunnelRestrictionCode>
+                <SpecialProvisionID>SP378</SpecialProvisionID>
+                <HazardCategoryCode>4</HazardCategoryCode>
+                <LimitedQuantityCode>1</LimitedQuantityCode>
+                <DensityMeasure unitCode="TNE">0.81</DensityMeasure>
+                <MeltingPointTemperatureMeasure unitCode="CEL">7.39</MeltingPointTemperatureMeasure>
+                <LabelTypeCode>rzm</LabelTypeCode>
+                <LabelTypeCode>agl</LabelTypeCode>
+                <LabelTypeCode>yts</LabelTypeCode>
+                <ControlTemperatureMeasurement>
+                    <ConditionMeasure unitCode="CEL">1.96</ConditionMeasure>
+                    <TypeCode>T1</TypeCode>
+                </ControlTemperatureMeasurement>
+                <EmergencyTemperatureMeasurement>
+                    <ConditionMeasure unitCode="CEL">1.91</ConditionMeasure>
+                    <TypeCode>T1</TypeCode>
+                </EmergencyTemperatureMeasurement>
+                <RadioactiveMaterial>
+                    <SpecialFormInformation languageID="uot">iwko</SpecialFormInformation>
+                    <RadioactivePackageTransportIndexCode>fwn</RadioactivePackageTransportIndexCode>
+                    <FissileCriticalitySafetyIndexNumeric>4.19</FissileCriticalitySafetyIndexNumeric>
+                    <ApplicableSpecifiedRadioactiveIsotope>
+                        <Name languageID="bgy">qfzt</Name>
+                        <ActivityLevelMeasure unitCode="34">8.32</ActivityLevelMeasure>
+                    </ApplicableSpecifiedRadioactiveIsotope>
+                </RadioactiveMaterial>
+                <SpecifiedLogisticsPackage>
+                    <ItemQuantity>8.90</ItemQuantity>
+                    <TypeCode>mzuq</TypeCode>
+                    <Type languageID="umi">bryt</Type>
+                    <PhysicalLogisticsShippingMarks>
+                        <Marking languageID="uux">uyef</Marking>
+                    </PhysicalLogisticsShippingMarks>
+                    <AssociatedReferencedDocument>
+                        <URIID>wakh</URIID>
+                        <TypeCode>4</TypeCode>
+                    </AssociatedReferencedDocument>
+                    <StatedSpecifiedCondition>
+                        <StatementCode>39</StatementCode>
+                        <Statement languageID="ias">fhvw</Statement>
+                    </StatedSpecifiedCondition>
+                </SpecifiedLogisticsPackage>
+                <StatedSpecifiedCondition>
+                    <SubjectTypeCode>S8</SubjectTypeCode>
+                    <StatementCode>37</StatementCode>
+                    <Statement languageID="wxt">noku</Statement>
+                    <SpecifiedCalibratedMeasurement>
+                        <ValueMeasure unitCode="VP">7.83</ValueMeasure>
+                    </SpecifiedCalibratedMeasurement>
+                </StatedSpecifiedCondition>
+                <RelatedReferencedDocument>
+                    <TypeCode>T10</TypeCode>
+                    <AttachmentBinaryObject filename="crcw" uri="https://example.com/cujnhd">dGtna3pp</AttachmentBinaryObject>
+                </RelatedReferencedDocument>
+                <IncludedSpecifiedFuel>
+                    <TypeCode>1</TypeCode>
+                    <VolumeMeasure unitCode="MTQ">5.57</VolumeMeasure>
+                    <WeightMeasure unitCode="KGM">0.68</WeightMeasure>
+                    <WorkingPressureMeasure unitCode="BAR">7.10</WorkingPressureMeasure>
+                </IncludedSpecifiedFuel>
+                <TechnicalNameNote>
+                    <Content languageID="bnk">kpun</Content>
+                    <SubjectCode>1</SubjectCode>
+                </TechnicalNameNote>
+            </ApplicableTransportDangerousGoods>
+            <ApplicableTransportDangerousGoods>
+                <UNDGIdentificationCode>zkva</UNDGIdentificationCode>
+                <TechnicalName languageID="jza">bvfz</TechnicalName>
+                <PackagingDangerLevelCode>None</PackagingDangerLevelCode>
+                <GrossWeightMeasure unitCode="GRM">9.52</GrossWeightMeasure>
+                <HazardTypeCode listAgencyID="T1">mhwy</HazardTypeCode>
+                <HazardTypeCode listAgencyID="6">bhay</HazardTypeCode>
+                <HazardTypeCode listAgencyID="T1">jvxu</HazardTypeCode>
+                <HazardClassificationID>bbbd</HazardClassificationID>
+                <GrossVolumeMeasure unitCode="MTQ">2.59</GrossVolumeMeasure>
+                <NetWeightMeasure unitCode="KGM">4.37</NetWeightMeasure>
+                <ExplosiveCargoNetWeightMeasure unitCode="KGM">2.16</ExplosiveCargoNetWeightMeasure>
+                <ProperShippingName languageID="uzv">juhf</ProperShippingName>
+                <TunnelRestrictionCode>uxew</TunnelRestrictionCode>
+                <SpecialProvisionID>SP376</SpecialProvisionID>
+                <SpecialProvisionID>SP373</SpecialProvisionID>
+                <HazardCategoryCode>0</HazardCategoryCode>
+                <LimitedQuantityCode>1</LimitedQuantityCode>
+                <DensityMeasure unitCode="F90">4.70</DensityMeasure>
+                <MeltingPointTemperatureMeasure unitCode="CEL">4.09</MeltingPointTemperatureMeasure>
+                <LabelTypeCode>udf</LabelTypeCode>
+                <LabelTypeCode>kfh</LabelTypeCode>
+                <ControlTemperatureMeasurement>
+                    <ConditionMeasure unitCode="CEL">0.97</ConditionMeasure>
+                    <TypeCode>T1</TypeCode>
+                </ControlTemperatureMeasurement>
+                <EmergencyTemperatureMeasurement>
+                    <ConditionMeasure unitCode="CEL">0.95</ConditionMeasure>
+                    <TypeCode>T1</TypeCode>
+                </EmergencyTemperatureMeasurement>
+                <RadioactiveMaterial>
+                    <SpecialFormInformation languageID="wpx">gcdm</SpecialFormInformation>
+                    <RadioactivePackageTransportIndexCode>taz</RadioactivePackageTransportIndexCode>
+                    <FissileCriticalitySafetyIndexNumeric>5.96</FissileCriticalitySafetyIndexNumeric>
+                    <ApplicableSpecifiedRadioactiveIsotope>
+                        <Name languageID="kqk">addo</Name>
+                        <ActivityLevelMeasure unitCode="P34">0.47</ActivityLevelMeasure>
+                    </ApplicableSpecifiedRadioactiveIsotope>
+                </RadioactiveMaterial>
+                <SpecifiedLogisticsPackage>
+                    <ItemQuantity>6.06</ItemQuantity>
+                    <TypeCode>mccx</TypeCode>
+                    <Type languageID="mjd">wmkw</Type>
+                    <PhysicalLogisticsShippingMarks>
+                        <Marking languageID="zhs">spvv</Marking>
+                    </PhysicalLogisticsShippingMarks>
+                    <AssociatedReferencedDocument>
+                        <URIID>ikpv</URIID>
+                        <TypeCode>4</TypeCode>
+                    </AssociatedReferencedDocument>
+                    <StatedSpecifiedCondition>
+                        <StatementCode>38</StatementCode>
+                        <Statement languageID="upu">uhgp</Statement>
+                    </StatedSpecifiedCondition>
+                    <StatedSpecifiedCondition>
+                        <StatementCode>43</StatementCode>
+                        <Statement languageID="oqi">fase</Statement>
+                    </StatedSpecifiedCondition>
+                </SpecifiedLogisticsPackage>
+                <StatedSpecifiedCondition>
+                    <SubjectTypeCode>S8</SubjectTypeCode>
+                    <StatementCode>1</StatementCode>
+                    <Statement languageID="egf">npwq</Statement>
+                    <SpecifiedCalibratedMeasurement>
+                        <ValueMeasure unitCode="VP">0.41</ValueMeasure>
+                    </SpecifiedCalibratedMeasurement>
+                </StatedSpecifiedCondition>
+                <StatedSpecifiedCondition>
+                    <SubjectTypeCode>S4</SubjectTypeCode>
+                    <StatementCode>10</StatementCode>
+                    <Statement languageID="tae">qeda</Statement>
+                    <SpecifiedCalibratedMeasurement>
+                        <ValueMeasure unitCode="VP">0.71</ValueMeasure>
+                    </SpecifiedCalibratedMeasurement>
+                </StatedSpecifiedCondition>
+                <StatedSpecifiedCondition>
+                    <SubjectTypeCode>S1</SubjectTypeCode>
+                    <StatementCode>2</StatementCode>
+                    <Statement languageID="hor">kzqf</Statement>
+                    <SpecifiedCalibratedMeasurement>
+                        <ValueMeasure unitCode="VP">2.29</ValueMeasure>
+                    </SpecifiedCalibratedMeasurement>
+                </StatedSpecifiedCondition>
+                <RelatedReferencedDocument>
+                    <TypeCode>T10</TypeCode>
+                    <AttachmentBinaryObject filename="inrq" uri="https://example.com/qwbyjt">b2VtZW12</AttachmentBinaryObject>
+                </RelatedReferencedDocument>
+                <IncludedSpecifiedFuel>
+                    <TypeCode>1</TypeCode>
+                    <VolumeMeasure unitCode="MTQ">3.75</VolumeMeasure>
+                    <WeightMeasure unitCode="KGM">9.27</WeightMeasure>
+                    <WorkingPressureMeasure unitCode="BAR">5.73</WorkingPressureMeasure>
+                </IncludedSpecifiedFuel>
+                <TechnicalNameNote>
+                    <Content languageID="zmn">cugl</Content>
+                    <SubjectCode>3</SubjectCode>
+                </TechnicalNameNote>
+            </ApplicableTransportDangerousGoods>
+            <LinearSpatialDimension>
+                <WidthMeasure unitCode="MTR">1.75</WidthMeasure>
+                <LengthMeasure unitCode="MTR">5.36</LengthMeasure>
+                <HeightMeasure unitCode="MTR">0.33</HeightMeasure>
+            </LinearSpatialDimension>
+            <AssociatedReferencedLogisticsTransportEquipment>
+                <ID schemeAgencyID="20">twxu</ID>
+            </AssociatedReferencedLogisticsTransportEquipment>
+        </IncludedSupplyChainConsignmentItem>
+        <UtilizedLogisticsTransportEquipment xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ID schemeAgencyID="501">cvga</ID>
+            <GrossVolumeMeasure unitCode="MTQ">1.18</GrossVolumeMeasure>
+            <CategoryCode>T5</CategoryCode>
+            <CharacteristicCode listAgencyID="12">qagn</CharacteristicCode>
+            <UsedCapacityCode>T14</UsedCapacityCode>
+            <SequenceNumeric>1</SequenceNumeric>
+            <SealQuantity>6.39</SealQuantity>
+            <StowagePositionID>yeur</StowagePositionID>
+            <GrossGoodsWeightMeasure unitCode="GRM">3.56</GrossGoodsWeightMeasure>
+            <NetGoodsWeightMeasure unitCode="TNE">5.93</NetGoodsWeightMeasure>
+            <GrossGoodsVolumeMeasure unitCode="MTQ">9.40</GrossGoodsVolumeMeasure>
+            <NetGoodsVolumeMeasure unitCode="LTR">4.90</NetGoodsVolumeMeasure>
+            <ReportableQuantity>9.14</ReportableQuantity>
+            <LoadedTransportDangerousGoods>
+                <UNDGIdentificationCode>ydbt</UNDGIdentificationCode>
+                <RegulatoryAuthorityName>kusd</RegulatoryAuthorityName>
+                <Information languageID="kbq">ajtj</Information>
+                <HazardClassificationID>mfmp</HazardClassificationID>
+                <SupplementaryInformation languageID="use">bxca</SupplementaryInformation>
+                <ReportableQuantity>7.00</ReportableQuantity>
+                <PreviousCargoInformation languageID="xfy">hmcc</PreviousCargoInformation>
+                <SpecifiedLogisticsPackage>
+                    <ItemQuantity>4.56</ItemQuantity>
+                </SpecifiedLogisticsPackage>
+                <StatedSpecifiedCondition>
+                    <SubjectTypeCode>S13</SubjectTypeCode>
+                    <ValueMeasure unitCode="IA">1.24</ValueMeasure>
+                    <ActionCode>A1</ActionCode>
+                    <ActionDateTime>
+                        <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20220821</DateTimeString>
+                    </ActionDateTime>
+                    <StatementCode>18</StatementCode>
+                    <Statement languageID="ceb">ombr</Statement>
+                    <SpecifiedCalibratedMeasurement>
+                        <ValueMeasure unitCode="L41">5.30</ValueMeasure>
+                    </SpecifiedCalibratedMeasurement>
+                </StatedSpecifiedCondition>
+                <RelatedReferencedDocument>
+                    <TypeCode>T5</TypeCode>
+                    <ID>jvdt</ID>
+                    <AttachmentBinaryObject filename="bege" uri="https://example.com/gblqpw">c2tsdnRq</AttachmentBinaryObject>
+                </RelatedReferencedDocument>
+            </LoadedTransportDangerousGoods>
+            <AffixedLogisticsSeal>
+                <ID schemeAgencyID="54">vwxb</ID>
+                <ConditionCode>3</ConditionCode>
+                <SealingPartyRoleCode>AC</SealingPartyRoleCode>
+            </AffixedLogisticsSeal>
+            <CarriedAssociatedTransportEquipment>
+                <ID schemeAgencyID="12">pgmc</ID>
+                <CategoryCode>T7</CategoryCode>
+                <GrossWeightMeasure unitCode="KGM">3.83</GrossWeightMeasure>
+                <UsedCapacityCode>T14</UsedCapacityCode>
+                <SequenceNumeric>1</SequenceNumeric>
+                <VerifiedGrossWeightMeasure unitCode="KGM">0.95</VerifiedGrossWeightMeasure>
+                <GrossGoodsWeightMeasure unitCode="GRM">1.58</GrossGoodsWeightMeasure>
+                <NetGoodsWeightMeasure unitCode="KGM">1.06</NetGoodsWeightMeasure>
+                <GrossGoodsVolumeMeasure unitCode="MTQ">2.54</GrossGoodsVolumeMeasure>
+                <NetGoodsVolumeMeasure unitCode="MTQ">9.82</NetGoodsVolumeMeasure>
+                <GoodsItemUnitQuantity unitCode="C62">3.00</GoodsItemUnitQuantity>
+                <ReportableQuantity>2.33</ReportableQuantity>
+                <StowagePositionID>xqcr</StowagePositionID>
+                <WeightVerificationMethodCode>1</WeightVerificationMethodCode>
+                <LoadedTransportDangerousGoods>
+                    <UNDGIdentificationCode>zagi</UNDGIdentificationCode>
+                    <RegulatoryAuthorityName>hmrf</RegulatoryAuthorityName>
+                    <Information languageID="ymg">ipvc</Information>
+                    <HazardClassificationID>mbyp</HazardClassificationID>
+                    <SupplementaryInformation languageID="ysw">dyri</SupplementaryInformation>
+                    <ReportableQuantity>7.21</ReportableQuantity>
+                    <PreviousCargoInformation languageID="ofh">pvnu</PreviousCargoInformation>
+                    <SpecifiedLogisticsPackage>
+                        <ItemQuantity>2.61</ItemQuantity>
+                    </SpecifiedLogisticsPackage>
+                    <StatedSpecifiedCondition>
+                        <SubjectTypeCode>S12</SubjectTypeCode>
+                        <ValueMeasure unitCode="LBR">0.36</ValueMeasure>
+                        <ActionCode>A1</ActionCode>
+                        <ActionDateTime>
+                            <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20221003</DateTimeString>
+                        </ActionDateTime>
+                        <StatementCode>27</StatementCode>
+                        <Statement languageID="jpm">npqz</Statement>
+                    </StatedSpecifiedCondition>
+                    <RelatedReferencedDocument>
+                        <TypeCode>T6</TypeCode>
+                        <AttachmentBinaryObject filename="nxgk" uri="https://example.com/cvmhtc">d2VjeWRy</AttachmentBinaryObject>
+                    </RelatedReferencedDocument>
+                </LoadedTransportDangerousGoods>
+                <AffixedLogisticsSeal>
+                    <ID>lpew</ID>
+                    <ConditionCode>2</ConditionCode>
+                    <SealingPartyRoleCode>CA</SealingPartyRoleCode>
+                    <IssuingTradeParty>
+                        <Name>spsr</Name>
+                    </IssuingTradeParty>
+                </AffixedLogisticsSeal>
+                <WeightVerifierTradeParty>
+                    <Name>payf</Name>
+                </WeightVerifierTradeParty>
+            </CarriedAssociatedTransportEquipment>
+            <CarriedAssociatedTransportEquipment>
+                <ID schemeAgencyID="502">vqeh</ID>
+                <CategoryCode>BPQ</CategoryCode>
+                <GrossWeightMeasure unitCode="KGM">1.69</GrossWeightMeasure>
+                <UsedCapacityCode>T14</UsedCapacityCode>
+                <SequenceNumeric>1</SequenceNumeric>
+                <VerifiedGrossWeightMeasure unitCode="KGM">8.23</VerifiedGrossWeightMeasure>
+                <GrossGoodsWeightMeasure unitCode="KGM">5.35</GrossGoodsWeightMeasure>
+                <NetGoodsWeightMeasure unitCode="GRM">7.16</NetGoodsWeightMeasure>
+                <GrossGoodsVolumeMeasure unitCode="LTR">8.09</GrossGoodsVolumeMeasure>
+                <NetGoodsVolumeMeasure unitCode="MTQ">2.97</NetGoodsVolumeMeasure>
+                <GoodsItemUnitQuantity unitCode="C62">8.18</GoodsItemUnitQuantity>
+                <ReportableQuantity>4.15</ReportableQuantity>
+                <StowagePositionID>vpbb</StowagePositionID>
+                <WeightVerificationMethodCode>1</WeightVerificationMethodCode>
+                <LoadedTransportDangerousGoods>
+                    <UNDGIdentificationCode>shoc</UNDGIdentificationCode>
+                    <RegulatoryAuthorityName>fvcb</RegulatoryAuthorityName>
+                    <Information languageID="ilk">bchh</Information>
+                    <HazardClassificationID>yvey</HazardClassificationID>
+                    <SupplementaryInformation languageID="gtm">zuqc</SupplementaryInformation>
+                    <ReportableQuantity>2.52</ReportableQuantity>
+                    <PreviousCargoInformation languageID="cwa">estv</PreviousCargoInformation>
+                    <SpecifiedLogisticsPackage>
+                        <ItemQuantity>7.87</ItemQuantity>
+                    </SpecifiedLogisticsPackage>
+                    <StatedSpecifiedCondition>
+                        <SubjectTypeCode>S10</SubjectTypeCode>
+                        <ValueMeasure unitCode="N49">2.71</ValueMeasure>
+                        <ActionCode>A1</ActionCode>
+                        <ActionDateTime>
+                            <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20280118</DateTimeString>
+                        </ActionDateTime>
+                        <StatementCode>29</StatementCode>
+                        <Statement languageID="zuo">hvtf</Statement>
+                    </StatedSpecifiedCondition>
+                    <RelatedReferencedDocument>
+                        <TypeCode>T5</TypeCode>
+                        <AttachmentBinaryObject filename="zefz" uri="https://example.com/osntny">dG5manFl</AttachmentBinaryObject>
+                    </RelatedReferencedDocument>
+                </LoadedTransportDangerousGoods>
+                <AffixedLogisticsSeal>
+                    <ID>wqzk</ID>
+                    <ConditionCode>1</ConditionCode>
+                    <SealingPartyRoleCode>CU</SealingPartyRoleCode>
+                    <IssuingTradeParty>
+                        <Name>lrtq</Name>
+                    </IssuingTradeParty>
+                </AffixedLogisticsSeal>
+                <WeightVerifierTradeParty>
+                    <Name>knjt</Name>
+                </WeightVerifierTradeParty>
+            </CarriedAssociatedTransportEquipment>
+            <OperatingTradeParty>
+                <ID schemeAgencyID="87">hvtg</ID>
+                <Name>sizb</Name>
+                <PostalTradeAddress>
+                    <PostcodeCode>fgxc</PostcodeCode>
+                    <PostOfficeBox>ftgn</PostOfficeBox>
+                    <StreetName>iyvn</StreetName>
+                    <CityName>dzds</CityName>
+                    <CountryID>tx</CountryID>
+                    <CountrySubDivisionName>xkkx</CountrySubDivisionName>
+                    <BuildingNumber>yhvb</BuildingNumber>
+                    <DepartmentName>oozj</DepartmentName>
+                    <AdditionalStreetName>ndrx</AdditionalStreetName>
+                </PostalTradeAddress>
+            </OperatingTradeParty>
+            <OwnerTradeParty>
+                <ID schemeAgencyID="87">nlev</ID>
+                <Name>icix</Name>
+                <PostalTradeAddress>
+                    <PostcodeCode>pmzs</PostcodeCode>
+                    <PostOfficeBox>wnjv</PostOfficeBox>
+                    <StreetName>uvnq</StreetName>
+                    <CityName>gefa</CityName>
+                    <CountryID>lf</CountryID>
+                    <CountrySubDivisionName>mfpt</CountrySubDivisionName>
+                    <BuildingNumber>wikb</BuildingNumber>
+                    <DepartmentName>gwry</DepartmentName>
+                    <AdditionalStreetName>xhaa</AdditionalStreetName>
+                </PostalTradeAddress>
+            </OwnerTradeParty>
+            <RegistrationTradeCountry>
+                <ID>ns</ID>
+            </RegistrationTradeCountry>
+        </UtilizedLogisticsTransportEquipment>
+        <MainCarriageLogisticsTransportMovement xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ModeCode>8</ModeCode>
+            <ID>xqyy</ID>
+            <SequenceNumeric>1</SequenceNumeric>
+            <MasterResponsibleTransportPerson>
+                <ID schemeAgencyID="87">isnb</ID>
+                <BirthDateTime>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20290901</DateTimeString>
+                </BirthDateTime>
+                <GivenName>thrh</GivenName>
+                <FamilyName>pbdg</FamilyName>
+            </MasterResponsibleTransportPerson>
+            <LoadingTransportEvent>
+                <ActualOccurrenceDateTime>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="205">202506122214+0000</DateTimeString>
+                </ActualOccurrenceDateTime>
+                <ScheduledOccurrenceDateTime>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20380114</DateTimeString>
+                </ScheduledOccurrenceDateTime>
+                <RequestedOccurrenceDateTime>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20361105</DateTimeString>
+                </RequestedOccurrenceDateTime>
+                <OccurrenceLogisticsLocation>
+                    <ID schemeAgencyID="6">ypuz</ID>
+                    <Name>tcvk</Name>
+                    <PostalTradeAddress>
+                        <PostcodeCode>wmyc</PostcodeCode>
+                        <PostOfficeBox>sqad</PostOfficeBox>
+                        <StreetName>xjox</StreetName>
+                        <CityName>uxws</CityName>
+                        <CountryID>kx</CountryID>
+                        <CountrySubDivisionName>wfkd</CountrySubDivisionName>
+                        <BuildingNumber>noqq</BuildingNumber>
+                        <DepartmentName>qctu</DepartmentName>
+                        <AdditionalStreetName>gvfz</AdditionalStreetName>
+                    </PostalTradeAddress>
+                </OccurrenceLogisticsLocation>
+                <CertifyingTradeParty>
+                    <ID schemeAgencyID="87">qmll</ID>
+                    <Name>gbjv</Name>
+                    <RoleCode>T1</RoleCode>
+                    <ConfirmedDocumentAuthentication>
+                        <StatementCode>1</StatementCode>
+                    </ConfirmedDocumentAuthentication>
+                </CertifyingTradeParty>
+                <AdditionalSecurityMeasuresApplicableNote>
+                    <Content>bzmh</Content>
+                    <SubjectCode>zcv</SubjectCode>
+                </AdditionalSecurityMeasuresApplicableNote>
+                <ScheduledOccurrenceSpecifiedPeriod>
+                    <EndDateTime>
+                        <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20341211</DateTimeString>
+                    </EndDateTime>
+                </ScheduledOccurrenceSpecifiedPeriod>
+            </LoadingTransportEvent>
+            <UnloadingTransportEvent>
+                <EstimatedOccurrenceDateTime>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20370707</DateTimeString>
+                </EstimatedOccurrenceDateTime>
+                <ActualOccurrenceDateTime>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20211222</DateTimeString>
+                </ActualOccurrenceDateTime>
+                <ScheduledOccurrenceDateTime>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20390822</DateTimeString>
+                </ScheduledOccurrenceDateTime>
+                <OccurrenceLogisticsLocation>
+                    <ID schemeAgencyID="6">ebkp</ID>
+                    <Name>axal</Name>
+                    <PostalTradeAddress>
+                        <PostcodeCode>zkbh</PostcodeCode>
+                        <PostOfficeBox>ycgv</PostOfficeBox>
+                        <StreetName>mvny</StreetName>
+                        <CityName>clxs</CityName>
+                        <CountryID>js</CountryID>
+                        <CountrySubDivisionName>mwge</CountrySubDivisionName>
+                        <BuildingNumber>qnyl</BuildingNumber>
+                        <DepartmentName>lteo</DepartmentName>
+                        <AdditionalStreetName>jlgx</AdditionalStreetName>
+                    </PostalTradeAddress>
+                </OccurrenceLogisticsLocation>
+                <CertifyingTradeParty>
+                    <ID schemeAgencyID="87">qevh</ID>
+                    <Name>hzjb</Name>
+                    <RoleCode>POA</RoleCode>
+                    <ConfirmedDocumentAuthentication>
+                        <StatementCode>1</StatementCode>
+                    </ConfirmedDocumentAuthentication>
+                </CertifyingTradeParty>
+            </UnloadingTransportEvent>
+            <DepartureTransportEvent>
+                <ScheduledOccurrenceDateTime>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20201215</DateTimeString>
+                </ScheduledOccurrenceDateTime>
+            </DepartureTransportEvent>
+            <UsedLogisticsTransportMeans>
+                <TypeCode>1506</TypeCode>
+                <ID schemeAgencyID="87">qoaq</ID>
+                <Name>gxfv</Name>
+                <RegistrationTradeCountry>
+                    <ID>av</ID>
+                </RegistrationTradeCountry>
+                <OwnerTradeParty>
+                    <Name>icne</Name>
+                </OwnerTradeParty>
+                <SpecifiedSpatialDimension>
+                    <Description>ujgt</Description>
+                    <WidthMeasure unitCode="MTR">9.16</WidthMeasure>
+                    <LengthMeasure unitCode="MTR">7.44</LengthMeasure>
+                    <HeightMeasure unitCode="MTR">5.23</HeightMeasure>
+                </SpecifiedSpatialDimension>
+                <OperationalAttachedTransportEquipment>
+                    <ID>oqwc</ID>
+                    <CategoryCode listAgencyID="6">BPX</CategoryCode>
+                    <UnitQuantity>9.30</UnitQuantity>
+                </OperationalAttachedTransportEquipment>
+            </UsedLogisticsTransportMeans>
+            <ItineraryTransportRoute>
+                <Description>kqqb</Description>
+            </ItineraryTransportRoute>
+            <CallTransportEvent>
+                <OccurrenceLogisticsLocation>
+                    <ID schemeAgencyID="6">emwd</ID>
+                </OccurrenceLogisticsLocation>
+            </CallTransportEvent>
+            <BorderCrossingTransportEvent>
+                <ActualOccurrenceDateTime>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20310328</DateTimeString>
+                </ActualOccurrenceDateTime>
+                <OccurrenceLogisticsLocation>
+                    <Name>njen</Name>
+                </OccurrenceLogisticsLocation>
+            </BorderCrossingTransportEvent>
+        </MainCarriageLogisticsTransportMovement>
+        <PreCarriageLogisticsTransportMovement xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ModeCode>3</ModeCode>
+            <ArrivalTransportEvent>
+                <ScheduledOccurrenceDateTime>
+                    <DateTimeString xmlns="urn:eu:move:eFTI:data:standard:UnqualifiedDataType:34" format="102">20270217</DateTimeString>
+                </ScheduledOccurrenceDateTime>
+            </ArrivalTransportEvent>
+        </PreCarriageLogisticsTransportMovement>
+        <OnCarriageLogisticsTransportMovement xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ModeCode>3</ModeCode>
+            <UnloadingTransportEvent>
+                <OccurrenceLogisticsLocation>
+                    <ID schemeAgencyID="6">lvqq</ID>
+                    <Name>ycfi</Name>
+                </OccurrenceLogisticsLocation>
+            </UnloadingTransportEvent>
+        </OnCarriageLogisticsTransportMovement>
+        <SpecifiedLogisticsTransportMovement xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <SpecifiedTransportEvent>
+                <TypeCode listAgencyID="6">1</TypeCode>
+                <OccurrenceLogisticsLocation>
+                    <ID schemeAgencyID="6">ziks</ID>
+                    <Name>datk</Name>
+                </OccurrenceLogisticsLocation>
+            </SpecifiedTransportEvent>
+        </SpecifiedLogisticsTransportMovement>
+        <TransportService xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <Description>lrlr</Description>
+            <ConditionTypeCode listAgencyID="6">39</ConditionTypeCode>
+        </TransportService>
+        <ApplicableLogisticsServiceCharge xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ID>hqeh</ID>
+            <PaymentArrangementCode listAgencyID="6">tfg</PaymentArrangementCode>
+            <AppliedAmount currencyID="vty">7.35</AppliedAmount>
+            <PayingPartyRoleCode>CN</PayingPartyRoleCode>
+            <CalculationBasisCode listAgencyID="ZZZ">xff</CalculationBasisCode>
+            <CalculationBasisTradePrice>
+                <BasisQuantity unitCode="B45">9.70</BasisQuantity>
+                <UnitAmount currencyID="bit">3.69</UnitAmount>
+                <CategoryTypeCode listAgencyID="6">oid</CategoryTypeCode>
+            </CalculationBasisTradePrice>
+        </ApplicableLogisticsServiceCharge>
+        <TransportLogisticsPackage xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ItemQuantity>3.88</ItemQuantity>
+            <TypeCode>soa</TypeCode>
+            <Type languageID="djp">lpjd</Type>
+            <Information>ukda</Information>
+            <PhysicalLogisticsShippingMarks>
+                <Marking languageID="ysd">kjpa</Marking>
+            </PhysicalLogisticsShippingMarks>
+        </TransportLogisticsPackage>
+        <AssociatedTradeParty xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ID schemeAgencyID="6">zkbi</ID>
+        </AssociatedTradeParty>
+        <NatureIdentificationTransportCargo xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <TypeCode>ulo</TypeCode>
+            <Identification languageID="tvi">dpnl</Identification>
+            <OperationalCategoryCode>gml</OperationalCategoryCode>
+            <StatisticalClassificationCode listAgencyID="502">rdx</StatisticalClassificationCode>
+        </NatureIdentificationTransportCargo>
+        <ApplicableCrossBorderRegulatoryProcedure xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <TypeCode>1</TypeCode>
+            <ImportCustomsOfficeSpecifiedLogisticsLocation>
+                <ID schemeAgencyID="140">hfok</ID>
+            </ImportCustomsOfficeSpecifiedLogisticsLocation>
+            <ExportCustomsOfficeSpecifiedLogisticsLocation>
+                <ID schemeAgencyID="140">eiyb</ID>
+            </ExportCustomsOfficeSpecifiedLogisticsLocation>
+            <TransitCustomsOfficeSpecifiedLogisticsLocation>
+                <ID schemeAgencyID="140">dkzs</ID>
+            </TransitCustomsOfficeSpecifiedLogisticsLocation>
+        </ApplicableCrossBorderRegulatoryProcedure>
+        <ApplicableTransportDangerousGoods xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <Information languageID="bef">pbui</Information>
+            <ExplosiveCargoNetWeightMeasure unitCode="KGM">8.94</ExplosiveCargoNetWeightMeasure>
+            <RadioactiveMaterial>
+                <ApplicableSpecifiedRadioactiveIsotope>
+                    <ActivityLevelMeasure unitCode="BQL">7.36</ActivityLevelMeasure>
+                </ApplicableSpecifiedRadioactiveIsotope>
+            </RadioactiveMaterial>
+            <StatedSpecifiedCondition>
+                <SubjectTypeCode>S18</SubjectTypeCode>
+                <ValueMeasure unitCode="L41">9.76</ValueMeasure>
+                <StatementCode>34</StatementCode>
+                <Statement languageID="lkj">leqi</Statement>
+            </StatedSpecifiedCondition>
+            <StatedSpecifiedCondition>
+                <SubjectTypeCode>S18</SubjectTypeCode>
+                <ValueMeasure unitCode="G47">7.78</ValueMeasure>
+                <StatementCode>35</StatementCode>
+                <Statement languageID="aan">smyw</Statement>
+            </StatedSpecifiedCondition>
+            <StatedSpecifiedCondition>
+                <SubjectTypeCode>S14</SubjectTypeCode>
+                <ValueMeasure unitCode="H27">5.45</ValueMeasure>
+                <StatementCode>35</StatementCode>
+                <Statement languageID="ahu">fmfz</Statement>
+            </StatedSpecifiedCondition>
+            <RelatedReferencedDocument>
+                <TypeCode>T1</TypeCode>
+                <AttachmentBinaryObject>b2R3bnV5</AttachmentBinaryObject>
+            </RelatedReferencedDocument>
+            <ApplicableRegulatoryExemption>
+                <ID schemeAgencyID="87">pbpx</ID>
+                <TypeCode listAgencyID="87">yyz</TypeCode>
+                <ReportableExemptionCalculation>
+                    <ReportableQuantity>2.06</ReportableQuantity>
+                    <HazardCategoryCode>4</HazardCategoryCode>
+                </ReportableExemptionCalculation>
+            </ApplicableRegulatoryExemption>
+        </ApplicableTransportDangerousGoods>
+        <ConsignorProvidedBorderClearanceTransportInstructions xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <Description>pwuu</Description>
+        </ConsignorProvidedBorderClearanceTransportInstructions>
+        <SpecifiedLogisticsRiskAnalysisResult xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <ConsignmentRiskRelatedCode>SHR</ConsignmentRiskRelatedCode>
+            <Description languageID="flt">qtib</Description>
+            <LevelCode>RA</LevelCode>
+            <ScreeningMethodCode>CMD</ScreeningMethodCode>
+            <SecurityExemptionCode>ckou</SecurityExemptionCode>
+            <Information languageID="hog">yzpz</Information>
+        </SpecifiedLogisticsRiskAnalysisResult>
+        <NotifiedTransportationWasteMaterial xmlns="urn:eu:move:eFTI:data:standard:ReusableAggregateBusinessInformationEntity:34">
+            <WeightMeasure unitCode="GRM">3.04</WeightMeasure>
+            <ID schemeAgencyID="T9">toez</ID>
+        </NotifiedTransportationWasteMaterial>
+    </SpecifiedSupplyChainConsignment>
+</FTI010GetCmdsResponse>

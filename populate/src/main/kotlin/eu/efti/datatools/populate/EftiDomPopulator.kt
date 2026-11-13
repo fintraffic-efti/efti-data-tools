@@ -20,6 +20,34 @@ import kotlin.math.min
 
 typealias XmlValueGenerator = (valuePath: ValuePath, repeatIndex: Int, type: XmlType) -> String
 
+/**
+ * Context given to an [XmlElementGenerator] for one occurrence of an element.
+ *
+ * @property doc the document being populated, for creating attributes and child nodes
+ * @property element the already-created, empty element to populate
+ * @property schema the schema of the element being populated
+ * @property valuePath the value path of this occurrence, including its repeat index
+ * @property repeatIndex the zero-based index of this occurrence among its repeats
+ */
+data class ElementGenerationContext(
+    val doc: Document,
+    val element: Element,
+    val schema: XmlSchemaElement,
+    val valuePath: ValuePath,
+    val repeatIndex: Int,
+)
+
+/**
+ * Generates the full subtree -- attributes, text content and children -- of one element occurrence.
+ *
+ * Unlike [XmlValueGenerator], which only produces the value of a single attribute or text content node, an
+ * [XmlElementGenerator] is responsible for the entire element it is matched for. This is needed when the
+ * attributes and the text content of an element are not independent, for example a `DateTimeString` element
+ * whose text content must be formatted according to its own `format` attribute: generating the two values in
+ * isolation, as [XmlValueGenerator] does, cannot keep them consistent with each other.
+ */
+typealias XmlElementGenerator = (context: ElementGenerationContext) -> Unit
+
 enum class RepeatablePopulateMode {
     RANDOM,
     MINIMUM_ONE,
@@ -195,35 +223,44 @@ class EftiDomPopulator(
         )
 
         repeat(count.toInt()) { repeatIndex ->
-            val element = parent.appendChild(doc.createElementNS(schema.name.namespaceURI, schema.name.localPart))
+            val element = parent.appendChild(
+                doc.createElementNS(schema.name.namespaceURI, schema.name.localPart),
+            ) as Element
 
-            schema.type.attributes.forEach { schemaAttribute ->
-                val attribute =
-                    doc.createAttributeNS(schemaAttribute.name.namespaceURI, schemaAttribute.name.localPart)
+            val elementGenerator = valueGenerators.findElementRule(schema.name, schema.type)?.second
+            if (elementGenerator != null) {
+                elementGenerator(
+                    ElementGenerationContext(doc, element, schema, currentPath.append(repeatIndex), repeatIndex),
+                )
+            } else {
+                schema.type.attributes.forEach { schemaAttribute ->
+                    val attribute =
+                        doc.createAttributeNS(schemaAttribute.name.namespaceURI, schemaAttribute.name.localPart)
 
-                val fixedValue = schemaAttribute.fixedValue
-                if (fixedValue != null) {
-                    // A document is only valid if an attribute with a fixed value has exactly that value.
-                    attribute.value = fixedValue
-                } else if (schemaAttribute.type.isTextContentType) {
-                    val generator = findMostSpecificGenerator(schemaAttribute.name, schemaAttribute.type)
-                    attribute.value =
-                        generator(currentPath.append(repeatIndex).append(schemaAttribute), 0, schemaAttribute.type)
+                    val fixedValue = schemaAttribute.fixedValue
+                    if (fixedValue != null) {
+                        // A document is only valid if an attribute with a fixed value has exactly that value.
+                        attribute.value = fixedValue
+                    } else if (schemaAttribute.type.isTextContentType) {
+                        val generator = findMostSpecificGenerator(schemaAttribute.name, schemaAttribute.type)
+                        attribute.value =
+                            generator(currentPath.append(repeatIndex).append(schemaAttribute), 0, schemaAttribute.type)
+                    }
+                    element.attributes.setNamedItem(attribute)
                 }
-                element.attributes.setNamedItem(attribute)
-            }
 
-            schema.children.forEach { child ->
-                populateElement(doc, element, currentPath.append(repeatIndex), child)
-            }
+                schema.children.forEach { child ->
+                    populateElement(doc, element, currentPath.append(repeatIndex), child)
+                }
 
-            val fixedValue = schema.fixedValue
-            if (fixedValue != null) {
-                // A document is only valid if an element with a fixed value has exactly that value.
-                element.textContent = fixedValue
-            } else if (schema.type.isTextContentType) {
-                val generator = findMostSpecificGenerator(schema.name, schema.type)
-                element.textContent = generator(currentPath.append(repeatIndex), repeatIndex, schema.type)
+                val fixedValue = schema.fixedValue
+                if (fixedValue != null) {
+                    // A document is only valid if an element with a fixed value has exactly that value.
+                    element.textContent = fixedValue
+                } else if (schema.type.isTextContentType) {
+                    val generator = findMostSpecificGenerator(schema.name, schema.type)
+                    element.textContent = generator(currentPath.append(repeatIndex), repeatIndex, schema.type)
+                }
             }
         }
     }
